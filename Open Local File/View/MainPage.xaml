@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="OpenLocalFile.MainPage"
+             xmlns:local="clr-namespace:OpenLocalFile"
+             xmlns:syncfusion="clr-namespace:Syncfusion.Maui.PdfViewer;assembly=Syncfusion.Maui.PdfViewer">
+    <ContentPage.BindingContext>
+        <local:PdfViewerViewModel/>
+    </ContentPage.BindingContext>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid
+            Grid.Row="0" BackgroundColor="#FFF6F6F6" Padding="8"
+            IsVisible="{OnPlatform MacCatalyst=False}">
+            <Label FontSize="Medium" TextColor="Black" VerticalOptions="Center" Text="Choose File"></Label>
+            <ImageButton 
+                Source="openfile.png" 
+                BackgroundColor="#FFF6F6F6"
+                VerticalOptions="Center" HorizontalOptions="End" 
+                Aspect="Center" Command="{Binding OpenDocumentCommand}"/>
+        </Grid>
+        <syncfusion:SfPdfViewer Grid.Row="1" DocumentSource="{Binding PdfDocumentStream}"/>
+    </Grid>
+</ContentPage>

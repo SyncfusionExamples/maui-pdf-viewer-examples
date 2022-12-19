@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="OpenPasswordProtectedFile.MainPage"
+             xmlns:local="clr-namespace:OpenPasswordProtectedFile"
+             xmlns:syncfusion="clr-namespace:Syncfusion.Maui.PdfViewer;assembly=Syncfusion.Maui.PdfViewer">
+    <ContentPage.BindingContext>
+        <local:PdfViewerViewModel/>
+    </ContentPage.BindingContext>
+    <Grid>
+        <syncfusion:SfPdfViewer 
+            x:Name="PdfViewer"
+            DocumentSource="{Binding PdfDocumentStream}"
+            PasswordRequested="SfPdfViewer_PasswordRequested"
+            DocumentLoadFailed="PdfViewer_DocumentLoadFailed"/>
+        <local:PasswordDialogBox
+            x:Name="PasswordDialog"
+            IsVisible="false" 
+            PasswordEntered="PasswordDialogBox_PasswordEntered"/>
+        <local:MessageBox
+            x:Name="MessageBox"
+            IsVisible="False"
+            OkClicked="MessageBox_OKClicked"/>
+    </Grid>
+</ContentPage>
