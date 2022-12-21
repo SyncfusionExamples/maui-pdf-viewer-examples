@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Magnification.MainPage"
+             xmlns:syncfusion="clr-namespace:Syncfusion.Maui.PdfViewer;assembly=Syncfusion.Maui.PdfViewer"
+             xmlns:editors="clr-namespace:Syncfusion.Maui.Inputs;assembly=Syncfusion.Maui.Inputs"
+             xmlns:local="clr-namespace:Magnification">
+    <ContentPage.Resources>
+        <Style x:Key="buttonIconStyle" TargetType="ImageButton">
+            <Setter Property="BorderWidth" Value="0" />
+            <Setter Property="VerticalOptions" Value="Center" />
+            <Setter Property="VisualStateManager.VisualStateGroups">
+                <VisualStateGroupList>
+                    <VisualStateGroup x:Name="CommonStates">
+                        <VisualState x:Name="Normal">
+                            <VisualState.Setters>
+                                <Setter Property="BackgroundColor" Value="Transparent" />
+                            </VisualState.Setters>
+                        </VisualState>
+                        <VisualState x:Name="Disabled">
+                            <VisualState.Setters>
+                                <Setter Property="BackgroundColor" Value="Transparent" />
+                            </VisualState.Setters>
+                        </VisualState>
+                        <VisualState x:Name="Pressed">
+                            <VisualState.Setters>
+                                <Setter Property="BackgroundColor" Value="#0F000000" />
+                            </VisualState.Setters>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateGroupList>
+            </Setter>
+        </Style>
+    </ContentPage.Resources>
+    <ContentPage.BindingContext>
+        <local:PdfViewerViewModel></local:PdfViewerViewModel>
+    </ContentPage.BindingContext>
+
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <HorizontalStackLayout
+                Grid.Row="0"
+                Spacing="12" 
+                HorizontalOptions="Center"
+                Padding="4">
+                <ImageButton 
+                    Source="zoom_out.png"
+                    x:Name="ZoomOutButton"
+                    ClassId="zoom_out"
+                    Style="{StaticResource buttonIconStyle}"
+                    Command="{Binding ZoomOutCommand}"
+                    IsEnabled="{Binding CanZoomOut}"
+                    PropertyChanged="Button_PropertyChanged"/>
+                <ImageButton 
+                    Source="zoom_in.png"
+                    x:Name="ZoomInButton"
+                    ClassId="zoom_in"
+                    Style="{StaticResource buttonIconStyle}"
+                    Command="{Binding ZoomInCommand}" 
+                    IsEnabled="{Binding CanZoomIn}"
+                    PropertyChanged="Button_PropertyChanged"/>
+                <editors:SfComboBox x:Name="comboBox" 
+                    ItemsSource="{Binding ZoomPercentages}"
+                    SelectedIndex="{Binding CurrentZoomIndex,Mode=TwoWay}"
+                    IsEditable="False"
+                    IsClearButtonVisible="false"/>
+            </HorizontalStackLayout>
+            <syncfusion:SfPdfViewer 
+                Grid.Row="1" 
+                x:Name="pdfViewer" 
+                DocumentSource="{Binding PdfDocumentStream}"
+                MinZoomFactor="0.5"
+                MaxZoomFactor="8"
+                ZoomFactor="{Binding CurrentZoom,Mode=TwoWay}"/>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

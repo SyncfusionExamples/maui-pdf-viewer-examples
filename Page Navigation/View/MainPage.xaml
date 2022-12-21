@@ -1,0 +1,127 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:syncfusion="clr-namespace:Syncfusion.Maui.PdfViewer;assembly=Syncfusion.Maui.PdfViewer"
+             xmlns:local="clr-namespace:PageNavigation"
+             x:Class="PageNavigation.MainPage">
+
+    <ContentPage.BindingContext>
+        <local:PdfViewerViewModel  />
+    </ContentPage.BindingContext>
+    
+    <ContentPage.Resources>
+        <Style x:Key="buttonIconStyle" TargetType="ImageButton">
+            <Setter Property="BorderWidth" Value="0" />
+            <Setter Property="Padding" Value="4" />
+            <Setter Property="WidthRequest" Value="40"/>
+            <Setter Property="HeightRequest" Value="40"/>
+            <Setter Property="VerticalOptions" Value="Center" />            
+            <Setter Property="HorizontalOptions" Value="Center" />            
+            <Setter Property="VisualStateManager.VisualStateGroups">
+                <VisualStateGroupList>
+                    <VisualStateGroup x:Name="CommonStates">
+                        <VisualState x:Name="Normal">
+                            <VisualState.Setters>                                
+                                <Setter Property="BackgroundColor" Value="Transparent" />
+                            </VisualState.Setters>
+                        </VisualState>
+                        <VisualState x:Name="Disabled">
+                            <VisualState.Setters>                                
+                                <Setter Property="BackgroundColor" Value="Transparent" />
+                            </VisualState.Setters>
+                        </VisualState>
+                        <VisualState x:Name="Pressed">
+                            <VisualState.Setters>                                
+                                <Setter Property="BackgroundColor" Value="#0F000000" />
+                            </VisualState.Setters>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateGroupList>
+            </Setter>
+        </Style>
+    </ContentPage.Resources>
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <HorizontalStackLayout Grid.Row="0" Spacing="8" HorizontalOptions="Center" HeightRequest="50">
+            
+            <ImageButton Source="first_page.png"
+                    ClassId="first_page"                    
+                    Style="{StaticResource buttonIconStyle}"
+                    IsEnabled="{Binding CanGoToFirstPage}"
+                    PropertyChanged="Button_PropertyChanged"
+                    Command="{Binding Source={x:Reference PdfViewer},Path=GoToFirstPageCommand}"/>
+            
+            <ImageButton Source="previous_page.png"
+                    ClassId="previous_page"
+                    Style="{StaticResource buttonIconStyle}"
+                    PropertyChanged="Button_PropertyChanged"
+                    IsEnabled="{Binding CanGoToPreviousPage}"
+                    Command="{Binding Source={x:Reference PdfViewer},Path=GoToPreviousPageCommand}"/>
+
+            <Border BackgroundColor="#FFFFFFFF" Stroke="#66000000" StrokeShape="{OnPlatform Android=RoundRectangle 4, WinUI=RoundRectangle 4, MacCatalyst=RoundRectangle 5, iOS=RoundRectangle 5}" HeightRequest="{OnPlatform Android=30,WinUI=34, MacCatalyst=26, iOS=26}"
+                        Padding="{OnPlatform Android=5}" StrokeThickness="1">
+                <Entry 
+                    x:Name="PageNumberEntry"
+                    HandlerChanged="PageNumberEntry_HandlerChanged"
+                    Text="{Binding CurrentPageNumber}"
+                    MaxLength="4"
+                    Keyboard="Numeric"
+                    TextChanged="PageNumberEntry_TextChanged"
+                    Unfocused="PageNumberEntry_Unfocused"
+                    Completed="PageNumberEntry_Completed"
+                    VerticalTextAlignment="Center"
+                    WidthRequest="40"
+                    HeightRequest="{OnPlatform Default=24, Android=40}"
+                    VerticalOptions="Center" 
+                    HorizontalTextAlignment="Center"/>
+            </Border>
+
+            <Label 
+                Text=" / " 
+                VerticalTextAlignment="Center" 
+                HorizontalTextAlignment="Center"
+                VerticalOptions="Center"/>
+            
+            <Label 
+                Text="{Binding TotalPageCount}" 
+                VerticalTextAlignment="Center"
+                HorizontalTextAlignment="Center"
+                VerticalOptions="Center"/>
+
+            <ImageButton Source="next_page.png" 
+                    Style="{StaticResource buttonIconStyle}"
+                    ClassId="next_page"
+                    IsEnabled="{Binding CanGoToNextPage}"
+                    PropertyChanged="Button_PropertyChanged"
+                    Command="{Binding Source={x:Reference PdfViewer},Path=GoToNextPageCommand}"/>
+
+            <ImageButton Source="last_page.png" 
+                    ClassId="last_page"
+                    Style="{StaticResource buttonIconStyle}"
+                    IsEnabled="{Binding CanGoToLastPage}"
+                    PropertyChanged="Button_PropertyChanged"
+                    Command="{Binding Source={x:Reference PdfViewer},Path=GoToLastPageCommand}"/>
+        </HorizontalStackLayout>
+
+        <syncfusion:SfPdfViewer x:Name="PdfViewer" Grid.Row="1"
+                DocumentSource="{Binding PdfDocumentStream}"
+                PageCount="{Binding TotalPageCount, Mode=OneWayToSource}"
+                PageNumber="{Binding CurrentPageNumber, Mode=OneWayToSource}">
+        </syncfusion:SfPdfViewer>
+
+        <local:MessageBox
+            x:Name="MessageBox"
+            Grid.RowSpan="2"           
+            IsVisible="False"
+            BackgroundColor="#09778899"
+            HorizontalOptions="Fill"
+            VerticalOptions="Fill"/>
+
+    </Grid>
+
+</ContentPage>
