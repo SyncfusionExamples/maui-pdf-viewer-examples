@@ -6,11 +6,11 @@
              x:Class="PdfViewerExample.MainPage">
 
     <ContentPage.BindingContext>
-        <local:PdfViewerViewModel x:Name="viewModel" />
+        <local:PdfViewerViewModel />
     </ContentPage.BindingContext>
 
     <ContentPage.Content>
-        <syncfusion:SfPdfViewer x:Name="pdfViewer"
+        <syncfusion:SfPdfViewer x:Name="PdfViewer"
                                DocumentSource="{Binding PdfDocumentStream}">
         </syncfusion:SfPdfViewer>
     </ContentPage.Content>
