@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:ChoosePDFFromList"
+             xmlns:syncfusion="clr-namespace:Syncfusion.Maui.PdfViewer;assembly=Syncfusion.Maui.PdfViewer"
+             x:Class="ChoosePDFFromList.MainPage">
+
+    <ContentPage.BindingContext>
+        <local:PdfData/>
+    </ContentPage.BindingContext>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <ListView ItemsSource="{Binding Files}" ItemTapped="ListView_ItemTapped"
+                  BackgroundColor="LightGray"
+                  Grid.Column="0">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Label Text="{Binding }" Padding="0,0,8,0" HeightRequest="40" VerticalTextAlignment="Center"/>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <syncfusion:SfPdfViewer Grid.Column="1" x:Name="pdfViewer" DocumentSource="{Binding DocumentStream}"/>
+    </Grid>
+
+</ContentPage>
