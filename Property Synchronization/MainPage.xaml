@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PdfViewerMirroringDemo.MainPage"
+             xmlns:syncfusion="clr-namespace:Syncfusion.Maui.PdfViewer;assembly=Syncfusion.Maui.PdfViewer">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <HorizontalStackLayout Grid.Row="0" Grid.Column="0">
+            <Label Text="Viewer-1" FontSize="24" Margin="10"/>
+            <ImageButton Source="zoom_out.png" HeightRequest="32" Clicked="PdfViewer1_ZoomOutClicked"/>
+            <ImageButton Source="zoom_in.png" HeightRequest="32" Clicked="PdfViewer1_ZoomInClicked"/>
+        </HorizontalStackLayout>
+        <HorizontalStackLayout Grid.Row="0" Grid.Column="1" >
+            <Label Text="Viewer-2" FontSize="24" Margin="10"/>
+            <ImageButton Source="zoom_out.png" HeightRequest="32" Clicked="PdfViewer2_ZoomOutClicked"/>
+            <ImageButton Source="zoom_in.png" HeightRequest="32" Clicked="PdfViewer2_ZoomOutClicked"/>
+        </HorizontalStackLayout>
+        <Border Stroke="Gray" StrokeThickness="1" Grid.Row="1" Grid.Column="0">
+            <syncfusion:SfPdfViewer x:Name="PdfViewer1"/>
+        </Border>
+        <Border Stroke="Gray" StrokeThickness="1" Grid.Row="1" Grid.Column="1">
+            <syncfusion:SfPdfViewer  x:Name="PdfViewer2"/>
+        </Border>
+    </Grid>
+</ContentPage>
