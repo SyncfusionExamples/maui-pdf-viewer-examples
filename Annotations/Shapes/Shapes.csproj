@@ -16,7 +16,7 @@
 
 		<!-- App Identifier -->
 		<ApplicationId>com.companyname.shapes</ApplicationId>
-		<ApplicationIdGuid>b5c4d40f-26fe-4dd8-b30d-f3dd59de178e</ApplicationIdGuid>
+		<ApplicationIdGuid>7bfe6a05-c75f-4c74-8fcc-b58b4b4be509</ApplicationIdGuid>
 
 		<!-- Versions -->
 		<ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
@@ -79,8 +79,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <PackageReference Include="Syncfusion.Maui.PdfViewer" Version="22.2.5" />
-	  <PackageReference Include="Syncfusion.Maui.Sliders" Version="22.2.5" />
+	  <PackageReference Include="Syncfusion.Maui.PdfViewer" Version="*" />
+	  <PackageReference Include="Syncfusion.Maui.Sliders" Version="*" />
 	</ItemGroup>
 
 	<ItemGroup>
