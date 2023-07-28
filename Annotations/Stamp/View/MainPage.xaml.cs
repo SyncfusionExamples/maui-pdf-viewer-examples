@@ -11,17 +11,17 @@ public partial class MainPage : ContentPage
     Annotation SelectedAnnotation;
 
     /// <summary>
-    /// Gets or sets the type of stamp.
+    /// Stores the type of the built-in stamp which is tapped in the stamp dialog.
     /// </summary>
     private StampType StampType { get; set; }
 
     /// <summary>
-    /// Gets or sets the image stream.
+    /// Stores the image stream of the custom stamp which is tapped in the stamp dialog.
     /// </summary>
     private Stream ImageStream { get; set; }
 
     /// <summary>
-    /// Gets or sets the stamp mode. If true, the stamp mode is enabled; otherwise, it is disabled (false by default).
+    /// Indicates whether the tap on the PdfViewer should add the stamp selected from the stamp dialog. Once the stamp is added, this field will be set to false.
     /// </summary>
     private bool StampMode { get; set; } = false;
 
