@@ -36,8 +36,7 @@ public partial class MainPage : ContentPage
     /// Event handler for the "ThicknessChangedEnd" event of the EditorControl.
     /// Updates the border width of the selected annotation or the default ink annotation in the PdfViewer based on the EditorThickness value.
     /// </summary>
-    /// <param name="sender">The object that triggered the event.</param>
-    /// <param name="e">The EventArgs associated with the event.</param>
+    
     private void EditorControl_ThicknessChangedEnd(object sender, EventArgs e)
     {
         if(SelectedAnnotation != null)
@@ -61,8 +60,7 @@ public partial class MainPage : ContentPage
     /// Event handler for the "OpacityChangedEnd" event of the EditorControl.
     /// Updates the opacity of the selected annotation or the default ink annotation in the PdfViewer based on the EditorOpacity value.
     /// </summary>
-    /// <param name="sender">The object that triggered the event.</param>
-    /// <param name="e">The EventArgs associated with the event.</param>
+   
     private void EditorControl_OpacityChangedEnd(object sender, EventArgs e)
     {
         if (SelectedAnnotation != null)
@@ -80,8 +78,7 @@ public partial class MainPage : ContentPage
     /// Event handler for the "ColorChanged" event of the EditorControl.
     /// Updates the color of the selected annotation or the default ink annotation in the PdfViewer based on the ColorChangedEventArgs.
     /// </summary>
-    /// <param name="sender">The object that triggered the event.</param>
-    /// <param name="e">The ColorChangedEventArgs containing the new color information.</param>
+
     private void EditorControl_ColorChanged(object sender, ColorChangedEventArgs e)
     {
         if (SelectedAnnotation != null)
@@ -98,8 +95,7 @@ public partial class MainPage : ContentPage
     /// Event handler for the "AnnotationDeselected" event of the PdfViewer.
     /// Clears the selected annotation and adjusts the visibility and layout of the EditorControl and associated UI elements.
     /// </summary>
-    /// <param name="sender">The object that triggered the event.</param>
-    /// <param name="e">The AnnotationEventArgs containing information about the deselected annotation.</param>
+   
     private void PdfViewer_AnnotationDeselected(object sender, AnnotationEventArgs e)
     {
         SelectedAnnotation = null;
@@ -112,8 +108,7 @@ public partial class MainPage : ContentPage
     /// Event handler for the "AnnotationSelected" event of the PdfViewer.
     /// Handles the selection of an annotation by updating UI elements in the EditorControl based on the selected annotation type.
     /// </summary>
-    /// <param name="sender">The object that triggered the event.</param>
-    /// <param name="e">The AnnotationEventArgs containing information about the selected annotation.</param>
+    
     private void PdfViewer_AnnotationSelected(object sender, AnnotationEventArgs e)
     {
         SelectedAnnotation = e.Annotation;
@@ -160,8 +155,7 @@ public partial class MainPage : ContentPage
     /// Event handler for the "PropertyChanged" event of the EditOption.
     /// Hides the EditorControl if the "IsVisible" property of the EditOption is changed.
     /// </summary>
-    /// <param name="sender">The object that triggered the event (EditOption).</param>
-    /// <param name="e">The PropertyChangedEventArgs containing information about the changed property.</param>
+    
     private void EditOption_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
     {
         if (e.PropertyName == nameof(IsVisible))
@@ -194,6 +188,7 @@ public partial class MainPage : ContentPage
         }
     }
 
+
     private void ColorPalletteReset()
     {
         EditorControl.ThicknessSliderLayOut.IsVisible = true;
@@ -202,6 +197,8 @@ public partial class MainPage : ContentPage
         EditorControl.OpacityThicknessSeparator.IsVisible = true;
         EditorControl.HeightRequest = 200f;
     }
+
+
     private void ShowPropertyPanel_Clicked(object sender, EventArgs e)
     {
         if(PdfViewer.AnnotationMode == AnnotationMode.Ink)
@@ -218,6 +215,9 @@ public partial class MainPage : ContentPage
         }
     }
 
+    /// <summary>
+    /// Handles the event when the color palette button is clicked, toggling the visibility of the editor control.
+    /// </summary>
     private void ColorPalette_Clicked(object sender, EventArgs e)
     {
         if (SelectedAnnotation != null)
@@ -226,6 +226,9 @@ public partial class MainPage : ContentPage
         }
     }
 
+    /// <summary>
+    /// Handles the event when an annotation is deselected in the PdfViewer.
+    /// </summary>
     private void Delete_Clicked(object sender, EventArgs e)
     {
         if (SelectedAnnotation != null)
@@ -234,6 +237,9 @@ public partial class MainPage : ContentPage
         }
     }
 
+    /// <summary>
+    /// Handles the event when the "Lock/Unlock" button is clicked, toggling the lock status of the selected annotation.
+    /// </summary>
     private void LockUnlock_Clicked(object sender, EventArgs e)
     {
         if (SelectedAnnotation != null)
@@ -243,6 +249,10 @@ public partial class MainPage : ContentPage
         UnlockButton.IsVisible = SelectedAnnotation.IsLocked ? true : false;
         Lockbutton.IsVisible = SelectedAnnotation.IsLocked ? false : true;
     }
+
+    /// <summary>
+    /// Handles the event when the "Save" button is clicked, saving the PDF document to a file in the common app data directory.
+    /// </summary>
     private async void Save_Clicked(object sender, EventArgs e)
     {
         string targetFile = Path.Combine(FileSystem.Current.AppDataDirectory, "Saved.pdf");
@@ -250,6 +260,11 @@ public partial class MainPage : ContentPage
         PdfViewer.SaveDocument(outputStream);
         await DisplayAlert("Document Saved", "The document has been saved to the file " + targetFile, "OK");
     }
+
+
+    /// <summary>
+    /// Handles the event when the "Import" button is clicked, importing annotations from an XFDF file.
+    /// </summary>
     private void Import_Clicked(object sender, EventArgs e)
     {
         string fileName = Path.Combine(FileSystem.Current.AppDataDirectory, "Export.xfdf");
@@ -263,6 +278,10 @@ public partial class MainPage : ContentPage
         else
             DisplayAlert("No files to import", "There are no xfdf files to import. Please export the annotations to an xfdf file and then import. ", "OK");
     }
+
+    /// <summary>
+    /// Handles the event when the "Export" button is clicked, exporting annotations to an XFDF file.
+    /// </summary>
     private async void Export_Clicked(object sender, EventArgs e)
     {
         Stream xfdfStream = new MemoryStream();
@@ -270,6 +289,12 @@ public partial class MainPage : ContentPage
         await CopyFileToAppDataDirectory(xfdfStream, "Export.xfdf");
     }
 
+    /// <summary>
+    /// Copies the contents of the input stream to a file in the application's data directory.
+    /// </summary>
+    /// <param name="inputStream">The input stream containing the data to be copied.</param>
+    /// <param name="filename">The name of the target file.</param>
+    /// <returns>A task representing the asynchronous operation.</returns>
     public async Task CopyFileToAppDataDirectory(Stream inputStream, string filename)
     {
         // Create an output filename

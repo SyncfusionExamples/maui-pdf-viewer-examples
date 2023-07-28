@@ -206,6 +206,10 @@ public partial class MainPage : ContentPage
         }
     }
 
+    /// <summary>
+    /// Event handler for the annotation buttons' click events.
+    /// Sets the PDF viewer's annotation mode based on the clicked button.
+    /// </summary>
     private void Annotation_Clicked(object sender, EventArgs e)
     {
         
@@ -235,6 +239,10 @@ public partial class MainPage : ContentPage
             }
     }
 
+    /// <summary>
+    /// Event handler for the annotation menu button click.
+    /// Manages the visibility of annotation-related UI elements and updates the PDF viewer's annotation mode.
+    /// </summary>
     private void AnnotationMenu_Clicked(object sender, EventArgs e)
     {
         if(SelectedAnnotation!=null)
@@ -259,12 +267,18 @@ public partial class MainPage : ContentPage
             
     }
 
+    /// <summary>
+    /// Handles the event when the color palette button is clicked, toggling the visibility of the editor control.
+    /// </summary>
     private void ColorPalette_Clicked(object sender, EventArgs e)
     {
         EditorControl.IsVisible = !EditorControl.IsVisible;
           
     }
 
+    /// <summary>
+    /// Handles the event when the "Delete" button is clicked, removing the selected annotation from the PdfViewer.
+    /// </summary>
     private void Delete_Clicked(object sender, EventArgs e)
     {
         if (SelectedAnnotation != null)
@@ -273,6 +287,9 @@ public partial class MainPage : ContentPage
         }
     }
 
+    /// <summary>
+    /// Handles the event when the "Save" button is clicked, saving the PDF document to a file in the common app data directory.
+    /// </summary>
     private async void Save_Clicked(object sender, EventArgs e)
     {
         string targetFile = Path.Combine(FileSystem.Current.AppDataDirectory, "Saved.pdf");
@@ -289,6 +306,7 @@ public partial class MainPage : ContentPage
         }
     }
 
+
     private void Unlock_Clicked(object sender, EventArgs e)
     {
         if (SelectedAnnotation != null)
@@ -297,12 +315,22 @@ public partial class MainPage : ContentPage
         }
     }
 
+    /// <summary>
+    /// Handles the event when the "Export" button is clicked, exporting annotations to an XFDF file.
+    /// </summary>
     private async void Export_Clicked(object sender, EventArgs e)
     {
         Stream xfdfStream = new MemoryStream();
         PdfViewer.ExportAnnotations(xfdfStream, Syncfusion.Pdf.Parsing.AnnotationDataFormat.XFdf);
         await CopyFileToAppDataDirectory(xfdfStream, "Export.xfdf");     
     }
+
+    /// <summary>
+    /// Copies the contents of the input stream to a file in the application's data directory.
+    /// </summary>
+    /// <param name="inputStream">The input stream containing the data to be copied.</param>
+    /// <param name="filename">The name of the target file.</param>
+    /// <returns>A task representing the asynchronous operation.</returns>
     private async Task CopyFileToAppDataDirectory(Stream inputStream, string fileName)
     {
         string targetFile = Path.Combine(FileSystem.Current.AppDataDirectory, fileName);
@@ -318,6 +346,9 @@ public partial class MainPage : ContentPage
         }
     }
 
+    /// <summary>
+    /// Handles the event when the "Lock/Unlock" button is clicked, toggling the lock status of the selected annotation.
+    /// </summary>
     private void LockUnlock_Clicked(object sender, EventArgs e)
     {
         if (SelectedAnnotation != null)
