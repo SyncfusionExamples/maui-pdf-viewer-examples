@@ -108,8 +108,6 @@ public partial class MainPage : ContentPage
     /// Handles the event when the opacity of the editor control changes and updates the opacity of the selected annotation.
     /// If no annotation is selected, it sets the default opacity for text markups.
     /// </summary>
-    /// <param name="sender">The sender object.</param>
-    /// <param name="e">The event arguments.</param>
     private void EditorControl_OpacityChangedEnd(object sender, EventArgs e)
     {
         if (SelectedAnnotation != null)
@@ -125,8 +123,6 @@ public partial class MainPage : ContentPage
     /// <summary>
     /// Handles the event when the thickness of the editor control changes and updates the thickness of the selected shape or ink annotation.
     /// </summary>
-    /// <param name="sender">The sender object.</param>
-    /// <param name="e">The event arguments.</param>
     private void EditorControl_ThicknessChangedEnd(object sender, EventArgs e)
     {
         if (SelectedAnnotation != null)
@@ -169,8 +165,6 @@ public partial class MainPage : ContentPage
     /// Handles the event when the color of the editor control changes and updates the color of the selected annotation.
     /// If no annotation is selected, it sets the default color for text markups.
     /// </summary>
-    /// <param name="sender">The sender object.</param>
-    /// <param name="e">The event arguments containing the new color code.</param>
     private void EditorControl_ColorChanged(object sender, ColorChangedEventArgs e)
     {
         if (SelectedAnnotation != null)
@@ -210,8 +204,6 @@ public partial class MainPage : ContentPage
     /// <summary>
     /// Handles the event when an annotation is deselected in the PdfViewer.
     /// </summary>
-    /// <param name="sender">The sender object.</param>
-    /// <param name="e">The event arguments containing information about the deselected annotation.</param>
     private void PdfViewer_AnnotationDeselected(object sender, AnnotationEventArgs e)
     {
         SelectedAnnotation = null;
@@ -235,8 +227,6 @@ public partial class MainPage : ContentPage
     /// <summary>
     /// Handles the event when an annotation is selected in the PdfViewer.
     /// </summary>
-    /// <param name="sender">The sender object.</param>
-    /// <param name="e">The event arguments containing information about the selected annotation.</param>
     private void PdfViewer_AnnotationSelected(object sender, AnnotationEventArgs e)
     {
         SelectedAnnotation = e.Annotation;
@@ -328,8 +318,6 @@ public partial class MainPage : ContentPage
     /// <summary>
     /// Handles the event when the "Highlight" button is clicked, enabling the highlight annotation mode.
     /// </summary>
-    /// <param name="sender">The sender object.</param>
-    /// <param name="e">The event arguments.</param>
     private void HighlightClicked(object sender, EventArgs e)
     {
         PdfViewer.AnnotationMode = AnnotationMode.Highlight;
@@ -341,8 +329,6 @@ public partial class MainPage : ContentPage
     /// <summary>
     /// Handles the event when the "Underline" button is clicked, enabling the Underline annotation mode.
     /// </summary>
-    /// <param name="sender">The sender object.</param>
-    /// <param name="e">The event arguments.</param>
     private void UnderlineClicked(object sender, EventArgs e)
     {
         PdfViewer.AnnotationMode = AnnotationMode.Underline;
@@ -354,8 +340,6 @@ public partial class MainPage : ContentPage
     /// <summary>
     /// Handles the event when the "Strikeout" button is clicked, enabling the Strikeout annotation mode.
     /// </summary>
-    /// <param name="sender">The sender object.</param>
-    /// <param name="e">The event arguments.</param>
     private void StrikeOutClicked(object sender, EventArgs e)
     {
         PdfViewer.AnnotationMode = AnnotationMode.StrikeOut;
@@ -367,8 +351,6 @@ public partial class MainPage : ContentPage
     /// <summary>
     /// Handles the event when the "Squiggly" button is clicked, enabling the Squiggly annotation mode.
     /// </summary>
-    /// <param name="sender">The sender object.</param>
-    /// <param name="e">The event arguments.</param>
     private void SquigglyClicked(object sender, EventArgs e)
     {
         PdfViewer.AnnotationMode = AnnotationMode.Squiggly;
@@ -380,8 +362,6 @@ public partial class MainPage : ContentPage
     /// <summary>
     /// Handles the event when the "Show Text Markup" button is clicked, toggling the visibility of text markup controls and editor.
     /// </summary>
-    /// <param name="sender">The sender object.</param>
-    /// <param name="e">The event arguments.</param>
     private void ShowTextMarkup_Clicked(object sender, EventArgs e)
     {
         if (TextMarkupGrid.IsVisible && EditOptions.IsVisible)
@@ -415,8 +395,6 @@ public partial class MainPage : ContentPage
     /// <summary>
     /// Handles the event when the "Delete" button is clicked, removing the selected annotation from the PdfViewer.
     /// </summary>
-    /// <param name="sender">The sender object.</param>
-    /// <param name="e">The event arguments.</param>
     private void Delete_Clicked(object sender, EventArgs e)
     {
         if (SelectedAnnotation != null)
@@ -428,8 +406,6 @@ public partial class MainPage : ContentPage
     /// <summary>
     /// Handles the event when the "Save" button is clicked, saving the PDF document to a file in the common app data directory.
     /// </summary>
-    /// <param name="sender">The sender object.</param>
-    /// <param name="e">The event arguments.</param>
     private async void Save_Clicked(object sender, EventArgs e)
     {
         string targetFile = Path.Combine(FileSystem.Current.AppDataDirectory, "Saved.pdf");
@@ -441,8 +417,6 @@ public partial class MainPage : ContentPage
     /// <summary>
     /// Handles the event when the "Lock/Unlock" button is clicked, toggling the lock status of the selected annotation.
     /// </summary>
-    /// <param name="sender">The sender object.</param>
-    /// <param name="e">The event arguments.</param>
     private void LockUnlock_Clicked(object sender, EventArgs e)
     {
         if (SelectedAnnotation != null)
@@ -455,8 +429,6 @@ public partial class MainPage : ContentPage
     /// <summary>
     /// Handles the event when the "Import" button is clicked, importing annotations from an XFDF file.
     /// </summary>
-    /// <param name="sender">The sender object.</param>
-    /// <param name="e">The event arguments.</param>
     private void Import_Clicked(object sender, EventArgs e)
     {
         string fileName = Path.Combine(FileSystem.Current.AppDataDirectory, "Export.xfdf");
@@ -474,8 +446,6 @@ public partial class MainPage : ContentPage
     /// <summary>
     /// Handles the event when the "Export" button is clicked, exporting annotations to an XFDF file.
     /// </summary>
-    /// <param name="sender">The sender object.</param>
-    /// <param name="e">The event arguments.</param>
     private async void Export_Clicked(object sender, EventArgs e)
     {
         Stream xfdfStream = new MemoryStream();
