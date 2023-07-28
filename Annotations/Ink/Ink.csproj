@@ -16,7 +16,7 @@
 
 		<!-- App Identifier -->
 		<ApplicationId>com.companyname.ink</ApplicationId>
-		<ApplicationIdGuid>275ecac0-b5c8-44ec-a4a4-3fdae47e763c</ApplicationIdGuid>
+		<ApplicationIdGuid>6ca6b63a-67b1-4b5a-b56d-ca14a83ab664</ApplicationIdGuid>
 
 		<!-- Versions -->
 		<ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
@@ -47,6 +47,11 @@
 		<!-- Raw Assets (also remove the "Resources\Raw" prefix) -->
 		<MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
 	</ItemGroup>
+	
+<ItemGroup>
+	  <PackageReference Include="Syncfusion.Maui.PdfViewer" Version="*" />
+	  <PackageReference Include="Syncfusion.Maui.Sliders" Version="*" />
+	</ItemGroup>
 
 	<ItemGroup>
 	  <None Remove="Assets\Annotations.pdf" />
@@ -71,19 +76,17 @@
 	  <MauiImage Include="Assets\export_image.png" />
 	  <MauiImage Include="Assets\export_small_image.png" />
 	  <MauiImage Include="Assets\import_image.png" />
+	  <MauiImage Include="Assets\import_small_image.png" />
 	  <MauiImage Include="Assets\lock_image.png" />
 	  <MauiImage Include="Assets\lock_small_image.png" />
+	  <MauiImage Include="Assets\unlock_image.png" />
 	  <MauiImage Include="Assets\unlock_small_image.png" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiImage Include="Assets\import_small_image.png" />
-	  <MauiImage Include="Assets\unlock_image.png" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <PackageReference Include="Syncfusion.Maui.PdfViewer" Version="22.2.5" />
-	  <PackageReference Include="Syncfusion.Maui.Sliders" Version="22.2.5" />
+	  <MauiXaml Update="View\MainPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	</ItemGroup>
 
 </Project>
