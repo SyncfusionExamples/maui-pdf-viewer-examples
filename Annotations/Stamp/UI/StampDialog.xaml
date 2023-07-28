@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Stamp.StampDialog"
+             xmlns:local="clr-namespace:Stamp"
+             BackgroundColor="#40000000">
+    <Border 
+        BackgroundColor="#F3EDF7"
+        Stroke="#33000000"
+        StrokeThickness="1" HorizontalOptions="Center" 
+        VerticalOptions="Center" HeightRequest="{OnPlatform Default=380,Android=320,iOS=320,MacCatalyst=320}" WidthRequest="360" >
+        <Grid BackgroundColor="#FFFFFF">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0" BackgroundColor="#D3D3D3">
+                <Label Grid.Row="0" Text="Choose Stamps" TextColor="Black" HorizontalOptions="Center" FontSize="20" Margin="10" />
+            </Grid>
+
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <VerticalStackLayout HeightRequest="220" Grid.Column="0" WidthRequest="150" 
+                                     HorizontalOptions="Center" VerticalOptions="Center" >
+                    <Label Text="Built-in stamp" TextColor="Black" HorizontalOptions="Center" FontSize="16" Margin="10"/>
+                    <Image Source="{OnPlatform Default=approved.png,Android=approved_small.png,iOS=approved_small.png,MacCatalyst=approved_small.png}" x:Name="Approved">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnImageTapped" />
+                        </Image.GestureRecognizers>
+                    </Image>
+                    <Label HeightRequest="20"/>
+                    <Image Source="{OnPlatform Default=draft.png,Android=draft_small.png,iOS=draft_small.png,MacCatalyst=draft_small.png}" x:Name="Draft"  >
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnImageTapped" />
+                        </Image.GestureRecognizers>
+                    </Image>
+                    <Label HeightRequest="20"  />
+                    <Image Source="{OnPlatform Default=confidential.png,Android=confidential_small.png,iOS=confidential_small.png,MacCatalyst=confidential_small.png}" x:Name="Confidential"  >
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnImageTapped" />
+                        </Image.GestureRecognizers>
+                    </Image>
+                    <Label HeightRequest="20"  />
+                    <Image Source="{OnPlatform Default=notapproved.png,Android=notapproved_small.png,iOS=notapproved_small.png,MacCatalyst=notapproved_small.png}" x:Name="NotApproved"  >
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnImageTapped" />
+                        </Image.GestureRecognizers>
+                    </Image>
+                </VerticalStackLayout>
+
+                <VerticalStackLayout HeightRequest="220" WidthRequest="150" Grid.Column="1" 
+                                     HorizontalOptions="Center" VerticalOptions="Center" >
+                    <Label Text="Custom stamp" TextColor="Black" HorizontalOptions="Center" FontSize="16" Margin="10" />
+                    <Image Source="{OnPlatform Default=dotnet.jpg,Android=dotnet_small.jpg,iOS=dotnet_small.jpg,MacCatalyst=dotnet_small.jpg}" x:Name="Dotnet" >
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnImageTapped" />
+                        </Image.GestureRecognizers>
+                    </Image>
+                    <Label HeightRequest="20"  />
+                    <Image Source="{OnPlatform Default=download.png,Android=download_small.png,iOS=download_small.png,MacCatalyst=download_small.png}" x:Name="Download" >
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnImageTapped" />
+                        </Image.GestureRecognizers>
+                    </Image>
+                </VerticalStackLayout>
+            </Grid>
+
+            <Grid Grid.Row="2" Margin="20" VerticalOptions="End">
+                <Label Text="Select a stamp and tap on the page" TextColor="Black" FontSize="14" 
+                       HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand"/>
+                <Button Text="Close" FontSize="14" TextColor="Black"
+                        Clicked="OnCloseButtonClicked" CornerRadius="0" Padding="4,2,4,5.5"
+                        BackgroundColor="Violet" VerticalOptions="CenterAndExpand"
+                        HorizontalOptions="EndAndExpand"/>
+            </Grid>
+        </Grid>
+    </Border>
+</ContentView>
