@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:syncfusion="clr-namespace:Syncfusion.Maui.PdfViewer;assembly=Syncfusion.Maui.PdfViewer"
+             x:Class="BusyIndicatorStyle.MainPage">
+
+    <ContentPage.Resources>
+        <Style 
+               TargetType="ActivityIndicator" ApplyToDerivedTypes="True">
+            <Setter Property="Color" Value="Red" />
+        </Style>
+    </ContentPage.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <HorizontalStackLayout Grid.Row="0">
+            <Button x:Name="Load" Text="Click to load a document" Clicked="Load_Clicked"/>
+        </HorizontalStackLayout>
+        <syncfusion:SfPdfViewer Grid.Row="1" x:Name="pdfViewer"/>
+    </Grid>
+</ContentPage>
