@@ -1,0 +1,118 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:PolylineAnnotationDemo"
+    xmlns:syncfusion="clr-namespace:Syncfusion.Maui.PdfViewer;assembly=Syncfusion.Maui.PdfViewer"        
+    x:Class="PolylineAnnotationDemo.MainPage">
+   
+    <ContentPage.Resources>
+        <Style TargetType="Button">
+            <Setter Property="BorderWidth" Value="0" />
+            <Setter Property="FontSize" Value="18" />
+            <Setter Property="Padding" Value="4" />
+            <Setter Property="VerticalOptions" Value="Center" />
+            <Setter Property="FontFamily" Value="{OnPlatform iOS=PdfViewerIcon, MacCatalyst=PdfViewerIcon, Android=PdfViewerIcon.ttf#, WinUI=PdfViewerIcon.ttf#PdfViewerIcon}" />
+            <Setter Property="VisualStateManager.VisualStateGroups">
+                <VisualStateGroupList>
+                    <VisualStateGroup x:Name="CommonStates">
+                        <VisualState x:Name="Normal">
+                            <VisualState.Setters>
+                                <Setter Property="TextColor" Value="#99000000" />
+                                <Setter Property="BackgroundColor" Value="Transparent" />
+                            </VisualState.Setters>
+                        </VisualState>
+                        <VisualState x:Name="Disabled">
+                            <VisualState.Setters>
+                                <Setter Property="TextColor" Value="#44000000" />
+                                <Setter Property="BackgroundColor" Value="Transparent" />
+                            </VisualState.Setters>
+                        </VisualState>
+                        <VisualState x:Name="Pressed">
+                            <VisualState.Setters>
+                                <Setter Property="TextColor" Value="#99000000" />
+                                <Setter Property="BackgroundColor" Value="#0F000000" />
+                            </VisualState.Setters>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateGroupList>
+            </Setter>
+        </Style>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0" HeightRequest="40" BackgroundColor="#FFF6F6F6">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="{OnPlatform Default=Auto, Android=1*, iOS=1*}"/>
+                    <ColumnDefinition Width="{OnPlatform Default=*, Android=1*, iOS=1*}"/>
+                </Grid.ColumnDefinitions>
+                <HorizontalStackLayout Grid.Column="0" Spacing="8"
+                        HorizontalOptions="Start">
+                    
+
+                    <Button Text="&#xe75f;" FontSize="18" x:Name="Save" FontFamily="Maui Material Assets" Clicked="Save_Clicked"/>
+                    <Button ImageSource="{OnPlatform Default=import_image.png,Android=import_small_image.png,iOS=import_small_image.png,MacCatalyst=import_small_image.png}" ToolTipProperties.Text="Import default exported file" WidthRequest="{OnPlatform Default=35,Android=25}" HeightRequest="{OnPlatform Default=25,Android=15}" Clicked="Import_Clicked" />
+                    <Button x:Name="Export" ImageSource="{OnPlatform Default=export_image.png,Android=export_small_image.png,iOS=export_small_image.png,MacCatalyst=export_small_image.png}" ToolTipProperties.Text="Export the current file" WidthRequest="{OnPlatform Default=35,Android=25}" HeightRequest="{OnPlatform Default=25,Android=15}" Clicked="Export_Clicked"/>
+                    <!--<Button ImageSource="{OnPlatform Default=import_image.png,Android=import_small_image.png,iOS=import_small_image.png,MacCatalyst=import_small_image.png}" ToolTipProperties.Text="Import last Exported file" WidthRequest="{OnPlatform Default=35,Android=25}" HeightRequest="{OnPlatform Default=25,Android=15}" Clicked="ImportExportedFile_Clicked" />-->
+                    
+                </HorizontalStackLayout >
+                <HorizontalStackLayout 
+                        Grid.Column="1" Spacing="8"
+                        HorizontalOptions="End">
+                    <Button Text="&#xe73b;" Margin="4,0,0,0"  FontSize="18" x:Name="AnnotationMenu" FontFamily="Maui Material Assets" Clicked="AnnotationMenu_Clicked"/>
+                    <Button Text="&#xe744;" Margin="4,0,0,0"  FontSize="18" Clicked="UndoRedoClicked" x:Name="Undo" FontFamily="Maui Material Assets" Command="{Binding Path=UndoCommand,Source={x:Reference PdfViewer}}"/>
+                    <Button Text="&#xe745;" Margin="4,0,0,0" FontSize="18" Clicked="UndoRedoClicked" x:Name="Redo" FontFamily="Maui Material Assets" Command="{Binding Path=RedoCommand,Source={x:Reference PdfViewer}}"/>
+                </HorizontalStackLayout>
+            </Grid>
+            <Grid Grid.Row="2" x:Name="AnnotationMenuGrid" IsVisible="false" HeightRequest="40" BackgroundColor="#FFF6F6F6">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="{OnPlatform Default=Auto, Android=1*, iOS=1*}"/>
+                    <ColumnDefinition Width="{OnPlatform Default=*, Android=1*, iOS=1*}"/>
+                </Grid.ColumnDefinitions>
+                <HorizontalStackLayout 
+                        Grid.Column="0" Margin="0,0,12,0" x:Name="AnnotationIcons" IsVisible="{Binding Path=IsVisible,Source={x:Reference AnnotationMenuGrid}}"
+                    Spacing="8"
+                        HorizontalOptions="{OnPlatform MacCatalyst=Start, iOS=Start, Android=Start, WinUI=Center}">
+
+                    <Button Text="&#xe73c;"  FontSize="18" x:Name="Arrow" FontFamily="Maui Material Assets" Clicked="Annotation_Clicked"/>
+                    <Button Text="&#xe73d;" FontSize="18" x:Name="Line" FontFamily="Maui Material Assets" Clicked="Annotation_Clicked"/>
+                    <Button Text="&#xe73e;" FontSize="18" x:Name="Rectangle" FontFamily="Maui Material Assets" Clicked="Annotation_Clicked"/>
+                    <Button Text="&#xe73f;" FontSize="18" x:Name="Circle" FontFamily="Maui Material Assets" Clicked="Annotation_Clicked"/>
+                    <Button Text="&#xe786;" FontSize="18" x:Name="Polyline" FontFamily="Maui Material Assets" Clicked="Annotation_Clicked"/>
+                </HorizontalStackLayout>
+                <HorizontalStackLayout 
+                        Grid.Column="1" Margin="8,0,12,0" x:Name="EditOption" IsVisible="true" PropertyChanged="EditOption_PropertyChanged"
+                        HorizontalOptions="End">
+                    <Button x:Name="Lock" IsVisible="false" ImageSource="{OnPlatform Default=lock_image.png,MacCatalyst=lock_small_image.png,Android=lock_small_image.png,iOS=lock_small_image.png}" WidthRequest="{OnPlatform Default=30,Android=20}" HeightRequest="{OnPlatform Default=25,Android=15}" Clicked="LockUnlock_Clicked" Margin="0,0,0,2"/>
+                    <Button x:Name="Unlock" IsVisible="false" ImageSource="{OnPlatform Default=unlock_image.png,MacCatalyst=lock_small_image.png,Android=unlock_small_image.png,iOS=unlock_small_image.png}" WidthRequest="{OnPlatform Default=30,Android=20}" HeightRequest="{OnPlatform Default=25,Android=15}" Clicked="LockUnlock_Clicked" Margin="0,0,0,2"/>
+                    <Button  Text="&#xe767;"  Margin="8,0,0,0"  FontSize="18" x:Name="ColorPalette" IsVisible="true" FontFamily="Maui Material Assets" Clicked="ColorPalette_Clicked"/>
+                    <Button Text="&#xe70f;" Margin="8,0,0,0" FontSize="18" x:Name="Delete" IsVisible="false" FontFamily="Maui Material Assets" Clicked="Delete_Clicked"/>
+                </HorizontalStackLayout>
+
+            </Grid>
+            <Line Grid.Row="1" StrokeThickness="1" BackgroundColor="#33000000"/>
+            <Line Grid.Row="3" StrokeThickness="1" IsVisible="{Binding Path=IsVisible,Source={x:Reference EditOption}}" BackgroundColor="#33000000"/>
+            <syncfusion:SfPdfViewer
+                    x:Name="PdfViewer"
+                    Grid.Row="4"                   
+                     TextSelectionChanged="TextSelected" >
+            </syncfusion:SfPdfViewer>
+            <Grid  x:Name="ColorGrid" RowDefinitions="0.5*,1*,0.5*,1*,0.5*,1*,0.25*" Grid.Row="4" IsVisible="false" VerticalOptions="Start" HorizontalOptions="End" BackgroundColor="#FFF6F6F6" WidthRequest="200" HeightRequest="200">
+                <Label Padding="7"  Grid.Row="0" Text="Color" FontSize="10" TextColor="Black" HorizontalOptions="Start" VerticalOptions="End"></Label>
+                <Picker  Margin="7"  Grid.Row="1" x:Name="colorPicker"  WidthRequest="170" BackgroundColor="Gray" VerticalOptions="Center" HorizontalOptions="StartAndExpand" SelectedIndexChanged="Color_Picked" ></Picker>
+                <Label Padding="7"  Grid.Row="2" Text="Opacity" FontSize="10" TextColor="Black" HorizontalOptions="Start" VerticalOptions="Start"></Label>
+                <Slider Grid.Row="3" x:Name="OpacSlider" Value="1" Minimum="0" Maximum="1" ThumbColor="{OnPlatform Default=Black, MacCatalyst=White, iOS=White}"  VerticalOptions="Center" ValueChanged = "OpacityValueChanged" WidthRequest="150" BackgroundColor="Black"></Slider>
+                <Label Padding="7" Grid.Row="4" Text="Thickness" FontSize="10" TextColor="Black" HorizontalOptions="Start" VerticalOptions="End"></Label>
+                <Slider Grid.Row="5" x:Name="thickSlider" Minimum="1" Value="5" Maximum="12" ThumbColor="{OnPlatform Default=Black, MacCatalyst=White, iOS=White}" VerticalOptions="Center" ValueChanged = "ThicknessValueChanged" WidthRequest="150" BackgroundColor="Black"></Slider>
+            </Grid>
+           
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
