@@ -109,7 +109,7 @@
                     DocumentSource="{Binding PdfDocumentStream}">
             </syncfusion:SfPdfViewer>
             <local:ColorPalatte
-                x:Name="freeTextEditor" BackgroundColor="#FFF6F6F6" WidthRequest="{OnPlatform WinUI=280 ,Android=230,MacCatalyst=230,iOS=280 }" HorizontalOptions="End" VerticalOptions="Start" Grid.Row="5"
+                x:Name="shapeColorPaletteEditor" BackgroundColor="#FFF6F6F6" WidthRequest="{OnPlatform WinUI=280 ,Android=230,MacCatalyst=230,iOS=280 }" HorizontalOptions="End" VerticalOptions="Start" Grid.Row="5"
                 IsVisible="false"/>
         </Grid>
     </ContentPage.Content>

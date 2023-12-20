@@ -15,20 +15,20 @@ public partial class MainPage : ContentPage
         string[,] colorCodes = new string[1, 5] {
             { "#FF990000", "#FF996100", "#FF009907", "#FF060099", "#FF990098"},
         };
-        freeTextEditor.SelectedThickness = PdfViewer.AnnotationSettings.Square.BorderWidth;
-        freeTextEditor.SelectedOpacity=PdfViewer.AnnotationSettings.Circle.Color.Alpha;
-        freeTextEditor.SelectedFillColorOpacity = 1;
+        shapeColorPaletteEditor.SelectedThickness = PdfViewer.AnnotationSettings.Square.BorderWidth;
+        shapeColorPaletteEditor.SelectedOpacity=PdfViewer.AnnotationSettings.Circle.Color.Alpha;
+        shapeColorPaletteEditor.SelectedFillColorOpacity = 1;
         if (this.BindingContext is PdfViewerViewModel viewModel)
         {
-            viewModel.SelectedThickness = freeTextEditor.SelectedThickness;
-            viewModel.SelectedOpacity = freeTextEditor.SelectedOpacity;
-            viewModel.SelectedFillColorOpacity = freeTextEditor.SelectedFillColorOpacity;
+            viewModel.SelectedThickness = shapeColorPaletteEditor.SelectedThickness;
+            viewModel.SelectedOpacity = shapeColorPaletteEditor.SelectedOpacity;
+            viewModel.SelectedFillColorOpacity = shapeColorPaletteEditor.SelectedFillColorOpacity;
         }
-        freeTextEditor.ShapeStrokeColorChanged += FreeTextEditor_ShapeStrokeColorChanged;
-        freeTextEditor.ShapeFillColorChanged += FreeTextEditor_ShapeFillColorChanged;
-        freeTextEditor.StrokeOpacityChanged += FreeTextEditor_StrokeOpacityChanged;
-        freeTextEditor.FillOpacityChanged += FreeTextEditor_FillOpacityChanged;
-        freeTextEditor.BorderThicknessChanged += FreeTextEditor_BorderThicknessChanged;
+        shapeColorPaletteEditor.ShapeStrokeColorChanged += FreeTextEditor_ShapeStrokeColorChanged;
+        shapeColorPaletteEditor.ShapeFillColorChanged += FreeTextEditor_ShapeFillColorChanged;
+        shapeColorPaletteEditor.StrokeOpacityChanged += FreeTextEditor_StrokeOpacityChanged;
+        shapeColorPaletteEditor.FillOpacityChanged += FreeTextEditor_FillOpacityChanged;
+        shapeColorPaletteEditor.BorderThicknessChanged += FreeTextEditor_BorderThicknessChanged;
         PdfViewer.AnnotationSelected += PdfViewer_AnnotationSelected;
         PdfViewer.AnnotationDeselected += PdfViewer_AnnotationDeselected; ;
 #if ANDROID
@@ -44,7 +44,7 @@ public partial class MainPage : ContentPage
     { 
             SelectedAnnotation = null;
         // ColorPalatte.IsVisible = false;
-           freeTextEditor.IsVisible = false;
+        shapeColorPaletteEditor.IsVisible = false;
            shapeList.IsVisible = true;
            delete.IsVisible = false;
            Lock.IsVisible = false;
@@ -59,7 +59,7 @@ public partial class MainPage : ContentPage
         shapeList.IsVisible = false;
         AnnotationMenuGrid.IsVisible = true;
         delete.IsVisible = true;
-        freeTextEditor.IsVisible = false;
+        shapeColorPaletteEditor.IsVisible = false;
         if (this.BindingContext is PdfViewerViewModel viewModel)
         {
             if (SelectedAnnotation is SquareAnnotation || SelectedAnnotation is CircleAnnotation || SelectedAnnotation is PolygonAnnotation)
@@ -165,28 +165,28 @@ public partial class MainPage : ContentPage
     {
         if (SelectedAnnotation != null)
         {
-            SelectedAnnotation.FillColor = e.WithAlpha(freeTextEditor.SelectedFillColorOpacity);
+            SelectedAnnotation.FillColor = e.WithAlpha(shapeColorPaletteEditor.SelectedFillColorOpacity);
         }
         else if (PdfViewer.AnnotationMode != AnnotationMode.None && PdfViewer.AnnotationMode!=AnnotationMode.Polyline && PdfViewer.AnnotationMode!=AnnotationMode.Line && PdfViewer.AnnotationMode!=AnnotationMode.Arrow)
         {
             switch (PdfViewer.AnnotationMode)
             {
                 case AnnotationMode.Square:
-                    PdfViewer.AnnotationSettings.Square.FillColor = e.WithAlpha(freeTextEditor.SelectedFillColorOpacity);
+                    PdfViewer.AnnotationSettings.Square.FillColor = e.WithAlpha(shapeColorPaletteEditor.SelectedFillColorOpacity);
                     break;
                 case AnnotationMode.Circle:
-                    PdfViewer.AnnotationSettings.Circle.FillColor = e.WithAlpha(freeTextEditor.SelectedFillColorOpacity);
+                    PdfViewer.AnnotationSettings.Circle.FillColor = e.WithAlpha(shapeColorPaletteEditor.SelectedFillColorOpacity);
                     break;
                 case AnnotationMode.Polygon:
-                    PdfViewer.AnnotationSettings.Polygon.FillColor = e.WithAlpha(freeTextEditor.SelectedFillColorOpacity);
+                    PdfViewer.AnnotationSettings.Polygon.FillColor = e.WithAlpha(shapeColorPaletteEditor.SelectedFillColorOpacity);
                     break;
             }
         }
         else
         {
-            PdfViewer.AnnotationSettings.Square.FillColor = e.WithAlpha(freeTextEditor.SelectedFillColorOpacity);
-            PdfViewer.AnnotationSettings.Circle.FillColor = e.WithAlpha(freeTextEditor.SelectedFillColorOpacity);
-            PdfViewer.AnnotationSettings.Polygon.FillColor = e.WithAlpha(freeTextEditor.SelectedFillColorOpacity);
+            PdfViewer.AnnotationSettings.Square.FillColor = e.WithAlpha(shapeColorPaletteEditor.SelectedFillColorOpacity);
+            PdfViewer.AnnotationSettings.Circle.FillColor = e.WithAlpha(shapeColorPaletteEditor.SelectedFillColorOpacity);
+            PdfViewer.AnnotationSettings.Polygon.FillColor = e.WithAlpha(shapeColorPaletteEditor.SelectedFillColorOpacity);
         }
     }
 
@@ -194,40 +194,40 @@ public partial class MainPage : ContentPage
     {
         if (SelectedAnnotation != null)
         {
-            SelectedAnnotation.Color = e.WithAlpha(freeTextEditor.SelectedOpacity);
+            SelectedAnnotation.Color = e.WithAlpha(shapeColorPaletteEditor.SelectedOpacity);
         }
         else if(PdfViewer.AnnotationMode!=AnnotationMode.None)
         {
             switch(PdfViewer.AnnotationMode)
             {
                 case AnnotationMode.Square:
-                    PdfViewer.AnnotationSettings.Square.Color = e.WithAlpha(freeTextEditor.SelectedOpacity);
+                    PdfViewer.AnnotationSettings.Square.Color = e.WithAlpha(shapeColorPaletteEditor.SelectedOpacity);
                     break;
                 case AnnotationMode.Circle:
-                    PdfViewer.AnnotationSettings.Circle.Color = e.WithAlpha(freeTextEditor.SelectedOpacity);
+                    PdfViewer.AnnotationSettings.Circle.Color = e.WithAlpha(shapeColorPaletteEditor.SelectedOpacity);
                     break;
                 case AnnotationMode.Arrow:
-                    PdfViewer.AnnotationSettings.Arrow.Color = e.WithAlpha(freeTextEditor.SelectedOpacity);
+                    PdfViewer.AnnotationSettings.Arrow.Color = e.WithAlpha(shapeColorPaletteEditor.SelectedOpacity);
                     break;
                 case AnnotationMode.Polygon:
-                    PdfViewer.AnnotationSettings.Polygon.Color = e.WithAlpha(freeTextEditor.SelectedOpacity);
+                    PdfViewer.AnnotationSettings.Polygon.Color = e.WithAlpha(shapeColorPaletteEditor.SelectedOpacity);
                     break;
                 case AnnotationMode.Line:
-                    PdfViewer.AnnotationSettings.Line.Color = e.WithAlpha(freeTextEditor.SelectedOpacity);
+                    PdfViewer.AnnotationSettings.Line.Color = e.WithAlpha(shapeColorPaletteEditor.SelectedOpacity);
                     break;
                 case AnnotationMode.Polyline:
-                    PdfViewer.AnnotationSettings.Polyline.Color = e.WithAlpha(freeTextEditor.SelectedOpacity);
+                    PdfViewer.AnnotationSettings.Polyline.Color = e.WithAlpha(shapeColorPaletteEditor.SelectedOpacity);
                     break;
             }
         }
         else
         {
-            PdfViewer.AnnotationSettings.Square.Color = e.WithAlpha(freeTextEditor.SelectedOpacity);
-            PdfViewer.AnnotationSettings.Circle.Color = e.WithAlpha(freeTextEditor.SelectedOpacity);
-            PdfViewer.AnnotationSettings.Arrow.Color = e.WithAlpha(freeTextEditor.SelectedOpacity);
-            PdfViewer.AnnotationSettings.Line.Color= e.WithAlpha(freeTextEditor.SelectedOpacity);
-            PdfViewer.AnnotationSettings.Polygon.Color= e.WithAlpha(freeTextEditor.SelectedOpacity);
-            PdfViewer.AnnotationSettings.Polyline.Color = e.WithAlpha(freeTextEditor.SelectedOpacity);
+            PdfViewer.AnnotationSettings.Square.Color = e.WithAlpha(shapeColorPaletteEditor.SelectedOpacity);
+            PdfViewer.AnnotationSettings.Circle.Color = e.WithAlpha(shapeColorPaletteEditor.SelectedOpacity);
+            PdfViewer.AnnotationSettings.Arrow.Color = e.WithAlpha(shapeColorPaletteEditor.SelectedOpacity);
+            PdfViewer.AnnotationSettings.Line.Color= e.WithAlpha(shapeColorPaletteEditor.SelectedOpacity);
+            PdfViewer.AnnotationSettings.Polygon.Color= e.WithAlpha(shapeColorPaletteEditor.SelectedOpacity);
+            PdfViewer.AnnotationSettings.Polyline.Color = e.WithAlpha(shapeColorPaletteEditor.SelectedOpacity);
         }  
     }
 
@@ -319,7 +319,7 @@ public partial class MainPage : ContentPage
                 PdfViewer.AnnotationMode = AnnotationMode.Polyline;
             }
             SetSliderValue();
-            freeTextEditor.IsVisible = false;
+            shapeColorPaletteEditor.IsVisible = false;
             // Add more cases if needed
         }
     }
@@ -328,43 +328,43 @@ public partial class MainPage : ContentPage
     {
         if(SelectedAnnotation != null)
         {
-            freeTextEditor.SelectedFillColorOpacity = 1;
+            shapeColorPaletteEditor.SelectedFillColorOpacity = 1;
             if (SelectedAnnotation is SquareAnnotation square)
             {
-                freeTextEditor.SelectedThickness = square.BorderWidth;
-                freeTextEditor.SelectedOpacity = square.Color.Alpha;
-                freeTextEditor.SelectedFillColorOpacity = square.FillColor.Alpha;
+                shapeColorPaletteEditor.SelectedThickness = square.BorderWidth;
+                shapeColorPaletteEditor.SelectedOpacity = square.Color.Alpha;
+                shapeColorPaletteEditor.SelectedFillColorOpacity = square.FillColor.Alpha;
             }
             else if(SelectedAnnotation is CircleAnnotation circle)
             {
-                freeTextEditor.SelectedThickness = circle.BorderWidth;
-                freeTextEditor.SelectedOpacity = circle.Color.Alpha;
-                freeTextEditor.SelectedFillColorOpacity = circle.FillColor.Alpha;
+                shapeColorPaletteEditor.SelectedThickness = circle.BorderWidth;
+                shapeColorPaletteEditor.SelectedOpacity = circle.Color.Alpha;
+                shapeColorPaletteEditor.SelectedFillColorOpacity = circle.FillColor.Alpha;
             }
             else if(SelectedAnnotation is LineAnnotation line)
             {
-                freeTextEditor.SelectedThickness = line.BorderWidth;
-                freeTextEditor.SelectedOpacity = line.Color.Alpha;
+                shapeColorPaletteEditor.SelectedThickness = line.BorderWidth;
+                shapeColorPaletteEditor.SelectedOpacity = line.Color.Alpha;
             }
             else if(SelectedAnnotation is PolygonAnnotation polygon)
             {
-                freeTextEditor.SelectedThickness =polygon.BorderWidth;
-                freeTextEditor.SelectedOpacity = polygon.Color.Alpha;
-                freeTextEditor.SelectedFillColorOpacity = polygon.FillColor.Alpha;
+                shapeColorPaletteEditor.SelectedThickness =polygon.BorderWidth;
+                shapeColorPaletteEditor.SelectedOpacity = polygon.Color.Alpha;
+                shapeColorPaletteEditor.SelectedFillColorOpacity = polygon.FillColor.Alpha;
             }
             else if(SelectedAnnotation is PolylineAnnotation polyline)
             {
-                freeTextEditor.SelectedThickness = polyline.BorderWidth;
-                freeTextEditor.SelectedOpacity = polyline.Color.Alpha;
+                shapeColorPaletteEditor.SelectedThickness = polyline.BorderWidth;
+                shapeColorPaletteEditor.SelectedOpacity = polyline.Color.Alpha;
             }
             else if(SelectedAnnotation is InkAnnotation ink)
             {
-                freeTextEditor.SelectedThickness = ink.BorderWidth;
-                freeTextEditor.SelectedOpacity = ink.Color.Alpha;
+                shapeColorPaletteEditor.SelectedThickness = ink.BorderWidth;
+                shapeColorPaletteEditor.SelectedOpacity = ink.Color.Alpha;
             }
             else if(SelectedAnnotation is StampAnnotation stamp)
             {
-                freeTextEditor.SelectedOpacity = stamp.Opacity;
+                shapeColorPaletteEditor.SelectedOpacity = stamp.Opacity;
             }
         }
         else
@@ -372,36 +372,36 @@ public partial class MainPage : ContentPage
             switch(PdfViewer.AnnotationMode)
             {
                 case AnnotationMode.Square:
-                    freeTextEditor.SelectedOpacity = PdfViewer.AnnotationSettings.Square.Color.Alpha;
-                    freeTextEditor.SelectedThickness = PdfViewer.AnnotationSettings.Square.BorderWidth;
+                    shapeColorPaletteEditor.SelectedOpacity = PdfViewer.AnnotationSettings.Square.Color.Alpha;
+                    shapeColorPaletteEditor.SelectedThickness = PdfViewer.AnnotationSettings.Square.BorderWidth;
                     break;
                 case AnnotationMode.Circle:
-                    freeTextEditor.SelectedOpacity = PdfViewer.AnnotationSettings.Circle.Color.Alpha;
-                    freeTextEditor.SelectedThickness = PdfViewer.AnnotationSettings.Circle.BorderWidth;
+                    shapeColorPaletteEditor.SelectedOpacity = PdfViewer.AnnotationSettings.Circle.Color.Alpha;
+                    shapeColorPaletteEditor.SelectedThickness = PdfViewer.AnnotationSettings.Circle.BorderWidth;
                     break;
                 case AnnotationMode.Arrow:
-                    freeTextEditor.SelectedOpacity = PdfViewer.AnnotationSettings.Arrow.Color.Alpha;
-                    freeTextEditor.SelectedThickness = PdfViewer.AnnotationSettings.Arrow.BorderWidth;
+                    shapeColorPaletteEditor.SelectedOpacity = PdfViewer.AnnotationSettings.Arrow.Color.Alpha;
+                    shapeColorPaletteEditor.SelectedThickness = PdfViewer.AnnotationSettings.Arrow.BorderWidth;
                     break;
                 case AnnotationMode.Polygon:
-                    freeTextEditor.SelectedOpacity = PdfViewer.AnnotationSettings.Polygon.Color.Alpha;
-                    freeTextEditor.SelectedThickness = PdfViewer.AnnotationSettings.Polygon.BorderWidth;
+                    shapeColorPaletteEditor.SelectedOpacity = PdfViewer.AnnotationSettings.Polygon.Color.Alpha;
+                    shapeColorPaletteEditor.SelectedThickness = PdfViewer.AnnotationSettings.Polygon.BorderWidth;
                     break;
                 case AnnotationMode.Line:
-                    freeTextEditor.SelectedOpacity = PdfViewer.AnnotationSettings.Line.Color.Alpha;
-                    freeTextEditor.SelectedThickness = PdfViewer.AnnotationSettings.Line.BorderWidth;
+                    shapeColorPaletteEditor.SelectedOpacity = PdfViewer.AnnotationSettings.Line.Color.Alpha;
+                    shapeColorPaletteEditor.SelectedThickness = PdfViewer.AnnotationSettings.Line.BorderWidth;
                     break;
                 case AnnotationMode.Polyline:
-                    freeTextEditor.SelectedOpacity = PdfViewer.AnnotationSettings.Polyline.Color.Alpha;
-                    freeTextEditor.SelectedThickness = PdfViewer.AnnotationSettings.Line.BorderWidth;
+                    shapeColorPaletteEditor.SelectedOpacity = PdfViewer.AnnotationSettings.Polyline.Color.Alpha;
+                    shapeColorPaletteEditor.SelectedThickness = PdfViewer.AnnotationSettings.Line.BorderWidth;
                     break;
             }
         }
         if (this.BindingContext is PdfViewerViewModel viewModel)
         {
-            viewModel.SelectedThickness = freeTextEditor.SelectedThickness;
-            viewModel.SelectedOpacity = freeTextEditor.SelectedOpacity;
-            viewModel.SelectedFillColorOpacity=freeTextEditor.SelectedFillColorOpacity;
+            viewModel.SelectedThickness = shapeColorPaletteEditor.SelectedThickness;
+            viewModel.SelectedOpacity = shapeColorPaletteEditor.SelectedOpacity;
+            viewModel.SelectedFillColorOpacity=shapeColorPaletteEditor.SelectedFillColorOpacity;
             if (SelectedAnnotation is SquareAnnotation || SelectedAnnotation is CircleAnnotation || SelectedAnnotation is PolygonAnnotation || PdfViewer.AnnotationMode==AnnotationMode.Polygon || PdfViewer.AnnotationMode==AnnotationMode.Circle|| PdfViewer.AnnotationMode==AnnotationMode.Square)
                 viewModel.IsSelectedAnnotationClosed = true;
             else
@@ -414,7 +414,7 @@ public partial class MainPage : ContentPage
     /// </summary>
     private void ColorPalette_Clicked(object sender, EventArgs e)
     {
-        freeTextEditor.IsVisible = !freeTextEditor.IsVisible;
+        shapeColorPaletteEditor.IsVisible = !shapeColorPaletteEditor.IsVisible;
         //EditorControl.IsVisible = !EditorControl.IsVisible;
 
     }
@@ -521,7 +521,7 @@ public partial class MainPage : ContentPage
 
     private void ColorPalatte_Clicked(object sender, EventArgs e)
     {
-        freeTextEditor.IsVisible = !freeTextEditor.IsVisible;
+        shapeColorPaletteEditor.IsVisible = !shapeColorPaletteEditor.IsVisible;
     }
 
     private void ShapesButtonClicked(object sender, EventArgs e)
@@ -539,7 +539,7 @@ public partial class MainPage : ContentPage
             if (AnnotationMenuGrid.IsVisible)
             {
                 PdfViewer.AnnotationMode = AnnotationMode.None;
-                freeTextEditor.IsVisible = false;
+                shapeColorPaletteEditor.IsVisible = false;
             }
             AnnotationMenuGrid.IsVisible = !AnnotationMenuGrid.IsVisible;
         }
