@@ -73,7 +73,7 @@
                                     <RowDefinition Height="Auto"/>
                                 </Grid.RowDefinitions>
                                 <Label Grid.Row="0" Text="Thickness" TextColor="#1C1B1F" HorizontalOptions="Start" Margin="15,0,0,0"/>
-                                <sliders:SfSlider x:Name="FreetextStroke" Grid.Row="1" Minimum="0" Value="{Binding SelectedThickness}"  ValueChangeEnd="SfSlider_ValueChangeEnd" Maximum="12" HorizontalOptions="Start" >
+                                <sliders:SfSlider x:Name="ShapeStroke" Grid.Row="1" Minimum="0" Value="{Binding SelectedThickness}"  ValueChangeEnd="SfSlider_ValueChangeEnd" Maximum="12" HorizontalOptions="Start" >
                                     <sliders:SfSlider.TrackStyle>
                                         <sliders:SliderTrackStyle ActiveFill="#6750A4" InactiveFill="#1F000000"/>
                                     </sliders:SfSlider.TrackStyle>

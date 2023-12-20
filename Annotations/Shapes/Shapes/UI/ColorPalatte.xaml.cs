@@ -7,7 +7,6 @@ public partial class ColorPalatte : ContentView
 {
     Ellipse? selectedColorButtonHighlight;
     Ellipse? selectedColorButtonHighlightStroke;
-    Ellipse? selectedFontColorHighlight;
 
     internal float SelectedOpacity { get; set; }
     internal float SelectedFontSize { get; set; } 
@@ -27,10 +26,10 @@ public partial class ColorPalatte : ContentView
         Colorpaletteborder.Content = MyGrid;
         this.Content = Colorpaletteborder;
         tabView.SelectionChanged += OnSelectionChanged;
-        this.PropertyChanged += FreeTextFillColorPalatte_PropertyChanged;
+        this.PropertyChanged += ColorPalatte_PropertyChanged;
     }
 
-    private void FreeTextFillColorPalatte_PropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
+    private void ColorPalatte_PropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
     {
         if (e.PropertyName == nameof(IsVisible))
         {
@@ -85,33 +84,10 @@ public partial class ColorPalatte : ContentView
                     }
                     selectedColorButtonHighlightStroke = null;
                 }
-                if (PreButton != null && selectedFontColorHighlight != null)
-                {
-#if !WINDOWS
-                    PreButton.HeightRequest = 35;
-                    PreButton.WidthRequest = 35;
-#if MACCATALYST
-                     PreButton.CornerRadius = 17;
-#elif IOS
-                    PreButton.CornerRadius = 20;
-#else
-                    PreButton.CornerRadius = 35;
-#endif
-#else
-                    PreButton.HeightRequest = 40;
-                    PreButton.WidthRequest = 40;
-                    PreButton.CornerRadius = 40;
-#endif
-                    selectedFontColorHighlight.Stroke = Brush.Transparent;
-                    if (selectedFontColorHighlight.Parent != null)
-                    {
-                       // FontColor.Children.Remove(selectedFontColorHighlight);
-                    }
-                    selectedFontColorHighlight = null;
-                }
             }
         }
     }
+
 
 #if MACCATALYST
     Frame Colorpaletteborder = new Frame()
@@ -360,7 +336,7 @@ public partial class ColorPalatte : ContentView
 
     private void SfSlider_ValueChangeEnd(object sender, EventArgs e)
     {
-        float thickness = (float)FreetextStroke.Value;
+        float thickness = (float)ShapeStroke.Value;
         SelectedThickness = thickness;
         BorderThicknessChanged?.Invoke(this, thickness);
     }
