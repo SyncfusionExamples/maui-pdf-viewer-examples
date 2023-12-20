@@ -57,36 +57,11 @@
 
 	<ItemGroup>
 	  <None Remove="Annotations.pdf" />
-	  <None Remove="Resources\Assets\Annotations.pdf" />
-	  <None Remove="Resources\Assets\export_image.png" />
-	  <None Remove="Resources\Assets\export_small_image.png" />
-	  <None Remove="Resources\Assets\import_image.png" />
-	  <None Remove="Resources\Assets\import_small_image.png" />
-	  <None Remove="Resources\Assets\lock_image.png" />
-	  <None Remove="Resources\Assets\lock_small_image.png" />
-	  <None Remove="Resources\Assets\PDF_Succinctly.pdf" />
-	  <None Remove="Resources\Assets\unlock_image.png" />
-	  <None Remove="Resources\Assets\unlock_small_image.png" />
-	  <None Remove="Resources\Fonts\PdfViewerIcon.ttf" />
+	  <None Remove="FreeTextDocument.pdf" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiImage Include="Resources\Assets\import_small_image.png" />
-	  <MauiImage Include="Resources\Assets\unlock_image.png" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <EmbeddedResource Include="Resources\Assets\Annotations.pdf" />
-	  <EmbeddedResource Include="Resources\Assets\PDF_Succinctly.pdf" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <MauiImage Include="Resources\Assets\export_image.png" />
-	  <MauiImage Include="Resources\Assets\export_small_image.png" />
-	  <MauiImage Include="Resources\Assets\import_image.png" />
-	  <MauiImage Include="Resources\Assets\lock_image.png" />
-	  <MauiImage Include="Resources\Assets\lock_small_image.png" />
-	  <MauiImage Include="Resources\Assets\unlock_small_image.png" />
+	  <EmbeddedResource Include="FreeTextDocument.pdf" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -105,10 +80,6 @@
 		<PackageReference Include="Syncfusion.Maui.PdfViewer" Version="*" />
 		<PackageReference Include="Syncfusion.Maui.Sliders" Version="*" />
 		<PackageReference Include="Syncfusion.Maui.TabView" Version="*" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <EmbeddedResource Include="Annotations.pdf" />
 	</ItemGroup>
 
 	<ItemGroup>

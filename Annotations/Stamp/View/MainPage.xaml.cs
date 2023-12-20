@@ -290,18 +290,18 @@ public partial class MainPage : ContentPage
     /// <summary>
     /// Handles the event when the "Import" button is clicked, importing annotations from an XFDF file.
     /// </summary>
-    private void Import_Clicked(object sender, EventArgs e)
+    private async void Import_Clicked(object sender, EventArgs e)
     {
         string fileName = Path.Combine(FileSystem.Current.AppDataDirectory, "Export.xfdf");
         if (File.Exists(fileName))
         {
             Stream inputStream = File.OpenRead(fileName);
             inputStream.Position = 0;
-            PdfViewer.ImportAnnotations(inputStream, Syncfusion.Pdf.Parsing.AnnotationDataFormat.XFdf);
-            DisplayAlert("Annotations imported", "Annotations from the " + fileName + " file are imported", "OK");
+            await PdfViewer.ImportAnnotationsAsync(inputStream, Syncfusion.Pdf.Parsing.AnnotationDataFormat.XFdf);
+            await DisplayAlert("Information", "Annotations Loaded from the " + fileName, "OK");
         }
         else
-            DisplayAlert("No files to import", "There are no xfdf files to import. Please export the annotations to an xfdf file and then import. ", "OK");
+            await DisplayAlert("XFDF file Not Found", "No xfdf files available for import. Please export the annotations to an xfdf file and then import. ", "OK");
     }
 
     /// <summary>
@@ -310,7 +310,7 @@ public partial class MainPage : ContentPage
     private async void Export_Clicked(object sender, EventArgs e)
     {
         Stream xfdfStream = new MemoryStream();
-        PdfViewer.ExportAnnotations(xfdfStream, Syncfusion.Pdf.Parsing.AnnotationDataFormat.XFdf);
+        await PdfViewer.ExportAnnotationsAsync(xfdfStream, Syncfusion.Pdf.Parsing.AnnotationDataFormat.XFdf);
         await CopyFileToAppDataDirectory(xfdfStream, "Export.xfdf");
     }
 

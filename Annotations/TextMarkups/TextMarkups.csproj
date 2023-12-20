@@ -49,37 +49,12 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <None Remove="Annotations.pdf" />
-	  <None Remove="Assets\Annotations.pdf" />
-	  <None Remove="Assets\Icons\export_image.png" />
-	  <None Remove="Assets\Icons\export_small_image.png" />
-	  <None Remove="Assets\Icons\import_image.png" />
-	  <None Remove="Assets\Icons\import_small_image.png" />
-	  <None Remove="Assets\Icons\lock_image.png" />
-	  <None Remove="Assets\Icons\lock_small_image.png" />
-	  <None Remove="Assets\Icons\textmarkup_image.png" />
-	  <None Remove="Assets\Icons\textmarkup_small_image.png" />
-	  <None Remove="Assets\Icons\unlock_image.png" />
-	  <None Remove="Assets\Icons\unlock_small_image.png" />
 	  <None Remove="Resources\Fonts\PdfViewerIcon.ttf" />
+	  <None Remove="TextMarkupDocument.pdf" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <EmbeddedResource Include="Annotations.pdf" />
-	  <EmbeddedResource Include="Assets\Annotations.pdf" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <MauiImage Include="Assets\Icons\export_image.png" />
-	  <MauiImage Include="Assets\Icons\export_small_image.png" />
-	  <MauiImage Include="Assets\Icons\import_image.png" />
-	  <MauiImage Include="Assets\Icons\import_small_image.png" />
-	  <MauiImage Include="Assets\Icons\lock_image.png" />
-	  <MauiImage Include="Assets\Icons\lock_small_image.png" />
-	  <MauiImage Include="Assets\Icons\textmarkup_image.png" />
-	  <MauiImage Include="Assets\Icons\textmarkup_small_image.png" />
-	  <MauiImage Include="Assets\Icons\unlock_image.png" />
-	  <MauiImage Include="Assets\Icons\unlock_small_image.png" />
+	  <EmbeddedResource Include="TextMarkupDocument.pdf" />
 	</ItemGroup>
 	<ItemGroup>
 		<PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />

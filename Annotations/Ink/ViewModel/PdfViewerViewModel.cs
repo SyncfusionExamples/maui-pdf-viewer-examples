@@ -50,7 +50,7 @@ namespace Ink
         public ICommand OpenFileCommand => _openFileCommand;
         public PdfViewerViewModel()
         {
-            PdfDocumentStream = this.GetType().Assembly.GetManifestResourceStream("Ink.Annotations.pdf");
+            PdfDocumentStream = this.GetType().Assembly.GetManifestResourceStream("Ink.InkDocumet.pdf");
             _openFileCommand = new Command<object>(OpenFile);
         }
 

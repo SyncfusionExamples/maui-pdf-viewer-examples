@@ -278,9 +278,9 @@ public partial class FreeTextEditor : ContentView
             ColorStroke.Children.Add(selectedColorButtonHighlightStroke);
         }
     }
-    private void ShapeStrokeOpacitySlidervalue_Chnaged(object sender, EventArgs e)
+    private void FreeTextOpacitySlidervalue_Chnaged(object sender, EventArgs e)
     {
-        float opacity = (float)shapeStrokeOpacitySlider.Value;
+        float opacity = (float)FreeTextOpacitySlider.Value;
         SelectedOpacity = opacity;
         OpacityChanged.Invoke(this,opacity);
     }

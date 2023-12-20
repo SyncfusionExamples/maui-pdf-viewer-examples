@@ -47,6 +47,15 @@
 		<!-- Raw Assets (also remove the "Resources\Raw" prefix) -->
 		<MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
 	</ItemGroup>
+
+	<ItemGroup>
+	  <AndroidResource Remove="Assets\**" />
+	  <Compile Remove="Assets\**" />
+	  <EmbeddedResource Remove="Assets\**" />
+	  <MauiCss Remove="Assets\**" />
+	  <MauiXaml Remove="Assets\**" />
+	  <None Remove="Assets\**" />
+	</ItemGroup>
 	
 <ItemGroup>
 	  <PackageReference Include="Syncfusion.Maui.PdfViewer" Version="*" />
@@ -55,32 +64,8 @@
 
 	<ItemGroup>
 	  <None Remove="Annotations.pdf" />
-	  <None Remove="Assets\export_image.png" />
-	  <None Remove="Assets\export_small_image.png" />
-	  <None Remove="Assets\import_image.png" />
-	  <None Remove="Assets\import_small_image.png" />
-	  <None Remove="Assets\lock_image.png" />
-	  <None Remove="Assets\lock_small_image.png" />
-	  <None Remove="Assets\PDF_Succinctly.pdf" />
-	  <None Remove="Assets\unlock_image.png" />
-	  <None Remove="Assets\unlock_small_image.png" />
+	  <None Remove="InkDocumet.pdf" />
 	  <None Remove="Resources\Fonts\PdfViewerIcon.ttf" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <EmbeddedResource Include="Annotations.pdf" />
-	  <EmbeddedResource Include="Assets\PDF_Succinctly.pdf" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <MauiImage Include="Assets\export_image.png" />
-	  <MauiImage Include="Assets\export_small_image.png" />
-	  <MauiImage Include="Assets\import_image.png" />
-	  <MauiImage Include="Assets\import_small_image.png" />
-	  <MauiImage Include="Assets\lock_image.png" />
-	  <MauiImage Include="Assets\lock_small_image.png" />
-	  <MauiImage Include="Assets\unlock_image.png" />
-	  <MauiImage Include="Assets\unlock_small_image.png" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -99,6 +84,10 @@
 		<PackageReference Include="Syncfusion.Pdf.Imaging.NET" Version="*" />
 		<PackageReference Include="Syncfusion.Maui.PdfViewer" Version="*" />
 		<PackageReference Include="Syncfusion.Maui.Sliders" Version="*" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <EmbeddedResource Include="InkDocumet.pdf" />
 	</ItemGroup>
 
 	<ItemGroup>

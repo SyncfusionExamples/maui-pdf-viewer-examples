@@ -49,11 +49,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <None Remove="Assets\Annotations.pdf" />
 	  <None Remove="Assets\dotnet.jpg" />
 	  <None Remove="Assets\download.png" />
-	  <None Remove="Assets\export_image.png" />
-	  <None Remove="Assets\export_small_image.png" />
 	  <None Remove="Assets\Images\approved.png" />
 	  <None Remove="Assets\Images\approved_small.png" />
 	  <None Remove="Assets\Images\confidential.png" />
@@ -66,28 +63,19 @@
 	  <None Remove="Assets\Images\draft_small.png" />
 	  <None Remove="Assets\Images\notapproved.png" />
 	  <None Remove="Assets\Images\notapproved_small.png" />
-	  <None Remove="Assets\import_image.png" />
-	  <None Remove="Assets\import_small_image.png" />
-	  <None Remove="Assets\lock_image.png" />
-	  <None Remove="Assets\lock_small_image.png" />
-	  <None Remove="Assets\PDF_Succinctly.pdf" />
-	  <None Remove="Assets\unlock_image.png" />
-	  <None Remove="Assets\unlock_small_image.png" />
 	  <None Remove="Resources\Fonts\PdfViewerIcon.ttf" />
+	  <None Remove="StampDocument.pdf" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <EmbeddedResource Include="Assets\Annotations.pdf" />
 	  <EmbeddedResource Include="Assets\Images\dotnet.jpg" />
 	  <EmbeddedResource Include="Assets\Images\download.png" />
-	  <EmbeddedResource Include="Assets\PDF_Succinctly.pdf" />
+	  <EmbeddedResource Include="StampDocument.pdf" />
 	</ItemGroup>
 
 	<ItemGroup>
 	  <MauiImage Include="Assets\dotnet.jpg" />
 	  <MauiImage Include="Assets\download.png" />
-	  <MauiImage Include="Assets\export_image.png" />
-	  <MauiImage Include="Assets\export_small_image.png" />
 	  <MauiImage Include="Assets\Images\approved.png" />
 	  <MauiImage Include="Assets\Images\approved_small.png" />
 	  <MauiImage Include="Assets\Images\confidential.png" />
@@ -98,12 +86,6 @@
 	  <MauiImage Include="Assets\Images\draft_small.png" />
 	  <MauiImage Include="Assets\Images\notapproved.png" />
 	  <MauiImage Include="Assets\Images\notapproved_small.png" />
-	  <MauiImage Include="Assets\import_image.png" />
-	  <MauiImage Include="Assets\import_small_image.png" />
-	  <MauiImage Include="Assets\lock_image.png" />
-	  <MauiImage Include="Assets\lock_small_image.png" />
-	  <MauiImage Include="Assets\unlock_image.png" />
-	  <MauiImage Include="Assets\unlock_small_image.png" />
 	</ItemGroup>
 
 	<ItemGroup>

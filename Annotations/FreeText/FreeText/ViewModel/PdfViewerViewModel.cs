@@ -67,7 +67,7 @@ namespace FreeText
         
         public PdfViewerViewModel()
         {
-            PdfDocumentStream = this.GetType().Assembly.GetManifestResourceStream("FreeText.Annotations.pdf");
+            PdfDocumentStream = this.GetType().Assembly.GetManifestResourceStream("FreeText.FreeTextDocument.pdf");
             _openFileCommand = new Command<object>(OpenFile);
           
         }

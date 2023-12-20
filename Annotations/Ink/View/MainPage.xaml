@@ -62,8 +62,8 @@
                         Command="{Binding OpenFileCommand}"
                         IsVisible="{OnPlatform MacCatalyst=false}"/>
                     <Button Text="&#xe75f;" FontSize="18" x:Name="Save" FontFamily="Maui Material Assets" Clicked="Save_Clicked" Margin="0,0,3,0"/>
-                    <Button x:Name="Import" ImageSource="{OnPlatform Default=import_image.png,Android=import_small_image.png,iOS=import_small_image.png,MacCatalyst=import_small_image.png}" WidthRequest="{OnPlatform Default=35,Android=25}" HeightRequest="{OnPlatform Default=25,Android=15}" Margin="0" Clicked="Import_Clicked"/>
-                    <Button x:Name="Export" ImageSource="{OnPlatform Default=export_image.png,Android=export_small_image.png,iOS=export_small_image.png,MacCatalyst=export_small_image.png}" WidthRequest="{OnPlatform Default=35,Android=25}" HeightRequest="{OnPlatform Default=25,Android=15}" Margin="0" Clicked="Export_Clicked"/>
+                    <Button x:Name="Import" Text="&#xe782;" FontSize="18" FontFamily="Maui Material Assets" Margin="0,0,3,0" Clicked="Import_Clicked"/>
+                    <Button x:Name="Export" Text="&#xe781;" FontSize="18" FontFamily="Maui Material Assets" Margin="0,0,3,0" Clicked="Export_Clicked"/>
                 </HorizontalStackLayout >
                 <HorizontalStackLayout 
                         Grid.Column="1" Margin="0,0,12,0" 
@@ -77,8 +77,8 @@
                 <HorizontalStackLayout x:Name="EditOption"
                         Grid.Column="0" Margin="8,0,12,0" 
                         HorizontalOptions="End">
-                    <Button x:Name="Lockbutton" ImageSource="{OnPlatform Default=lock_image.png,Android=lock_small_image.png,iOS=lock_small_image.png,MacCatalyst=lock_small_image.png}" WidthRequest="{OnPlatform Default=30,Android=20}" HeightRequest="{OnPlatform Default=25,Android=15}" Clicked="LockUnlock_Clicked" Margin="0,0,0,2"/>
-                    <Button x:Name="UnlockButton" ImageSource="{OnPlatform Default=unlock_image.png,Android=unlock_small_image.png,iOS=unlock_small_image.png,MacCatalyst=unlock_small_image.png}" WidthRequest="{OnPlatform Default=30,Android=20}" HeightRequest="{OnPlatform Default=25,Android=15}" Clicked="LockUnlock_Clicked" Margin="0,0,0,2"/>
+                    <Button x:Name="Lockbutton" Text="&#xe77b;" FontSize="18" FontFamily="Maui Material Assets" Clicked="LockUnlock_Clicked"/>
+                    <Button x:Name="UnlockButton" Text="&#xe77c;" FontSize="18" FontFamily="Maui Material Assets" HeightRequest="{OnPlatform Default=25,Android=15}" Clicked="LockUnlock_Clicked"/>
                     <Button Text="&#xe767;" Margin="8,0,0,0"  FontSize="16" x:Name="ColorPalette" FontFamily="Maui Material Assets" Clicked="ColorPalette_Clicked"/>
                     <Button Text="&#xe70f;" Margin="8,0,0,0" FontSize="18" x:Name="Delete" IsVisible="false"  FontFamily="Maui Material Assets" Clicked="Delete_Clicked"/>
                 </HorizontalStackLayout>

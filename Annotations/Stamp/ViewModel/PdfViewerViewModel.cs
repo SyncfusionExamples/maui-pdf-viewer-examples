@@ -48,7 +48,7 @@ namespace Stamp
 
         public PdfViewerViewModel()
         {
-            PdfDocumentStream = this.GetType().Assembly.GetManifestResourceStream("Stamp.Assets." + "Annotations.pdf");
+            PdfDocumentStream = this.GetType().Assembly.GetManifestResourceStream("Stamp.StampDocument.pdf");
             _openFileCommand = new Command<object>(OpenFile);
         }
 

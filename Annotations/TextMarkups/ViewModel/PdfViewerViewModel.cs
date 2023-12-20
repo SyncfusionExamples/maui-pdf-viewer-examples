@@ -44,7 +44,7 @@ namespace TextMarkups
 
         public PdfViewerViewModel()
         {
-            PdfDocumentStream = this.GetType().Assembly.GetManifestResourceStream("TextMarkups.Annotations.pdf");
+            PdfDocumentStream = this.GetType().Assembly.GetManifestResourceStream("TextMarkups.TextMarkupDocument.pdf");
             _openFileCommand = new Command<object>(OpenFile);
         }
 
