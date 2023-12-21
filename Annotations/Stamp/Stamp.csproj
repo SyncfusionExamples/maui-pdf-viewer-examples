@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFrameworks>net6.0-android;net6.0-ios;net6.0-maccatalyst</TargetFrameworks>
-		<TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net6.0-windows10.0.19041.0</TargetFrameworks>
+		<TargetFrameworks>net8.0-android;net8.0-ios;net8.0-maccatalyst</TargetFrameworks>
+		<TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net8.0-windows10.0.19041.0</TargetFrameworks>
 		<!-- Uncomment to also build the tizen app. You will need to install tizen by following this: https://github.com/Samsung/Tizen.NET -->
 		<!-- <TargetFrameworks>$(TargetFrameworks);net6.0-tizen</TargetFrameworks> -->
 		<OutputType>Exe</OutputType>
@@ -49,11 +49,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <None Remove="Assets\Annotations.pdf" />
 	  <None Remove="Assets\dotnet.jpg" />
 	  <None Remove="Assets\download.png" />
-	  <None Remove="Assets\export_image.png" />
-	  <None Remove="Assets\export_small_image.png" />
 	  <None Remove="Assets\Images\approved.png" />
 	  <None Remove="Assets\Images\approved_small.png" />
 	  <None Remove="Assets\Images\confidential.png" />
@@ -66,28 +63,19 @@
 	  <None Remove="Assets\Images\draft_small.png" />
 	  <None Remove="Assets\Images\notapproved.png" />
 	  <None Remove="Assets\Images\notapproved_small.png" />
-	  <None Remove="Assets\import_image.png" />
-	  <None Remove="Assets\import_small_image.png" />
-	  <None Remove="Assets\lock_image.png" />
-	  <None Remove="Assets\lock_small_image.png" />
-	  <None Remove="Assets\PDF_Succinctly.pdf" />
-	  <None Remove="Assets\unlock_image.png" />
-	  <None Remove="Assets\unlock_small_image.png" />
 	  <None Remove="Resources\Fonts\PdfViewerIcon.ttf" />
+	  <None Remove="StampDocument.pdf" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <EmbeddedResource Include="Assets\Annotations.pdf" />
 	  <EmbeddedResource Include="Assets\Images\dotnet.jpg" />
 	  <EmbeddedResource Include="Assets\Images\download.png" />
-	  <EmbeddedResource Include="Assets\PDF_Succinctly.pdf" />
+	  <EmbeddedResource Include="StampDocument.pdf" />
 	</ItemGroup>
 
 	<ItemGroup>
 	  <MauiImage Include="Assets\dotnet.jpg" />
 	  <MauiImage Include="Assets\download.png" />
-	  <MauiImage Include="Assets\export_image.png" />
-	  <MauiImage Include="Assets\export_small_image.png" />
 	  <MauiImage Include="Assets\Images\approved.png" />
 	  <MauiImage Include="Assets\Images\approved_small.png" />
 	  <MauiImage Include="Assets\Images\confidential.png" />
@@ -98,17 +86,24 @@
 	  <MauiImage Include="Assets\Images\draft_small.png" />
 	  <MauiImage Include="Assets\Images\notapproved.png" />
 	  <MauiImage Include="Assets\Images\notapproved_small.png" />
-	  <MauiImage Include="Assets\import_image.png" />
-	  <MauiImage Include="Assets\import_small_image.png" />
-	  <MauiImage Include="Assets\lock_image.png" />
-	  <MauiImage Include="Assets\lock_small_image.png" />
-	  <MauiImage Include="Assets\unlock_image.png" />
-	  <MauiImage Include="Assets\unlock_small_image.png" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <PackageReference Include="Syncfusion.Maui.PdfViewer" Version="*" />
-	  <PackageReference Include="Syncfusion.Maui.Sliders" Version="*" />
+		<PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
+		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="$(MauiVersion)" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
+		<PackageReference Include="Syncfusion.Compression.NET" Version="*" />
+		<PackageReference Include="Syncfusion.Maui.Core" Version="*" />
+		<PackageReference Include="Syncfusion.Maui.SignaturePad" Version="*" />
+		<PackageReference Include="Syncfusion.Maui.DataSource" Version="*" />
+		<PackageReference Include="Syncfusion.Maui.GridCommon" Version="*" />
+		<PackageReference Include="Syncfusion.Maui.ListView" Version="*" />
+		<PackageReference Include="Syncfusion.Maui.PdfToImageConverter" Version="*" />
+		<PackageReference Include="Syncfusion.Pdf.NET" Version="*" />
+		<PackageReference Include="Syncfusion.Pdf.Imaging.NET" Version="*" />
+		<PackageReference Include="Syncfusion.Maui.PdfViewer" Version="*" />
+		<PackageReference Include="Syncfusion.Maui.Sliders" Version="*" />
+		<PackageReference Include="Syncfusion.Maui.TabView" Version="*" />
 	</ItemGroup>
 
 	<ItemGroup>

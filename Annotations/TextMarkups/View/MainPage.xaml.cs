@@ -1,7 +1,8 @@
+using Microsoft.Maui;
 using Microsoft.Maui.Platform;
-using Microsoft.Maui.Storage;
 using Syncfusion.Maui.PdfViewer;
 using Syncfusion.Maui.Sliders;
+using System.Windows.Input;
 
 namespace TextMarkups;
 
@@ -15,12 +16,13 @@ public partial class MainPage : ContentPage
         string[,] colorCodes = new string[1, 5] {
             { "#FF990000", "#FF996100", "#FF009907", "#FF060099", "#FF990098"},
         };
-        EditorControl.ConfigureColorPicker(colorCodes);
-        EditorControl.ConfigureOpacity(1);
-        EditorControl.ConfigureThickness(5);
-        EditorControl.ColorChanged += EditorControl_ColorChanged;
-        EditorControl.OpacityChangedEnd += EditorControl_OpacityChangedEnd;
-        EditorControl.ThicknessChangedEnd += EditorControl_ThicknessChangedEnd;
+        textMarkupEditor.SelectedOpacity = PdfViewer.AnnotationSettings.Highlight.Color.Alpha;
+        if (this.BindingContext is PdfViewerViewModel viewModel)
+        {
+            viewModel.SelectedOpacity = textMarkupEditor.SelectedOpacity;
+        }
+        textMarkupEditor.ColorChanged += FreeTextEditor_FontColorChanged;
+        textMarkupEditor.OpacityChanged += FreeTextEditor_OpacityChanged;
         PdfViewer.AnnotationSelected += PdfViewer_AnnotationSelected;
         PdfViewer.AnnotationDeselected += PdfViewer_AnnotationDeselected;
         PdfViewer.PropertyChanged += PdfViewer_PropertyChanged;
@@ -64,7 +66,7 @@ public partial class MainPage : ContentPage
         {
             if (PdfViewer.AnnotationMode == AnnotationMode.None)
             {
-                EditorControl.IsVisible = false;
+                textMarkupEditor.IsVisible = false;
             }
             else
             {
@@ -74,10 +76,8 @@ public partial class MainPage : ContentPage
         else if (e.PropertyName == nameof(PdfViewer.DocumentSource))
         {
             TextMarkupGrid.IsVisible = false;
-            EditorControl.IsVisible = false;
-            EditOptions.IsVisible = false;
+            textMarkupEditor.IsVisible = false;
             TextMarkupIcons.IsVisible = true;
-            ResetEditorControlAppearance();
         }
     }
 
@@ -88,19 +88,35 @@ public partial class MainPage : ContentPage
     {
         if (PdfViewer.AnnotationMode == AnnotationMode.Highlight)
         {
-            EditorControl.EditorOpacity = PdfViewer.AnnotationSettings.Highlight.Opacity;
+            textMarkupEditor.SelectedOpacity = PdfViewer.AnnotationSettings.Highlight.Opacity;
+            if (this.BindingContext is PdfViewerViewModel viewModel)
+            {
+                viewModel.SelectedOpacity = PdfViewer.AnnotationSettings.Highlight.Opacity;
+            }
         }
         else if (PdfViewer.AnnotationMode == AnnotationMode.Underline)
         {
-            EditorControl.EditorOpacity = PdfViewer.AnnotationSettings.Underline.Opacity;
+            textMarkupEditor.SelectedOpacity = PdfViewer.AnnotationSettings.Underline.Opacity;
+            if (this.BindingContext is PdfViewerViewModel viewModel)
+            {
+                viewModel.SelectedOpacity = PdfViewer.AnnotationSettings.Underline.Opacity;
+            }
         }
         else if (PdfViewer.AnnotationMode == AnnotationMode.StrikeOut)
         {
-            EditorControl.EditorOpacity = PdfViewer.AnnotationSettings.StrikeOut.Opacity;
+            textMarkupEditor.SelectedOpacity = PdfViewer.AnnotationSettings.StrikeOut.Opacity;
+            if (this.BindingContext is PdfViewerViewModel viewModel)
+            {
+                viewModel.SelectedOpacity = PdfViewer.AnnotationSettings.StrikeOut.Opacity;
+            }
         }
         else if (PdfViewer.AnnotationMode == AnnotationMode.Squiggly)
         {
-            EditorControl.EditorOpacity = PdfViewer.AnnotationSettings.Squiggly.Opacity;
+            textMarkupEditor.SelectedOpacity = PdfViewer.AnnotationSettings.Squiggly.Opacity;
+            if (this.BindingContext is PdfViewerViewModel viewModel)
+            {
+                viewModel.SelectedOpacity = PdfViewer.AnnotationSettings.Squiggly.Opacity;
+            }
         }
     }
 
@@ -108,56 +124,34 @@ public partial class MainPage : ContentPage
     /// Handles the event when the opacity of the editor control changes and updates the opacity of the selected annotation.
     /// If no annotation is selected, it sets the default opacity for text markups.
     /// </summary>
-    private void EditorControl_OpacityChangedEnd(object sender, EventArgs e)
+    private void FreeTextEditor_OpacityChanged(object? sender, float e)
     {
-        if (SelectedAnnotation != null)
-        {
-            SelectedAnnotation.Opacity = (float)EditorControl.EditorOpacity;
-        }
+        if (SelectedAnnotation != null && (SelectedAnnotation is HighlightAnnotation || SelectedAnnotation is UnderlineAnnotation || SelectedAnnotation is StrikeOutAnnotation || SelectedAnnotation is SquigglyAnnotation))
+            SelectedAnnotation.Opacity = e;
         else
-        {
-            SetDefaultOpacityForTextMarkups();
-        }
-    }
-
-    /// <summary>
-    /// Handles the event when the thickness of the editor control changes and updates the thickness of the selected shape or ink annotation.
-    /// </summary>
-    private void EditorControl_ThicknessChangedEnd(object sender, EventArgs e)
-    {
-        if (SelectedAnnotation != null)
-        {
-            if (SelectedAnnotation is ShapeAnnotation shape)
-            {
-                shape.BorderWidth = (int)EditorControl.EditorThickness;
-            }
-            if (SelectedAnnotation is InkAnnotation ink)
-            {
-                ink.BorderWidth = (int)EditorControl.EditorThickness;
-            }
-        }
+            SetDefaultOpacityForTextMarkups(e);
     }
 
     /// <summary>
     /// Sets the default opacity for text markups in the PdfViewer's annotation settings based on the current editor control's opacity.
     /// </summary>
-    private void SetDefaultOpacityForTextMarkups()
+    private void SetDefaultOpacityForTextMarkups(float opacity)
     {
         if (PdfViewer.AnnotationMode == AnnotationMode.Highlight)
         {
-            PdfViewer.AnnotationSettings.Highlight.Opacity = (float)EditorControl.EditorOpacity;
+            PdfViewer.AnnotationSettings.Highlight.Opacity = opacity;
         }
         else if (PdfViewer.AnnotationMode == AnnotationMode.Underline)
         {
-            PdfViewer.AnnotationSettings.Underline.Opacity = (float)EditorControl.EditorOpacity;
+            PdfViewer.AnnotationSettings.Underline.Opacity = opacity;
         }
         else if (PdfViewer.AnnotationMode == AnnotationMode.StrikeOut)
         {
-            PdfViewer.AnnotationSettings.StrikeOut.Opacity = (float)EditorControl.EditorOpacity;
+            PdfViewer.AnnotationSettings.StrikeOut.Opacity = opacity;
         }
         else if (PdfViewer.AnnotationMode == AnnotationMode.Squiggly)
         {
-            PdfViewer.AnnotationSettings.Squiggly.Opacity = (float)EditorControl.EditorOpacity;
+            PdfViewer.AnnotationSettings.Squiggly.Opacity = opacity;
         }
     }
 
@@ -165,16 +159,12 @@ public partial class MainPage : ContentPage
     /// Handles the event when the color of the editor control changes and updates the color of the selected annotation.
     /// If no annotation is selected, it sets the default color for text markups.
     /// </summary>
-    private void EditorControl_ColorChanged(object sender, ColorChangedEventArgs e)
+    private void FreeTextEditor_FontColorChanged(object? sender, Color e)
     {
-        if (SelectedAnnotation != null)
-        {
-            SelectedAnnotation.Color = Color.FromArgb(e.ColorCode);
-        }
+        if (SelectedAnnotation != null && (SelectedAnnotation is HighlightAnnotation || SelectedAnnotation is UnderlineAnnotation || SelectedAnnotation is StrikeOutAnnotation || SelectedAnnotation is SquigglyAnnotation))
+            SelectedAnnotation.Color = e;
         else
-        {
-            SetDefaultColorForTextMarkups(Color.FromArgb(e.ColorCode));
-        }
+            SetDefaultColorForTextMarkups(e);
     }
 
     /// <summary>
@@ -207,21 +197,12 @@ public partial class MainPage : ContentPage
     private void PdfViewer_AnnotationDeselected(object sender, AnnotationEventArgs e)
     {
         SelectedAnnotation = null;
-        EditOptions.IsVisible = false;
         TextMarkupIcons.IsVisible = true;
-        ResetEditorControlAppearance();
-    }
-
-    /// <summary>
-    /// Resets the appearance of the editor control to its default state.
-    /// </summary>
-    private void ResetEditorControlAppearance()
-    {
-        EditorControl.ThicknessSliderLayOut.IsVisible = false;
-        EditorControl.ColorPaletteLayOut.IsVisible = true;
-        EditorControl.ColorOpacitySeparator.IsVisible = true;
-        EditorControl.OpacityThicknessSeparator.IsVisible = false;
-        EditorControl.HeightRequest = 123f;
+        Delete.IsVisible = false;
+        ColorPalette.IsVisible = false;
+        Lock.IsVisible = false;
+        Unlock.IsVisible = false;
+        textMarkupEditor.IsVisible = false;
     }
 
     /// <summary>
@@ -230,54 +211,44 @@ public partial class MainPage : ContentPage
     private void PdfViewer_AnnotationSelected(object sender, AnnotationEventArgs e)
     {
         SelectedAnnotation = e.Annotation;
-        UpdateEditorControlAppearance();
+        Delete.IsVisible = true;
+        Lock.IsVisible = true;
+        Unlock.IsVisible = true;
+        ColorPalette.IsVisible = true;
+        if (SelectedAnnotation is HighlightAnnotation highlight)
+        {
+            textMarkupEditor.SelectedOpacity = highlight.Opacity;
+            if (this.BindingContext is PdfViewerViewModel viewModel)
+            {
+                viewModel.SelectedOpacity = highlight.Opacity;
+            }
+        }
+        if (SelectedAnnotation is UnderlineAnnotation underline)
+        {
+            textMarkupEditor.SelectedOpacity = underline.Opacity;
+            if (this.BindingContext is PdfViewerViewModel viewModel)
+            {
+                viewModel.SelectedOpacity = underline.Opacity;
+            }
+        }
+        if (SelectedAnnotation is StrikeOutAnnotation strikeout)
+        {
+            textMarkupEditor.SelectedOpacity = strikeout.Opacity;
+            if (this.BindingContext is PdfViewerViewModel viewModel)
+            {
+                viewModel.SelectedOpacity = strikeout.Opacity;
+            }
+        }
+        if (SelectedAnnotation is SquigglyAnnotation squiggly)
+        {
+            textMarkupEditor.SelectedOpacity = squiggly.Opacity;
+            if (this.BindingContext is PdfViewerViewModel viewModel)
+            {
+                viewModel.SelectedOpacity = squiggly.Opacity;
+            }
+        }
         SetAnnotationLockModes();
-        ResetOpacitySlider();
         ShowEditOptionsAndHideMarkup();
-        ResetThicknessSlider();
-    }
-
-    /// <summary>
-    /// Resets the thickness slider in the editor control to match the border width of the selected shape or ink annotation.
-    /// </summary>
-    private void ResetThicknessSlider()
-    {
-        if (SelectedAnnotation is ShapeAnnotation shape)
-        {
-            EditorControl.EditorThickness = shape.BorderWidth;
-        }
-        else if (SelectedAnnotation is InkAnnotation ink)
-        {
-            EditorControl.EditorThickness = ink.BorderWidth;
-        }
-    }
-
-    /// <summary>
-    /// Updates the appearance of the editor control based on the selected annotation type.
-    /// </summary>
-    private void UpdateEditorControlAppearance()
-    {
-        if (SelectedAnnotation is UnderlineAnnotation || SelectedAnnotation is StrikeOutAnnotation ||
-                SelectedAnnotation is SquigglyAnnotation || SelectedAnnotation is HighlightAnnotation)
-        {
-            ResetEditorControlAppearance();
-        }
-        else if (SelectedAnnotation is StampAnnotation)
-        {
-            EditorControl.ColorPaletteLayOut.IsVisible = false;
-            EditorControl.ThicknessSliderLayOut.IsVisible = false;
-            EditorControl.ColorOpacitySeparator.IsVisible = false;
-            EditorControl.OpacityThicknessSeparator.IsVisible = false;
-            EditorControl.HeightRequest = 80f;
-        }
-        else
-        {
-            EditorControl.ThicknessSliderLayOut.IsVisible = true;
-            EditorControl.ColorPaletteLayOut.IsVisible = true;
-            EditorControl.ColorOpacitySeparator.IsVisible = true;
-            EditorControl.OpacityThicknessSeparator.IsVisible = true;
-            EditorControl.HeightRequest = 200f;
-        }
     }
 
     /// <summary>
@@ -289,21 +260,9 @@ public partial class MainPage : ContentPage
         {
             TextMarkupGrid.IsVisible = true;
         }
-        EditOptions.IsVisible = true;
         TextMarkupIcons.IsVisible = false;
-        if (EditorControl.IsVisible)
-            EditorControl.IsVisible = false;
-    }
-
-    /// <summary>
-    /// Resets the opacity slider in the editor control to match the opacity of the selected annotation, if available.
-    /// </summary>
-    private void ResetOpacitySlider()
-    {
-        if (SelectedAnnotation != null)
-        {
-            EditorControl.EditorOpacity = SelectedAnnotation.Opacity;
-        }
+        if (textMarkupEditor.IsVisible)
+            textMarkupEditor.IsVisible = false;
     }
 
     /// <summary>
@@ -321,9 +280,7 @@ public partial class MainPage : ContentPage
     private void HighlightClicked(object sender, EventArgs e)
     {
         PdfViewer.AnnotationMode = AnnotationMode.Highlight;
-        EditorControl.IsVisible = true;
-        if (EditorControl.EditorOpacity != PdfViewer.AnnotationSettings.Highlight.Opacity)
-            SetSliderOpacityBasedOnAnnotationSetting();
+        ColorPalette.IsVisible = true;
     }
 
     /// <summary>
@@ -332,9 +289,7 @@ public partial class MainPage : ContentPage
     private void UnderlineClicked(object sender, EventArgs e)
     {
         PdfViewer.AnnotationMode = AnnotationMode.Underline;
-        EditorControl.IsVisible = true;
-        if (EditorControl.EditorOpacity != PdfViewer.AnnotationSettings.Underline.Opacity)
-            SetSliderOpacityBasedOnAnnotationSetting();
+        ColorPalette.IsVisible = true;
     }
 
     /// <summary>
@@ -343,9 +298,7 @@ public partial class MainPage : ContentPage
     private void StrikeOutClicked(object sender, EventArgs e)
     {
         PdfViewer.AnnotationMode = AnnotationMode.StrikeOut;
-        EditorControl.IsVisible = true;
-        if (EditorControl.EditorOpacity != PdfViewer.AnnotationSettings.StrikeOut.Opacity)
-            SetSliderOpacityBasedOnAnnotationSetting();
+        ColorPalette.IsVisible = true;
     }
 
     /// <summary>
@@ -354,9 +307,7 @@ public partial class MainPage : ContentPage
     private void SquigglyClicked(object sender, EventArgs e)
     {
         PdfViewer.AnnotationMode = AnnotationMode.Squiggly;
-        EditorControl.IsVisible = true;
-        if (EditorControl.EditorOpacity != PdfViewer.AnnotationSettings.Squiggly.Opacity)
-            SetSliderOpacityBasedOnAnnotationSetting();
+        ColorPalette.IsVisible = true;
     }
 
     /// <summary>
@@ -367,15 +318,14 @@ public partial class MainPage : ContentPage
         if (TextMarkupGrid.IsVisible && EditOptions.IsVisible)
         {
             TextMarkupIcons.IsVisible = true;
-            EditorControl.IsVisible = false;
-            EditOptions.IsVisible = false;
+            textMarkupEditor.IsVisible = false;
             return;
         }
         TextMarkupGrid.IsVisible = !TextMarkupGrid.IsVisible;
         if (!TextMarkupGrid.IsVisible)
         {
             PdfViewer.AnnotationMode = AnnotationMode.None;
-            EditorControl.IsVisible = false;
+            textMarkupEditor.IsVisible = false;
         }
     }
 
@@ -386,10 +336,7 @@ public partial class MainPage : ContentPage
     /// <param name="e">The event arguments.</param>
     private void ColorPalette_Clicked(object sender, EventArgs e)
     {
-        if (SelectedAnnotation != null)
-        {
-            EditorControl.IsVisible = !EditorControl.IsVisible;
-        }
+        textMarkupEditor.IsVisible = !textMarkupEditor.IsVisible;
     }
 
     /// <summary>
@@ -429,18 +376,18 @@ public partial class MainPage : ContentPage
     /// <summary>
     /// Handles the event when the "Import" button is clicked, importing annotations from an XFDF file.
     /// </summary>
-    private void Import_Clicked(object sender, EventArgs e)
+    private async void Import_Clicked(object sender, EventArgs e)
     {
         string fileName = Path.Combine(FileSystem.Current.AppDataDirectory, "Export.xfdf");
         if (File.Exists(fileName))
         {
             Stream inputStream = File.OpenRead(fileName);
             inputStream.Position = 0;
-            PdfViewer.ImportAnnotations(inputStream, Syncfusion.Pdf.Parsing.AnnotationDataFormat.XFdf);
-            DisplayAlert("Annotations imported", "Annotations from the " + fileName + " file are imported", "OK");
+            await PdfViewer.ImportAnnotationsAsync(inputStream, Syncfusion.Pdf.Parsing.AnnotationDataFormat.XFdf);
+            await DisplayAlert("Information", "Annotations Loaded from the " + fileName, "OK");
         }
         else
-            DisplayAlert("No files to import", "There are no xfdf files to import. Please export the annotations to an xfdf file and then import. ", "OK");
+            await DisplayAlert("XFDF file Not Found", "No xfdf files available for import. Please export the annotations to an xfdf file and then import. ", "OK");
     }
 
     /// <summary>
@@ -449,7 +396,7 @@ public partial class MainPage : ContentPage
     private async void Export_Clicked(object sender, EventArgs e)
     {
         Stream xfdfStream = new MemoryStream();
-        PdfViewer.ExportAnnotations(xfdfStream, Syncfusion.Pdf.Parsing.AnnotationDataFormat.XFdf);
+        await PdfViewer.ExportAnnotationsAsync(xfdfStream, Syncfusion.Pdf.Parsing.AnnotationDataFormat.XFdf);
         await CopyFileToAppDataDirectory(xfdfStream, "Export.xfdf");
     }
 
@@ -473,7 +420,7 @@ public partial class MainPage : ContentPage
     {
         if (e.PropertyName == nameof(IsVisible) && !EditOptions.IsVisible)
         {
-            EditorControl.IsVisible = false;
+            textMarkupEditor.IsVisible = false;
         }
     }
     #endregion

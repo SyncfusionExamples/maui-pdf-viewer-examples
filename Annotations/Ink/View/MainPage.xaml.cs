@@ -12,15 +12,19 @@ public partial class MainPage : ContentPage
     public MainPage()
     {
         InitializeComponent();
+        inkEditor.SelectedThickness = PdfViewer.AnnotationSettings.Ink.BorderWidth;
+        inkEditor.SelectedOpacity = PdfViewer.AnnotationSettings.Ink.Color.Alpha;
+        if (this.BindingContext is PdfViewerViewModel viewModel)
+        {
+            viewModel.SelectedThickness = inkEditor.SelectedThickness;
+            viewModel.SelectedOpacity = inkEditor.SelectedOpacity;
+        }
         string[,] colorCodes = new string[1, 5] {
             { "#FF990000", "#FF996100", "#FF009907", "#FF060099", "#FF990098"},
         };
-        EditorControl.ConfigureColorPicker(colorCodes);
-        EditorControl.ConfigureOpacity(1);
-        EditorControl.ConfigureThickness();
-        EditorControl.ColorChanged += EditorControl_ColorChanged;
-        EditorControl.OpacityChangedEnd += EditorControl_OpacityChangedEnd;
-        EditorControl.ThicknessChangedEnd += EditorControl_ThicknessChangedEnd;
+        inkEditor.ThicknessChanged += FreeTextEditor_BorderThicknessChanged;
+        inkEditor.ColorChanged += FreeTextEditor_FontColorChanged;
+        inkEditor.OpacityChanged += FreeTextEditor_OpacityChanged;
         PdfViewer.AnnotationSelected += PdfViewer_AnnotationSelected;
         PdfViewer.AnnotationDeselected += PdfViewer_AnnotationDeselected;
 #if ANDROID
@@ -32,136 +36,66 @@ public partial class MainPage : ContentPage
 #endif
     }
 
-    /// <summary>
-    /// Event handler for the "ThicknessChangedEnd" event of the EditorControl.
-    /// Updates the border width of the selected annotation or the default ink annotation in the PdfViewer based on the EditorThickness value.
-    /// </summary>
-    
-    private void EditorControl_ThicknessChangedEnd(object sender, EventArgs e)
+    private void FreeTextEditor_OpacityChanged(object? sender, float e)
     {
-        if(SelectedAnnotation != null)
-        {
-            if(SelectedAnnotation is  ShapeAnnotation shape)
-            {
-                shape.BorderWidth = (int)EditorControl.EditorThickness;
-            }
-            if (SelectedAnnotation is InkAnnotation ink)
-            {
-                ink.BorderWidth = (int)EditorControl.EditorThickness;
-            }
-        }
+        if (SelectedAnnotation != null && SelectedAnnotation is InkAnnotation inkAnnotation)
+            inkAnnotation.Opacity = e;
         else
-        {
-            PdfViewer.AnnotationSettings.Ink.BorderWidth = (int)EditorControl.EditorThickness;
-        }
+            PdfViewer.AnnotationSettings.Ink.Opacity = e;
     }
 
-    /// <summary>
-    /// Event handler for the "OpacityChangedEnd" event of the EditorControl.
-    /// Updates the opacity of the selected annotation or the default ink annotation in the PdfViewer based on the EditorOpacity value.
-    /// </summary>
-   
-    private void EditorControl_OpacityChangedEnd(object sender, EventArgs e)
+    private void FreeTextEditor_FontColorChanged(object? sender, Color e)
     {
-        if (SelectedAnnotation != null)
-        {
-            SelectedAnnotation.Opacity = (float)EditorControl.EditorOpacity;
-            PdfViewer.AnnotationSettings.Ink.Opacity = (float)EditorControl.EditorOpacity;
-        }
-        else if (PdfViewer.AnnotationMode == AnnotationMode.Ink)
-        {
-            PdfViewer.AnnotationSettings.Ink.Opacity = (float)EditorControl.EditorOpacity;
-        }
+        if (SelectedAnnotation != null && SelectedAnnotation is InkAnnotation inkAnnotation)
+            inkAnnotation.Color = e;
+        else
+            PdfViewer.AnnotationSettings.Ink.Color = e;
     }
 
-    /// <summary>
-    /// Event handler for the "ColorChanged" event of the EditorControl.
-    /// Updates the color of the selected annotation or the default ink annotation in the PdfViewer based on the ColorChangedEventArgs.
-    /// </summary>
-
-    private void EditorControl_ColorChanged(object sender, ColorChangedEventArgs e)
+    private void FreeTextEditor_BorderThicknessChanged(object? sender, float e)
     {
-        if (SelectedAnnotation != null)
-        {
-            SelectedAnnotation.Color = Color.FromArgb(e.ColorCode);
-        }
-        else if(PdfViewer.AnnotationMode == AnnotationMode.Ink)
-        {
-            PdfViewer.AnnotationSettings.Ink.Color = Color.FromArgb(e.ColorCode);
-        }
+        if (SelectedAnnotation != null && SelectedAnnotation is InkAnnotation inkAnnotation)
+            inkAnnotation.BorderWidth = e;
+        else
+            PdfViewer.AnnotationSettings.Ink.BorderWidth = e;
     }
 
     /// <summary>
     /// Event handler for the "AnnotationDeselected" event of the PdfViewer.
     /// Clears the selected annotation and adjusts the visibility and layout of the EditorControl and associated UI elements.
     /// </summary>
-   
     private void PdfViewer_AnnotationDeselected(object sender, AnnotationEventArgs e)
     {
         SelectedAnnotation = null;
-        EditorControl.IsVisible = false;
+        inkEditor.IsVisible = false;
+        Delete.IsVisible = false;
         AnnotationPropertyGrid.IsVisible = false;
-        ColorPalletteReset();
     }
 
     /// <summary>
     /// Event handler for the "AnnotationSelected" event of the PdfViewer.
     /// Handles the selection of an annotation by updating UI elements in the EditorControl based on the selected annotation type.
     /// </summary>
-    
     private void PdfViewer_AnnotationSelected(object sender, AnnotationEventArgs e)
     {
         SelectedAnnotation = e.Annotation;
-        EditorControl.EditorOpacity = SelectedAnnotation.Opacity;
+        if(SelectedAnnotation is InkAnnotation inkAnnotation)
+        {
+            inkEditor.SelectedThickness = inkAnnotation.BorderWidth;
+            inkEditor.SelectedOpacity = inkAnnotation.Opacity;
+            if (this.BindingContext is PdfViewerViewModel viewModel)
+            {
+                viewModel.SelectedThickness = inkAnnotation.BorderWidth;
+                viewModel.SelectedOpacity = inkAnnotation.Opacity;
+            }
+        }
+        Delete.IsVisible = true;
         if (!AnnotationPropertyGrid.IsVisible)
         {
             AnnotationPropertyGrid.IsVisible = true;
         }
         UnlockButton.IsVisible = SelectedAnnotation.IsLocked ? true : false;
         Lockbutton.IsVisible = SelectedAnnotation.IsLocked ? false : true;
-        if (SelectedAnnotation is UnderlineAnnotation || SelectedAnnotation is StrikeOutAnnotation ||
-                SelectedAnnotation is SquigglyAnnotation ||
-                SelectedAnnotation is HighlightAnnotation)
-        {
-            EditorControl.ThicknessSliderLayOut.IsVisible = false;
-            EditorControl.ColorPaletteLayOut.IsVisible = true;
-            EditorControl.ColorOpacitySeparator.IsVisible = true;
-            EditorControl.OpacityThicknessSeparator.IsVisible = false;
-            EditorControl.HeightRequest = 123f;
-        }
-        else if (SelectedAnnotation is StampAnnotation)
-        {
-            EditorControl.ColorPaletteLayOut.IsVisible = false;
-            EditorControl.ThicknessSliderLayOut.IsVisible = false;
-            EditorControl.ColorOpacitySeparator.IsVisible = false;
-            EditorControl.OpacityThicknessSeparator.IsVisible = false;
-            EditorControl.HeightRequest = 80f;
-        }
-        else
-        {
-            ColorPalletteReset();
-        }
-        if (SelectedAnnotation is ShapeAnnotation shape)
-        {
-            EditorControl.EditorThickness = shape.BorderWidth;
-        }
-        else if (SelectedAnnotation is InkAnnotation ink)
-        {
-            EditorControl.EditorThickness = ink.BorderWidth;
-        }
-    }
-
-    /// <summary>
-    /// Event handler for the "PropertyChanged" event of the EditOption.
-    /// Hides the EditorControl if the "IsVisible" property of the EditOption is changed.
-    /// </summary>
-    
-    private void EditOption_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
-    {
-        if (e.PropertyName == nameof(IsVisible))
-        {
-            EditorControl.IsVisible = false;
-        }
     }
 
     /// <summary>
@@ -189,29 +123,19 @@ public partial class MainPage : ContentPage
     }
 
 
-    private void ColorPalletteReset()
-    {
-        EditorControl.ThicknessSliderLayOut.IsVisible = true;
-        EditorControl.ColorPaletteLayOut.IsVisible = true;
-        EditorControl.ColorOpacitySeparator.IsVisible = true;
-        EditorControl.OpacityThicknessSeparator.IsVisible = true;
-        EditorControl.HeightRequest = 200f;
-    }
-
-
     private void ShowPropertyPanel_Clicked(object sender, EventArgs e)
     {
         if(PdfViewer.AnnotationMode == AnnotationMode.Ink)
         {
             PdfViewer.AnnotationMode = AnnotationMode.None;
-            EditorControl.IsVisible = false;
+            AnnotationPropertyGrid.IsVisible = false;
+            inkEditor.IsVisible = false;
+            Delete.IsVisible = false;
         }
         else
         {
             PdfViewer.AnnotationMode = AnnotationMode.Ink;
-            EditorControl.EditorOpacity = PdfViewer.AnnotationSettings.Ink.Opacity;
-            EditorControl.EditorThickness = PdfViewer.AnnotationSettings.Ink.BorderWidth;
-            EditorControl.IsVisible = true;
+            AnnotationPropertyGrid.IsVisible = true;
         }
     }
 
@@ -220,10 +144,7 @@ public partial class MainPage : ContentPage
     /// </summary>
     private void ColorPalette_Clicked(object sender, EventArgs e)
     {
-        if (SelectedAnnotation != null)
-        {
-            EditorControl.IsVisible = !EditorControl.IsVisible;
-        }
+        inkEditor.IsVisible = !inkEditor.IsVisible;
     }
 
     /// <summary>
@@ -257,7 +178,7 @@ public partial class MainPage : ContentPage
     {
         string targetFile = Path.Combine(FileSystem.Current.AppDataDirectory, "Saved.pdf");
         using FileStream outputStream = File.Create(targetFile);
-        PdfViewer.SaveDocument(outputStream);
+        await PdfViewer.SaveDocumentAsync(outputStream);
         await DisplayAlert("Document Saved", "The document has been saved to the file " + targetFile, "OK");
     }
 
@@ -265,18 +186,18 @@ public partial class MainPage : ContentPage
     /// <summary>
     /// Handles the event when the "Import" button is clicked, importing annotations from an XFDF file.
     /// </summary>
-    private void Import_Clicked(object sender, EventArgs e)
+    private async void Import_Clicked(object sender, EventArgs e)
     {
         string fileName = Path.Combine(FileSystem.Current.AppDataDirectory, "Export.xfdf");
         if (File.Exists(fileName))
         {
             Stream inputStream = File.OpenRead(fileName);
             inputStream.Position = 0;
-            PdfViewer.ImportAnnotations(inputStream, Syncfusion.Pdf.Parsing.AnnotationDataFormat.XFdf);
-            DisplayAlert("Annotations imported", "Annotations from the " + fileName + " file are imported", "OK");
+            await PdfViewer.ImportAnnotationsAsync(inputStream, Syncfusion.Pdf.Parsing.AnnotationDataFormat.XFdf);
+            await DisplayAlert("Information", "Annotations Loaded from the " + fileName, "OK");
         }
         else
-            DisplayAlert("No files to import", "There are no xfdf files to import. Please export the annotations to an xfdf file and then import. ", "OK");
+            await DisplayAlert("XFDF file Not Found", "No xfdf files available for import. Please export the annotations to an xfdf file and then import. ", "OK");
     }
 
     /// <summary>
@@ -285,7 +206,7 @@ public partial class MainPage : ContentPage
     private async void Export_Clicked(object sender, EventArgs e)
     {
         Stream xfdfStream = new MemoryStream();
-        PdfViewer.ExportAnnotations(xfdfStream, Syncfusion.Pdf.Parsing.AnnotationDataFormat.XFdf);
+        await PdfViewer.ExportAnnotationsAsync(xfdfStream, Syncfusion.Pdf.Parsing.AnnotationDataFormat.XFdf);
         await CopyFileToAppDataDirectory(xfdfStream, "Export.xfdf");
     }
 

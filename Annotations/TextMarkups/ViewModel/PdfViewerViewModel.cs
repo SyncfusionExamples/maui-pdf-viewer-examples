@@ -7,6 +7,7 @@ namespace TextMarkups
     {
         private ICommand _openFileCommand;
         private Stream _documentStream;
+        private float selectedOpacity;
 
         /// <summary>
         /// Occurs when a property is changed.
@@ -26,6 +27,16 @@ namespace TextMarkups
             }
         }
 
+        public float SelectedOpacity
+        {
+            get => selectedOpacity;
+            set
+            {
+                selectedOpacity = value;
+                OnPropertyChanged("SelectedOpacity");
+            }
+        }
+
         /// <summary>
         /// Gets the command to browse file in the disk.
         /// </summary>
@@ -33,7 +44,7 @@ namespace TextMarkups
 
         public PdfViewerViewModel()
         {
-            PdfDocumentStream = this.GetType().Assembly.GetManifestResourceStream("TextMarkups.Assets." + "Annotations.pdf");
+            PdfDocumentStream = this.GetType().Assembly.GetManifestResourceStream("TextMarkups.TextMarkupDocument.pdf");
             _openFileCommand = new Command<object>(OpenFile);
         }
 

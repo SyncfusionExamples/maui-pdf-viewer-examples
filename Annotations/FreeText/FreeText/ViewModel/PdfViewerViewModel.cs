@@ -1,32 +1,21 @@
-﻿using System.ComponentModel;
+﻿using Syncfusion.Maui.PdfViewer;
+using System.ComponentModel;
 using System.Windows.Input;
 
-namespace Stamp
+namespace FreeText
 {
     public class PdfViewerViewModel : INotifyPropertyChanged
     {
-
         private ICommand _openFileCommand;
-        private bool _showStampDialog = false;
         private Stream _documentStream;
+        private float selectedThickness;
+        private float selectedOpacity;
+        private float selectedFontSize;
 
         /// <summary>
         /// Occurs when a property is changed.
         /// </summary>
         public event PropertyChangedEventHandler PropertyChanged;
-
-        /// <summary>
-        /// Gets or sets the value to show or hide the stamp dialog.
-        /// </summary>
-        public bool ShowStampDialog
-        {
-            get => _showStampDialog;
-            set
-            {
-                _showStampDialog = value;
-                OnPropertyChanged("ShowStampDialog");
-            }
-        }
 
         /// <summary>
         /// Stores the PDF document stream.
@@ -41,15 +30,46 @@ namespace Stamp
             }
         }
 
+        public float SelectedThickness
+        {
+            get => selectedThickness;
+            set
+            {
+                selectedThickness = value;
+                OnPropertyChanged("SelectedThickness");
+            }
+        }
+
+        public float SelectedOpacity
+        {
+            get => selectedOpacity;
+            set
+            {
+                selectedOpacity = value;
+                OnPropertyChanged("SelectedOpacity");
+            }
+        }
+
+        public float SelectedFontSize
+        {
+            get => selectedFontSize;
+            set
+            {
+                selectedFontSize = value;
+                OnPropertyChanged("SelectedFontSize");
+            }
+        }
+
         /// <summary>
         /// Gets the command to browse file in the disk.
         /// </summary>
         public ICommand OpenFileCommand => _openFileCommand;
-
+        
         public PdfViewerViewModel()
         {
-            PdfDocumentStream = this.GetType().Assembly.GetManifestResourceStream("Stamp.StampDocument.pdf");
+            PdfDocumentStream = this.GetType().Assembly.GetManifestResourceStream("FreeText.FreeTextDocument.pdf");
             _openFileCommand = new Command<object>(OpenFile);
+          
         }
 
         /// <summary>
@@ -59,12 +79,12 @@ namespace Stamp
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
+        
         /// <summary>
         /// Opens the file from the disk and create document stream from it.
         /// </summary>
         async internal void OpenFile(object commandParameter)
         {
-            ShowStampDialog = false;
             FilePickerFileType pdfFileType = new FilePickerFileType(new Dictionary<DevicePlatform, IEnumerable<string>>{
                         { DevicePlatform.iOS, new[] { "public.pdf" } },
                         { DevicePlatform.Android, new[] { "application/pdf" } },
@@ -87,6 +107,7 @@ namespace Stamp
             try
             {
                 var result = await FilePicker.Default.PickAsync(options);
+                
                 if (result != null)
                 {
                     PdfDocumentStream = await result.OpenReadAsync();
@@ -104,5 +125,6 @@ namespace Stamp
             }
             return null;
         }
+        
     }
 }

@@ -7,6 +7,8 @@ namespace Ink
     {
         private ICommand _openFileCommand;
         private Stream _documentStream;
+        private float selectedThickness;
+        private float selectedOpacity;
 
         /// <summary>
         /// Occurs when a property is changed.
@@ -22,13 +24,33 @@ namespace Ink
             }
         }
 
+        public float SelectedThickness
+        {
+            get => selectedThickness;
+            set
+            {
+                selectedThickness = value;
+                OnPropertyChanged("SelectedThickness");
+            }
+        }
+
+        public float SelectedOpacity
+        {
+            get => selectedOpacity;
+            set
+            {
+                selectedOpacity = value;
+                OnPropertyChanged("SelectedOpacity");
+            }
+        }
+
         /// <summary>
         /// Gets the command to browse file in the disk.
         /// </summary>
         public ICommand OpenFileCommand => _openFileCommand;
         public PdfViewerViewModel()
         {
-            PdfDocumentStream = this.GetType().Assembly.GetManifestResourceStream("Ink.Assets." + "Annotations.pdf");
+            PdfDocumentStream = this.GetType().Assembly.GetManifestResourceStream("Ink.InkDocumet.pdf");
             _openFileCommand = new Command<object>(OpenFile);
         }
 
