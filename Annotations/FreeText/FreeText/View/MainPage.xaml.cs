@@ -10,6 +10,7 @@ public partial class MainPage : ContentPage
 {
    
     Annotation SelectedAnnotation;
+
     public MainPage()
     {
         InitializeComponent();
@@ -42,6 +43,10 @@ public partial class MainPage : ContentPage
 #endif
     }
 
+    /// <summary>
+    /// Handles the FontSizeChanged event for the FreeTextEditor control.
+    /// Updates the font size based on the selected FreeTextAnnotation or the default settings.
+    /// </summary>
     private void FreeTextEditor_FontSizeChanged(object? sender, double e)
     {
         if (this.BindingContext is PdfViewerViewModel viewModel)
@@ -54,6 +59,10 @@ public partial class MainPage : ContentPage
             PdfViewer.AnnotationSettings.FreeText.FontSize = e;
     }
 
+    /// <summary>
+    /// Handles the OpacityChanged event for the FreeTextEditor control.
+    /// Updates the opacity based on the selected FreeTextAnnotation or the default settings.
+    /// </summary>
     private void FreeTextEditor_OpacityChanged(object? sender, float e)
     {
         if (this.BindingContext is PdfViewerViewModel viewModel)
@@ -66,6 +75,10 @@ public partial class MainPage : ContentPage
             PdfViewer.AnnotationSettings.FreeText.Opacity = e;
     }
 
+    /// <summary>
+    /// Handles the ColorChanged event for the FreeTextEditor control.
+    /// Updates the font color based on the selected FreeTextAnnotation or the default settings.
+    /// </summary>
     private void FreeTextEditor_FontColorChanged(object? sender, Color e)
     {
         if (SelectedAnnotation != null && SelectedAnnotation is FreeTextAnnotation freeTextAnnotation)
@@ -74,6 +87,10 @@ public partial class MainPage : ContentPage
             PdfViewer.AnnotationSettings.FreeText.Color = e;
     }
 
+    /// <summary>
+    /// Handles the BorderColorChanged event for the FreeTextEditor control.
+    /// Updates the border color based on the selected FreeTextAnnotation or the default settings.
+    /// </summary>
     private void FreeTextEditor_BorderColorChanged(object? sender, Color e)
     {
         if (SelectedAnnotation != null && SelectedAnnotation is FreeTextAnnotation freeTextAnnotation)
@@ -82,6 +99,10 @@ public partial class MainPage : ContentPage
             PdfViewer.AnnotationSettings.FreeText.BorderColor = e;
     }
 
+    /// <summary>
+    /// Handles the BorderThicknessChanged event for the FreeTextEditor control.
+    /// Updates the border thickness based on the selected FreeTextAnnotation or the default settings.
+    /// </summary>
     private void FreeTextEditor_BorderThicknessChanged(object? sender, float e)
     {
         if (this.BindingContext is PdfViewerViewModel viewModel)
@@ -94,6 +115,10 @@ public partial class MainPage : ContentPage
             PdfViewer.AnnotationSettings.FreeText.BorderWidth = e;
     }
 
+    /// <summary>
+    /// Handles the FillColorChanged event for the FreeTextEditor control.
+    /// Updates the fill color based on the selected FreeTextAnnotation or the default settings.
+    /// </summary>
     private void FreeTextEditor_FillColorChanged(object? sender, Color e)
     {
         if(SelectedAnnotation != null)
@@ -117,7 +142,6 @@ public partial class MainPage : ContentPage
         delete.IsVisible = false;
         Lock.IsVisible = false;
         Unlock.IsVisible = false;
-        
     }
 
     /// <summary>
@@ -207,22 +231,6 @@ public partial class MainPage : ContentPage
         await DisplayAlert("Document Saved", "The document has been saved to the file " + targetFile, "OK");
     }
 
-    private void Lock_Clicked(object sender, EventArgs e)
-    {
-        if (SelectedAnnotation != null)
-        {
-            SelectedAnnotation.IsLocked = true;
-        }
-    }
-
-    private void Unlock_Clicked(object sender, EventArgs e)
-    {
-        if (SelectedAnnotation != null)
-        {
-            SelectedAnnotation.IsLocked = false;
-        }
-    }
-
     /// <summary>
     /// Handles the event when the "Export" button is clicked, exporting annotations to an XFDF file.
     /// </summary>
@@ -260,6 +268,9 @@ public partial class MainPage : ContentPage
         Lock.IsVisible = !SelectedAnnotation.IsLocked;
     }
 
+    /// <summary>
+    /// Handles the event when the "Import" button is clicked, importing annotations from an XFDF file.
+    /// </summary>
     private async void  Import_Clicked(object sender, EventArgs e)
     {
         string fileName = Path.Combine(FileSystem.Current.AppDataDirectory, "Export.xfdf");
@@ -274,6 +285,10 @@ public partial class MainPage : ContentPage
             await DisplayAlert("XFDF file Not Found", "No xfdf files available for import. Please export the annotations to an xfdf file and then import. ", "OK");
     }
 
+    /// <summary>
+    /// Handles the Clicked event for the ColorPalatte button.
+    /// Toggles the visibility of the FreeTextEditor, showing or hiding it.
+    /// </summary>
     private void ColorPalatte_Clicked(object sender, EventArgs e)
     {
         freeTextEditor.IsVisible = !freeTextEditor.IsVisible;
