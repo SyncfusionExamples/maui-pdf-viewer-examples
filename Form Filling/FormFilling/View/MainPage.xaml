@@ -47,9 +47,9 @@
                         Command="{Binding OpenFileCommand}"
                         IsVisible="{OnPlatform MacCatalyst=false}"
                         FontFamily="Maui Material Assets"/>
-                <Button Text="&#xe75f;" x:Name="Save" FontFamily="Maui Material Assets" Clicked="Save_Clicked" Margin="0,0,3,0"/>
-                <Button x:Name="Import" Text="&#xe782;" Clicked="Import_Clicked"/>
-                <Button x:Name="Export" Text="&#xe781;" Clicked="Export_Clicked"/>
+                <Button Text="&#xe75f;" x:Name="Save" FontFamily="Maui Material Assets"  Clicked="Save_Clicked" Margin="0,0,3,0"/>
+                <Button x:Name="Import" Text="&#xe782;" FontFamily="Maui Material Assets"  Clicked="Import_Clicked"/>
+                <Button x:Name="Export" Text="&#xe781;" FontFamily="Maui Material Assets"  Clicked="Export_Clicked"/>
             </HorizontalStackLayout>
             <syncfusion:SfPdfViewer x:Name="pdfViewer" Grid.Row="1" DocumentSource="{Binding PdfDocumentStream}"/>
         </Grid>
