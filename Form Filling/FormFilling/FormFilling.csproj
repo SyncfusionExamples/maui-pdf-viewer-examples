@@ -57,11 +57,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <None Remove="Assets\export_image.png" />
-	  <None Remove="Assets\export_small_image.png" />
 	  <None Remove="Assets\form_document.pdf" />
-	  <None Remove="Assets\import_image.png" />
-	  <None Remove="Assets\import_small_image.png" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -73,13 +69,6 @@
 		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
 		<PackageReference Include="Syncfusion.Maui.PdfViewer" Version="24.1.41" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <MauiImage Include="Assets\export_image.png" />
-	  <MauiImage Include="Assets\export_small_image.png" />
-	  <MauiImage Include="Assets\import_image.png" />
-	  <MauiImage Include="Assets\import_small_image.png" />
 	</ItemGroup>
 
 </Project>
