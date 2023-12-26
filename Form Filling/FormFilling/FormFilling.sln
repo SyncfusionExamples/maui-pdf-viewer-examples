@@ -1,0 +1,27 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34330.188
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FormFilling", "FormFilling.csproj", "{17B0F9CC-C0CE-4E0D-B1A1-FF7F2105726A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{17B0F9CC-C0CE-4E0D-B1A1-FF7F2105726A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{17B0F9CC-C0CE-4E0D-B1A1-FF7F2105726A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{17B0F9CC-C0CE-4E0D-B1A1-FF7F2105726A}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{17B0F9CC-C0CE-4E0D-B1A1-FF7F2105726A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{17B0F9CC-C0CE-4E0D-B1A1-FF7F2105726A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{17B0F9CC-C0CE-4E0D-B1A1-FF7F2105726A}.Release|Any CPU.Deploy.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {21999B49-3A7C-41A2-AE34-FE52219C9C4A}
+	EndGlobalSection
+EndGlobal
