@@ -55,19 +55,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
-		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="$(MauiVersion)" />
-		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
-		<PackageReference Include="Syncfusion.Compression.NET" Version="*" />
-		<PackageReference Include="Syncfusion.Maui.Core" Version="*" />
-		<PackageReference Include="Syncfusion.Maui.SignaturePad" Version="*" />
-		<PackageReference Include="Syncfusion.Maui.DataSource" Version="*" />
-		<PackageReference Include="Syncfusion.Maui.GridCommon" Version="*" />
-		<PackageReference Include="Syncfusion.Maui.ListView" Version="*" />
-		<PackageReference Include="Syncfusion.Maui.PdfToImageConverter" Version="*" />
-		<PackageReference Include="Syncfusion.Pdf.NET" Version="*" />
-		<PackageReference Include="Syncfusion.Pdf.Imaging.NET" Version="*" />
-		<PackageReference Include="Syncfusion.Maui.PdfViewer" Version="*" />
+		<PackageReference Include="Syncfusion.Maui.PdfViewer" Version="20.4.38" />
 	</ItemGroup>
 
 	<ItemGroup>
