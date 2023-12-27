@@ -53,7 +53,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Syncfusion.Maui.PdfViewer" Version="20.4.38" />
+	  <PackageReference Include="Syncfusion.Maui.PdfViewer" Version="23.2.4" />
 	</ItemGroup>
 
 </Project>
