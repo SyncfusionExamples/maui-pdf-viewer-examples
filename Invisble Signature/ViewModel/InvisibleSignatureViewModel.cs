@@ -157,7 +157,7 @@ namespace InvisbleSignatureDemo
         internal async void SaveDocument()
         {
             signatureValidatedStream.Position = 0;
-            string fileName = "SaveDocument.pdf";
+            string fileName = "Saved Document.pdf";
             try
             {
                 if (fileName != null)
