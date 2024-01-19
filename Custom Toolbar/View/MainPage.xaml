@@ -54,13 +54,15 @@
                     <ColumnDefinition Width="{OnPlatform Default=*, Android=3*, iOS=3*}"/>
                     <ColumnDefinition Width="{OnPlatform Default=*, Android=1*, iOS=1*}"/>
                 </Grid.ColumnDefinitions>
+                <HorizontalStackLayout Margin="8,0,0,0" Grid.Column="0" Spacing="8" HorizontalOptions="Start">
                 <Button Text="&#xe700;"
-                        Margin="8,0,0,0"
-                        Grid.Column="0"
-                        HorizontalOptions="Start"
                         PropertyChanged="Button_PropertyChanged"
                         Command="{Binding OpenFileCommand}"
                         IsVisible="{OnPlatform MacCatalyst=false}"/>
+                    <Button Text="&#xe784;"
+                            FontFamily="Maui Material Assets"
+                            Clicked="Share_Clicked"/>
+                </HorizontalStackLayout>
                 <HorizontalStackLayout HorizontalOptions="{OnPlatform Default=End, Android=CenterAndExpand, iOS=CenterAndExpand}"
                     Spacing="8" Grid.Column="1">
                     <Border BackgroundColor="#FFFFFFFF" Stroke="#66000000" StrokeShape="{OnPlatform Default=RoundRectangle 4, MacCatalyst=RoundRectangle 5, iOS=RoundRectangle 5}" HeightRequest="{OnPlatform Android=30,WinUI=34, MacCatalyst=26, iOS=26}"
