@@ -62,6 +62,9 @@
                     <Button Text="&#xe784;"
                             FontFamily="Maui Material Assets"
                             Clicked="Share_Clicked"/>
+                    <Button Text="&#xe717;"
+         FontFamily="Maui Material Assets"
+         Clicked="ShareToDefaultMail_Clicked"/>
                 </HorizontalStackLayout>
                 <HorizontalStackLayout HorizontalOptions="{OnPlatform Default=End, Android=CenterAndExpand, iOS=CenterAndExpand}"
                     Spacing="8" Grid.Column="1">
