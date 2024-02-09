@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CustomSearchToolbar.MainPage"
+             xmlns:syncfusion="clr-namespace:Syncfusion.Maui.PdfViewer;assembly=Syncfusion.Maui.PdfViewer">
+    <Grid RowDefinitions="45,*">
+        <syncfusion:SfPdfViewer Grid.Row="1" x:Name="PdfViewer"></syncfusion:SfPdfViewer>
+        <Grid Grid.Row="0" BackgroundColor="#FFF7F2FB">
+            <HorizontalStackLayout HorizontalOptions="Center">
+                <Entry Placeholder="Search text..." Background="White" ClearButtonVisibility="WhileEditing" x:Name="TextField" WidthRequest="280"></Entry>
+                <Button Text="&#xe715;" TextColor="#1C1B1F" FontSize="20" FontFamily="Maui Material Assets" Background="Transparent" x:Name="Search" Clicked="Search_Clicked"></Button>
+                <Button x:Name="Previous" Text="&#xe707;" FontSize="20" TextColor="#1C1B1F" FontFamily="Maui Material Assets" Background="Transparent" Clicked="Previous_Clicked"></Button>
+                <Button x:Name="Next" Text="&#xe706;" FontSize="20" TextColor="#1C1B1F" FontFamily="Maui Material Assets" Background="Transparent" Clicked="Next_Clicked"></Button>
+                <Label Margin="5,0" VerticalOptions="Center" TextColor="#1C1B1F" Text="Match case"></Label>
+                <CheckBox x:Name="MatchCase" IsChecked="False" CheckedChanged="Search_Clicked"></CheckBox>
+                <Button x:Name="ChangeHightlightColor" FontSize="20" Text="&#xe710;" FontFamily="Maui Material Assets" Background="Transparent" TextColor="#1C1B1F" Clicked="ChangeHightlightColor_Clicked"></Button>
+                <Button x:Name="Close" Text="&#xe70e;" FontSize="20" FontFamily="Maui Material Assets" Background="Transparent" TextColor="#1C1B1F" Clicked="Close_Clicked"></Button>
+                <Label Margin="5,0" VerticalOptions="Center" IsVisible="false" x:Name="MatchesCount" Text="Matches count: " Background="Transparent" TextColor="#1C1B1F"></Label>
+                <Label Margin="5,0" VerticalOptions="Center" IsVisible="false" x:Name="CurrentMatch" Text="Current Match: " Background="Transparent" TextColor="#1C1B1F"></Label>
+            </HorizontalStackLayout>
+        </Grid>
+    </Grid>
+
+</ContentPage>
