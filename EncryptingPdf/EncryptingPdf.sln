@@ -1,0 +1,27 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34330.188
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EncryptingPdf", "EncryptingPdf\EncryptingPdf.csproj", "{83395079-7EF8-4BD6-8F94-61A0CEED5C16}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{83395079-7EF8-4BD6-8F94-61A0CEED5C16}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{83395079-7EF8-4BD6-8F94-61A0CEED5C16}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{83395079-7EF8-4BD6-8F94-61A0CEED5C16}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{83395079-7EF8-4BD6-8F94-61A0CEED5C16}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{83395079-7EF8-4BD6-8F94-61A0CEED5C16}.Release|Any CPU.Build.0 = Release|Any CPU
+		{83395079-7EF8-4BD6-8F94-61A0CEED5C16}.Release|Any CPU.Deploy.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1C304C46-2790-4E70-926C-CF1A1048750D}
+	EndGlobalSection
+EndGlobal
