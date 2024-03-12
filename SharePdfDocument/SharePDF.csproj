@@ -58,6 +58,9 @@
 
 	<ItemGroup>
 	  <None Remove="Assets\PdfSuccinctly.pdf" />
+	  <None Remove="Assets\share_icon.png" />
+	  <None Remove="Resources\Images\icons8_share_b.png" />
+	  <None Remove="Resources\Images\icons_share_a.png" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -69,6 +72,10 @@
 		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
 		<PackageReference Include="Syncfusion.Maui.PdfViewer" Version="*" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ApplicationDefinition Include="Assets\share_icon.png" />
 	</ItemGroup>
 
 </Project>
