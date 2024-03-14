@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel;
 using System.Windows.Input;
+using Syncfusion.Maui.PdfViewer;
 
 namespace CustomToolbar
 {
@@ -19,6 +20,7 @@ namespace CustomToolbar
         private bool _showPasswordDialog = false;
         private Stream _documentStream;
         private int _pageCount;
+        private PageLayoutMode _pageLayoutMode;
 
         /// <summary>
         /// Occurs when a property is changed.
@@ -170,6 +172,18 @@ namespace CustomToolbar
             }
         }
 
+        /// <summary>
+        /// Stores the  pageLayout Mode of the PDF.
+        /// </summary>
+        public PageLayoutMode PageLayoutMode
+        {
+            get => _pageLayoutMode;
+            set
+            {
+                _pageLayoutMode = value;
+                OnPropertyChanged("PageLayoutMode");
+            }
+        }
         /// <summary>
         /// Gets the command to browse file in the disk.
         /// </summary>
