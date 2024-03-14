@@ -6,7 +6,7 @@ public partial class MainPage : ContentPage
 {
     private int targetPageNumber = 0;
     private bool pageNumberChanged = false;
-    //When loading password protected files, it is used to wait the current thread's execution, until the user enters the password.
+    /When loading password protected files, it is used to wait the current thread's execution, until the user enters the password.
     private ManualResetEvent manualResetEvent = new ManualResetEvent(false);
 
     public MainPage()
