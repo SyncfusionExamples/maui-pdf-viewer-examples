@@ -109,7 +109,7 @@ public partial class FlattenOptions : ContentView
    {
        stream.CopyTo(fileStream); // Copy the stream to the file stream.
    }
-#elif ANDROID || IOS || MACCATALYST
+#else
         string filePath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), fileName); // Define the file path for Android, iOS, and Mac Catalyst.
         using (FileStream fileStream = new FileStream(filePath, FileMode.Create))
         {

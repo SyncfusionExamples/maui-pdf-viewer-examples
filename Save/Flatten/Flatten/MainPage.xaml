@@ -9,7 +9,7 @@
         <HorizontalStackLayout HorizontalOptions="Start">
             <Button Text="&#xe75f;" 
                 FontFamily="Maui Material Assets"
-                Clicked="Button_Clicked"
+                Clicked="Save_Clicked"
                 HorizontalOptions="Start"></Button>
         </HorizontalStackLayout>
         <local:FlattenOptions IsVisible="false" x:Name="flattenOptions" Grid.Row="1"></local:FlattenOptions>

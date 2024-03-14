@@ -17,7 +17,7 @@ public partial class MainPage : ContentPage
     }
 
     // Event handler for Button click event, toggles the visibility of flattenOptions.
-    private void Button_Clicked(object sender, EventArgs e)
+    private void Save_Clicked(object sender, EventArgs e)
     {
         // Toggles the visibility of flattenOptions.
         if (flattenOptions.IsVisible)
