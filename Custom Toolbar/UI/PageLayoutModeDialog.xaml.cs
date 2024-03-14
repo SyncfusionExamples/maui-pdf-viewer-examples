@@ -3,9 +3,9 @@ using Syncfusion.Maui.ListView;
 namespace CustomToolbar;
 
 /// <summary>
-/// PageLayoutModeDialog representing a dialog for selecting page layout mode.
+/// PageLayoutModeView representing a dialog for selecting page layout mode.
 /// </summary>
-public partial class PageLayoutModeDialog : ContentView
+public partial class PageLayoutModeView : ContentView
 {
     /// <summary>
     /// Event raised when an item is tapped in the dialog.
@@ -15,7 +15,7 @@ public partial class PageLayoutModeDialog : ContentView
     /// <summary>
     /// Initializes a new instance of the PageLayoutModeDialog class.
     /// </summary>
-    public PageLayoutModeDialog() 
+    public PageLayoutModeView() 
     {
         Initialize();
     }

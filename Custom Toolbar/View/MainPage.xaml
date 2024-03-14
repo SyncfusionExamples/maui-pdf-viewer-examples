@@ -145,7 +145,7 @@
                 x:Name="MessageBox" Grid.Row="2"
                 IsVisible="False"
                 OkClicked="MessageBox_OKClicked"/>
-            <local:PageLayoutModeDialog   
+            <local:PageLayoutModeView 
                     WidthRequest="{OnPlatform MacCatalyst=205, iOS=150, Android=150, WinUI=205}" 
                     BackgroundColor="#F7F2FB"
                     HeightRequest="84"
