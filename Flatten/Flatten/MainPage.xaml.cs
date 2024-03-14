@@ -1,26 +1,11 @@
-﻿using Syncfusion.Maui.PdfViewer.Annotations;
-using Syncfusion.Maui.PdfViewer;
-using Syncfusion.Pdf.Interactive;
-using Syncfusion.Pdf.Parsing;
-using System.Globalization;
+﻿using Syncfusion.Maui.PdfViewer;
 using System.Reflection;
-using Microsoft.Maui.Controls.Shapes;
-using Microsoft.Maui.Controls;
-using Syncfusion.Pdf;
-using Syncfusion.Maui.Core.Internals;
-using System.Diagnostics;
-using System.IO;
 
 namespace Flatten;
 
 public partial class MainPage : ContentPage
 {
-    Stream loadedStream;
-    List<string> annotationModes;
-    List<string> colorStrings;
-    List<Color> colors;
-    Annotation annotation;
-    FormField formField;
+   
     public MainPage()
     {
         InitializeComponent();
@@ -28,6 +13,7 @@ public partial class MainPage : ContentPage
         pdfViewer.LoadDocument(loadedStream, flattenOptions: FlattenOptions.Unsupported);
     }
 
+    // Sets FlattenOnSave property to true for each annotation in the pdfViewer.
     private void Button_Clicked_4(object sender, EventArgs e)
     {
         foreach (var annotation in pdfViewer.Annotations)
@@ -36,6 +22,7 @@ public partial class MainPage : ContentPage
         }
     }
 
+    // Sets FlattenOnSave property to true for each form field in the pdfViewer.
     private void Button_Clicked_6(object sender, EventArgs e)
     {
         foreach (var formField in pdfViewer.FormFields)
@@ -44,6 +31,7 @@ public partial class MainPage : ContentPage
         }
     }
 
+    // Saves the modified PDF document to a file.
     void SaveDocument()
     {
         Stream stream = new MemoryStream();
@@ -65,6 +53,7 @@ public partial class MainPage : ContentPage
         DisplayAlert("Information", "Successfully saved", "OK");
     }
 
+    // Event handler for Button click event, calls SaveDocument to save the PDF document.
     private void Button_Clicked(object sender, EventArgs e)
     {
         SaveDocument();
