@@ -5,7 +5,7 @@
              xmlns:syncfusion="clr-namespace:Syncfusion.Maui.PdfViewer;assembly=Syncfusion.Maui.PdfViewer" 
              x:Class="FormFilling.MainPage">
     <ContentPage.BindingContext>
-        <local:ViewModal/>
+        <local:ViewModel/>
     </ContentPage.BindingContext>
     <ContentPage.Resources>
         <Style TargetType="Button">
@@ -51,9 +51,11 @@
                 <Button Text="&#xe75f;" x:Name="Save" FontFamily="Maui Material Assets"  Clicked="Save_Clicked" Margin="0,0,3,0"/>
                 <Button x:Name="Import" Text="&#xe782;" FontFamily="Maui Material Assets"  Clicked="Import_Clicked"/>
                 <Button x:Name="Export" Text="&#xe781;" FontFamily="Maui Material Assets"  Clicked="Export_Clicked"/>
-                <Label x:Name="PreviousCustomData"> </Label>
-                <Label x:Name="CurrentCustomData"> </Label>
-            </HorizontalStackLayout>
+                    <VerticalStackLayout>
+                        <Label x:Name="PreviousCustomData"></Label>
+                        <Label x:Name="CurrentCustomData"></Label>
+                    </VerticalStackLayout>
+                </HorizontalStackLayout>
                 </ScrollView>
              <syncfusion:SfPdfViewer x:Name="pdfViewer" Grid.Row="1" DocumentSource="{Binding PdfDocumentStream}" FormFieldValueChanged="PdfViewer_FormFieldValueChanged" />
         </Grid>

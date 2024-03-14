@@ -16,9 +16,11 @@ namespace FormFilling
         {
             if (e != null && e.FormField!=null)
             {
-                PreviousCustomData.Text = $"Previous Modified Date : {e.FormField.CustomData}";
+                //Gets the custom information that will be saved in the form field. 
+                PreviousCustomData.Text = $"Last modified: {e.FormField.CustomData}";
+                //Sets the custom information to the form field. 
                 e.FormField.CustomData = DateTime.Now.ToString();
-                CurrentCustomData.Text = $"Current Modified Date : {e.FormField.CustomData}";
+                CurrentCustomData.Text = $"Current modified: {e.FormField.CustomData} ";
             }
         }
 

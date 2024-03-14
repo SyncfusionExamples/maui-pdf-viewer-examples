@@ -8,7 +8,7 @@ using System.Windows.Input;
 
 namespace FormFilling
 {
-    internal class ViewModal : INotifyPropertyChanged
+    internal class ViewModel : INotifyPropertyChanged
     {
         private ICommand _openFileCommand;
         private Stream _documentStream;
@@ -29,7 +29,7 @@ namespace FormFilling
         /// Gets the command to browse file in the disk.
         /// </summary>
         public ICommand OpenFileCommand => _openFileCommand;
-        public ViewModal()
+        public ViewModel()
         {
             PdfDocumentStream = this.GetType().Assembly.GetManifestResourceStream("FormFilling.Assets.form_document.pdf");
             _openFileCommand = new Command<object>(OpenFile);
