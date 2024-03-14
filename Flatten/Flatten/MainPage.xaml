@@ -2,8 +2,8 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:pv="clr-namespace:Syncfusion.Maui.PdfViewer;assembly=Syncfusion.Maui.PdfViewer"
-             x:Class="Flatten.MainPage">
-
+             x:Class="Flatten.MainPage"
+             xmlns:local="clr-namespace:Flatten">
     <Grid RowDefinitions="50,*">
         <pv:SfPdfViewer x:Name="pdfViewer" Grid.Row="1"/>
         <HorizontalStackLayout HorizontalOptions="Start">
@@ -11,8 +11,7 @@
                 FontFamily="Maui Material Assets"
                 Clicked="Button_Clicked"
                 HorizontalOptions="Start"></Button>
-            <Button Text="Flatten annotations" Clicked="Button_Clicked_4"></Button>
-            <Button Text="Flatten formfields" Clicked="Button_Clicked_6"></Button>
         </HorizontalStackLayout>
+        <local:FlattenOptions IsVisible="false" x:Name="flattenOptions" Grid.Row="1"></local:FlattenOptions>
     </Grid>
 </ContentPage>

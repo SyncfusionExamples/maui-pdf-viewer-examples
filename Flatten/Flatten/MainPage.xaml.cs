@@ -5,57 +5,24 @@ namespace Flatten;
 
 public partial class MainPage : ContentPage
 {
-   
+    // Initializes the MainPage by loading the PDF document and sets up the PdfViewer and flattenOptions.
     public MainPage()
     {
         InitializeComponent();
+        // Loads the PDF document from the embedded resource "Flatten.AnnotationsFormfields.pdf".
         Stream loadedStream = typeof(MainPage).GetTypeInfo().Assembly.GetManifestResourceStream("Flatten.AnnotationsFormfields.pdf");
-        pdfViewer.LoadDocument(loadedStream, flattenOptions: FlattenOptions.Unsupported);
+        pdfViewer.LoadDocument(loadedStream);
+        // Associates the PdfViewer with flattenOptions for further processing.
+        flattenOptions.PdfViewer = pdfViewer;
     }
 
-    // Sets FlattenOnSave property to true for each annotation in the pdfViewer.
-    private void Button_Clicked_4(object sender, EventArgs e)
-    {
-        foreach (var annotation in pdfViewer.Annotations)
-        {
-            annotation.FlattenOnSave = true;
-        }
-    }
-
-    // Sets FlattenOnSave property to true for each form field in the pdfViewer.
-    private void Button_Clicked_6(object sender, EventArgs e)
-    {
-        foreach (var formField in pdfViewer.FormFields)
-        {
-            formField.FlattenOnSave = true;
-        }
-    }
-
-    // Saves the modified PDF document to a file.
-    void SaveDocument()
-    {
-        Stream stream = new MemoryStream();
-        pdfViewer.SaveDocument(stream);
-        string fileName = "SavedPDF.pdf";
-#if WINDOWS
-       string filePath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), fileName);
-       using (FileStream fileStream = new FileStream(filePath, FileMode.Create))
-       {
-           stream.CopyTo(fileStream);
-       }
-#elif ANDROID || IOS || MACCATALYST
-        string filePath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), fileName);
-        using (FileStream fileStream = new FileStream(filePath, FileMode.Create))
-        {
-            stream.CopyTo(fileStream);
-        }
-#endif
-        DisplayAlert("Information", "Successfully saved", "OK");
-    }
-
-    // Event handler for Button click event, calls SaveDocument to save the PDF document.
+    // Event handler for Button click event, toggles the visibility of flattenOptions.
     private void Button_Clicked(object sender, EventArgs e)
     {
-        SaveDocument();
+        // Toggles the visibility of flattenOptions.
+        if (flattenOptions.IsVisible)
+            flattenOptions.IsVisible = false; // Hides flattenOptions if it's currently visible.
+        else
+            flattenOptions.IsVisible = true; // Shows flattenOptions if it's currently hidden.
     }
 }
