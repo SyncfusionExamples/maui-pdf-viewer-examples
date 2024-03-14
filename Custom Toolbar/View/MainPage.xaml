@@ -50,7 +50,7 @@
             </Grid.RowDefinitions>
             <Grid Grid.Row="0" HeightRequest="40" BackgroundColor="#FFF6F6F6">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="{OnPlatform Default=Auto, Android=1*, iOS=1*}"/>
+                    <ColumnDefinition Width="{OnPlatform Default=Auto, Android=1.5*, iOS=1.5*}"/>
                     <ColumnDefinition Width="{OnPlatform Default=*, Android=3*, iOS=3*}"/>
                     <ColumnDefinition Width="{OnPlatform Default=*, Android=1*, iOS=1*}"/>
                     <ColumnDefinition Width="{OnPlatform Default=40, Android=1*, iOS=1*}"/>
@@ -115,7 +115,7 @@
                         Command="{Binding ZoomInCommand}" IsEnabled="{Binding CanZoomIn}"
                         PropertyChanged="Button_PropertyChanged"/>
                 </HorizontalStackLayout>
-                <Grid Grid.Column="3" Margin="0,0,12,0" HorizontalOptions="{OnPlatform MacCatalyst=End, iOS=End, Android=End, WinUI=End}">
+                <Grid Grid.Column="3" Margin="0,0,12,0" HorizontalOptions="End">
                     <Button Text="&#xe795;" 
                             Margin="0,0,0,0" 
                             HorizontalOptions="End"
