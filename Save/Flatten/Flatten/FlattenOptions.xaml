@@ -27,7 +27,7 @@
                             </Grid.ColumnDefinitions>
                             <HorizontalStackLayout>
                                 <Label 
-                                Padding="0,0,0,0"
+                                Padding="10,0,0,0"
                                 FontSize="{OnPlatform MacCatalyst=16, iOS=14, Android=14, WinUI=16}"
                                 FontFamily="Roboto"
                                 VerticalOptions="Center"
