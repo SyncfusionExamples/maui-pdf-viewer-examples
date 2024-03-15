@@ -182,4 +182,11 @@ public partial class MainPage : ContentPage
                 PdfViewer.DocumentSource = context.PdfDocumentStream;
         }
     }
+    /// <summary>
+    /// Handles when the outline view button is clicked.
+    /// </summary>
+    private void OutlineButtionClicked(object sender, EventArgs e)
+    {
+        PdfViewer.IsOutlineViewVisible =!PdfViewer.IsOutlineViewVisible;
+    }
 }
