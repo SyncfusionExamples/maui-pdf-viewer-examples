@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:pv="clr-namespace:Syncfusion.Maui.PdfViewer;assembly=Syncfusion.Maui.PdfViewer"
+             x:Class="ConversionOfCoordinates.MainPage">
+    <Grid RowDefinitions="*,50">
+        <pv:SfPdfViewer x:Name="pdfViewer" Grid.Row="0"/>
+        <ScrollView Orientation="Both" Grid.Row="1">
+            <HorizontalStackLayout Grid.Row="1" HorizontalOptions="Center">
+                <Button Margin="10,0" x:Name="open" Text="ClientToPage" WidthRequest="150" VerticalOptions="Center" CornerRadius="25" Clicked="Open_Clicked"></Button>
+                <Button Margin="10,0" x:Name="Save" Text="Save" WidthRequest="150" VerticalOptions="Center" CornerRadius="25" Clicked="Save_Clicked_1"></Button>
+                <Label VerticalOptions="Center" Text="PageNumber : "></Label>
+                <Label x:Name="pageNumber" VerticalOptions="Center" Margin="20,0,20,0" WidthRequest="50"></Label>
+                <Button Margin="10,0" x:Name="LoadFromDoc" Clicked="LoadFromDoc_Clicked" Text="Page to Client" WidthRequest="150" VerticalOptions="Center" CornerRadius="25"></Button>
+                <Button Margin="10,0" x:Name="AddScrollView" Text="Page to Scroll" WidthRequest="150" VerticalOptions="Center" CornerRadius="25" Clicked="AddScrollView_Clicked"></Button>
+                <Button Margin="10,0" x:Name="removeView" Text="Remove view" WidthRequest="150" VerticalOptions="Center" CornerRadius="25" Clicked="removeView_Clicked"></Button>
+            </HorizontalStackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>
