@@ -6,7 +6,7 @@
     <Grid RowDefinitions="50,*">
         <pv:SfPdfViewer x:Name="pdfViewer" Grid.Row="1"/>
         <HorizontalStackLayout Grid.Row="0" HorizontalOptions="Center">
-            <Button Text="Bring annotation to view" ToolTipProperties.Text="When scrolling to the first square annotation and clicking the button, the annotation comes into view." Clicked="Button_Clicked"></Button>
+            <Button Text="Bring annotation to view" ToolTipProperties.Text="The first square annotation is comes into view and selected " Clicked="Button_Clicked"></Button>
         </HorizontalStackLayout>
     </Grid>
 </ContentPage>
