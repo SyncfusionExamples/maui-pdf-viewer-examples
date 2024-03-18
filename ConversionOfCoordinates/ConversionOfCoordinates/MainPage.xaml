@@ -3,10 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:pv="clr-namespace:Syncfusion.Maui.PdfViewer;assembly=Syncfusion.Maui.PdfViewer"
              x:Class="ConversionOfCoordinates.MainPage">
-    <Grid RowDefinitions="*,50">
-        <pv:SfPdfViewer x:Name="pdfViewer" Grid.Row="0"/>
-        <HorizontalStackLayout Grid.Row="1" HorizontalOptions="Center">
-            <Button Text="Bring annotation to view" Clicked="Button_Clicked"></Button>
+    <Grid RowDefinitions="50,*">
+        <pv:SfPdfViewer x:Name="pdfViewer" Grid.Row="1"/>
+        <HorizontalStackLayout Grid.Row="0" HorizontalOptions="Center">
+            <Button Text="Bring annotation to view" ToolTipProperties.Text="When scrolling to the first square annotation and clicking the button, the annotation comes into view." Clicked="Button_Clicked"></Button>
         </HorizontalStackLayout>
     </Grid>
 </ContentPage>
