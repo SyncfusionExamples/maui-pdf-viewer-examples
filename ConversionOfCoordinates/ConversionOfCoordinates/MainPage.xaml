@@ -5,8 +5,8 @@
              x:Class="ConversionOfCoordinates.MainPage">
     <Grid RowDefinitions="50,*">
         <pv:SfPdfViewer x:Name="pdfViewer" Grid.Row="1"/>
-        <HorizontalStackLayout Grid.Row="0" HorizontalOptions="Center">
-            <Button Text="Bring annotation to view" ToolTipProperties.Text="The first square annotation is comes into view and selected " Clicked="Button_Clicked"></Button>
+        <HorizontalStackLayout HorizontalOptions="Fill" x:Name="layout" Grid.Row="0" >
+            <Button Margin="500,0,0,0" Text="Bring annotation to view" ToolTipProperties.Text="When the button is clicked, the first square annotation comes into view and becomes selected." Clicked="Button_Clicked"></Button>
         </HorizontalStackLayout>
     </Grid>
 </ContentPage>

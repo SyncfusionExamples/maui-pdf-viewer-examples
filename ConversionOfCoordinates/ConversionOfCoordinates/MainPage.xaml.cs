@@ -12,6 +12,7 @@ namespace ConversionOfCoordinates
             InitializeComponent();
             stream = typeof(MainPage).GetTypeInfo().Assembly.GetManifestResourceStream("ConversionOfCoordinates.Annotations.pdf");
             pdfViewer.LoadDocument(stream);
+            layout.BackgroundColor = Color.FromArgb("#F7F2FB");
         }
 
         private void Button_Clicked(object sender, EventArgs e)
