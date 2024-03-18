@@ -9,16 +9,14 @@ namespace ConversionOfCoordinates
 
         public MainPage()
         {
+            InitializeComponent();
             // Load PDF document from embedded resource
             stream = typeof(MainPage).GetTypeInfo().Assembly.GetManifestResourceStream("ConversionOfCoordinates.Annotations.pdf");
             pdfViewer.LoadDocument(stream);
-
-            // Set background color of tool bar
-            layout.BackgroundColor = Color.FromArgb("#F7F2FB");
         }
 
         // Method to handle button click event
-        private void Button_Clicked(object sender, EventArgs e)
+        private void BringAnnotationToViewClicked(object sender, EventArgs e)
         {
             int count = 0;
 
