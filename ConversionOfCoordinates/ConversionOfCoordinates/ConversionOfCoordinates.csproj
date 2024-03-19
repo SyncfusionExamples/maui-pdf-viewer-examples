@@ -83,18 +83,6 @@
 
 	<ItemGroup>
 	  <EmbeddedResource Include="Annotations.pdf" />
-	  <EmbeddedResource Include="Annotations1.pdf" />
-	  <EmbeddedResource Include="Annotations1270.pdf" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <EmbeddedResource Include="0degree.pdf" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <EmbeddedResource Include="CoCrop90.pdf">
-	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-	  </EmbeddedResource>
 	</ItemGroup>
 
 </Project>
