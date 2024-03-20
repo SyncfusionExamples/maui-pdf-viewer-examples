@@ -54,6 +54,7 @@
 
 	<ItemGroup>
 		<PackageReference Include="Syncfusion.Maui.PdfViewer" Version="*" />
+	  <PackageReference Include="Syncfusion.Maui.ListView" Version="*" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -63,6 +64,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="UI\PageLayoutModeDialog.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="UI\MessageBox.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

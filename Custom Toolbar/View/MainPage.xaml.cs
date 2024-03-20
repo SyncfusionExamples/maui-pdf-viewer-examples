@@ -1,4 +1,5 @@
 using Microsoft.Maui.Platform;
+using Syncfusion.Maui.PdfViewer;
 
 namespace CustomToolbar;
 
@@ -181,5 +182,31 @@ public partial class MainPage : ContentPage
             if (context.PdfDocumentStream != null)
                 PdfViewer.DocumentSource = context.PdfDocumentStream;
         }
+    }
+
+    /// <summary>
+    /// Toggles the visibility of the page layout options when the page layout button is clicked.
+    /// </summary>
+    private void pageLayoutClicked(object sender, EventArgs e)
+    {
+        PageLayout.IsVisible = !PageLayout.IsVisible;
+    }
+
+    /// <summary>
+    /// Handles the change of page layout mode based on user selection.
+    /// </summary>
+    private void PageLayoutModeChanged(object sender, ItemTappedEventArgs e)
+    {
+        if (BindingContext is PdfViewerViewModel context)
+        {
+            // Set the page layout mode based on the selected mode.
+            if (context.PageLayoutMode == Syncfusion.Maui.PdfViewer.PageLayoutMode.Continuous)
+                PdfViewer.PageLayoutMode = PageLayoutMode.Continuous;
+            else
+                PdfViewer.PageLayoutMode = PageLayoutMode.Single;
+            // Hide the page layout options after selection.
+            PageLayout.IsVisible = false;
+        }
+
     }
 }
