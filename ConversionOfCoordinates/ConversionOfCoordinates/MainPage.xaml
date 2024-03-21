@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:pv="clr-namespace:Syncfusion.Maui.PdfViewer;assembly=Syncfusion.Maui.PdfViewer"
+             x:Class="ConversionOfCoordinates.MainPage">
+    <Grid RowDefinitions="50,*">
+        <pv:SfPdfViewer x:Name="pdfViewer" Grid.Row="1"/>
+        <HorizontalStackLayout HorizontalOptions="Fill" BackgroundColor="LightBlue"  x:Name="layout" Grid.Row="0" >
+            <Button Margin="500,0,0,0" Text="Bring annotation to view" ToolTipProperties.Text="When the button is clicked, the first square annotation comes into view and becomes selected." Clicked="BringAnnotationToViewClicked"></Button>
+        </HorizontalStackLayout>
+    </Grid>
+</ContentPage>
