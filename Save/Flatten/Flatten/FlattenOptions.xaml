@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Flatten.FlattenOptions"
+             xmlns:sf="clr-namespace:Syncfusion.Maui.ListView;assembly=Syncfusion.Maui.ListView">
+
+    <Border 
+        x:Name="Colors" 
+        VerticalOptions="Start" 
+        HorizontalOptions="Start"
+        WidthRequest="{OnPlatform MacCatalyst=205, iOS=150, Android=150, WinUI=205}"
+        HeightRequest="126"
+        Padding="0,0,0,0" 
+        StrokeShape="RoundRectangle 4"
+        BackgroundColor="White">
+        <sf:SfListView 
+        x:Name="listView" ItemTapped="SfListView_ItemTapped" ItemSize="40" >
+            <sf:SfListView.ItemTemplate>
+                <DataTemplate>
+                    <Border StrokeThickness="0">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="0" />
+                    </Border.StrokeShape>
+                        <Grid >
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <HorizontalStackLayout>
+                                <Label 
+                                Padding="10,0,0,0"
+                                FontSize="{OnPlatform MacCatalyst=16, iOS=14, Android=14, WinUI=16}"
+                                FontFamily="Roboto"
+                                VerticalOptions="Center"
+                                Text="{Binding IconName}">
+                            </Label>
+                        </HorizontalStackLayout>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </sf:SfListView.ItemTemplate>
+        </sf:SfListView>
+    </Border>
+</ContentView>
