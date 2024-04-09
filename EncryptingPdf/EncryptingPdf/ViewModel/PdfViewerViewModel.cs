@@ -1,16 +1,18 @@
-﻿using Syncfusion.Pdf.Parsing;
+﻿
+using Syncfusion.Pdf.Parsing;
 using Syncfusion.Pdf.Security;
 using System.ComponentModel;
 using System.Reflection;
+
+
 
 namespace EncryptingPdf
 {
     public class PdfViewerViewModel : INotifyPropertyChanged
     {
-        //fields 
-        private Stream? _inputPdfDocument;
+        //field
         private Stream? _outputPdfDocument;
-        private FileStream outputStream;
+        FileStream outputStream;
 
         //An event to detect the change in the value of a property.
         public event PropertyChangedEventHandler? PropertyChanged;
@@ -29,8 +31,14 @@ namespace EncryptingPdf
         //Constructor of the view model class
         public PdfViewerViewModel()
         {
+            EncryptPDF();
+            //Assign the output file to property to use in the Document source for loading the PDF 
+            OutputPdfDocument = outputStream;
+        }
+        private void EncryptPDF()
+        {
             //Accessing the PDF document that is added as embedded resource as stream.
-            _inputPdfDocument = typeof(App).GetTypeInfo().Assembly.GetManifestResourceStream("EncryptingPdf.Assets.PDF_Succinctly.pdf");
+            Stream _inputPdfDocument = typeof(App).GetTypeInfo().Assembly.GetManifestResourceStream("EncryptingPdf.Assets.PDF_Succinctly.pdf");
 
             //Load existing PDF document.
             PdfLoadedDocument document = new PdfLoadedDocument(_inputPdfDocument);
@@ -50,12 +58,9 @@ namespace EncryptingPdf
             // Create a file stream to save the PDF document. Here a file named "EncryptedPdf.pdf" is created in the application's data directory.
             string filepath = Path.Combine(FileSystem.Current.AppDataDirectory, "EncryptedPdf.pdf");
             outputStream = new FileStream(filepath, FileMode.Create, FileAccess.ReadWrite);
+
             // Save the PDF document.
             document.Save(outputStream);
-
-            //Assign the output file to property to use in the Document source for loading the PDF 
-            OutputPdfDocument = outputStream;
-
         }
 
         public void OnPropertyChanged(string name)
