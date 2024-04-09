@@ -12,7 +12,7 @@ namespace EncryptingPdf
     {
         //field
         private Stream? _outputPdfDocument;
-        FileStream outputStream;
+        private FileStream outputStream;
 
         //An event to detect the change in the value of a property.
         public event PropertyChangedEventHandler? PropertyChanged;
