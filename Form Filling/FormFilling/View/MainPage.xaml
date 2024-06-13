@@ -51,7 +51,7 @@
                 <Button x:Name="Import" Text="&#xe782;" FontFamily="Maui Material Assets"  Clicked="Import_Clicked"/>
                 <Button x:Name="Export" Text="&#xe781;" FontFamily="Maui Material Assets"  Clicked="Export_Clicked"/>
             </HorizontalStackLayout>
-            <syncfusion:SfPdfViewer x:Name="pdfViewer" Grid.Row="1" DocumentSource="{Binding PdfDocumentStream}"/>
+            <syncfusion:SfPdfViewer x:Name="pdfViewer" ShowToolbars="False" Grid.Row="1" DocumentSource="{Binding PdfDocumentStream}"/>
         </Grid>
     </ContentPage.Content>
 

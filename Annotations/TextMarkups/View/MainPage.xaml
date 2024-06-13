@@ -102,6 +102,7 @@
             <syncfusion:SfPdfViewer
                     x:Name="PdfViewer"
                     Grid.Row="4"
+                    ShowToolbars="False"
                     DocumentSource="{Binding PdfDocumentStream}">
             </syncfusion:SfPdfViewer>
             <local:TextMarkupEditor
