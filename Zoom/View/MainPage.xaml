@@ -75,7 +75,8 @@
                 DocumentSource="{Binding PdfDocumentStream}"
                 MinZoomFactor="0.5"
                 MaxZoomFactor="8"
-                ZoomFactor="{Binding CurrentZoom,Mode=TwoWay}"/>
+                ZoomFactor="{Binding CurrentZoom,Mode=TwoWay}"
+                ShowToolbars="False"/>
         </Grid>
     </ContentPage.Content>
 </ContentPage>

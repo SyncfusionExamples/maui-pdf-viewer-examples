@@ -18,6 +18,6 @@
         <HorizontalStackLayout Grid.Row="0">
             <Button x:Name="Load" Text="Click to load a document" Clicked="Load_Clicked"/>
         </HorizontalStackLayout>
-        <syncfusion:SfPdfViewer Grid.Row="1" x:Name="pdfViewer"/>
+        <syncfusion:SfPdfViewer Grid.Row="1" x:Name="pdfViewer" ShowToolbars="False"/>
     </Grid>
 </ContentPage>

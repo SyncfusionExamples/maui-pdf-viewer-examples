@@ -111,7 +111,8 @@
         <syncfusion:SfPdfViewer x:Name="PdfViewer" Grid.Row="1"
                 DocumentSource="{Binding PdfDocumentStream}"
                 PageCount="{Binding TotalPageCount, Mode=OneWayToSource}"
-                PageNumber="{Binding CurrentPageNumber, Mode=OneWayToSource}">
+                PageNumber="{Binding CurrentPageNumber, Mode=OneWayToSource}"
+                ShowToolbars="False">
         </syncfusion:SfPdfViewer>
 
         <local:MessageBox
