@@ -93,6 +93,7 @@
                     MinZoomFactor="{Binding MinZoom, Mode=OneWayToSource}"
                     MaxZoomFactor="{Binding MaxZoom, Mode=OneWayToSource}"
                     DocumentSource="{Binding PdfDocumentStream}"
+                    ShowToolbars="False"
                     ZoomFactor="{Binding CurrentZoom,Mode=TwoWay}">
             </syncfusion:SfPdfViewer>
             <local:InkEditor
