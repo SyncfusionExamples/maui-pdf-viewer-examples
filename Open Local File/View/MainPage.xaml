@@ -22,6 +22,6 @@
                 VerticalOptions="Center" HorizontalOptions="End" 
                 Aspect="Center" Command="{Binding OpenDocumentCommand}"/>
         </Grid>
-        <syncfusion:SfPdfViewer Grid.Row="1" DocumentSource="{Binding PdfDocumentStream}" ShowToolbars="False"/>
+        <syncfusion:SfPdfViewer Grid.Row="1" DocumentSource="{Binding PdfDocumentStream}" ShowToolbars="{OnPlatform WinUI=False, Android=False, iOS=False}"/>
     </Grid>
 </ContentPage>
