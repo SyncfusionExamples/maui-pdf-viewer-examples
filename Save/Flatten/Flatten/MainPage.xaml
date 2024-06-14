@@ -5,7 +5,7 @@
              x:Class="Flatten.MainPage"
              xmlns:local="clr-namespace:Flatten">
     <Grid RowDefinitions="50,*">
-        <pv:SfPdfViewer x:Name="pdfViewer" Grid.Row="1"/>
+        <pv:SfPdfViewer x:Name="pdfViewer" Grid.Row="1" ShowToolbars="False"/>
         <HorizontalStackLayout HorizontalOptions="Start">
             <Button Text="&#xe75f;" 
                 FontFamily="Maui Material Assets"
