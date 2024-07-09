@@ -1,0 +1,118 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:Stickynote"
+    xmlns:syncfusion="clr-namespace:Syncfusion.Maui.PdfViewer;assembly=Syncfusion.Maui.PdfViewer"  
+    x:Class="Stickynote.MainPage">
+    <ContentPage.BindingContext>
+        <local:PdfViewerViewModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.Resources>
+        <Style TargetType="Button">
+            <Setter Property="BorderWidth" Value="0" />
+            <Setter Property="FontSize" Value="18" />
+            <Setter Property="Padding" Value="4" />
+            <Setter Property="VerticalOptions" Value="Center" />
+            <Setter Property="FontFamily" Value="{OnPlatform iOS=PdfViewerIcon, MacCatalyst=PdfViewerIcon, Android=PdfViewerIcon.ttf#, WinUI=PdfViewerIcon.ttf#PdfViewerIcon}" />
+            <Setter Property="VisualStateManager.VisualStateGroups">
+                <VisualStateGroupList>
+                    <VisualStateGroup x:Name="CommonStates">
+                        <VisualState x:Name="Normal">
+                            <VisualState.Setters>
+                                <Setter Property="TextColor" Value="#99000000" />
+                                <Setter Property="BackgroundColor" Value="Transparent" />
+                            </VisualState.Setters>
+                        </VisualState>
+                        <VisualState x:Name="Disabled">
+                            <VisualState.Setters>
+                                <Setter Property="TextColor" Value="#44000000" />
+                                <Setter Property="BackgroundColor" Value="Transparent" />
+                            </VisualState.Setters>
+                        </VisualState>
+                        <VisualState x:Name="Pressed">
+                            <VisualState.Setters>
+                                <Setter Property="TextColor" Value="#99000000" />
+                                <Setter Property="BackgroundColor" Value="#0F000000" />
+                            </VisualState.Setters>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateGroupList>
+            </Setter>
+        </Style>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0" HeightRequest="40" BackgroundColor="#FFF6F6F6">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="{OnPlatform Default=Auto, Android=1*, iOS=1*}"/>
+                    <ColumnDefinition Width="{OnPlatform Default=*, Android=1*, iOS=1*}"/>
+                </Grid.ColumnDefinitions>
+                <HorizontalStackLayout Grid.Column="0" Spacing="8" Margin="10,0,0,0"
+                        HorizontalOptions="Start">
+                    <Button Text="&#xe712;"
+                            FontFamily="Maui Material Assets"
+                            FontSize="20"
+                            PropertyChanged="Button_PropertyChanged"
+                            Command="{Binding OpenFileCommand}"
+                            IsVisible="{OnPlatform MacCatalyst=false}"/>
+                    <Button Text="&#xe75f;" FontSize="18" x:Name="Save" FontFamily="Maui Material Assets" Clicked="Save_Clicked"/>
+                    <Button Text="&#xe782;" FontSize="20" ToolTipProperties.Text="Import Annotation File" FontFamily="Maui Material Assets" Clicked="Import_Clicked" />
+                    <Button x:Name="Export" Text="&#xe781;" ToolTipProperties.Text="Export Annotation File" FontSize="20"  FontFamily="Maui Material Assets" Clicked="Export_Clicked"/>
+
+                </HorizontalStackLayout >
+                <HorizontalStackLayout 
+                        Grid.Column="1" Spacing="8"
+                        HorizontalOptions="End" Margin="0,0,15,0">
+                    <Button Text="&#xe775;" x:Name="ShapesButton" FontFamily="Maui Material Assets"  Margin="4,0,0,0" Clicked="StickyButtonClicked" />
+                    <Button Text="&#xe744;" Margin="4,0,0,0" Background="{OnPlatform WinUI='Transparent',Android='Transparent'}"  FontSize="18" x:Name="Undo" FontFamily="Maui Material Assets" Command="{Binding Path=UndoCommand,Source={x:Reference PdfViewer}}"/>
+                    <Button Text="&#xe745;" Margin="4,0,0,0" Background="{OnPlatform WinUI='Transparent',Android='Transparent'}"  FontSize="18" x:Name="Redo" FontFamily="Maui Material Assets" Command="{Binding Path=RedoCommand,Source={x:Reference PdfViewer}}"/>
+                </HorizontalStackLayout>
+            </Grid>
+            <Grid Grid.Row="2" x:Name="AnnotationMenuGrid" IsVisible="false" HeightRequest="40" BackgroundColor="#FFF6F6F6">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="{OnPlatform Default=Auto, Android=1*, iOS=1*}"/>
+                    <ColumnDefinition Width="{OnPlatform Default=*, Android=1*, iOS=1*}"/>
+                </Grid.ColumnDefinitions>
+                <HorizontalStackLayout 
+                        Grid.Column="1" Margin="8,0,12,0" x:Name="EditOption" IsVisible="true" PropertyChanged="EditOption_PropertyChanged"
+                        HorizontalOptions="End">
+                    <Button x:Name="Lock" IsVisible="false" Text="&#xe77b;" FontSize="18" FontFamily="Maui Material Assets"  Clicked="LockUnlock_Clicked" Margin="0,0,0,2"/>
+                    <Button x:Name="Unlock" IsVisible="false" Text="&#xe77c;" FontSize="18" FontFamily="Maui Material Assets" Clicked="LockUnlock_Clicked" Margin="0,0,0,2"/>
+                    <Button  Text="&#xe767;"  Margin="8,0,0,0"  FontSize="18" x:Name="colorPalette" IsVisible="true" FontFamily="Maui Material Assets" Clicked="ColorPalette_Clicked"/>
+                    <Button Text="&#xe70f;" Margin="8,0,0,0" FontSize="18" x:Name="delete" IsVisible="false" FontFamily="Maui Material Assets" Clicked="Delete_Clicked"/>
+                </HorizontalStackLayout>
+                <HorizontalStackLayout x:Name="stickyList" Grid.Column="0" HeightRequest="40" Spacing="10" Margin="0,0" IsVisible="true"                                                                               
+                        HorizontalOptions="{OnPlatform MacCatalyst=Start, iOS=Start, Android=StartAndExpand, WinUI=Start}">
+                    <Button Text="&#xe775;"  FontSize="18" x:Name="Note" FontFamily="Maui Material Assets" Clicked="Annotation_Clicked"/>
+                    <Button Text="&#xe779;" FontSize="18" x:Name="Insert" FontFamily="Maui Material Assets" Clicked="Annotation_Clicked"/>
+                    <Button Text="&#xe711;" FontSize="18" x:Name="Comment" FontFamily="Maui Material Assets" Clicked="Annotation_Clicked"/>
+                    <Button Text="&#xe777;" FontSize="18" x:Name="Key" FontFamily="Maui Material Assets" Clicked="Annotation_Clicked"/>
+                    <Button Text="&#xe778;" FontSize="18" x:Name="Help" FontFamily="Maui Material Assets" Clicked="Annotation_Clicked"/>
+                    <Button Text="&#xe776;" FontSize="18" x:Name="Paragraph" FontFamily="Maui Material Assets" Clicked="Annotation_Clicked"/>
+                    <Button Text="&#xe77a;" FontSize="18" x:Name="NewParagraph" FontFamily="Maui Material Assets" Clicked="Annotation_Clicked"/>
+                </HorizontalStackLayout>
+            </Grid>
+            <Line Grid.Row="1" StrokeThickness="1" BackgroundColor="#33000000"/>
+            <Line Grid.Row="3" StrokeThickness="1" IsVisible="{Binding Path=IsVisible,Source={x:Reference EditOption}}" BackgroundColor="#33000000"/>
+
+            <syncfusion:SfPdfViewer
+                    x:Name="PdfViewer"
+                    Grid.Row="5"                   
+                    DocumentSource="{Binding PdfDocumentStream}">
+            </syncfusion:SfPdfViewer>
+            
+            <local:ColorPalatte
+                x:Name="stickyColorPaletteEditor" BackgroundColor="#FFF6F6F6" WidthRequest="{OnPlatform WinUI=280 ,Android=230,MacCatalyst=230,iOS=280 }" HorizontalOptions="End" VerticalOptions="Start" Grid.Row="5"
+                IsVisible="false"/>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
