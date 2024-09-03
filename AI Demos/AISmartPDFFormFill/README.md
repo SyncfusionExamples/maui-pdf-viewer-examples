@@ -14,3 +14,9 @@ The smart PDF form filling process leverages advanced AI models to interpret and
 
 <img src="images/smart fill.png" width="800"/>
 
+**Note:** In the project directory, locate the `AIHelper.cs` file. Replace the default values in the following code snippet with your specific AI endpoint, deployment name, and API key to ensure proper functionality.
+
+```csharp
+private string aiEndpoint = "https://yourendpoint.com/";
+private string deploymentName = "DEPLOYMENT_NAME";
+private string apiKey = "AZURE_OPENAI_API_KEY";
