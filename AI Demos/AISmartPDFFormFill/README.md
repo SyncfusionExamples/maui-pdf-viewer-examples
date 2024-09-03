@@ -12,4 +12,4 @@ The smart PDF form filling process leverages advanced AI models to interpret and
 3. Once the text is copied, the "Smart Fill" option will be enabled (refer to the screenshot below).
 4. Click the "Smart Fill" button to automatically populate the form fields with the copied text content.
 
-<img src="images/smart fill.png" width="600"/>
+<img src="images/smart fill.png"/>
