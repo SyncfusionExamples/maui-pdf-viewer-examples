@@ -17,7 +17,7 @@ public partial class MainPage : ContentPage
 
     private async void PdfViewer_DocumentLoaded(object? sender, EventArgs? e)
     {
-        AssistServices AI=new AssistServices();
+        AssistServices AI = new AssistServices();
         if (AI.deploymentName == "DEPLOYMENT_NAME")
         {
             Application.Current?.MainPage?.DisplayAlert("Alert", "The Azure API key or endpoint is missing or incorrect. Please verify your credentials", "OK");

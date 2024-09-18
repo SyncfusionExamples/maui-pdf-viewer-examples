@@ -1,46 +1,30 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "D:\\ForGitHub\\Summarizer\\",
+  "WorkspaceRootPath": "D:\\ForGitHub\\maui-pdf-viewer-examples\\AI Demos\\Summarizer\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{EE1D2667-9ECB-4D28-AEE7-336DCDD81816}|Summarizer\\Summarizer.csproj|d:\\forgithub\\summarizer\\summarizer\\mainpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{EE1D2667-9ECB-4D28-AEE7-336DCDD81816}|Summarizer\\Summarizer.csproj|solutionrelative:summarizer\\mainpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+      "AbsoluteMoniker": "D:0:0:{CD42BBF8-9F64-4E6F-BB42-F00ED07A35C1}|Summarizer\\Summarizer.csproj|d:\\forgithub\\maui-pdf-viewer-examples\\ai demos\\summarizer\\summarizer\\mainpage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CD42BBF8-9F64-4E6F-BB42-F00ED07A35C1}|Summarizer\\Summarizer.csproj|solutionrelative:summarizer\\mainpage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{EE1D2667-9ECB-4D28-AEE7-336DCDD81816}|Summarizer\\Summarizer.csproj|d:\\forgithub\\summarizer\\summarizer\\summarizer.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|",
-      "RelativeMoniker": "D:0:0:{EE1D2667-9ECB-4D28-AEE7-336DCDD81816}|Summarizer\\Summarizer.csproj|solutionrelative:summarizer\\summarizer.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|"
+      "AbsoluteMoniker": "D:0:0:{CD42BBF8-9F64-4E6F-BB42-F00ED07A35C1}|Summarizer\\Summarizer.csproj|d:\\forgithub\\maui-pdf-viewer-examples\\ai demos\\summarizer\\summarizer\\mauiprogram.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CD42BBF8-9F64-4E6F-BB42-F00ED07A35C1}|Summarizer\\Summarizer.csproj|solutionrelative:summarizer\\mauiprogram.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{EE1D2667-9ECB-4D28-AEE7-336DCDD81816}|Summarizer\\Summarizer.csproj|d:\\forgithub\\summarizer\\summarizer\\summarizer.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
-      "RelativeMoniker": "D:0:0:{EE1D2667-9ECB-4D28-AEE7-336DCDD81816}|Summarizer\\Summarizer.csproj|solutionrelative:summarizer\\summarizer.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+      "AbsoluteMoniker": "D:0:0:{CD42BBF8-9F64-4E6F-BB42-F00ED07A35C1}|Summarizer\\Summarizer.csproj|d:\\forgithub\\maui-pdf-viewer-examples\\ai demos\\summarizer\\summarizer\\mainpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{CD42BBF8-9F64-4E6F-BB42-F00ED07A35C1}|Summarizer\\Summarizer.csproj|solutionrelative:summarizer\\mainpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{EE1D2667-9ECB-4D28-AEE7-336DCDD81816}|Summarizer\\Summarizer.csproj|d:\\forgithub\\summarizer\\summarizer\\viewmodel\\pdfviewerviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EE1D2667-9ECB-4D28-AEE7-336DCDD81816}|Summarizer\\Summarizer.csproj|solutionrelative:summarizer\\viewmodel\\pdfviewerviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{CD42BBF8-9F64-4E6F-BB42-F00ED07A35C1}|Summarizer\\Summarizer.csproj|d:\\forgithub\\maui-pdf-viewer-examples\\ai demos\\summarizer\\summarizer\\viewmodel\\pdfviewerviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CD42BBF8-9F64-4E6F-BB42-F00ED07A35C1}|Summarizer\\Summarizer.csproj|solutionrelative:summarizer\\viewmodel\\pdfviewerviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{EE1D2667-9ECB-4D28-AEE7-336DCDD81816}|Summarizer\\Summarizer.csproj|d:\\forgithub\\summarizer\\summarizer\\mainpage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EE1D2667-9ECB-4D28-AEE7-336DCDD81816}|Summarizer\\Summarizer.csproj|solutionrelative:summarizer\\mainpage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{CD42BBF8-9F64-4E6F-BB42-F00ED07A35C1}|Summarizer\\Summarizer.csproj|d:\\forgithub\\maui-pdf-viewer-examples\\ai demos\\summarizer\\summarizer\\assistservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CD42BBF8-9F64-4E6F-BB42-F00ED07A35C1}|Summarizer\\Summarizer.csproj|solutionrelative:summarizer\\assistservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{EE1D2667-9ECB-4D28-AEE7-336DCDD81816}|Summarizer\\Summarizer.csproj|d:\\forgithub\\summarizer\\summarizer\\assistservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EE1D2667-9ECB-4D28-AEE7-336DCDD81816}|Summarizer\\Summarizer.csproj|solutionrelative:summarizer\\assistservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{EE1D2667-9ECB-4D28-AEE7-336DCDD81816}|Summarizer\\Summarizer.csproj|d:\\forgithub\\summarizer\\summarizer\\mauiprogram.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EE1D2667-9ECB-4D28-AEE7-336DCDD81816}|Summarizer\\Summarizer.csproj|solutionrelative:summarizer\\mauiprogram.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{EE1D2667-9ECB-4D28-AEE7-336DCDD81816}|Summarizer\\Summarizer.csproj|d:\\forgithub\\summarizer\\summarizer\\appshell.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{EE1D2667-9ECB-4D28-AEE7-336DCDD81816}|Summarizer\\Summarizer.csproj|solutionrelative:summarizer\\appshell.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{EE1D2667-9ECB-4D28-AEE7-336DCDD81816}|Summarizer\\Summarizer.csproj|d:\\forgithub\\summarizer\\summarizer\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{EE1D2667-9ECB-4D28-AEE7-336DCDD81816}|Summarizer\\Summarizer.csproj|solutionrelative:summarizer\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\ForGitHub\\Summarizer\\Summarizer\\obj\\Debug\\net8.0-windows10.0.19041.0\\win10-x64\\Platforms\\Windows\\App.g.i.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Summarizer\\obj\\Debug\\net8.0-windows10.0.19041.0\\win10-x64\\Platforms\\Windows\\App.g.i.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{CD42BBF8-9F64-4E6F-BB42-F00ED07A35C1}|Summarizer\\Summarizer.csproj|d:\\forgithub\\maui-pdf-viewer-examples\\ai demos\\summarizer\\summarizer\\summarizer.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{CD42BBF8-9F64-4E6F-BB42-F00ED07A35C1}|Summarizer\\Summarizer.csproj|solutionrelative:summarizer\\summarizer.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
     }
   ],
   "DocumentGroupContainers": [
@@ -50,7 +34,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 12,
+          "SelectedChildIndex": 6,
           "Children": [
             {
               "$type": "Bookmark",
@@ -75,123 +59,80 @@
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "Summarizer",
-              "DocumentMoniker": "D:\\ForGitHub\\Summarizer\\Summarizer\\Summarizer.csproj",
-              "RelativeDocumentMoniker": "Summarizer\\Summarizer.csproj",
-              "ToolTip": "D:\\ForGitHub\\Summarizer\\Summarizer\\Summarizer.csproj",
-              "RelativeToolTip": "Summarizer\\Summarizer.csproj",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2024-09-17T16:03:24.873Z",
+              "Title": "MauiProgram.cs",
+              "DocumentMoniker": "D:\\ForGitHub\\maui-pdf-viewer-examples\\AI Demos\\Summarizer\\Summarizer\\MauiProgram.cs",
+              "RelativeDocumentMoniker": "Summarizer\\MauiProgram.cs",
+              "ToolTip": "D:\\ForGitHub\\maui-pdf-viewer-examples\\AI Demos\\Summarizer\\Summarizer\\MauiProgram.cs",
+              "RelativeToolTip": "Summarizer\\MauiProgram.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABYAAAAwAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-18T12:16:48.383Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "launchSettings.json",
-              "DocumentMoniker": "D:\\ForGitHub\\Summarizer\\Summarizer\\Properties\\launchSettings.json",
-              "RelativeDocumentMoniker": "Summarizer\\Properties\\launchSettings.json",
-              "ToolTip": "D:\\ForGitHub\\Summarizer\\Summarizer\\Properties\\launchSettings.json",
-              "RelativeToolTip": "Summarizer\\Properties\\launchSettings.json",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2024-08-29T07:08:19.612Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "AppShell.xaml",
-              "DocumentMoniker": "D:\\ForGitHub\\Summarizer\\Summarizer\\AppShell.xaml",
-              "RelativeDocumentMoniker": "Summarizer\\AppShell.xaml",
-              "ToolTip": "D:\\ForGitHub\\Summarizer\\Summarizer\\AppShell.xaml",
-              "RelativeToolTip": "Summarizer\\AppShell.xaml",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAAIAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-08-29T04:53:54.871Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "App.g.i.cs",
-              "DocumentMoniker": "D:\\ForGitHub\\Summarizer\\Summarizer\\obj\\Debug\\net8.0-windows10.0.19041.0\\win10-x64\\Platforms\\Windows\\App.g.i.cs",
-              "RelativeDocumentMoniker": "Summarizer\\obj\\Debug\\net8.0-windows10.0.19041.0\\win10-x64\\Platforms\\Windows\\App.g.i.cs",
-              "ToolTip": "D:\\ForGitHub\\Summarizer\\Summarizer\\obj\\Debug\\net8.0-windows10.0.19041.0\\win10-x64\\Platforms\\Windows\\App.g.i.cs",
-              "RelativeToolTip": "Summarizer\\obj\\Debug\\net8.0-windows10.0.19041.0\\win10-x64\\Platforms\\Windows\\App.g.i.cs",
-              "ViewState": "AQIAADMAAAAAAAAAAAAhwEoAAABEAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-28T13:00:44.453Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "MauiProgram.cs",
-              "DocumentMoniker": "D:\\ForGitHub\\Summarizer\\Summarizer\\MauiProgram.cs",
-              "RelativeDocumentMoniker": "Summarizer\\MauiProgram.cs",
-              "ToolTip": "D:\\ForGitHub\\Summarizer\\Summarizer\\MauiProgram.cs",
-              "RelativeToolTip": "Summarizer\\MauiProgram.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABUAAAAuAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-28T12:55:13.297Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "AssistServices.cs",
-              "DocumentMoniker": "D:\\ForGitHub\\Summarizer\\Summarizer\\AssistServices.cs",
-              "RelativeDocumentMoniker": "Summarizer\\AssistServices.cs",
-              "ToolTip": "D:\\ForGitHub\\Summarizer\\Summarizer\\AssistServices.cs",
-              "RelativeToolTip": "Summarizer\\AssistServices.cs",
-              "ViewState": "AQIAAA4AAAAAAAAAAAAAwBsAAAAQAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-28T12:13:49.217Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "MainPage.xaml.cs",
-              "DocumentMoniker": "D:\\ForGitHub\\Summarizer\\Summarizer\\MainPage.xaml.cs",
-              "RelativeDocumentMoniker": "Summarizer\\MainPage.xaml.cs",
-              "ToolTip": "D:\\ForGitHub\\Summarizer\\Summarizer\\MainPage.xaml.cs",
-              "RelativeToolTip": "Summarizer\\MainPage.xaml.cs",
-              "ViewState": "AQIAAFQAAAAAAAAAAAAEwG4AAAAMAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-28T12:13:46.332Z"
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "MainPage.xaml.cs",
+              "DocumentMoniker": "D:\\ForGitHub\\maui-pdf-viewer-examples\\AI Demos\\Summarizer\\Summarizer\\MainPage.xaml.cs",
+              "RelativeDocumentMoniker": "Summarizer\\MainPage.xaml.cs",
+              "ToolTip": "D:\\ForGitHub\\maui-pdf-viewer-examples\\AI Demos\\Summarizer\\Summarizer\\MainPage.xaml.cs",
+              "RelativeToolTip": "Summarizer\\MainPage.xaml.cs",
+              "ViewState": "AQIAABIAAAAAAAAAAAAYwDMAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-18T12:16:05.93Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "MainPage.xaml",
-              "DocumentMoniker": "D:\\ForGitHub\\Summarizer\\Summarizer\\MainPage.xaml",
+              "DocumentMoniker": "D:\\ForGitHub\\maui-pdf-viewer-examples\\AI Demos\\Summarizer\\Summarizer\\MainPage.xaml",
               "RelativeDocumentMoniker": "Summarizer\\MainPage.xaml",
-              "ToolTip": "D:\\ForGitHub\\Summarizer\\Summarizer\\MainPage.xaml*",
-              "RelativeToolTip": "Summarizer\\MainPage.xaml*",
-              "ViewState": "AQIAABIAAAAAAAAAAAAAADIAAABMAAAA",
+              "ToolTip": "D:\\ForGitHub\\maui-pdf-viewer-examples\\AI Demos\\Summarizer\\Summarizer\\MainPage.xaml",
+              "RelativeToolTip": "Summarizer\\MainPage.xaml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAIwAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-08-28T12:13:40.645Z",
+              "WhenOpened": "2024-09-18T12:15:30.33Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
               "Title": "PdfViewerViewModel.cs",
-              "DocumentMoniker": "D:\\ForGitHub\\Summarizer\\Summarizer\\ViewModel\\PdfViewerViewModel.cs",
+              "DocumentMoniker": "D:\\ForGitHub\\maui-pdf-viewer-examples\\AI Demos\\Summarizer\\Summarizer\\ViewModel\\PdfViewerViewModel.cs",
               "RelativeDocumentMoniker": "Summarizer\\ViewModel\\PdfViewerViewModel.cs",
-              "ToolTip": "D:\\ForGitHub\\Summarizer\\Summarizer\\ViewModel\\PdfViewerViewModel.cs",
+              "ToolTip": "D:\\ForGitHub\\maui-pdf-viewer-examples\\AI Demos\\Summarizer\\Summarizer\\ViewModel\\PdfViewerViewModel.cs",
               "RelativeToolTip": "Summarizer\\ViewModel\\PdfViewerViewModel.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAA8AAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-28T12:13:15.632Z"
+              "WhenOpened": "2024-09-18T12:15:20.014Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Summarizer.csproj",
-              "DocumentMoniker": "D:\\ForGitHub\\Summarizer\\Summarizer\\Summarizer.csproj",
+              "DocumentIndex": 4,
+              "Title": "AssistServices.cs",
+              "DocumentMoniker": "D:\\ForGitHub\\maui-pdf-viewer-examples\\AI Demos\\Summarizer\\Summarizer\\AssistServices.cs",
+              "RelativeDocumentMoniker": "Summarizer\\AssistServices.cs",
+              "ToolTip": "D:\\ForGitHub\\maui-pdf-viewer-examples\\AI Demos\\Summarizer\\Summarizer\\AssistServices.cs",
+              "RelativeToolTip": "Summarizer\\AssistServices.cs",
+              "ViewState": "AQIAABMAAAAAAAAAAAAQwAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-18T12:15:07.799Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Summarizer",
+              "DocumentMoniker": "D:\\ForGitHub\\maui-pdf-viewer-examples\\AI Demos\\Summarizer\\Summarizer\\Summarizer.csproj",
               "RelativeDocumentMoniker": "Summarizer\\Summarizer.csproj",
-              "ToolTip": "D:\\ForGitHub\\Summarizer\\Summarizer\\Summarizer.csproj",
+              "ToolTip": "D:\\ForGitHub\\maui-pdf-viewer-examples\\AI Demos\\Summarizer\\Summarizer\\Summarizer.csproj",
               "RelativeToolTip": "Summarizer\\Summarizer.csproj",
-              "ViewState": "AQIAAAAAAAAAAAAAAAArwA8AAAAeAAAA",
+              "ViewState": "AQIAACQAAAAAAAAAAAAAAE8AAAAEAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2024-08-28T11:54:01.765Z"
+              "WhenOpened": "2024-09-18T12:14:31.732Z",
+              "EditorCaption": ""
             }
           ]
         }

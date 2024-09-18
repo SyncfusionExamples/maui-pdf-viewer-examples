@@ -19,7 +19,8 @@ namespace Summarizer
 #if DEBUG
     		builder.Logging.AddDebug();
 #endif
-            builder.ConfigureSyncfusionCore();
+
+            builder.ConfigureSyncfusionCore();  
             return builder.Build();
         }
     }

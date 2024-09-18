@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.10.35122.118
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Summarizer", "Summarizer\Summarizer.csproj", "{EE1D2667-9ECB-4D28-AEE7-336DCDD81816}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Summarizer", "Summarizer\Summarizer.csproj", "{CD42BBF8-9F64-4E6F-BB42-F00ED07A35C1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,17 +11,17 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{EE1D2667-9ECB-4D28-AEE7-336DCDD81816}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EE1D2667-9ECB-4D28-AEE7-336DCDD81816}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EE1D2667-9ECB-4D28-AEE7-336DCDD81816}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
-		{EE1D2667-9ECB-4D28-AEE7-336DCDD81816}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EE1D2667-9ECB-4D28-AEE7-336DCDD81816}.Release|Any CPU.Build.0 = Release|Any CPU
-		{EE1D2667-9ECB-4D28-AEE7-336DCDD81816}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{CD42BBF8-9F64-4E6F-BB42-F00ED07A35C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CD42BBF8-9F64-4E6F-BB42-F00ED07A35C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CD42BBF8-9F64-4E6F-BB42-F00ED07A35C1}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{CD42BBF8-9F64-4E6F-BB42-F00ED07A35C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CD42BBF8-9F64-4E6F-BB42-F00ED07A35C1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CD42BBF8-9F64-4E6F-BB42-F00ED07A35C1}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {CD37EA4E-9DCE-4074-8D2A-8764456C5349}
+		SolutionGuid = {A2477ADB-5676-475F-A831-8327EC2C8B92}
 	EndGlobalSection
 EndGlobal

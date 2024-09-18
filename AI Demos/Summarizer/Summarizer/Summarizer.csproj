@@ -36,25 +36,6 @@
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</SupportedOSPlatformVersion>
 		<TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</TargetPlatformMinVersion>
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
-		<GenerateAppInstallerFile>True</GenerateAppInstallerFile>
-		<AppxPackageSigningEnabled>True</AppxPackageSigningEnabled>
-		<AppxPackageSigningTimestampDigestAlgorithm>SHA256</AppxPackageSigningTimestampDigestAlgorithm>
-		<AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
-		<AppxSymbolPackageEnabled>True</AppxSymbolPackageEnabled>
-		<GenerateTestArtifacts>True</GenerateTestArtifacts>
-		<AppInstallerUri>D:\ForGitHub\Summarize-APK</AppInstallerUri>
-		<HoursBetweenUpdateChecks>0</HoursBetweenUpdateChecks>
-		<PackageCertificateThumbprint>90FA34A076BFC112FB212D18FC4A1EE8F1D87753</PackageCertificateThumbprint>
-	</PropertyGroup>
-
-	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net8.0-android|AnyCPU'">
-	  <AndroidCreatePackagePerAbi>True</AndroidCreatePackagePerAbi>
-	</PropertyGroup>
-
-	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net8.0-android|AnyCPU'">
-	  <AndroidCreatePackagePerAbi>False</AndroidCreatePackagePerAbi>
-	  <AndroidPackageFormat>apk</AndroidPackageFormat>
-	  <AndroidUseAapt2>True</AndroidUseAapt2>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -80,25 +61,23 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <EmbeddedResource Include="Assets\summarizeDoc.pdf">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
+	  <EmbeddedResource Include="Assets\summarizeDoc.pdf" />
 	</ItemGroup>
 
 	<ItemGroup>
 		<PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
-		<PackageReference Include="Microsoft.SemanticKernel" Version="1.12.0" />
+	    <PackageReference Include="Microsoft.SemanticKernel" Version="1.12.0" />
 		<PackageReference Include="Syncfusion.Maui.PdfViewer" Version="*" />
 		<PackageReference Include="Syncfusion.Maui.AIAssistView" Version="*" />
 		<PackageReference Include="Syncfusion.Pdf.NET" Version="*" />
 		<PackageReference Include="Syncfusion.Compression.NET" Version="*" />
-	  <PackageReference Include="Syncfusion.Maui.Calendar" Version="*" />
-	  <PackageReference Include="Syncfusion.Maui.Chat" Version="*" />
-	  <PackageReference Include="Syncfusion.Maui.Inputs" Version="*" />
-	  <PackageReference Include="Syncfusion.Maui.Picker" Version="*" />
-	  <PackageReference Include="Syncfusion.Maui.Popup" Version="*" />
+	    <PackageReference Include="Syncfusion.Maui.Calendar" Version="*" />
+	    <PackageReference Include="Syncfusion.Maui.Chat" Version="*" />
+	    <PackageReference Include="Syncfusion.Maui.Inputs" Version="*" />
+	    <PackageReference Include="Syncfusion.Maui.Picker" Version="*" />
+	    <PackageReference Include="Syncfusion.Maui.Popup" Version="*" />
 		<PackageReference Include="Azure.AI.OpenAI" Version="1.0.0-beta.15" />
 		<PackageReference Include="Syncfusion.Maui.Core" Version="*" />
 		<PackageReference Include="Syncfusion.Maui.Buttons" Version="*" />

@@ -7,9 +7,9 @@
                       xmlns:syncfusion="clr-namespace:Syncfusion.Maui.PdfViewer;assembly=Syncfusion.Maui.PdfViewer"
                       xmlns:inputLayout="clr-namespace:Syncfusion.Maui.Core;assembly=Syncfusion.Maui.Core"
                       x:Class="Summarizer.MainPage">
-        <ContentPage.BindingContext>
-            <LocalViewModel:PdfViewerViewModel x:Name="viewModel"/>
-        </ContentPage.BindingContext>
+    <ContentPage.BindingContext>
+        <LocalViewModel:PdfViewerViewModel x:Name="viewModel"/>
+    </ContentPage.BindingContext>
     <ContentPage.Resources>
         <Style x:Key="buttonIconStyle" TargetType="Button">
             <Setter Property="BorderWidth" Value="0" />
