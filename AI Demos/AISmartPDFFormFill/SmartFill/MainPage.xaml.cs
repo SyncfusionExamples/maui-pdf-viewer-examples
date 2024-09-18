@@ -27,10 +27,10 @@ public partial class MainPage : ContentPage
     private async void Clipboard_ClipboardContentChanged(object? sender, EventArgs e)
     {
         string? copiedText = await Clipboard.GetTextAsync();
-        StartBubbleAnimation();
-        if (string.IsNullOrEmpty(copiedText) == false)
+        if (string.IsNullOrEmpty(copiedText) == false && chatService.deploymentName!= "DEPLOYMENT_NAME")
         {
             SubmitForm.IsEnabled = true;
+            StartBubbleAnimation();
         }
     }
 
@@ -216,21 +216,21 @@ public partial class MainPage : ContentPage
                     break;
             }
             await Task.Delay(3000);
-            button.Text = "\ue798";
+            button.Text = "\ue7a0";
         }
     }
 
     private void FullViewForCopiedData(object sender, EventArgs e)
     {
-        if (CopiedDataViewButton.Text == "\ue702")
+        if (CopiedDataViewButton.Text == "\ue708")
         {
             MobileCopiedData.HeightRequest = 2 * MobileCopiedData.HeightRequest;
-            CopiedDataViewButton.Text = "\ue703";
+            CopiedDataViewButton.Text = "\ue705";
         }
         else
         {
             MobileCopiedData.HeightRequest = MobileCopiedData.HeightRequest / 2;
-            CopiedDataViewButton.Text = "\ue702";
+            CopiedDataViewButton.Text = "\ue708";
         }
     }
     private void StartBubbleAnimation()
