@@ -51,6 +51,7 @@
 
 		<!-- Custom Fonts -->
 		<MauiFont Include="Resources\Fonts\*" />
+		<MauiFont Include="Resources\Fonts\MauiSampleFontIcon.ttf"/>
 
 		<!-- Raw Assets (also remove the "Resources\Raw" prefix) -->
 		<MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
@@ -58,6 +59,7 @@
 
 	<ItemGroup>
 	  <None Remove="PDF\smart-form.pdf" />
+	  <None Remove="Resources\Fonts\MauiSampleFontIcon.ttf" />
 	</ItemGroup>
 
 	<ItemGroup>

@@ -60,7 +60,7 @@
                 <Button x:Name="Save" Text="&#xe75f;" Padding="05" BorderWidth="0" Style="{StaticResource buttonIconStyle}" Clicked="SavePDF" ToolTipProperties.Text="Click to save the document" HeightRequest="40" WidthRequest="40" CornerRadius="5" TextColor="#99000000" BackgroundColor="Transparent" FontSize="24" FontFamily="Maui Material Assets" HorizontalOptions="Center" VerticalOptions="Center" Margin="12,0"/>
                 <Button x:Name="Print" Text="&#xe77f;" BorderWidth="0" Padding="5" Clicked="PrintPDF" Style="{StaticResource buttonIconStyle}" CornerRadius="5" ToolTipProperties.Text="Click to print the document"  HeightRequest="40" WidthRequest="40" TextColor="#99000000" BackgroundColor="Transparent" FontSize="24" FontFamily="Maui Material Assets" HorizontalOptions="Center" VerticalOptions="Center"/>
             </HorizontalStackLayout>
-            <buttons:SfButton x:Name="SubmitForm" ToolTipProperties.Text="Click to smart fill the form" Grid.Column="1" Text="Smart Fill"  WidthRequest="110" VerticalTextAlignment="Center" CornerRadius="20" HeightRequest="40" Clicked="OnSmartFillClicked" VerticalOptions="Center" FontSize="14" FontAttributes="Bold" HorizontalOptions="End" IsEnabled="False" Margin="10,5" IsVisible="{OnPlatform WinUI=true, MacCatalyst=true}" />
+            <Button x:Name="SubmitForm" ToolTipProperties.Text="Click to smart fill the form" Grid.Column="1" Text="Smart Fill"  WidthRequest="110" CornerRadius="20" HeightRequest="40" Clicked="OnSmartFillClicked" VerticalOptions="Center" FontSize="14" FontAttributes="Bold" HorizontalOptions="End" IsEnabled="False" Margin="10,5" IsVisible="{OnPlatform WinUI=true, MacCatalyst=true}" />
         </Grid>
         <Border 
             Grid.Column="1" 
@@ -119,12 +119,12 @@ BackgroundColor="#F7F2FB" >
     x:Name="CopiedData1" 
     BorderWidth="0" 
     AutomationId="CopiedButton1" 
-    Text="&#xe7a0;" 
+    Text="&#xe737;"
     Grid.Column="1" 
                                         Style="{StaticResource buttonIconStyle}"
     Clicked="SetClipboardText" 
     BackgroundColor="Transparent" 
-    FontFamily="Maui Material Assets" 
+    FontFamily="MauiSampleFontIcon"
     HorizontalOptions="End" 
      CornerRadius="20"
      Padding="8"
@@ -156,7 +156,7 @@ ColumnDefinitions="*,auto"
 RowSpacing="5"
 BackgroundColor="#F7F2FB">
                                     <Button 
-    Text="&#xe7a0;" 
+    Text="&#xe737;"
     AutomationId="CopiedButton2" 
     BorderWidth="0" 
                                         CornerRadius="20"
@@ -165,7 +165,7 @@ BackgroundColor="#F7F2FB">
     Grid.Column="1"
     Clicked="SetClipboardText" 
     BackgroundColor="Transparent" 
-    FontFamily="Maui Material Assets" 
+    FontFamily="MauiSampleFontIcon"
     HorizontalOptions="End" 
     VerticalOptions="Start" 
     FontAttributes="Bold" 
@@ -199,11 +199,11 @@ BackgroundColor="#F7F2FB" >
     AutomationId="CopiedButton3" 
     BorderWidth="0" 
                                         Style="{StaticResource buttonIconStyle}"
-    Text="&#xe7a0;" 
+   Text="&#xe737;" 
                                         Grid.Column="1"
     Clicked="SetClipboardText" 
     BackgroundColor="Transparent" 
-    FontFamily="Maui Material Assets" 
+    FontFamily="MauiSampleFontIcon" 
     HorizontalOptions="End" 
     VerticalOptions="Start" 
     FontAttributes="Bold" 
@@ -232,6 +232,7 @@ Padding="8"
                 </ScrollView>
             </Grid>
         </Border>
+ <!--Mobile UI-->
         <Grid 
             Grid.Row="2" 
     Grid.Column="0" 
@@ -292,10 +293,10 @@ Padding="8"
                                     Style="{StaticResource buttonIconStyle}"
                                     Grid.Column="1"
             AutomationId="CopiedButton1" 
-            Text="&#xe7a0;" 
+            Text="&#xe737;"
             Clicked="SetClipboardText" 
             BackgroundColor="Transparent" 
-            FontFamily="Maui Material Assets" 
+            FontFamily="MauiSampleFontIcon"
             HorizontalOptions="End" 
             VerticalOptions="Start" 
             CornerRadius="20"
@@ -331,10 +332,10 @@ Padding="8"
             BorderWidth="0" 
                                     Grid.Column="1"
                                     Style="{StaticResource buttonIconStyle}"
-            Text="&#xe7a0;" 
+            Text="&#xe737;"
             Clicked="SetClipboardText" 
             BackgroundColor="Transparent" 
-            FontFamily="Maui Material Assets" 
+            FontFamily="MauiSampleFontIcon"
             HorizontalOptions="End" 
             VerticalOptions="Start" 
             CornerRadius="20"
@@ -370,10 +371,10 @@ Padding="8"
             BorderWidth="0" 
                                     Style="{StaticResource buttonIconStyle}"
                                     Grid.Column="1"
-            Text="&#xe7a0;" 
+            Text="&#xe737;"
             Clicked="SetClipboardText" 
             BackgroundColor="Transparent" 
-            FontFamily="Maui Material Assets" 
+            FontFamily="MauiSampleFontIcon"
             HorizontalOptions="End" 
             VerticalOptions="Start" 
             CornerRadius="20"
@@ -401,6 +402,7 @@ Padding="8"
                 </Grid>
             </ScrollView>
         </Grid>
+<!--Mobile UI-->
         <Grid.Shadow>
             <Shadow Brush="#99000000" Offset="0,0" Radius="1" />
         </Grid.Shadow>
