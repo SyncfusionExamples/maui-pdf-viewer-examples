@@ -30,7 +30,7 @@ namespace Summarizer
         /// <summary>
         /// The AI key
         /// </summary>
-        private string apiKey = "AZURE_OPENAI_API_KEY";
+        private string key = "AZURE_OPENAI_API_KEY";
 
         /// <summary>
         /// The AzureOpenAI client
@@ -62,7 +62,7 @@ namespace Summarizer
         /// <returns>A predefined message requesting OpenAI connection for real-time queries.</returns>
         internal async Task<string> GetPrompt(string prompt)
         {
-            if (client != null && chatCompletions != null && key!= "AI_KEY")
+            if (client != null && chatCompletions != null && key!= "AZURE_OPENAI_API_KEY")
             {
                 chatCompletions.Messages.Clear();
                 chatCompletions.Messages.Add(new ChatRequestSystemMessage("Please provide the prompt for responce" + prompt));
@@ -87,7 +87,7 @@ namespace Summarizer
             try
             {
                 // Use extracted text
-                if (ExtractedText != null && client != null && chatCompletions != null && key != "AI_KEY")
+                if (ExtractedText != null && client != null && chatCompletions != null && key != "AZURE_OPENAI_API_KEY")
                 {
                     string message = ExtractedText;
                     var systemPrompt = "You are a helpful assistant. Use the provided PDF document pages and pick a precise page to answer the user question,Ignore about iTextSharp related points in the details, Strictly don't bold any text all text need to plain text. Pages: " + message;
@@ -140,7 +140,7 @@ namespace Summarizer
         {
             try
             {
-                if (ExtractedText != null && chatCompletions != null && client != null && key != "AI_KEY")
+                if (ExtractedText != null && chatCompletions != null && client != null && key != "AZURE_OPENAI_API_KEY")
                 {
                     chatCompletions.Messages.Clear();
                     chatCompletions.Messages.Add(new ChatRequestSystemMessage(systemPrompt));
