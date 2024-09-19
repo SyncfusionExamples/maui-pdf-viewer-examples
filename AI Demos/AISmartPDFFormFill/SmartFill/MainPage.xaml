@@ -10,6 +10,33 @@
     <ContentPage.BindingContext>
         <LocalViewModel:SmartFillViewModel x:Name="viewModel"/>
     </ContentPage.BindingContext>
+    <ContentPage.Resources>
+        <Style x:Key="buttonIconStyle" TargetType="Button">
+            <Setter Property="VisualStateManager.VisualStateGroups">
+                <VisualStateGroupList>
+                    <VisualStateGroup x:Name="CommonStates">
+                        <VisualState x:Name="Normal" />
+                        <VisualState x:Name="PointerOver">
+                            <VisualState.Setters>
+                                <Setter Property="BackgroundColor" Value="#1C1B1F14"/>
+                            </VisualState.Setters>
+                        </VisualState>
+                        <VisualState x:Name="Pressed">
+                            <VisualState.Setters>
+                                <Setter Property="BackgroundColor" Value="#1C1B1F14"/>
+                            </VisualState.Setters>
+                        </VisualState>
+                        <VisualState x:Name="Disabled">
+                            <VisualState.Setters>
+                                <Setter Property="BackgroundColor" Value="Transparent"/>
+                                <Setter Property="Opacity" Value="0.5"/>
+                            </VisualState.Setters>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateGroupList>
+            </Setter>
+        </Style>
+    </ContentPage.Resources>
     <Grid ColumnDefinitions="{OnPlatform WinUI='7*,3*', MacCatalyst='7*,3*'}" BackgroundColor="#CAC4D0" >
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
@@ -30,10 +57,10 @@
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
             <HorizontalStackLayout Grid.Column="0" HorizontalOptions="Start">
-                <Button x:Name="Save" Text="&#xe75f;" Padding="05" BorderWidth="0" Clicked="SavePDF" ToolTipProperties.Text="Click to save the document" CornerRadius="5" TextColor="#99000000" Background="Transparent" FontSize="24" FontFamily="Maui Material Assets" HorizontalOptions="Center" VerticalOptions="Center" Margin="12,0"/>
-                <Button x:Name="Print" Text="&#xe77f;" BorderWidth="0" Clicked="PrintPDF" CornerRadius="5" ToolTipProperties.Text="Click to print the document" TextColor="#99000000" Background="Transparent" FontSize="24" FontFamily="Maui Material Assets" HorizontalOptions="Center" VerticalOptions="Center"/>
+                <Button x:Name="Save" Text="&#xe75f;" Padding="05" BorderWidth="0" Style="{StaticResource buttonIconStyle}" Clicked="SavePDF" ToolTipProperties.Text="Click to save the document" HeightRequest="40" WidthRequest="40" CornerRadius="5" TextColor="#99000000" BackgroundColor="Transparent" FontSize="24" FontFamily="Maui Material Assets" HorizontalOptions="Center" VerticalOptions="Center" Margin="12,0"/>
+                <Button x:Name="Print" Text="&#xe77f;" BorderWidth="0" Padding="5" Clicked="PrintPDF" Style="{StaticResource buttonIconStyle}" CornerRadius="5" ToolTipProperties.Text="Click to print the document"  HeightRequest="40" WidthRequest="40" TextColor="#99000000" BackgroundColor="Transparent" FontSize="24" FontFamily="Maui Material Assets" HorizontalOptions="Center" VerticalOptions="Center"/>
             </HorizontalStackLayout>
-            <buttons:SfButton x:Name="SubmitForm" ToolTipProperties.Text="Click to smart fill the form" Grid.Column="1" Text="Smart Fill"  WidthRequest="110" VerticalTextAlignment="Center" CornerRadius="20" HeightRequest="40" Clicked="OnSmartFillClicked" VerticalOptions="Center" FontSize="14" FontAttributes="Bold" HorizontalOptions="End" IsEnabled="False" Margin="10,5" IsVisible="{OnPlatform WinUI=true, MacCatalyst=true}" />
+            <Button x:Name="SubmitForm" ToolTipProperties.Text="Click to smart fill the form" Grid.Column="1" Text="Smart Fill"  WidthRequest="110" CornerRadius="20" HeightRequest="40" Clicked="OnSmartFillClicked" VerticalOptions="Center" FontSize="14" FontAttributes="Bold" HorizontalOptions="End" IsEnabled="False" Margin="10,5" IsVisible="{OnPlatform WinUI=true, MacCatalyst=true}" />
         </Grid>
         <Border 
             Grid.Column="1" 
@@ -81,136 +108,138 @@
                             </Grid.RowDefinitions>
 
                             <!-- Copied Data Grid 1 -->
-                            <Grid 
-                        x:Name="CopiedDataGrid_Desktop1" 
-                        Grid.Row="0" 
-                        RowDefinitions="auto,*" 
-                        ColumnDefinitions="*,auto" 
-                        RowSpacing="5"
-                        BackgroundColor="#F7F2FB" 
-                        Padding="10" 
-                        Margin="15">
-                                <Button 
-                            x:Name="CopiedData1" 
-                            BorderWidth="0" 
-                            AutomationId="CopiedButton1" 
-                            Text="&#xe798;" 
-                            Grid.Row="0" 
-                            Clicked="SetClipboardText" 
-                            BackgroundColor="Transparent" 
-                            FontFamily="Maui Material Assets" 
-                            HorizontalOptions="End" 
-                            Padding="0" 
-                            VerticalOptions="Start" 
-                            FontAttributes="Bold" 
-                            FontSize="14" 
-                            TextColor="#99000000"/>
-                                <Label 
-                            x:Name="InputData1" 
-                            Grid.Row="1" 
-                            Grid.ColumnSpan="2" 
-                            Text="{Binding UserDetail1}" 
-                            VerticalOptions="FillAndExpand" 
-                            LineHeight="1.25" 
-                            FontFamily="Maui Material Assets" 
-                            FontSize="{OnPlatform Android=14, iOS=14}" 
-                            LineBreakMode="WordWrap" 
-                            TextColor="#99000000"/>
-                                <Grid.Shadow>
-                                    <Shadow Brush="#99000000" Offset="0,0" Radius="1"/>
-                                </Grid.Shadow>
-                            </Grid>
+                            <Border Grid.Row="0" StrokeThickness="0.2" Padding="10" Margin="15" Stroke="#99000000" >
+                                <Grid 
+x:Name="CopiedDataGrid_Desktop1" 
+Grid.Row="0" 
+ColumnDefinitions="*,auto" 
+RowSpacing="5"
+BackgroundColor="#F7F2FB" >
+                                    <Button 
+    x:Name="CopiedData1" 
+    BorderWidth="0" 
+    AutomationId="CopiedButton1" 
+    Text="&#xe737;"
+    Grid.Column="1" 
+                                        Style="{StaticResource buttonIconStyle}"
+    Clicked="SetClipboardText" 
+    BackgroundColor="Transparent" 
+    FontFamily="MauiSampleFontIcon"
+    HorizontalOptions="End" 
+     CornerRadius="20"
+     Padding="8"
+    VerticalOptions="Start" 
+    FontAttributes="Bold" 
+    FontSize="14" 
+    TextColor="#99000000"/>
+                                    <Label 
+    x:Name="InputData1" 
+    Grid.Column="0" 
+    Text="{Binding UserDetail1}" 
+    VerticalOptions="FillAndExpand" 
+    LineHeight="1.25" 
+    FontFamily="Maui Material Assets" 
+    FontSize="14" 
+    LineBreakMode="WordWrap" 
+    TextColor="#99000000"/>
+                                </Grid>
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="5"/>
+                                </Border.StrokeShape>
+                            </Border>
 
                             <!-- Copied Data Grid 2 -->
-                            <Grid 
-                        x:Name="CopiedDataGrid_Desktop2" 
-                        Grid.Row="1" 
-                        RowDefinitions="auto,*" 
-                        ColumnDefinitions="*,auto" 
-                        RowSpacing="5"
-                        BackgroundColor="#F7F2FB" 
-                        Padding="10" 
-                        Margin="15,0">
-                                <Button 
-                            Text="&#xe798;" 
-                            AutomationId="CopiedButton2" 
-                            BorderWidth="0" 
-                            Grid.Row="0" 
-                            Clicked="SetClipboardText" 
-                            BackgroundColor="Transparent" 
-                            FontFamily="Maui Material Assets" 
-                            HorizontalOptions="End" 
-                            VerticalOptions="Start" 
-                            FontAttributes="Bold" 
-                            FontSize="14" 
-                            Padding="0" 
-                            TextColor="#99000000"/>
-                                <Label 
-                            x:Name="InputData2" 
-                            LineHeight="1.25" 
-                            Grid.Row="1" 
-                            Grid.ColumnSpan="2" 
-                            Text="{Binding UserDetail2}" 
-                            VerticalOptions="FillAndExpand" 
-                            FontFamily="Maui Material Assets" 
-                            FontSize="{OnPlatform Android=14, iOS=14}" 
-                            LineBreakMode="WordWrap" 
-                            TextColor="#99000000"/>
-                                <Grid.Shadow>
-                                    <Shadow Brush="#99000000" Offset="0,0" Radius="1"/>
-                                </Grid.Shadow>
-                            </Grid>
+                            <Border Grid.Row="1" StrokeThickness="0.2" Padding="10" Margin="15,0" Stroke="#99000000" >
+                                <Grid 
+x:Name="CopiedDataGrid_Desktop2" 
+ColumnDefinitions="*,auto" 
+RowSpacing="5"
+BackgroundColor="#F7F2FB">
+                                    <Button 
+    Text="&#xe737;"
+    AutomationId="CopiedButton2" 
+    BorderWidth="0" 
+                                        CornerRadius="20"
+                                        Padding="8"
+                                        Style="{StaticResource buttonIconStyle}"
+    Grid.Column="1"
+    Clicked="SetClipboardText" 
+    BackgroundColor="Transparent" 
+    FontFamily="MauiSampleFontIcon"
+    HorizontalOptions="End" 
+    VerticalOptions="Start" 
+    FontAttributes="Bold" 
+    FontSize="14" 
+    TextColor="#99000000"/>
+                                    <Label 
+    x:Name="InputData2" 
+    LineHeight="1.25" 
+    Grid.Column="0" 
+    Text="{Binding UserDetail2}" 
+    VerticalOptions="FillAndExpand" 
+    FontFamily="Maui Material Assets" 
+    FontSize="14" 
+    LineBreakMode="WordWrap" 
+    TextColor="#99000000"/>
+                                </Grid>
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="5"/>
+                                </Border.StrokeShape>
+                            </Border>
 
                             <!-- Copied Data Grid 3 -->
-                            <Grid 
-                        Grid.Row="2" 
-                        Margin="15" 
-                        x:Name="CopiedDataGrid_Desktop3" 
-                        RowDefinitions="auto,*" 
-                        RowSpacing="5" 
-                        ColumnDefinitions="*,auto" 
-                        BackgroundColor="#F7F2FB" 
-                        Padding="10">
-                                <Button 
-                            AutomationId="CopiedButton3" 
-                            BorderWidth="0" 
-                            Text="&#xe798;" 
-                            Grid.Row="0" 
-                            Clicked="SetClipboardText" 
-                            BackgroundColor="Transparent" 
-                            FontFamily="Maui Material Assets" 
-                            HorizontalOptions="End" 
-                            VerticalOptions="Start" 
-                            FontAttributes="Bold" 
-                            Padding="0" 
-                            FontSize="14" 
-                            TextColor="#99000000"/>
-                                <Label 
-                            x:Name="InputData3" 
-                            LineHeight="1.25" 
-                            Grid.Row="1" 
-                            Text="{Binding UserDetail3}" 
-                            VerticalOptions="FillAndExpand" 
-                            FontFamily="Maui Material Assets" 
-                            FontSize="{OnPlatform Android=14, iOS=14}" 
-                            LineBreakMode="WordWrap" 
-                            TextColor="#99000000"/>
-                                <Grid.Shadow>
-                                    <Shadow Brush="#99000000" Offset="0,0" Radius="1"/>
-                                </Grid.Shadow>
-                            </Grid>
+                            <Border Grid.Row="2" StrokeThickness="0.2" Padding="10" Margin="15" Stroke="#99000000" >
+                                <Grid 
+Grid.Row="2" 
+x:Name="CopiedDataGrid_Desktop3" 
+RowSpacing="5" 
+ColumnDefinitions="*,auto" 
+BackgroundColor="#F7F2FB" >
+                                    <Button 
+    AutomationId="CopiedButton3" 
+    BorderWidth="0" 
+                                        Style="{StaticResource buttonIconStyle}"
+   Text="&#xe737;" 
+                                        Grid.Column="1"
+    Clicked="SetClipboardText" 
+    BackgroundColor="Transparent" 
+    FontFamily="MauiSampleFontIcon" 
+    HorizontalOptions="End" 
+    VerticalOptions="Start" 
+    FontAttributes="Bold" 
+   CornerRadius="20"
+Padding="8"
+    FontSize="14" 
+    TextColor="#99000000"/>
+                                    <Label 
+    x:Name="InputData3" 
+    LineHeight="1.25" 
+                                        Grid.Column="0"
+    Text="{Binding UserDetail3}" 
+    VerticalOptions="FillAndExpand" 
+    FontFamily="Maui Material Assets" 
+   FontSize="14" 
+    LineBreakMode="WordWrap" 
+    TextColor="#99000000"/>
+                                </Grid>
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="5"/>
+                                </Border.StrokeShape>
+                            </Border>
+                           
                         </Grid>
                     </Grid>
                 </ScrollView>
             </Grid>
         </Border>
+ <!--Mobile UI-->
         <Grid 
-    Grid.Row="2" 
+            Grid.Row="2" 
     Grid.Column="0" 
     HeightRequest="230" 
     RowDefinitions="auto,*" 
     x:Name="MobileCopiedData" 
-    BackgroundColor="#FFFFFF" 
+    BackgroundColor="#F7F2FB"
     IsVisible="False">
 
             <!-- Title Section -->
@@ -218,9 +247,9 @@
                 <BoxView HeightRequest="1" Opacity="1" BackgroundColor="#CAC4D0"/>
                 <Grid x:Name="ChooseMobile" RowDefinitions="auto,auto" RowSpacing="0">
                     <Button 
-                Text="&#xe702;" 
+                Text="&#xe708;" 
                 x:Name="CopiedDataViewButton" 
-                FontFamily="MauiSampleFontIcon" 
+                FontFamily="Maui Material Assets" 
                 Padding="2" 
                 Clicked="FullViewForCopiedData" 
                 BackgroundColor="Transparent" 
@@ -252,127 +281,128 @@
                         </Grid.RowDefinitions>
 
                         <!-- Copied Data Grid 1 -->
-                        <Grid 
-                    x:Name="CopiedDataGrid_Mobile1" 
-                    Grid.Row="0" 
-                    RowDefinitions="auto,*" 
-                    ColumnDefinitions="*,auto" 
-                    RowSpacing="5" 
-                    BackgroundColor="#FFFFFF" 
-                    Padding="10" 
-                    Margin="15">
-                            <Button 
-                        x:Name="CopiedData1_Mobile" 
-                        BorderWidth="0" 
-                        AutomationId="CopiedButton1" 
-                        Text="&#xe798;" 
-                        Grid.Row="0" 
-                        Clicked="SetClipboardText" 
-                        BackgroundColor="Transparent" 
-                        FontFamily="Maui Material Assets" 
-                        HorizontalOptions="End" 
-                        Padding="0" 
-                        VerticalOptions="Start" 
-                        FontAttributes="Bold" 
-                        FontSize="14" 
-                        TextColor="#99000000"/>
-                            <Label 
-                        x:Name="InputData1_Mobile" 
-                        Grid.Row="1" 
-                        Grid.ColumnSpan="2" 
-                        Text="{Binding UserDetail1}" 
-                        VerticalOptions="FillAndExpand" 
-                        LineHeight="1.25" 
-                        FontFamily="Maui Material Assets" 
-                        FontSize="{OnPlatform Android=14, iOS=14}" 
-                        LineBreakMode="WordWrap" 
-                        TextColor="#99000000"/>
-                            <Grid.Shadow>
-                                <Shadow Brush="#99000000" Offset="0,0" Radius="1"/>
-                            </Grid.Shadow>
-                        </Grid>
+                        <Border Grid.Row="0" StrokeThickness="0.2" Padding="10" Margin="15" Stroke="#99000000" >
+                            <Grid 
+        x:Name="CopiedDataGrid_Mobile1" 
+        ColumnDefinitions="*,auto" 
+        RowSpacing="5" 
+        BackgroundColor="#F7F2FB">
+                                <Button 
+            x:Name="CopiedData1_Mobile" 
+            BorderWidth="0" 
+                                    Style="{StaticResource buttonIconStyle}"
+                                    Grid.Column="1"
+            AutomationId="CopiedButton1" 
+            Text="&#xe737;"
+            Clicked="SetClipboardText" 
+            BackgroundColor="Transparent" 
+            FontFamily="MauiSampleFontIcon"
+            HorizontalOptions="End" 
+            VerticalOptions="Start" 
+            CornerRadius="20"
+            Padding="8"
+            FontAttributes="Bold" 
+            FontSize="14" 
+            TextColor="#99000000"/>
+                                <Label 
+            x:Name="InputData1_Mobile" 
+            Grid.Column="0" 
+            Text="{Binding UserDetail1}" 
+            VerticalOptions="FillAndExpand" 
+            LineHeight="1.25" 
+            FontFamily="Maui Material Assets" 
+            FontSize="14" 
+            LineBreakMode="WordWrap" 
+            TextColor="#99000000"/>
+                            </Grid>
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="5"/>
+                            </Border.StrokeShape>
+                        </Border>
 
                         <!-- Copied Data Grid 2 -->
-                        <Grid 
-                    x:Name="CopiedDataGrid_Mobile2" 
-                    Grid.Row="1" 
-                    RowDefinitions="auto,*" 
-                    ColumnDefinitions="*,auto" 
-                    RowSpacing="5" 
-                    BackgroundColor="#FFFFFF" 
-                    Padding="10" 
-                    Margin="15,0">
-                            <Button 
-                        Text="&#xe798;" 
-                        AutomationId="CopiedButton2" 
-                        BorderWidth="0" 
-                        Grid.Row="0" 
-                        Clicked="SetClipboardText" 
-                        BackgroundColor="Transparent" 
-                        FontFamily="Maui Material Assets" 
-                        HorizontalOptions="End" 
-                        VerticalOptions="Start" 
-                        FontAttributes="Bold" 
-                        FontSize="14" 
-                        Padding="0" 
-                        TextColor="#99000000"/>
-                            <Label 
-                        x:Name="InputData2_Mobile" 
-                        LineHeight="1.25" 
-                        Grid.Row="1" 
-                        Grid.ColumnSpan="2" 
-                        Text="{Binding UserDetail2}" 
-                        VerticalOptions="FillAndExpand" 
-                        FontFamily="Maui Material Assets" 
-                        FontSize="{OnPlatform Android=14, iOS=14}" 
-                        LineBreakMode="WordWrap" 
-                        TextColor="#99000000"/>
-                            <Grid.Shadow>
-                                <Shadow Brush="#99000000" Offset="0,0" Radius="1"/>
-                            </Grid.Shadow>
-                        </Grid>
+                        <Border Grid.Row="1" StrokeThickness="0.2" Padding="10" Margin="15,0" Stroke="#99000000" >
+                            <Grid 
+        x:Name="CopiedDataGrid_Mobile2" 
+        ColumnDefinitions="*,auto" 
+        RowSpacing="5" 
+        BackgroundColor="#F7F2FB">
+                                <Button 
+            AutomationId="CopiedButton2" 
+            BorderWidth="0" 
+                                    Grid.Column="1"
+                                    Style="{StaticResource buttonIconStyle}"
+            Text="&#xe737;"
+            Clicked="SetClipboardText" 
+            BackgroundColor="Transparent" 
+            FontFamily="MauiSampleFontIcon"
+            HorizontalOptions="End" 
+            VerticalOptions="Start" 
+            CornerRadius="20"
+            Padding="8"
+            FontAttributes="Bold" 
+            FontSize="14" 
+            TextColor="#99000000"/>
+                                <Label 
+            x:Name="InputData2_Mobile" 
+            Grid.Column="0" 
+            LineHeight="1.25" 
+            Text="{Binding UserDetail2}" 
+            VerticalOptions="FillAndExpand" 
+            FontFamily="Maui Material Assets" 
+            FontSize="14" 
+            LineBreakMode="WordWrap" 
+            TextColor="#99000000"/>
+                            </Grid>
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="5"/>
+                            </Border.StrokeShape>
+                        </Border>
 
                         <!-- Copied Data Grid 3 -->
-                        <Grid 
-                    Grid.Row="2" 
-                    x:Name="CopiedDataGrid_Mobile3" 
-                    Margin="15,15" 
-                    RowDefinitions="auto,*" 
-                    RowSpacing="5" 
-                    ColumnDefinitions="*,auto" 
-                    BackgroundColor="#FFFFFF" 
-                    Padding="10">
-                            <Button 
-                        AutomationId="CopiedButton3" 
-                        BorderWidth="0" 
-                        Grid.Row="0" 
-                        Clicked="SetClipboardText" 
-                        BackgroundColor="Transparent" 
-                        FontFamily="Maui Material Assets" 
-                        HorizontalOptions="End" 
-                        VerticalOptions="Start" 
-                        FontAttributes="Bold" 
-                        Padding="0" 
-                        FontSize="14" 
-                        TextColor="#99000000"/>
-                            <Label 
-                        x:Name="InputData3_Mobile" 
-                        LineHeight="1.25" 
-                        Grid.Row="1" 
-                        Text="{Binding UserDetail3}" 
-                        VerticalOptions="FillAndExpand" 
-                        FontFamily="Maui Material Assets" 
-                        FontSize="{OnPlatform Android=14, iOS=14}" 
-                        LineBreakMode="WordWrap" 
-                        TextColor="#99000000"/>
-                            <Grid.Shadow>
-                                <Shadow Brush="#99000000" Offset="0,0" Radius="1"/>
-                            </Grid.Shadow>
-                        </Grid>
+                        <Border Grid.Row="2" StrokeThickness="0.2" Padding="10" Margin="15" Stroke="#99000000" >
+                            <Grid 
+        x:Name="CopiedDataGrid_Mobile3" 
+        ColumnDefinitions="*,auto" 
+        RowSpacing="5" 
+        BackgroundColor="#F7F2FB">
+                                <Button 
+            AutomationId="CopiedButton3" 
+            BorderWidth="0" 
+                                    Style="{StaticResource buttonIconStyle}"
+                                    Grid.Column="1"
+            Text="&#xe737;"
+            Clicked="SetClipboardText" 
+            BackgroundColor="Transparent" 
+            FontFamily="MauiSampleFontIcon"
+            HorizontalOptions="End" 
+            VerticalOptions="Start" 
+            CornerRadius="20"
+            Padding="8"
+            FontAttributes="Bold" 
+            FontSize="14" 
+            TextColor="#99000000"/>
+                                <Label 
+            x:Name="InputData3_Mobile" 
+            Grid.Column="0" 
+            LineHeight="1.25" 
+            Text="{Binding UserDetail3}" 
+            VerticalOptions="FillAndExpand" 
+            FontFamily="Maui Material Assets" 
+            FontSize="14" 
+            LineBreakMode="WordWrap" 
+            TextColor="#99000000"/>
+                            </Grid>
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="5"/>
+                            </Border.StrokeShape>
+                        </Border>
+
                     </Grid>
                 </Grid>
             </ScrollView>
         </Grid>
+<!--Mobile UI-->
         <Grid.Shadow>
             <Shadow Brush="#99000000" Offset="0,0" Radius="1" />
         </Grid.Shadow>
