@@ -20,17 +20,17 @@ namespace Summarizer
         /// <summary>
         /// The EndPoint
         /// </summary>
-        private const string endpoint = "https://blazorpdf-ai.openai.azure.com/";
+        private string endpoint = "https://yourendpoint.com/";
 
         /// <summary>
         /// The Deployment name
         /// </summary>
-        internal string deploymentName = "gpt-4-0";
+        internal string deploymentName = "DEPLOYMENT_NAME";
 
         /// <summary>
-        /// The API key
+        /// The AI key
         /// </summary>
-        private const string key = "7f164d6ba53e4df784ecddabbf73d5a8";
+        private string apiKey = "AZURE_OPENAI_API_KEY";
 
         /// <summary>
         /// The AzureOpenAI client
