@@ -90,14 +90,17 @@ namespace FormFillWithUseCase
                 MemoryStream outputStream = new MemoryStream();
                 await pdfViewer.SaveDocumentAsync(outputStream);
 
-                string filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "workshop_registration.pdf");
-                File.WriteAllBytes(filePath, outputStream.ToArray());
-
-                await Share.Default.RequestAsync(new ShareFileRequest
+                string tempFilePath = Path.GetTempFileName().Replace(".tmp", ".pdf");
+                File.WriteAllBytes(tempFilePath, outputStream.ToArray());
+                if (File.Exists(tempFilePath))
                 {
-                    Title = "Share filled form",
-                    File = new ShareFile(filePath)
-                });
+                    var shareFileRequest = new ShareFileRequest
+                    {
+                        Title = "Share filled form",
+                        File = new ShareFile(tempFilePath),
+                    };
+                    await Share.Default.RequestAsync(shareFileRequest);
+                }
             }
         }
 
