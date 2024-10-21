@@ -6,11 +6,11 @@
              xmlns:button="clr-namespace:Syncfusion.Maui.Buttons;assembly=Syncfusion.Maui.Buttons"
              x:Class="FormFillWithUseCase.MainPage">
     <Grid>
-        <viewer:SfPdfViewer x:Name="pdfViewer" FormFieldFocusChanged="pdfViewer_FormFieldFocusChanged"/>
-        <button:SfButton x:Name="shareButton" ImageSource="share_icon.png" ShowIcon="True" VerticalOptions="End" HorizontalOptions="End" Margin="0,0,20,20" Text="Share" TextColor="White" Clicked="shareButton_Clicked"/>
+        <viewer:SfPdfViewer x:Name="pdfViewer" FormFieldFocusChanged="PdfViewer_FormFieldFocusChanged"/>
+        <button:SfButton x:Name="shareButton" ImageSource="share_icon.png" ShowIcon="True" VerticalOptions="End" HorizontalOptions="End" Margin="0,0,20,20" Text="Share" TextColor="White" Clicked="ShareButton_Clicked"/>
         <Grid x:Name="datePickerGrid" IsVisible="False">
             <Grid BackgroundColor="Black" Opacity="0.5" />
-            <picker:SfDatePicker x:Name="datePicker" WidthRequest="250" HeightRequest="250" BackgroundColor="White" HorizontalOptions="Center" VerticalOptions="Center" OkButtonClicked="datePicker_OkButtonClicked"  CancelButtonClicked="datePicker_CancelButtonClicked" >
+            <picker:SfDatePicker x:Name="datePicker" WidthRequest="250" HeightRequest="250" BackgroundColor="White" HorizontalOptions="Center" VerticalOptions="Center" OkButtonClicked="DatePicker_OkButtonClicked"  CancelButtonClicked="DatePicker_CancelButtonClicked" >
                 <picker:SfDatePicker.FooterView>
                     <picker:PickerFooterView ShowOkButton="True" Height="40" />
                 </picker:SfDatePicker.FooterView>
