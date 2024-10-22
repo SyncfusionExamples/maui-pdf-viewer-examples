@@ -69,7 +69,7 @@ namespace FormFillWithUseCase
                     // Remove the time and retain only the date from the selected DateTime object.
                     string date = datePicker.SelectedDate.Value.ToString().Split(' ')[0];
 
-                    // Convert the date to dd/mm/yyyy format.
+                    // Convert the date to d/m/yyyy format.
                     string[] dateComponents = date.Split("/");
                     date = $"{dateComponents[1]}/{dateComponents[0]}/{dateComponents[2]}";
 
