@@ -26,11 +26,25 @@ namespace SmartRedaction
             animation = new Animation();
             sensitiveInfoView.NodeChecked += SensitiveInfoView_NodeChecked;
             sensitiveInfoViewMobile.NodeChecked += SensitiveInfoView_NodeChecked;
-            CreateReduct.CheckedChanged += CreateReduct_CheckedChanged;
+            CreateReduct.StateChanged += CreateReduct_StateChanged;
             PdfViewer.AnnotationAdded += PdfViewer_AnnotationAdded;
             AddRedact.PropertyChanged += AddRedact_PropertyChanged;
             PdfViewer.DocumentLoaded += PdfViewer_DocumentLoaded;
 
+        }
+
+        private void CreateReduct_StateChanged(object? sender, Syncfusion.Maui.Buttons.StateChangedEventArgs e)
+        {
+            if (e.IsChecked.HasValue && e.IsChecked.Value)
+            {
+                PdfViewer.AnnotationMode = AnnotationMode.Square;
+                PdfViewer.AnnotationSettings.Square.BorderWidth = 1;
+                PdfViewer.AnnotationSettings.Author = "RedactedRect";
+            }
+            else
+            {
+                PdfViewer.AnnotationMode = AnnotationMode.None;
+            }
         }
 
         private void PdfViewer_DocumentLoaded(object? sender, EventArgs? e)
@@ -58,23 +72,10 @@ namespace SmartRedaction
             AddRedact.IsEnabled=true;
             MobileRedactLayout.IsVisible=false;
         }
-        private void CreateReduct_CheckedChanged(object? sender, CheckedChangedEventArgs e)
-        {
-            if (CreateReduct.IsChecked)
-            {
-                PdfViewer.AnnotationMode = AnnotationMode.Square;
-                PdfViewer.AnnotationSettings.Square.BorderWidth = 1;
-                PdfViewer.AnnotationSettings.Author = "RedactedRect";
-            }
-            else
-            {
-                PdfViewer.AnnotationMode = AnnotationMode.None;
-            }
-        }
 
         private void PdfViewer_AnnotationAdded(object? sender, AnnotationEventArgs e)
         {
-            if (CreateReduct.IsChecked && e.Annotation is SquareAnnotation)
+            if ( (bool)CreateReduct.IsChecked && e.Annotation is SquareAnnotation)
             {
                 e.Annotation.Name = $"RedactedRect{PdfViewer.Annotations.Count}";
                 e.Annotation.Author = "RedactedRect";
@@ -94,7 +95,6 @@ namespace SmartRedaction
                 // Access the NodeText
                 string nodeId = treeItem.NodeId;
                 string nodeText = treeItem.NodeText;
-
                 // Add or remove annotation for "Select All" nodes
                 if (nodeId == "Select All")
                 {
@@ -116,7 +116,6 @@ namespace SmartRedaction
                                 BorderWidth = 1,       // Set stroke thickness
                                 Name = item.NodeId     // Set annotation ID
                             };
-
                             // Add the annotation to the PDF viewer
                             PdfViewer.AddAnnotation(annotation);
                         }
@@ -214,8 +213,7 @@ namespace SmartRedaction
                 }
             }
             if (PdfViewer.Annotations.Count >= 1 &&
-    PdfViewer.Annotations.OfType<SquareAnnotation>()
-    .Count(a => !string.IsNullOrEmpty(a.Author) || a.Name.Contains("RedactedRect") || a.Author.Contains("RedactedRect")) >= 1)
+    PdfViewer.Annotations.OfType<SquareAnnotation>().Count(a => !string.IsNullOrEmpty(a.Author) || a.Name.Contains("RedactedRect") || a.Author.Contains("RedactedRect")) >= 1)
             {
                 SelectRedactitem.IsEnabled = true;
                 SelectRedactItem_Mobile.IsEnabled=true;
@@ -293,7 +291,6 @@ namespace SmartRedaction
         {
             var selectedPattern = PatternView.DataSource.Items;
             List<string> selectedItems = new List<string>();
-
             if (selectedPattern != null && selectedPattern.Any())
             {
                 foreach (var item in selectedPattern)
@@ -304,7 +301,6 @@ namespace SmartRedaction
                     }
                 }
             }
-
             // Convert the list to an array and update SelectedPatterns
             ViewModel.SelectedPatterns = selectedItems.ToArray();
         }
@@ -312,7 +308,6 @@ namespace SmartRedaction
         {
             var checkedItems = sensitiveInfoView.CheckedItems;
             List<string> selectedItems = new List<string>();
-
             if (checkedItems != null && checkedItems.Any())
             {
                 foreach (var item in checkedItems)
@@ -326,7 +321,6 @@ namespace SmartRedaction
                     }
                 }
             }
-
             // Convert the list to an array and update SelectedPatterns
             ViewModel.CheckedInfo = selectedItems.ToArray();
         }
@@ -343,16 +337,13 @@ namespace SmartRedaction
                 List<string> selectedItems = ViewModel.SelectedPatterns.ToList();
                 //Extract the text from the PDF
                 string extractedText = ExtractedTextFromPDF();
-
                 //Find the text bounds with the selected patterns
                 ViewModel.textboundsDetails = await FindText(extractedText, selectedItems);
-
                 //Count the no. of bounds fetched
                 ViewModel.textBoundsCount = ViewModel.textboundsDetails.Sum(pair => pair.Value.Count);
                 if (ViewModel.textBoundsCount > 0)
                 {
                     ViewModel.dataFetched = true;
-
                     ViewModel.OnPageAppearing();
 #if WINDOWS || MACCATALYST
                     popupContainer.IsVisible = false;
@@ -376,12 +367,10 @@ namespace SmartRedaction
         }
         private async Task<Dictionary<int, List<TextBounds>>> FindText(string extractedText, List<string> selectedItems)
         {
-
             if (PdfViewer.DocumentSource != null)
             {
                 List<string> sensitiveData = await GetSensitiveDataFromPDF(extractedText, selectedItems);
                 Stream documentStream = (Stream)PdfViewer.DocumentSource;
-
                 //Remove the Prefixs
                 List<string> sensitiveInformations = RemovePrefix(sensitiveData, selectedItems);
                 Dictionary<int, List<TextBounds>> boundsData = FindTextBounds(documentStream, sensitiveInformations);
@@ -394,30 +383,22 @@ namespace SmartRedaction
         internal async Task<List<string>> GetSensitiveDataFromPDF(string text, List<string> selectedItems)
         {
             StringBuilder stringBuilder = new StringBuilder();
-
             stringBuilder.AppendLine("I have a block of text containing various pieces of information. Please help me identify and extract any Personally Identifiable Information (PII) present in the text. The PII categories I am interested in are:");
-
             foreach (var item in selectedItems)
             {
                 stringBuilder.AppendLine(item);
             }
-
             stringBuilder.AppendLine("Please provide the extracted information as a plain list, separated by commas, without any prefix or numbering or extra content.");
-
             string prompt = stringBuilder.ToString();
-
             var answer = await openAIService.GetAnswerFromGPT(prompt, ExtractedTextFromPDF());
-
             if (answer != null)
             {
                 var output = answer.Trim();
-
                 // Use a HashSet to remove duplicates
                 var namesSet = new HashSet<string>(output
                     ?.Split(new[] { '\n', ',' }, StringSplitOptions.RemoveEmptyEntries)
                     .Select(name => name.Trim())
                     .Where(name => !string.IsNullOrEmpty(name)) ?? Enumerable.Empty<string>());
-
                 return namesSet.ToList();
             }
             return new List<string>();
@@ -426,7 +407,6 @@ namespace SmartRedaction
         public Dictionary<int, List<TextBounds>> FindTextBounds(Stream stream, List<string> sensitiveInformations)
         {
             Dictionary<int, List<TextBounds>> accumulatedBounds = new Dictionary<int, List<TextBounds>>();
-
             using (PdfLoadedDocument loadedDocument = new PdfLoadedDocument(stream))
             {
                 foreach (var info in sensitiveInformations)
@@ -482,7 +462,6 @@ namespace SmartRedaction
             MemoryStream pdf = new MemoryStream();
             PdfViewer.SaveDocument(pdf);
             PdfLoadedDocument loadedDocument = new PdfLoadedDocument(pdf);
-
             foreach (PdfLoadedPage page in loadedDocument.Pages)
             {
                 List<PdfLoadedAnnotation> removeAnnotations = new List<PdfLoadedAnnotation>();
@@ -501,17 +480,14 @@ namespace SmartRedaction
 
                     }
                 }
-
                 //Remove from the Annotation list
                 foreach (PdfLoadedAnnotation annotation in removeAnnotations)
                 {
                     page.Annotations.Remove(annotation);
                 }
-
             }
 
             loadedDocument.Redact();
-
             //Reload the document to view the redaction
             MemoryStream stream = new MemoryStream();
             loadedDocument.Save(stream);
@@ -522,7 +498,6 @@ namespace SmartRedaction
 
         private void RedactClicked(object sender, EventArgs e)
         {
-
             Redact();
         }
 
@@ -538,6 +513,7 @@ popupContainer.IsVisible = !popupContainer.IsVisible;
 #endif
             ViewModel.SensitiveInfo.Clear();
         }
+
         private void SavePDF(object sender, EventArgs e)
         {
             var filePath = Path.Combine(FileSystem.AppDataDirectory, "SavedSample.pdf");
@@ -590,9 +566,6 @@ popupContainer.IsVisible = !popupContainer.IsVisible;
             tapped = false;
         }
     }
-
-
-
 
     public class TextBounds
     {
