@@ -119,11 +119,8 @@
             <BoxView HeightRequest="1" Opacity="1" Grid.Row="0" BackgroundColor="{AppThemeBinding Light=#CAC4D0, Dark=#CAC4D0}"/>
             <Grid Grid.Row="1" RowDefinitions="auto,auto">
                 <Grid ColumnDefinitions="auto,auto,*">
-                    <Button x:Name="Back" HorizontalOptions="Start" Margin="0" FontSize="24" TextColor="#1C1B1F" BackgroundColor="Transparent" ToolTipProperties.Text="Back" FontFamily="Maui Material Assets" Clicked="AIAssistant_Clicked" IsVisible="{OnPlatform Android=true, iOS=true, Default=false}" Grid.Column="0"
-Text="{OnPlatform Android='\&#xe72d;', iOS='\&#xe72d;'}"/>
                     <Label x:Name="AIAssist" Grid.Column="1"  TextColor="#49454F" FontSize="{OnPlatform Android=16, iOS=16}" Text="AI Assistant" HorizontalOptions="Start" VerticalOptions="Center" Padding="18" FontFamily="Roboto" FontAttributes="Bold"/>
-                    <Button x:Name="close" Grid.Column="3" TextColor="#49454F" Style="{StaticResource buttonIconStyle}" BorderWidth="0" Clicked="AIAssistant_Clicked" CornerRadius="20" FontSize="24" Text="&#xe70b;" HorizontalOptions="End" FontFamily="Maui Material Assets" WidthRequest="40" HeightRequest="40" ToolTipProperties.Text="Close" Padding="0" Margin="0,0,14,0"
-IsVisible="{OnPlatform WinUI=true, MacCatalyst=true, Android=false, iOS=false}">
+                    <Button x:Name="close" Grid.Column="3" TextColor="#49454F" Style="{StaticResource buttonIconStyle}" BorderWidth="0" Clicked="AIAssistant_Clicked" CornerRadius="20" FontSize="24" Text="&#xe70b;" HorizontalOptions="End" FontFamily="Maui Material Assets" WidthRequest="40" HeightRequest="40" ToolTipProperties.Text="Close" Padding="0" Margin="0,0,14,0">
                     </Button>
                 </Grid>
             </Grid>

@@ -1,5 +1,4 @@
-﻿using Azure.Core;
-using Syncfusion.Maui.AIAssistView;
+﻿using Syncfusion.Maui.AIAssistView;
 using Syncfusion.Pdf.Parsing;
 
 namespace Summarizer;
@@ -18,10 +17,8 @@ public partial class MainPage : ContentPage
     private async void PdfViewer_DocumentLoaded(object? sender, EventArgs? e)
     {
         AssistServices AI = new AssistServices();
-        if (AI.deploymentName == "DEPLOYMENT_NAME")
-        {
+        if (AI.DeploymentName == "DEPLOYMENT_NAME")
             Application.Current?.MainPage?.DisplayAlert("Alert", "The Azure API key or endpoint is missing or incorrect. Please verify your credentials", "OK");
-        }
         await LoadPDFDataAsync();
         var reply = await viewModel.assistService.GetAnswerFromGPT("Read the PDF document contents and understand the concept. Provide summary for this in 3 to 4 simple sentences. Ignore about iTextSharp related points in the details");
         var suggestion = await viewModel.assistService.GetSuggestion("Provide short Summary for the document");
@@ -39,9 +36,7 @@ public partial class MainPage : ContentPage
             StopBubbleAnimation();
         }
         else
-        {
             StartBubbleAnimation();
-        }
     }
 
     internal async Task LoadPDFDataAsync()
@@ -49,26 +44,21 @@ public partial class MainPage : ContentPage
         await Task.Delay(1000);
         var documentSource = PdfViewer.DocumentSource;
         List<string> extractedText = new List<string>();
-
         if (documentSource != null)
         {
-
             Stream stream = (Stream)documentSource;
             PdfLoadedDocument loadedDocument = new PdfLoadedDocument(stream);
             // Loading page collections
             PdfLoadedPageCollection loadedPages = loadedDocument.Pages;
             await Task.Run(() =>
             {
-
                 // Extract annotations to a memory stream and convert to string
                 using (MemoryStream annotationStream = new MemoryStream())
                 {
                     loadedDocument.ExportAnnotations(annotationStream, AnnotationDataFormat.Json);
                     string annotations = ConvertToString(annotationStream);
                     if (!String.IsNullOrEmpty(annotations))
-                    {
                         extractedText.Add("Annotations: " + annotations);
-                    }
                 }
 
                 // Extract form fields to a memory stream and convert to string
@@ -79,9 +69,7 @@ public partial class MainPage : ContentPage
                         loadedDocument.Form.ExportData(formStream, DataFormat.Json, "form");
                         string formFields = ConvertToString(formStream);
                         if (!String.IsNullOrEmpty(formFields))
-                        {
                             extractedText.Add("Form fields: " + formFields);
-                        }
                     }
                 }
 
@@ -163,12 +151,10 @@ public partial class MainPage : ContentPage
         {
             var bubbleEffect = new Animation(v => AIButton.Scale = v, 1, 1.15, Easing.CubicInOut);
             var fadeEffect = new Animation(v => AIButton.Opacity = v, 1, 0.5, Easing.CubicInOut);
-
             animation.Add(0, 0.5, bubbleEffect);
             animation.Add(0, 0.5, fadeEffect);
             animation.Add(0.5, 1, new Animation(v => AIButton.Scale = v, 1.15, 1, Easing.CubicInOut));
             animation.Add(0.5, 1, new Animation(v => AIButton.Opacity = v, 0.5, 1, Easing.CubicInOut));
-
             animation.Commit(this, "BubbleEffect", length: 1500, easing: Easing.CubicInOut, repeat: () => true);
 
         }

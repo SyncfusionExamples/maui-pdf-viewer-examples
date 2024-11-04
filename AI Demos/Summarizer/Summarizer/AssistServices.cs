@@ -25,7 +25,7 @@ namespace Summarizer
         /// <summary>
         /// The Deployment name
         /// </summary>
-        internal string deploymentName = "DEPLOYMENT_NAME";
+        internal string DeploymentName = "DEPLOYMENT_NAME";
 
         /// <summary>
         /// The AI key
@@ -46,7 +46,7 @@ namespace Summarizer
         {
             chatCompletions = new ChatCompletionsOptions
             {
-                DeploymentName = deploymentName,
+                DeploymentName = DeploymentName,
                 Temperature = (float)1.2f,
                 NucleusSamplingFactor = (float)0.9,
                 FrequencyPenalty = 0.8f,
@@ -71,9 +71,7 @@ namespace Summarizer
                 return response.Value.Choices[0].Message.Content;
             }
             else
-            {
                 return "Please connect OpenAI for real time queries";
-            }
         }
 
         /// <summary>
@@ -113,7 +111,6 @@ namespace Summarizer
         internal async Task<AssistItemSuggestion> GetSuggestion(string prompt)
         {
             var chatSuggestions = new AssistItemSuggestion();
-
             var suggestions = new ObservableCollection<ISuggestion>();
             var suggestion = await GetAnswerFromGPT("You are a helpful assistant. Your task is to analyze the provided text and generate 3 short diverse questions and each question should not exceed 10 words.");
             if (suggestion != "Please connect OpenAI for real time queries")
@@ -149,9 +146,7 @@ namespace Summarizer
                     return response.Value.Choices[0].Message.Content;
                 }
                 else
-                {
                     return "Please connect OpenAI for real time queries";
-                }
             }
             catch
             {
