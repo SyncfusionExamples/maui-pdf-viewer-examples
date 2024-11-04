@@ -84,7 +84,7 @@
                         <VisualState Name="Disabled">
                             <VisualState.Setters>
                                 <Setter Property="BackgroundColor" Value="#1C1B1F1F" />
-                                <Setter Property="TextColor" Value="#1C1B1F61" />
+                                <Setter Property="Opacity" Value="0.5"/>
                             </VisualState.Setters>
                         </VisualState>
                     </VisualStateGroup>
@@ -414,7 +414,7 @@ HorizontalOptions="End"
                             Padding="8"
                             FontSize="14"
                              Style="{StaticResource ApplyButton}"
-                            WidthRequest="60"
+                            WidthRequest="90"
                             HeightRequest="40"
                             HorizontalOptions="End"
             Clicked="OkClicked" >
