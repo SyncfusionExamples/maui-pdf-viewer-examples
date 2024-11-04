@@ -13,7 +13,7 @@ namespace SmartRedaction
         /// <summary>
         /// The Deployment name
         /// </summary>
-        internal string deploymentName = "DEPLOYMENT_NAME";
+        internal string DeploymentName = "DEPLOYMENT_NAME";
 
         /// <summary>
         /// The AI key
@@ -34,7 +34,7 @@ namespace SmartRedaction
         {
             chatCompletions = new ChatCompletionsOptions
             {
-                DeploymentName = deploymentName,
+                DeploymentName = DeploymentName,
                 Temperature = (float)1.2f,
                 NucleusSamplingFactor = (float)0.9,
                 FrequencyPenalty = 0.8f,

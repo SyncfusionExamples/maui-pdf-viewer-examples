@@ -42,14 +42,12 @@ namespace SmartRedaction
                 PdfViewer.AnnotationSettings.Author = "RedactedRect";
             }
             else
-            {
                 PdfViewer.AnnotationMode = AnnotationMode.None;
-            }
         }
 
         private void PdfViewer_DocumentLoaded(object? sender, EventArgs? e)
         {
-            if (openAIService.deploymentName == "DEPLOYMENT_NAME")
+            if (openAIService.DeploymentName == "DEPLOYMENT_NAME")
             {
                 Application.Current?.MainPage?.DisplayAlert("Alert", "The Azure API key or endpoint is missing or incorrect. Please verify your credentials", "OK");
                 MobileScan.IsEnabled = false;
@@ -82,9 +80,7 @@ namespace SmartRedaction
                 AddRedact.IsEnabled = true;
             }
             else if (e.Annotation is SquareAnnotation)
-            {
                 SelectRedactitem.IsEnabled = true;
-            }
         }
 
 
@@ -251,9 +247,7 @@ namespace SmartRedaction
                     loadedDocument.ExportAnnotations(annotationStream, AnnotationDataFormat.Json);
                     string annotations = ConvertToString(annotationStream);
                     if (!String.IsNullOrEmpty(annotations))
-                    {
                         extractedText.Add("Annotations: " + annotations);
-                    }
                 }
                 // Extract form fields to a memory stream and convert to string
                 using (MemoryStream formStream = new MemoryStream())
@@ -263,9 +257,7 @@ namespace SmartRedaction
                         loadedDocument.Form.ExportData(formStream, DataFormat.Json, "form");
                         string formFields = ConvertToString(formStream);
                         if (!String.IsNullOrEmpty(formFields))
-                        {
                             extractedText.Add("Form fields: " + formFields);
-                        }
                     }
                 }
                 // Extract text from existing PDF document pages
@@ -296,9 +288,7 @@ namespace SmartRedaction
                 foreach (var item in selectedPattern)
                 {
                     if (((TreeItem)item).IsChecked)
-                    {
                         selectedItems.Add(((TreeItem)item).NodeText);
-                    }
                 }
             }
             // Convert the list to an array and update SelectedPatterns
@@ -414,10 +404,8 @@ namespace SmartRedaction
                     if (!string.IsNullOrEmpty(info))
                     {
                         Dictionary<int, List<RectangleF>> bounds;
-
                         // Find the text bounds
                         loadedDocument.FindText(info, out bounds);
-
                         // Merge bounds into accumulatedBounds
                         foreach (var pair in bounds)
                         {
@@ -425,7 +413,6 @@ namespace SmartRedaction
                             {
                                 accumulatedBounds[pair.Key] = new List<TextBounds>();
                             }
-
                             // Add the bounds with the corresponding sensitive information
                             accumulatedBounds[pair.Key].AddRange(pair.Value.Select(rect => new TextBounds
                             {
@@ -448,9 +435,7 @@ namespace SmartRedaction
                     // Remove the selected items title prefix from the extracted sensitive information
                     string prefix = item + ": ";
                     if (sensitiveInfo[i].ToLower().Contains(prefix, StringComparison.Ordinal))
-                    {
                         sensitiveInfo[i] = sensitiveInfo[i].Substring((sensitiveInfo[i].IndexOf(':') + 1));
-                    }
                 }
             }
             return sensitiveInfo;
@@ -517,7 +502,6 @@ popupContainer.IsVisible = !popupContainer.IsVisible;
         private void SavePDF(object sender, EventArgs e)
         {
             var filePath = Path.Combine(FileSystem.AppDataDirectory, "SavedSample.pdf");
-
             var stream = new FileStream(filePath, FileMode.Create, FileAccess.Write);
             PdfViewer.SaveDocument(stream);
             Application.Current?.MainPage?.DisplayAlert("Success", $"Document saved successfully at:\n{filePath}", "OK");
@@ -549,14 +533,11 @@ popupContainer.IsVisible = !popupContainer.IsVisible;
             {
                 var bubbleEffect = new Animation(v => AIButton.Scale = v, 1, 1.15, Easing.CubicInOut);
                 var fadeEffect = new Animation(v => AIButton.Opacity = v, 1, 0.5, Easing.CubicInOut);
-
                 animation.Add(0, 0.5, bubbleEffect);
                 animation.Add(0, 0.5, fadeEffect);
                 animation.Add(0.5, 1, new Animation(v => AIButton.Scale = v, 1.15, 1, Easing.CubicInOut));
                 animation.Add(0.5, 1, new Animation(v => AIButton.Opacity = v, 0.5, 1, Easing.CubicInOut));
-
                 animation.Commit(this, "BubbleEffect", length: 1500, easing: Easing.CubicInOut, repeat: () => true);
-
             }
         }
 
