@@ -41,7 +41,7 @@ public partial class MainPage : ContentPage
 
     internal async Task LoadPDFDataAsync()
     {
-        await Task.Delay(1000);
+        await Task.Delay(100);
         var documentSource = PdfViewer.DocumentSource;
         List<string> extractedText = new List<string>();
         if (documentSource != null)
