@@ -29,7 +29,6 @@ namespace Summarizer
             }
         }
 
-
         public ObservableCollection<IAssistItem> Messages
         {
             get
@@ -51,6 +50,7 @@ namespace Summarizer
         }
 
         internal AssistServices assistService = new AssistServices();
+        
         public PdfViewerViewModel()
         {
              string basePath = "Summarizer.Assets";

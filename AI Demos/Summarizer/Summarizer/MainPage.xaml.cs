@@ -7,6 +7,7 @@ public partial class MainPage : ContentPage
 {
     private bool tapped;
     Animation animation;
+
     public MainPage()
     {
         InitializeComponent();
@@ -72,7 +73,6 @@ public partial class MainPage : ContentPage
                             extractedText.Add("Form fields: " + formFields);
                     }
                 }
-
                 // Extract text from existing PDF document pages
                 for (int i = 0; i < loadedPages.Count; i++)
                 {
@@ -93,6 +93,7 @@ public partial class MainPage : ContentPage
         var reader = new StreamReader(memoryStream, System.Text.Encoding.UTF8);
         return reader.ReadToEnd();
     }
+
     private void PreviousPage(object? sender, EventArgs e)
     {
         PdfViewer.GoToPreviousPage();
@@ -107,6 +108,7 @@ public partial class MainPage : ContentPage
             goToNextPageButton.IsEnabled = true;
         }
     }
+
     private void NextPage(object? sender, EventArgs e)
     {
         PdfViewer.GoToNextPage();
@@ -145,6 +147,7 @@ public partial class MainPage : ContentPage
     {
         StartBubbleAnimation();
     }
+
     private void StartBubbleAnimation()
     {
         if (!tapped)
