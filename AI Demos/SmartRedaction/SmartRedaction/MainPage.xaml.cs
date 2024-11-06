@@ -12,7 +12,7 @@ using Syncfusion.Maui.Core.Internals;
 
 
 namespace SmartRedaction
-{ 
+{
     public partial class MainPage : ContentPage
     {
         private AIService openAIService;
@@ -53,7 +53,7 @@ namespace SmartRedaction
                 MobileScan.IsEnabled = false;
                 MobileScan.Opacity = 0.5;
                 DesktopScanButton.IsEnabled = false;
-                DesktopScanButton.Opacity=0.5;
+                DesktopScanButton.Opacity = 0.5;
             }
         }
 
@@ -67,13 +67,13 @@ namespace SmartRedaction
 
         private void OkClicked(object sender, EventArgs e)
         {
-            AddRedact.IsEnabled=true;
-            MobileRedactLayout.IsVisible=false;
+            AddRedact.IsEnabled = true;
+            MobileRedactLayout.IsVisible = false;
         }
 
         private void PdfViewer_AnnotationAdded(object? sender, AnnotationEventArgs e)
         {
-            if ( (bool)CreateReduct.IsChecked && e.Annotation is SquareAnnotation)
+            if ((bool)CreateReduct.IsChecked && e.Annotation is SquareAnnotation)
             {
                 e.Annotation.Name = $"RedactedRect{PdfViewer.Annotations.Count}";
                 e.Annotation.Author = "RedactedRect";
@@ -212,11 +212,11 @@ namespace SmartRedaction
     PdfViewer.Annotations.OfType<SquareAnnotation>().Count(a => !string.IsNullOrEmpty(a.Author) || a.Name.Contains("RedactedRect") || a.Author.Contains("RedactedRect")) >= 1)
             {
                 SelectRedactitem.IsEnabled = true;
-                SelectRedactItem_Mobile.IsEnabled=true;
+                SelectRedactItem_Mobile.IsEnabled = true;
             }
             else
             {
-                SelectRedactitem.IsEnabled= false;
+                SelectRedactitem.IsEnabled = false;
                 SelectRedactItem_Mobile.IsEnabled = false;
             }
         }
@@ -317,7 +317,7 @@ namespace SmartRedaction
         private async void ScanClick(object sender, EventArgs e)
         {
 #if WINDOWS || MACCATALYST
-            LoadingIndicator.IsRunning=true;
+            LoadingIndicator.IsRunning = true;
 #else
             LoadingIndicatorMobile.IsRunning = true;
 #endif
@@ -349,7 +349,7 @@ namespace SmartRedaction
                     //ViewModel.OnAfterRender(ViewModel.dataFetched);
                 }
 #if WINDOWS || MACCATALYST
-                LoadingIndicator.IsRunning=false;
+                LoadingIndicator.IsRunning = false;
 #else
                 LoadingIndicatorMobile.IsRunning = false;
 #endif
@@ -489,7 +489,7 @@ namespace SmartRedaction
         private void OnCancelClicked(object sender, EventArgs e)
         {
 #if WINDOWS || MACCATALYST
-popupContainer.IsVisible = !popupContainer.IsVisible;
+            popupContainer.IsVisible = !popupContainer.IsVisible;
             SenstiveInfoContainer.IsVisible = false;
             SelectRedactitem.IsEnabled = false;
 #else
@@ -520,7 +520,6 @@ popupContainer.IsVisible = !popupContainer.IsVisible;
                 MobileRedactLayout.IsVisible = true;
                 StopBubbleAnimation();
             }
-                
         }
 
         private void image_Loaded(object sender, EventArgs e)
@@ -553,7 +552,4 @@ popupContainer.IsVisible = !popupContainer.IsVisible;
         public string SensitiveInformation { get; set; } = string.Empty;
         public RectangleF Bounds { get; set; }
     }
-
-
-
 }

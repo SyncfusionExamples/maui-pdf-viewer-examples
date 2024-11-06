@@ -34,21 +34,20 @@ namespace SmartRedaction
         {
             chatCompletions = new ChatCompletionsOptions
             {
-                DeploymentName = DeploymentName,
+                DeploymentName = this.DeploymentName,
                 Temperature = (float)1.2f,
                 NucleusSamplingFactor = (float)0.9,
                 FrequencyPenalty = 0.8f,
                 PresencePenalty = 0.8f
             };
-            client = new OpenAIClient(new Uri(endpoint), new AzureKeyCredential(key));
-
+            client = new OpenAIClient(new Uri(this.endpoint), new AzureKeyCredential(this.key));
         }
-        public async Task<string> GetAnswerFromGPT(string systemPrompt,string extractedtext)
+        public async Task<string> GetAnswerFromGPT(string systemPrompt, string extractedtext)
         {
             try
             {
                 string message = extractedtext;
-                if (client != null && chatCompletions != null && key!= "AZURE_OPENAI_API_KEY")
+                if (this.client != null && this.chatCompletions != null && this.key != "AZURE_OPENAI_API_KEY")
                 {
                     chatCompletions.Messages.Clear();
                     chatCompletions.Messages.Add(new ChatRequestSystemMessage(systemPrompt));
