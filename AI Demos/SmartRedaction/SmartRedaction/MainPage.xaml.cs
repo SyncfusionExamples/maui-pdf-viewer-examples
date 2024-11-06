@@ -7,9 +7,6 @@ using Syncfusion.Pdf.Interactive;
 using Syncfusion.Pdf.Redaction;
 using Syncfusion.Maui.PdfViewer;
 using System.Collections.ObjectModel;
-using Syncfusion.Maui.ListView;
-using Syncfusion.Maui.Core.Internals;
-
 
 namespace SmartRedaction
 {
@@ -18,6 +15,7 @@ namespace SmartRedaction
         private AIService openAIService;
         private bool tapped;
         Animation animation;
+
         public MainPage()
         {
             InitializeComponent();
@@ -30,7 +28,6 @@ namespace SmartRedaction
             PdfViewer.AnnotationAdded += PdfViewer_AnnotationAdded;
             AddRedact.PropertyChanged += AddRedact_PropertyChanged;
             PdfViewer.DocumentLoaded += PdfViewer_DocumentLoaded;
-
         }
 
         private void CreateReduct_StateChanged(object? sender, Syncfusion.Maui.Buttons.StateChangedEventArgs e)
@@ -82,7 +79,6 @@ namespace SmartRedaction
             else if (e.Annotation is SquareAnnotation)
                 SelectRedactitem.IsEnabled = true;
         }
-
 
         private void SensitiveInfoView_NodeChecked(object? sender, NodeCheckedEventArgs e)
         {
@@ -231,6 +227,7 @@ namespace SmartRedaction
         {
             return (number * 96f / 72f);
         }
+
         private string ExtractedTextFromPDF()
         {
             List<string> extractedText = new List<string>();
@@ -272,6 +269,7 @@ namespace SmartRedaction
             }
             return "";
         }
+
         private string ConvertToString(MemoryStream memoryStream)
         {
             // Reset the position of the MemoryStream to the beginning
@@ -279,6 +277,7 @@ namespace SmartRedaction
             var reader = new StreamReader(memoryStream, System.Text.Encoding.UTF8);
             return reader.ReadToEnd();
         }
+
         private void UpdateCheckedPatterns()
         {
             var selectedPattern = PatternView.DataSource.Items;
@@ -294,6 +293,7 @@ namespace SmartRedaction
             // Convert the list to an array and update SelectedPatterns
             ViewModel.SelectedPatterns = selectedItems.ToArray();
         }
+
         private void UpdateCheckedInfos()
         {
             var checkedItems = sensitiveInfoView.CheckedItems;
@@ -314,6 +314,7 @@ namespace SmartRedaction
             // Convert the list to an array and update SelectedPatterns
             ViewModel.CheckedInfo = selectedItems.ToArray();
         }
+
         private async void ScanClick(object sender, EventArgs e)
         {
 #if WINDOWS || MACCATALYST
@@ -355,6 +356,7 @@ namespace SmartRedaction
 #endif
             }
         }
+
         private async Task<Dictionary<int, List<TextBounds>>> FindText(string extractedText, List<string> selectedItems)
         {
             if (PdfViewer.DocumentSource != null)
@@ -368,8 +370,8 @@ namespace SmartRedaction
             }
             Dictionary<int, List<TextBounds>> temp = new Dictionary<int, List<TextBounds>>();
             return temp;
-
         }
+
         internal async Task<List<string>> GetSensitiveDataFromPDF(string text, List<string> selectedItems)
         {
             StringBuilder stringBuilder = new StringBuilder();
@@ -471,7 +473,6 @@ namespace SmartRedaction
                     page.Annotations.Remove(annotation);
                 }
             }
-
             loadedDocument.Redact();
             //Reload the document to view the redaction
             MemoryStream stream = new MemoryStream();
@@ -505,7 +506,6 @@ namespace SmartRedaction
             var stream = new FileStream(filePath, FileMode.Create, FileAccess.Write);
             PdfViewer.SaveDocument(stream);
             Application.Current?.MainPage?.DisplayAlert("Success", $"Document saved successfully at:\n{filePath}", "OK");
-
         }
 
         private void OpenCloseMobileRedactLayout(object sender, EventArgs e)
@@ -526,6 +526,7 @@ namespace SmartRedaction
         {
             StartBubbleAnimation();
         }
+
         private void StartBubbleAnimation()
         {
             if (!tapped)
