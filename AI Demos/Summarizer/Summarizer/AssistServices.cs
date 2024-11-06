@@ -46,13 +46,13 @@ namespace Summarizer
         {
             chatCompletions = new ChatCompletionsOptions
             {
-                DeploymentName = DeploymentName,
+                DeploymentName = this.DeploymentName,
                 Temperature = (float)1.2f,
                 NucleusSamplingFactor = (float)0.9,
                 FrequencyPenalty = 0.8f,
                 PresencePenalty = 0.8f
             };
-            client = new OpenAIClient(new Uri(endpoint), new AzureKeyCredential(key));
+            client = new OpenAIClient(new Uri(this.endpoint), new AzureKeyCredential(this.key));
         }
 
         /// <summary>
@@ -62,7 +62,7 @@ namespace Summarizer
         /// <returns>A predefined message requesting OpenAI connection for real-time queries.</returns>
         internal async Task<string> GetPrompt(string prompt)
         {
-            if (client != null && chatCompletions != null && key!= "AZURE_OPENAI_API_KEY")
+            if (this.client != null && this.chatCompletions != null && this.key != "AZURE_OPENAI_API_KEY")
             {
                 chatCompletions.Messages.Clear();
                 chatCompletions.Messages.Add(new ChatRequestSystemMessage("Please provide the prompt for responce" + prompt));
@@ -85,7 +85,7 @@ namespace Summarizer
             try
             {
                 // Use extracted text
-                if (ExtractedText != null && client != null && chatCompletions != null && key != "AZURE_OPENAI_API_KEY")
+                if (this.ExtractedText != null && this.client != null && this.chatCompletions != null && this.key != "AZURE_OPENAI_API_KEY")
                 {
                     string message = ExtractedText;
                     var systemPrompt = "You are a helpful assistant. Use the provided PDF document pages and pick a precise page to answer the user question,Ignore about iTextSharp related points in the details, Strictly don't bold any text all text need to plain text. Pages: " + message;
@@ -137,7 +137,7 @@ namespace Summarizer
         {
             try
             {
-                if (ExtractedText != null && chatCompletions != null && client != null && key != "AZURE_OPENAI_API_KEY")
+                if (this.ExtractedText != null && this.chatCompletions != null && this.client != null && this.key != "AZURE_OPENAI_API_KEY")
                 {
                     chatCompletions.Messages.Clear();
                     chatCompletions.Messages.Add(new ChatRequestSystemMessage(systemPrompt));
