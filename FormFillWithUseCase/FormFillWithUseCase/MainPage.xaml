@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewer="clr-namespace:Syncfusion.Maui.PdfViewer;assembly=Syncfusion.Maui.PdfViewer"
+             xmlns:picker="clr-namespace:Syncfusion.Maui.Picker;assembly=Syncfusion.Maui.Picker"
+             xmlns:button="clr-namespace:Syncfusion.Maui.Buttons;assembly=Syncfusion.Maui.Buttons"
+             x:Class="FormFillWithUseCase.MainPage">
+
+    <!-- Main container for the page content -->
+    <Grid>
+        <!-- Syncfusion PDF Viewer component 
+             Displays PDF documents and allows interaction with form fields. 
+             The 'FormFieldFocusChanged' event triggers when a user interacts with form fields -->
+        <viewer:SfPdfViewer x:Name="pdfViewer" FormFieldFocusChanged="PdfViewer_FormFieldFocusChanged"/>
+        <!-- Button for sharing functionality 
+             Positioned at the bottom-right corner of the page 
+             Includes an icon (share_icon.png) and text. 
+             The button listens for the 'ShareButton_Clicked' event when pressed -->
+        <button:SfButton x:Name="shareButton" 
+                         ImageSource="share_icon.png" 
+                         ShowIcon="True" 
+                         VerticalOptions="End" 
+                         HorizontalOptions="End" 
+                         Margin="0,0,20,20" 
+                         Text="Share" 
+                         TextColor="White" 
+                         Clicked="ShareButton_Clicked"/>
+        <!-- Overlay grid for displaying the date picker 
+             Initially set to hidden with IsVisible="False" 
+             Appears when the user interacts with a Date of Birth field in the PDF -->
+        <Grid x:Name="datePickerGrid" IsVisible="False">
+            <Grid BackgroundColor="Black" Opacity="0.5" />
+            <!-- Syncfusion DatePicker control for date selection 
+                 Includes 'Ok' and 'Cancel' button event handlers for user interaction -->
+            <picker:SfDatePicker x:Name="datePicker" 
+                                 WidthRequest="250" 
+                                 HeightRequest="250" 
+                                 BackgroundColor="White" 
+                                 HorizontalOptions="Center" 
+                                 VerticalOptions="Center" 
+                                 OkButtonClicked="DatePicker_OkButtonClicked"  
+                                 CancelButtonClicked="DatePicker_CancelButtonClicked">
+                <!-- Footer for the DatePicker
+                     Displays an OK button for confirming the selected date and a Cancel button to dismiss the picker. -->
+                <picker:SfDatePicker.FooterView>
+                    <picker:PickerFooterView ShowOkButton="True" Height="40" />
+                </picker:SfDatePicker.FooterView>
+            </picker:SfDatePicker>
+        </Grid>
+    </Grid>
+</ContentPage>

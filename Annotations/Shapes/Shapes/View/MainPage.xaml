@@ -105,7 +105,8 @@
            
             <syncfusion:SfPdfViewer
                     x:Name="PdfViewer"
-                    Grid.Row="5"                   
+                    Grid.Row="5"
+                    ShowToolbars="False"
                     DocumentSource="{Binding PdfDocumentStream}">
             </syncfusion:SfPdfViewer>
             <local:ColorPalatte
