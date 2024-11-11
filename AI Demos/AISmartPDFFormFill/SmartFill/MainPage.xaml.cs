@@ -15,6 +15,15 @@ public partial class MainPage : ContentPage
         animation = new Animation();
         Clipboard.ClipboardContentChanged += Clipboard_ClipboardContentChanged;
         PdfViewer.DocumentLoaded += PdfViewer_DocumentLoaded;
+        SubmitForm.PropertyChanged += SubmitForm_PropertyChanged;
+    }
+
+    private void SubmitForm_PropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
+    {
+        if (SubmitForm.IsEnabled)
+            SubmitForm.Opacity = 1;
+        else
+            SubmitForm.Opacity =0.5;
     }
 
     private void PdfViewer_DocumentLoaded(object? sender, EventArgs? e)
@@ -27,10 +36,10 @@ public partial class MainPage : ContentPage
     private async void Clipboard_ClipboardContentChanged(object? sender, EventArgs e)
     {
         string? copiedText = await Clipboard.GetTextAsync();
-        StartBubbleAnimation();
-        if (string.IsNullOrEmpty(copiedText) == false)
+        if (string.IsNullOrEmpty(copiedText) == false && chatService.deploymentName!= "DEPLOYMENT_NAME")
         {
             SubmitForm.IsEnabled = true;
+            StartBubbleAnimation();
         }
     }
 
@@ -200,8 +209,8 @@ public partial class MainPage : ContentPage
     {
         if (sender is Button button)
         {
-            button.Text = "\ue70c";
-            switch (button.AutomationId)
+            button.Text = "\ue726";
+            switch (button.AutomationId) // You can also use button.Id, button.AutomationId, etc.
             {
                 case "CopiedButton1":
                     await Clipboard.SetTextAsync(InputData1.Text);
@@ -216,21 +225,21 @@ public partial class MainPage : ContentPage
                     break;
             }
             await Task.Delay(3000);
-            button.Text = "\ue798";
+            button.Text = "\ue737";
         }
     }
 
     private void FullViewForCopiedData(object sender, EventArgs e)
     {
-        if (CopiedDataViewButton.Text == "\ue702")
+        if (CopiedDataViewButton.Text == "\ue708")
         {
             MobileCopiedData.HeightRequest = 2 * MobileCopiedData.HeightRequest;
-            CopiedDataViewButton.Text = "\ue703";
+            CopiedDataViewButton.Text = "\ue705";
         }
         else
         {
             MobileCopiedData.HeightRequest = MobileCopiedData.HeightRequest / 2;
-            CopiedDataViewButton.Text = "\ue702";
+            CopiedDataViewButton.Text = "\ue708";
         }
     }
     private void StartBubbleAnimation()

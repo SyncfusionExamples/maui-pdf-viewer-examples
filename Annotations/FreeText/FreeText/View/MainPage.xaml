@@ -96,7 +96,8 @@
             <Line Grid.Row="3" StrokeThickness="1" IsVisible="{Binding Path=IsVisible,Source={x:Reference EditOption}}" BackgroundColor="#33000000"/>
             <syncfusion:SfPdfViewer
                     x:Name="PdfViewer"
-                    Grid.Row="4"                   
+                    Grid.Row="4"    
+                    ShowToolbars="False"
                     DocumentSource="{Binding PdfDocumentStream}">
             </syncfusion:SfPdfViewer>
             <local:FreeTextEditor

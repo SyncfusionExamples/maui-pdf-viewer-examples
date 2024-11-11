@@ -75,23 +75,12 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiImage Include="Assets\export_image.png" />
-	  <MauiImage Include="Assets\export_small_image.png" />
-	  <MauiImage Include="Assets\import_image.png" />
-	  <MauiImage Include="Assets\import_small_image.png" />
-	  <MauiImage Include="Assets\lock_image.png" />
-	  <MauiImage Include="Assets\lock_small_image.png" />
-	  <MauiImage Include="Assets\unlock_image.png" />
-	  <MauiImage Include="Assets\unlock_small_image.png" />
-	</ItemGroup>
-
-	<ItemGroup>
 		<PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
-		<PackageReference Include="Syncfusion.Maui.PdfViewer" Version="24.1.41" />
-		<PackageReference Include="Syncfusion.Maui.Sliders" Version="24.1.41" />
-		<PackageReference Include="Syncfusion.Maui.TabView" Version="24.1.41" />
+		<PackageReference Include="Syncfusion.Maui.PdfViewer" Version="*" />
+		<PackageReference Include="Syncfusion.Maui.Sliders" Version="*" />
+		<PackageReference Include="Syncfusion.Maui.TabView" Version="*" />
 	</ItemGroup>
 
 	<ItemGroup>
