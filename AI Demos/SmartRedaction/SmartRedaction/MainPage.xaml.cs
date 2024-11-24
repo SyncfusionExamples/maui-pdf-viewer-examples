@@ -436,6 +436,7 @@ namespace SmartRedaction
                 List<PdfLoadedAnnotation> removeAnnotations = new List<PdfLoadedAnnotation>();
                 foreach (PdfLoadedAnnotation annotation in page.Annotations)
                 {
+                    // Iterate through the annotations that highlight the sensitive information and redact the content.
                     if (annotation is PdfLoadedRectangleAnnotation)
                     {
                         //Check the annot for Redaction
