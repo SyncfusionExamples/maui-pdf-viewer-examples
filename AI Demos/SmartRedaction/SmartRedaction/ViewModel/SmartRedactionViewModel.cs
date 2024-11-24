@@ -121,8 +121,6 @@ namespace SmartRedaction
                     new TreeItem { NodeId = "phoneNumbers", NodeText = "Phone Numbers", IsChecked=true },
                     new TreeItem { NodeId = "addresses", NodeText = "Addresses", IsChecked=true },
                     new TreeItem { NodeId = "dates", NodeText = "Dates", IsChecked=true },
-                    new TreeItem { NodeId = "faces", NodeText = "Faces" , IsChecked = true},
-                    new TreeItem { NodeId = "brandLogos", NodeText = "Brand Logos" , IsChecked = true},
                     new TreeItem { NodeId = "accountNumbers", NodeText = "Account Numbers" , IsChecked = true},
                     new TreeItem { NodeId = "creditCardNumbers", NodeText = "Credit Card Numbers" , IsChecked = true}
                 };

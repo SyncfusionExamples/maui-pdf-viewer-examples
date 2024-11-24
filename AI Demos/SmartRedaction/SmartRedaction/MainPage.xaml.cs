@@ -24,13 +24,13 @@ namespace SmartRedaction
             animation = new Animation();
             sensitiveInfoView.NodeChecked += SensitiveInfoView_NodeChecked;
             sensitiveInfoViewMobile.NodeChecked += SensitiveInfoView_NodeChecked;
-            CreateReduct.StateChanged += CreateReduct_StateChanged;
+            MarkRedaction.StateChanged += MarkRedaction_StateChanged;
             PdfViewer.AnnotationAdded += PdfViewer_AnnotationAdded;
             AddRedact.PropertyChanged += AddRedact_PropertyChanged;
             PdfViewer.DocumentLoaded += PdfViewer_DocumentLoaded;
         }
 
-        private void CreateReduct_StateChanged(object? sender, Syncfusion.Maui.Buttons.StateChangedEventArgs e)
+        private void MarkRedaction_StateChanged(object? sender, Syncfusion.Maui.Buttons.StateChangedEventArgs e)
         {
             if (e.IsChecked.HasValue && e.IsChecked.Value)
             {
@@ -70,7 +70,7 @@ namespace SmartRedaction
 
         private void PdfViewer_AnnotationAdded(object? sender, AnnotationEventArgs e)
         {
-            if ((bool)CreateReduct.IsChecked && e.Annotation is SquareAnnotation)
+            if ((bool)MarkRedaction.IsChecked && e.Annotation is SquareAnnotation)
             {
                 e.Annotation.Name = $"RedactedRect{PdfViewer.Annotations.Count}";
                 e.Annotation.Author = "RedactedRect";
@@ -223,11 +223,6 @@ namespace SmartRedaction
             SenstiveInfoContainer.IsVisible = false;
         }
 
-        private float ConvertPointToPixel(float number)
-        {
-            return (number * 96f / 72f);
-        }
-
         private string ExtractedTextFromPDF()
         {
             List<string> extractedText = new List<string>();
@@ -238,25 +233,6 @@ namespace SmartRedaction
                 PdfLoadedDocument loadedDocument = new PdfLoadedDocument(stream);
                 // Loading page collections
                 PdfLoadedPageCollection loadedPages = loadedDocument.Pages;
-                // Extract annotations to a memory stream and convert to string
-                using (MemoryStream annotationStream = new MemoryStream())
-                {
-                    loadedDocument.ExportAnnotations(annotationStream, AnnotationDataFormat.Json);
-                    string annotations = ConvertToString(annotationStream);
-                    if (!String.IsNullOrEmpty(annotations))
-                        extractedText.Add("Annotations: " + annotations);
-                }
-                // Extract form fields to a memory stream and convert to string
-                using (MemoryStream formStream = new MemoryStream())
-                {
-                    if (loadedDocument.Form != null)
-                    {
-                        loadedDocument.Form.ExportData(formStream, DataFormat.Json, "form");
-                        string formFields = ConvertToString(formStream);
-                        if (!String.IsNullOrEmpty(formFields))
-                            extractedText.Add("Form fields: " + formFields);
-                    }
-                }
                 // Extract text from existing PDF document pages
                 for (int i = 0; i < loadedPages.Count; i++)
                 {
@@ -268,14 +244,6 @@ namespace SmartRedaction
                 return result;
             }
             return "";
-        }
-
-        private string ConvertToString(MemoryStream memoryStream)
-        {
-            // Reset the position of the MemoryStream to the beginning
-            memoryStream.Position = 0;
-            var reader = new StreamReader(memoryStream, System.Text.Encoding.UTF8);
-            return reader.ReadToEnd();
         }
 
         private void UpdateCheckedPatterns()
@@ -445,7 +413,7 @@ namespace SmartRedaction
 
         private void Redact()
         {
-            CreateReduct.IsChecked = false;
+            MarkRedaction.IsChecked = false;
             MemoryStream pdf = new MemoryStream();
             PdfViewer.SaveDocument(pdf);
             PdfLoadedDocument loadedDocument = new PdfLoadedDocument(pdf);

@@ -138,7 +138,7 @@
                     <Button x:Name="OpenFile" Grid.Column="0" Style="{StaticResource buttonIconStyle}" Text="&#xe712;" Padding="05" BorderWidth="0" Command="{Binding OpenDocumentCommand}" ToolTipProperties.Text="Click to open document" CornerRadius="5" TextColor="#99000000" Margin="05" FontSize="24" FontFamily="Maui Material Assets" HorizontalOptions="Start" VerticalOptions="Center" />
                     <Button x:Name="Save" Grid.Column="1" Text="&#xe75f;" Padding="05" BorderWidth="0" Clicked="SavePDF" ToolTipProperties.Text="Click to save the document" CornerRadius="5" TextColor="#99000000" Style="{StaticResource buttonIconStyle}" FontSize="24" FontFamily="Maui Material Assets" HorizontalOptions="Start" VerticalOptions="Center" />
                     <HorizontalStackLayout Padding="0" Grid.Column="2" BackgroundColor="#F7F2FB" VerticalOptions="Center" Margin="10,0,5,0" >
-                        <checkbox:SfCheckBox x:Name="CreateReduct" ToolTipProperties.Text="Click to mark for redaction" VerticalOptions="Center" IsChecked="{Binding AnnotationMode, Source={x:Reference PdfViewer}}"/>
+                        <checkbox:SfCheckBox x:Name="MarkRedaction" ToolTipProperties.Text="Click to mark for redaction" VerticalOptions="Center" IsChecked="{Binding AnnotationMode, Source={x:Reference PdfViewer}}"/>
                         <Label Text="Mark for Redact" TextColor="#1C1B1F" FontSize="14" FontAttributes="Bold" VerticalOptions="Center" Margin="0"/>
                     </HorizontalStackLayout>
                     <Button Grid.Column="3"
@@ -205,18 +205,17 @@ Text="&#xe72d;"/>
                         <!-- Scan Button at the bottom -->
                         <Button Grid.Row="2"
                                 x:Name="MobileScan"
-   Text="Scan"
-   Margin="20,15,50,0"
-   CornerRadius="20"
-   VerticalOptions="Start"
+                                Text="Scan"
+                                Margin="20,15,50,0"
+                                CornerRadius="20"
+                                VerticalOptions="Start"
                                 Style="{StaticResource ApplyButton}"
                                 ToolTipProperties.Text="Click to get sensitive text"
-   FontAttributes="Bold"
-   FontSize="14"
-   WidthRequest="110"
-   HorizontalOptions="End"
-   Clicked="ScanClick" />
-
+                                FontAttributes="Bold"
+                                FontSize="14"
+                                WidthRequest="110"
+                                HorizontalOptions="End"
+                                Clicked="ScanClick" />
                     </Grid>
 
                     <Grid  Grid.Row="1" Grid.Column="{OnPlatform WinUI=1, MacCatalyst=1,Default=0}" VerticalOptions="Fill" x:Name="SenstiveInfoContainerMobile" IsVisible="False" BackgroundColor="#F7F2FB">
