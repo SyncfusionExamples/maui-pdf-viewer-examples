@@ -137,19 +137,19 @@ namespace SmartRedaction
                         {
                             NodeId = "RedactedRect" + annotCount++,
                             NodeText = textBounds.SensitiveInformation,
-                            pageNumber = detail.Key + 1,
+                            PageNumber = detail.Key + 1,
                             Bounds = textBounds.Bounds,
                         });
                     }
                 }
 
                 // Group ChildNodes by pageNumber and convert Child list to ObservableCollection
-                var groupedByPage = ChildNodes.GroupBy(node => node.pageNumber)
+                var groupedByPage = ChildNodes.GroupBy(node => node.PageNumber)
                                               .Select(group => new TreeItem
                                               {
                                                   NodeId = group.Key.ToString(),
                                                   NodeText = "Page " + (group.Key),
-                                                  pageNumber = group.Key,
+                                                  PageNumber = group.Key,
                                                   Expanded = true,
                                                   Child = new ObservableCollection<TreeItem>(group.ToList()) // Convert to ObservableCollection
                                               })
@@ -186,7 +186,7 @@ namespace SmartRedaction
         public string NodeId { get; set; }
         public string NodeText { get; set; }
         public bool Expanded { get; set; }
-        public int pageNumber { get; set; }
+        public int PageNumber { get; set; }
         public RectangleF Bounds { get; set; }
         public ObservableCollection<TreeItem> Child { get; set; } = new ObservableCollection<TreeItem>();
 

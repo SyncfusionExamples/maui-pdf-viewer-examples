@@ -105,7 +105,7 @@ namespace SmartRedaction
                                 Width = item.Bounds.Width,
                                 Height = item.Bounds.Height
                             };
-                            SquareAnnotation annotation = new SquareAnnotation(Bounds, item.pageNumber)
+                            SquareAnnotation annotation = new SquareAnnotation(Bounds, item.PageNumber)
                             {
                                 Color = Colors.Red,    // Set stroke color
                                 BorderWidth = 1,       // Set stroke thickness
@@ -134,7 +134,7 @@ namespace SmartRedaction
                 {
                     foreach (TreeItem item in ViewModel.ChildNodes)
                     {
-                        if (item.pageNumber == int.Parse(treeItem.NodeId))
+                        if (item.PageNumber == int.Parse(treeItem.NodeId))
                         {
                             if (e.Node.IsChecked == true)
                             {
@@ -146,7 +146,7 @@ namespace SmartRedaction
                                     Width = item.Bounds.Width,
                                     Height = item.Bounds.Height
                                 };
-                                SquareAnnotation annotation = new SquareAnnotation(Bounds, item.pageNumber)
+                                SquareAnnotation annotation = new SquareAnnotation(Bounds, item.PageNumber)
                                 {
                                     Color = Colors.Red,
                                     BorderWidth = 1,
@@ -184,7 +184,7 @@ namespace SmartRedaction
                             Width = treeItem.Bounds.Width,
                             Height = treeItem.Bounds.Height
                         };
-                        SquareAnnotation annotation = new SquareAnnotation(Bounds, treeItem.pageNumber)
+                        SquareAnnotation annotation = new SquareAnnotation(Bounds, treeItem.PageNumber)
                         {
                             Color = Colors.Red,
                             BorderWidth = 1,
@@ -318,7 +318,6 @@ namespace SmartRedaction
                     sensitiveInfoView.ItemsSource = ViewModel.SensitiveInfo;
                     sensitiveInfoViewMobile.ItemsSource = null;
                     sensitiveInfoViewMobile.ItemsSource = ViewModel.SensitiveInfo;
-                    //ViewModel.OnAfterRender(ViewModel.dataFetched);
                 }
 #if WINDOWS || MACCATALYST
                 LoadingIndicator.IsRunning = false;
@@ -336,18 +335,24 @@ namespace SmartRedaction
                 Stream documentStream = (Stream)PdfViewer.DocumentSource;
                 //Remove the Prefixs
                 List<string> sensitiveInformations = RemovePrefix(sensitiveData, selectedItems);
-                Dictionary<int, List<TextBounds>> boundsData = FindTextBounds(documentStream, sensitiveInformations);
+                Dictionary<int, List<TextBounds>> boundsData = FindSensitiveContentsBounds(documentStream, sensitiveInformations);
                 return boundsData;
             }
             Dictionary<int, List<TextBounds>> temp = new Dictionary<int, List<TextBounds>>();
             return temp;
         }
 
-        internal async Task<List<string>> GetSensitiveDataFromPDF(string text, List<string> selectedItems)
+        /// <summary>
+        /// Returns the sensitive information present in the PDF document.
+        /// </summary>
+        /// <param name="text">The text present in the PDF document</param>
+        /// <param name="sensitiveInformationTypes">The sensitive information types to identify, such as names, addresses, or phone numbers. </param>
+        /// <returns></returns>
+        internal async Task<List<string>> GetSensitiveDataFromPDF(string text, List<string> sensitiveInformationTypes)
         {
             StringBuilder stringBuilder = new StringBuilder();
             stringBuilder.AppendLine("I have a block of text containing various pieces of information. Please help me identify and extract any Personally Identifiable Information (PII) present in the text. The PII categories I am interested in are:");
-            foreach (var item in selectedItems)
+            foreach (var item in sensitiveInformationTypes)
             {
                 stringBuilder.AppendLine(item);
             }
@@ -367,36 +372,42 @@ namespace SmartRedaction
             return new List<string>();
         }
 
-        public Dictionary<int, List<TextBounds>> FindTextBounds(Stream stream, List<string> sensitiveInformations)
+        /// <summary>
+        /// Finds and returns the bounds of sensitive content within a PDF document.
+        /// </summary>
+        /// <param name="stream">The stream containing the PDF document.</param>
+        /// <param name="sensitiveContents">A list of sensitive content strings to search for.</param>
+        /// <returns>A dictionary where the key is the page number and the value is a list of TextBounds objects representing the sensitive content found on that page.</returns>
+        public Dictionary<int, List<TextBounds>> FindSensitiveContentsBounds(Stream stream, List<string> sensitiveContents)
         {
-            Dictionary<int, List<TextBounds>> accumulatedBounds = new Dictionary<int, List<TextBounds>>();
+            Dictionary<int, List<TextBounds>> sensitveContentsBounds = new Dictionary<int, List<TextBounds>>();
             using (PdfLoadedDocument loadedDocument = new PdfLoadedDocument(stream))
             {
-                foreach (var info in sensitiveInformations)
+                foreach (var content in sensitiveContents)
                 {
-                    if (!string.IsNullOrEmpty(info))
+                    if (!string.IsNullOrEmpty(content))
                     {
-                        Dictionary<int, List<RectangleF>> bounds;
+                        Dictionary<int, List<RectangleF>> contentBounds;
                         // Find the text bounds
-                        loadedDocument.FindText(info, out bounds);
+                        loadedDocument.FindText(content, out contentBounds);
                         // Merge bounds into accumulatedBounds
-                        foreach (var pair in bounds)
+                        foreach (var bounds in contentBounds)
                         {
-                            if (!accumulatedBounds.ContainsKey(pair.Key))
+                            if (!sensitveContentsBounds.ContainsKey(bounds.Key))
                             {
-                                accumulatedBounds[pair.Key] = new List<TextBounds>();
+                                sensitveContentsBounds[bounds.Key] = new List<TextBounds>();
                             }
                             // Add the bounds with the corresponding sensitive information
-                            accumulatedBounds[pair.Key].AddRange(pair.Value.Select(rect => new TextBounds
+                            sensitveContentsBounds[bounds.Key].AddRange(bounds.Value.Select(rect => new TextBounds
                             {
-                                SensitiveInformation = info,
+                                SensitiveInformation = content,
                                 Bounds = rect
                             }));
                         }
                     }
                 }
             }
-            return accumulatedBounds;
+            return sensitveContentsBounds;
         }
 
         private List<string> RemovePrefix(List<string> sensitiveInfo, List<string> selectedItems)
