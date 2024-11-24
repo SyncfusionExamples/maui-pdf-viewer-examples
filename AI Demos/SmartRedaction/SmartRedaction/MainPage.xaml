@@ -499,15 +499,14 @@
                            TextColor="#1C1B1F"
                            HorizontalTextAlignment="Center"
                            VerticalTextAlignment="Center"
-                           FontSize="14"
+                           FontSize="24"
                            FontFamily="MauiSampleFontIcon" />
-                    <Label Margin="10,0"
+                    <Label Margin="10,10"
                            Grid.Column="1"
                            VerticalOptions="Center"
                            TextColor="#1C1B1F"
-                           Text="Select the following sensitive Patterns to get redacted"
-                           FontFamily="MauiSampleFontIcon"
-                           FontAttributes="Bold" />
+                           Text="Select the information that needs to be redacted"
+                           FontFamily="MauiSampleFontIcon"/>
                 </Grid>
 
                 <Grid Grid.Row="1"
@@ -519,6 +518,7 @@
                     <Listview:SfListView Grid.Row="1"
                                          x:Name="PatternView"
                                          ItemSize="100"
+                                         VerticalOptions="Center"
                                          AutoFitMode="Height"
                                          SelectionMode="Multiple"
                                          ItemsSource="{Binding Patterns}">

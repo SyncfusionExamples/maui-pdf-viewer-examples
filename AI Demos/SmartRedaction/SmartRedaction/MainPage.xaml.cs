@@ -226,7 +226,7 @@ namespace SmartRedaction
             SenstiveInfoContainer.IsVisible = false;
         }
 
-        private string ExtractedTextFromPDF()
+        private string ExtractTextFromPDF()
         {
             List<string> extractedText = new List<string>();
             var documentSource = PdfViewer.DocumentSource;
@@ -298,7 +298,7 @@ namespace SmartRedaction
             {
                 List<string> selectedItems = ViewModel.SelectedPatterns.ToList();
                 //Extract the text from the PDF
-                string extractedText = ExtractedTextFromPDF();
+                string extractedText = ExtractTextFromPDF();
                 //Find the text bounds with the selected patterns
                 ViewModel.textboundsDetails = await FindText(extractedText, selectedItems);
                 //Count the no. of bounds fetched
@@ -353,7 +353,7 @@ namespace SmartRedaction
             }
             stringBuilder.AppendLine("Please provide the extracted information as a plain list, separated by commas, without any prefix or numbering or extra content.");
             string prompt = stringBuilder.ToString();
-            var answer = await openAIService.GetAnswerFromGPT(prompt, ExtractedTextFromPDF());
+            var answer = await openAIService.GetAnswerFromGPT(prompt, ExtractTextFromPDF());
             if (answer != null)
             {
                 var output = answer.Trim();

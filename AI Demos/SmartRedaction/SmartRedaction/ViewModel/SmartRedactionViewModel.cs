@@ -25,9 +25,8 @@ namespace SmartRedaction
 
         internal string[] SelectedPatterns = new string[] { };
         internal string[] CheckedInfo = new string[] { };
-        // public ObservableCollection<TreeItem> ChildNodes { get; set; } = new ObservableCollection<TreeItem>();
 
-       public ObservableCollection<TreeItem> ChildNodes = new ObservableCollection<TreeItem>();
+        public ObservableCollection<TreeItem> ChildNodes = new ObservableCollection<TreeItem>();
         internal bool dataFetched { get; set; } = false;
         internal bool dataRendered { get; set; } = false;
         internal Dictionary<int, List<TextBounds>> textboundsDetails;
@@ -50,7 +49,7 @@ namespace SmartRedaction
         {
             SensitiveInfo = new ObservableCollection<TreeItem>();
             LoadPatterns();
-            LoadPdfFile();     
+            LoadPdfFile();
         }
 
         private ICommand m_openDocumentCommand;
@@ -138,7 +137,7 @@ namespace SmartRedaction
                         {
                             NodeId = "RedactedRect" + annotCount++,
                             NodeText = textBounds.SensitiveInformation,
-                            pageNumber = detail.Key+1,
+                            pageNumber = detail.Key + 1,
                             Bounds = textBounds.Bounds,
                         });
                     }
@@ -168,10 +167,10 @@ namespace SmartRedaction
             }
         }
 
-        
+
         private void LoadPdfFile()
         {
-            _pdfFile = this.GetType().Assembly.GetManifestResourceStream("SmartRedaction.Assets.reduction.pdf");
+            _pdfFile = this.GetType().Assembly.GetManifestResourceStream("SmartRedaction.Assets.redaction.pdf");
             OnPropertyChanged(nameof(PdfFile));
         }
 
@@ -181,7 +180,7 @@ namespace SmartRedaction
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
-  
+
     public class TreeItem : INotifyPropertyChanged
     {
         public string NodeId { get; set; }
