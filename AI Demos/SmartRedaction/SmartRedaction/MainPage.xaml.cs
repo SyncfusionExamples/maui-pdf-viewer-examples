@@ -48,9 +48,12 @@ namespace SmartRedaction
             {
                 Application.Current?.MainPage?.DisplayAlert("Alert", "The Azure API key or endpoint is missing or incorrect. Please verify your credentials", "OK");
                 MobileScan.IsEnabled = false;
-                MobileScan.Opacity = 0.5;
                 DesktopScanButton.IsEnabled = false;
-                DesktopScanButton.Opacity = 0.5;
+            }
+            else
+            {
+                MobileScan.IsEnabled = true;
+                DesktopScanButton.IsEnabled = true;
             }
         }
 
