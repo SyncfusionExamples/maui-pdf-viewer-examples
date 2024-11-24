@@ -9,82 +9,123 @@
              x:Class="SmartRedaction.MainPage">
 
     <ContentPage.BindingContext>
-        <local:SmartRedactionViewModel x:Name="ViewModel"/>
+        <local:SmartRedactionViewModel x:Name="ViewModel" />
     </ContentPage.BindingContext>
     <ContentPage.Resources>
-        <Style x:Key="buttonIconStyle" TargetType="Button">
-            <Setter Property="BorderWidth" Value="0" />
-            <Setter Property="FontSize" Value="18" />
-            <Setter Property="Padding" Value="8" />
-            <Setter Property="VerticalOptions" Value="Center" />
-            <Setter Property="FontFamily" Value="MauiSampleFontIcon" />
-            <Setter Property="HeightRequest" Value="40" />
-            <Setter Property="WidthRequest" Value="40" />
-            <Setter Property="BackgroundColor" Value="Transparent"/>
+        <Style x:Key="buttonIconStyle"
+               TargetType="Button">
+            <Setter Property="BorderWidth"
+                    Value="0" />
+            <Setter Property="FontSize"
+                    Value="18" />
+            <Setter Property="Padding"
+                    Value="8" />
+            <Setter Property="VerticalOptions"
+                    Value="Center" />
+            <Setter Property="FontFamily"
+                    Value="MauiSampleFontIcon" />
+            <Setter Property="HeightRequest"
+                    Value="40" />
+            <Setter Property="WidthRequest"
+                    Value="40" />
+            <Setter Property="BackgroundColor"
+                    Value="Transparent" />
             <Setter Property="VisualStateManager.VisualStateGroups">
                 <VisualStateGroupList>
                     <VisualStateGroup x:Name="CommonStates">
                         <VisualState x:Name="Normal" />
                         <VisualState x:Name="PointerOver">
                             <VisualState.Setters>
-                                <Setter Property="HeightRequest" Value="40" />
-                                <Setter Property="BackgroundColor" Value="#1C1B1F14"/>
-                                <Setter Property="WidthRequest" Value="40" />
+                                <Setter Property="HeightRequest"
+                                        Value="40" />
+                                <Setter Property="BackgroundColor"
+                                        Value="#1C1B1F14" />
+                                <Setter Property="WidthRequest"
+                                        Value="40" />
                             </VisualState.Setters>
                         </VisualState>
                         <VisualState x:Name="Pressed">
                             <VisualState.Setters>
-                                <Setter Property="HeightRequest" Value="40" />
-                                <Setter Property="WidthRequest" Value="40" />
+                                <Setter Property="HeightRequest"
+                                        Value="40" />
+                                <Setter Property="WidthRequest"
+                                        Value="40" />
                             </VisualState.Setters>
                         </VisualState>
                         <VisualState x:Name="Disabled">
                             <VisualState.Setters>
-                                <Setter Property="BackgroundColor" Value="Transparent"/>
-                                <Setter Property="Opacity" Value="0.5"/>
+                                <Setter Property="BackgroundColor"
+                                        Value="Transparent" />
+                                <Setter Property="Opacity"
+                                        Value="0.5" />
                             </VisualState.Setters>
                         </VisualState>
                     </VisualStateGroup>
                 </VisualStateGroupList>
             </Setter>
             <Style.Triggers>
-                <Trigger Property="IsEnabled" Value="True" TargetType="Button">
-                    <Setter Property="Opacity" Value="1" />
+                <Trigger Property="IsEnabled"
+                         Value="True"
+                         TargetType="Button">
+                    <Setter Property="Opacity"
+                            Value="1" />
                 </Trigger>
-                <Trigger Property="IsEnabled" Value="False" TargetType="Button">
-                    <Setter Property="Opacity" Value="0.25" />
+                <Trigger Property="IsEnabled"
+                         Value="False"
+                         TargetType="Button">
+                    <Setter Property="Opacity"
+                            Value="0.25" />
                 </Trigger>
-                <Trigger Property="IsPressed" Value="True" TargetType="Button">
+                <Trigger Property="IsPressed"
+                         Value="True"
+                         TargetType="Button">
                 </Trigger>
             </Style.Triggers>
         </Style>
 
-        <Style x:Key="ApplyButton" TargetType="Button">
+        <Style x:Key="ApplyButton"
+               TargetType="Button">
             <Setter Property="VisualStateManager.VisualStateGroups">
                 <VisualStateGroupList>
                     <VisualStateGroup x:Name="ApplyVisual">
                         <VisualState Name="Normal">
                             <VisualState.Setters>
-                                <Setter Property="BackgroundColor" Value="#6750A4" />
-                                <Setter Property="TextColor" Value="#FFFFFF" />
+                                <Setter Property="BackgroundColor"
+                                        Value="#6750A4" />
+                                <Setter Property="TextColor"
+                                        Value="#FFFFFF" />
+                                <Setter Property="Opacity"
+                                        Value="1" />
                             </VisualState.Setters>
                         </VisualState>
                         <VisualState Name="Pressed">
                             <VisualState.Setters>
-                                <Setter Property="BackgroundColor" Value="#7965AF" />
-                                <Setter Property="TextColor" Value="#FFFFFF" />
+                                <Setter Property="BackgroundColor"
+                                        Value="#7965AF" />
+                                <Setter Property="TextColor"
+                                        Value="#FFFFFF" />
+                                <Setter Property="Opacity"
+                                        Value="1" />
                             </VisualState.Setters>
                         </VisualState>
                         <VisualState Name="PointerOver">
                             <VisualState.Setters>
-                                <Setter Property="BackgroundColor" Value="#7965AF" />
-                                <Setter Property="TextColor" Value="#FFFFFF" />
+                                <Setter Property="BackgroundColor"
+                                        Value="#7965AF" />
+                                <Setter Property="TextColor"
+                                        Value="#FFFFFF" />
+                                <Setter Property="Opacity"
+                                        Value="1" />
                             </VisualState.Setters>
                         </VisualState>
                         <VisualState Name="Disabled">
                             <VisualState.Setters>
-                                <Setter Property="BackgroundColor" Value="#1C1B1F1F" />
-                                <Setter Property="Opacity" Value="0.5"/>
+                                <Setter Property="BackgroundColor"
+                                        Value="#1C1B1F1F" />
+                                <Setter Property="TextColor"
+                                        Value="Black" />
+                                <Setter Property="Opacity"
+                                        Value="0.5" />
                             </VisualState.Setters>
                         </VisualState>
                     </VisualStateGroup>
@@ -92,35 +133,44 @@
             </Setter>
         </Style>
 
-        <Style x:Key="CancelButton" TargetType="Button">
+        <Style x:Key="CancelButton"
+               TargetType="Button">
             <Setter Property="VisualStateManager.VisualStateGroups">
                 <VisualStateGroupList>
                     <VisualStateGroup x:Name="CancelVisual">
                         <VisualState Name="Normal">
                             <VisualState.Setters>
-                                <Setter Property="BackgroundColor" Value="#00000000" />
-                                <Setter Property="TextColor" Value="#6750A4" />
+                                <Setter Property="BackgroundColor"
+                                        Value="#00000000" />
+                                <Setter Property="TextColor"
+                                        Value="#6750A4" />
                             </VisualState.Setters>
                         </VisualState>
 
                         <VisualState Name="Pressed">
                             <VisualState.Setters>
-                                <Setter Property="BackgroundColor" Value="#1C1B1F14" />
-                                <Setter Property="TextColor" Value="#6750A4" />
+                                <Setter Property="BackgroundColor"
+                                        Value="#1C1B1F14" />
+                                <Setter Property="TextColor"
+                                        Value="#6750A4" />
                             </VisualState.Setters>
                         </VisualState>
 
                         <VisualState Name="PointerOver">
                             <VisualState.Setters>
-                                <Setter Property="BackgroundColor" Value="#1C1B1F14" />
-                                <Setter Property="TextColor" Value="#6750A4" />
+                                <Setter Property="BackgroundColor"
+                                        Value="#1C1B1F14" />
+                                <Setter Property="TextColor"
+                                        Value="#6750A4" />
                             </VisualState.Setters>
                         </VisualState>
 
                         <VisualState Name="Disabled">
                             <VisualState.Setters>
-                                <Setter Property="BackgroundColor" Value="#00000000" />
-                                <Setter Property="TextColor" Value="#9E9E9E" />
+                                <Setter Property="BackgroundColor"
+                                        Value="#00000000" />
+                                <Setter Property="TextColor"
+                                        Value="#9E9E9E" />
                             </VisualState.Setters>
                         </VisualState>
                     </VisualStateGroup>
@@ -129,17 +179,64 @@
         </Style>
     </ContentPage.Resources>
 
-    <Grid RowDefinitions="*" BackgroundColor="#F7F2FB" ColumnDefinitions="{OnPlatform WinUI='7*,3*',MacCatalyst='7*,3*'}">
+    <Grid RowDefinitions="*"
+          BackgroundColor="#F7F2FB"
+          ColumnDefinitions="{OnPlatform WinUI='7*,3*',MacCatalyst='7*,3*'}">
         <!-- Main Content Area -->
-        <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" ColumnDefinitions="{OnPlatform WinUI='7*,2.5*',MacCatalyst='7*,3*'}">
+        <Grid Grid.Row="0"
+              Grid.Column="0"
+              Grid.ColumnSpan="2"
+              ColumnDefinitions="{OnPlatform WinUI='7*,2.5*',MacCatalyst='7*,3*'}">
             <!-- PDF Viewer on the left side -->
-            <Grid  Grid.Column="0" RowDefinitions="auto,*">
-                <Grid Grid.Row="0" ColumnDefinitions="auto,*,auto,auto,auto" HeightRequest="56">
-                    <Button x:Name="OpenFile" Grid.Column="0" Style="{StaticResource buttonIconStyle}" Text="&#xe712;" Padding="05" BorderWidth="0" Command="{Binding OpenDocumentCommand}" ToolTipProperties.Text="Click to open document" CornerRadius="5" TextColor="#99000000" Margin="05" FontSize="24" FontFamily="Maui Material Assets" HorizontalOptions="Start" VerticalOptions="Center" />
-                    <Button x:Name="Save" Grid.Column="1" Text="&#xe75f;" Padding="05" BorderWidth="0" Clicked="SavePDF" ToolTipProperties.Text="Click to save the document" CornerRadius="5" TextColor="#99000000" Style="{StaticResource buttonIconStyle}" FontSize="24" FontFamily="Maui Material Assets" HorizontalOptions="Start" VerticalOptions="Center" />
-                    <HorizontalStackLayout Padding="0" Grid.Column="2" BackgroundColor="#F7F2FB" VerticalOptions="Center" Margin="10,0,5,0" >
-                        <checkbox:SfCheckBox x:Name="CreateReduct" ToolTipProperties.Text="Click to mark for redaction" VerticalOptions="Center" IsChecked="{Binding AnnotationMode, Source={x:Reference PdfViewer}}"/>
-                        <Label Text="Mark for Redact" TextColor="#1C1B1F" FontSize="14" FontAttributes="Bold" VerticalOptions="Center" Margin="0"/>
+            <Grid  Grid.Column="0"
+                   RowDefinitions="auto,*">
+                <Grid Grid.Row="0"
+                      ColumnDefinitions="auto,*,auto,auto,auto"
+                      HeightRequest="56">
+                    <Button x:Name="OpenFile"
+                            Grid.Column="0"
+                            Style="{StaticResource buttonIconStyle}"
+                            Text="&#xe712;"
+                            Padding="05"
+                            BorderWidth="0"
+                            Command="{Binding OpenDocumentCommand}"
+                            ToolTipProperties.Text="Click to open document"
+                            CornerRadius="5"
+                            TextColor="#99000000"
+                            Margin="05"
+                            FontSize="24"
+                            FontFamily="Maui Material Assets"
+                            HorizontalOptions="Start"
+                            VerticalOptions="Center" />
+                    <Button x:Name="Save"
+                            Grid.Column="1"
+                            Text="&#xe75f;"
+                            Padding="05"
+                            BorderWidth="0"
+                            Clicked="SavePDF"
+                            ToolTipProperties.Text="Click to save the document"
+                            CornerRadius="5"
+                            TextColor="#99000000"
+                            Style="{StaticResource buttonIconStyle}"
+                            FontSize="24"
+                            FontFamily="Maui Material Assets"
+                            HorizontalOptions="Start"
+                            VerticalOptions="Center" />
+                    <HorizontalStackLayout Padding="0"
+                                           Grid.Column="2"
+                                           BackgroundColor="#F7F2FB"
+                                           VerticalOptions="Center"
+                                           Margin="10,0,5,0">
+                        <checkbox:SfCheckBox x:Name="MarkRedaction"
+                                             ToolTipProperties.Text="Click to mark for redaction"
+                                             VerticalOptions="Center"
+                                             IsChecked="{Binding AnnotationMode, Source={x:Reference PdfViewer}}" />
+                        <Label Text="Mark for Redact"
+                               TextColor="#1C1B1F"
+                               FontSize="14"
+                               FontAttributes="Bold"
+                               VerticalOptions="Center"
+                               Margin="0" />
                     </HorizontalStackLayout>
                     <Button Grid.Column="3"
                             x:Name="AddRedact"
@@ -147,23 +244,40 @@
                             FontAttributes="Bold"
                             Style="{StaticResource ApplyButton}"
                             ToolTipProperties.Text="Click to reduct"
-         Text="Redact"
-         Margin="{OnPlatform Android='10,0,0,0', iOS='10,0,0,0', Default='10,5'}"
+                            Text="Redact"
+                            Margin="{OnPlatform Android='10,0,0,0', iOS='10,0,0,0', Default='10,5'}"
                             HeightRequest="40"
-         CornerRadius="20"
-         FontSize="14"
-         WidthRequest="90"
-         HorizontalOptions="End"
-         Clicked="RedactClicked" />
-                    <Button x:Name="AIButton" Text="&#xe7e1;" Loaded="image_Loaded" FontFamily="MauiSampleFontIcon" FontAttributes="Bold" Clicked="OpenCloseMobileRedactLayout" FontSize="18" Padding="05" Grid.Column="4" HeightRequest="40" WidthRequest="40" Margin="10" IsVisible="{OnPlatform WinUI=False,MacCatalyst=False}"/>
-
+                            CornerRadius="20"
+                            FontSize="14"
+                            WidthRequest="90"
+                            HorizontalOptions="End"
+                            Clicked="RedactClicked" />
+                    <Button x:Name="AIButton"
+                            Text="&#xe7e1;"
+                            Loaded="image_Loaded"
+                            FontFamily="MauiSampleFontIcon"
+                            FontAttributes="Bold"
+                            Clicked="OpenCloseMobileRedactLayout"
+                            FontSize="18"
+                            Padding="05"
+                            Grid.Column="4"
+                            HeightRequest="40"
+                            WidthRequest="40"
+                            Margin="10"
+                            IsVisible="{OnPlatform WinUI=False,MacCatalyst=False}" />
                 </Grid>
-                <syncfusion:SfPdfViewer x:Name="PdfViewer" Grid.Row="1"
-                        ShowToolbars="False"
-                        DocumentSource="{Binding PdfFile}" />
+                <syncfusion:SfPdfViewer x:Name="PdfViewer"
+                                        Grid.Row="1"
+                                        ShowToolbars="False"
+                                        DocumentSource="{Binding PdfFile}" />
                 <!--Mobile UI-->
-                <Grid Grid.Row="1" BackgroundColor="#F7F2FB" x:Name="MobileRedactLayout" IsVisible="False" VerticalOptions="Fill">
-                    <Grid x:Name="popupContainerMobile" BackgroundColor="#F7F2FB" >
+                <Grid Grid.Row="1"
+                      BackgroundColor="#F7F2FB"
+                      x:Name="MobileRedactLayout"
+                      IsVisible="False"
+                      VerticalOptions="Fill">
+                    <Grid x:Name="popupContainerMobile"
+                          BackgroundColor="#F7F2FB">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="*" />
@@ -171,55 +285,87 @@
                         </Grid.RowDefinitions>
 
                         <!-- Label -->
-                        <Grid Grid.Row="0" ColumnDefinitions="auto,*" HeightRequest="56" VerticalOptions="Center">
-                            <Button x:Name="Back" HorizontalOptions="Start" Grid.Column="0" Margin="0" FontSize="24" TextColor="#1C1B1F" BackgroundColor="Transparent" ToolTipProperties.Text="Back" FontFamily="Maui Material Assets" Clicked="OpenCloseMobileRedactLayout" IsVisible="{OnPlatform Android=true, iOS=true, Default=false}"
-Text="&#xe72d;"/>
-                            <Label Margin="10,0" TextColor="#1C1B1F" VerticalOptions="Center" Grid.Column="1"
-      Text="Select the following sensitive Patterns to get redacted" FontAttributes="Bold"/>
+                        <Grid Grid.Row="0"
+                              ColumnDefinitions="auto,*"
+                              HeightRequest="56"
+                              VerticalOptions="Center">
+                            <Button x:Name="Back"
+                                    HorizontalOptions="Start"
+                                    Grid.Column="0"
+                                    Margin="0"
+                                    FontSize="24"
+                                    TextColor="#1C1B1F"
+                                    BackgroundColor="Transparent"
+                                    ToolTipProperties.Text="Back"
+                                    FontFamily="Maui Material Assets"
+                                    Clicked="OpenCloseMobileRedactLayout"
+                                    IsVisible="{OnPlatform Android=true, iOS=true, Default=false}"
+                                    Text="&#xe72d;" />
+                            <Label Margin="10,0"
+                                   TextColor="#1C1B1F"
+                                   VerticalOptions="Center"
+                                   Grid.Column="1"
+                                   Text="Select the following sensitive Patterns to get redacted"
+                                   FontAttributes="Bold" />
                         </Grid>
 
-                        <Grid Grid.Row="1" RowDefinitions="auto,*,auto">
-                            <BoxView Grid.Row="0" HeightRequest="1" Opacity="1" BackgroundColor="{AppThemeBinding Light=#CAC4D0, Dark=#CAC4D0}"/>
+                        <Grid Grid.Row="1"
+                              RowDefinitions="auto,*,auto">
+                            <BoxView Grid.Row="0"
+                                     HeightRequest="1"
+                                     Opacity="1"
+                                     BackgroundColor="{AppThemeBinding Light=#CAC4D0, Dark=#CAC4D0}" />
                             <Listview:SfListView Grid.Row="1"
-                    x:Name="PatternViewMobile"
-                    ItemSize="100"
-                    ItemSpacing="05"
+                                                 x:Name="PatternViewMobile"
+                                                 ItemSize="100"
+                                                 ItemSpacing="05"
                                                  AutoFitMode="Height"
-                    SelectionMode="Multiple"
-                    ItemsSource="{Binding Patterns}">
+                                                 SelectionMode="Multiple"
+                                                 ItemsSource="{Binding Patterns}">
                                 <Listview:SfListView.ItemTemplate>
                                     <DataTemplate>
                                         <ScrollView Orientation="Vertical">
-                                            <checkbox:SfCheckBox  x:Name ="{Binding NodeId}"                                   
-                     Text="{Binding NodeText}"
-                     VerticalOptions="Center"
-                     HorizontalOptions="Start"                                                     
-                     IsChecked="{Binding IsChecked, Mode=TwoWay}" />
+                                            <checkbox:SfCheckBox  x:Name="{Binding NodeId}"
+                                                                  Text="{Binding NodeText}"
+                                                                  VerticalOptions="Center"
+                                                                  HorizontalOptions="Start"
+                                                                  IsChecked="{Binding IsChecked, Mode=TwoWay}" />
                                         </ScrollView>
                                     </DataTemplate>
                                 </Listview:SfListView.ItemTemplate>
                             </Listview:SfListView>
-                            <BoxView Grid.Row="2" HeightRequest="1" Opacity="1" BackgroundColor="{AppThemeBinding Light=#CAC4D0, Dark=#CAC4D0}"/>
+                            <BoxView Grid.Row="2"
+                                     HeightRequest="1"
+                                     Opacity="1"
+                                     BackgroundColor="{AppThemeBinding Light=#CAC4D0, Dark=#CAC4D0}" />
                         </Grid>
-                        <ActivityIndicator  Grid.Row="1" x:Name="LoadingIndicatorMobile" HeightRequest="40" Color="#6750A4" WidthRequest="40"/>
+                        <ActivityIndicator  Grid.Row="1"
+                                            x:Name="LoadingIndicatorMobile"
+                                            HeightRequest="40"
+                                            Color="#6750A4"
+                                            WidthRequest="40" />
                         <!-- Scan Button at the bottom -->
                         <Button Grid.Row="2"
                                 x:Name="MobileScan"
-   Text="Scan"
-   Margin="20,15,50,0"
-   CornerRadius="20"
-   VerticalOptions="Start"
+                                Text="Scan"
+                                Margin="20,15,50,0"
+                                CornerRadius="20"
+                                VerticalOptions="Start"
                                 Style="{StaticResource ApplyButton}"
                                 ToolTipProperties.Text="Click to get sensitive text"
-   FontAttributes="Bold"
-   FontSize="14"
-   WidthRequest="110"
-   HorizontalOptions="End"
-   Clicked="ScanClick" />
-
+                                FontAttributes="Bold"
+                                FontSize="14"
+                                WidthRequest="110"
+                                HorizontalOptions="End"
+                                Clicked="ScanClick" />
                     </Grid>
 
-                    <Grid  Grid.Row="1" Grid.Column="{OnPlatform WinUI=1, MacCatalyst=1,Default=0}" VerticalOptions="Fill" x:Name="SenstiveInfoContainerMobile" IsVisible="False" BackgroundColor="#F7F2FB">
+                    <Grid  Grid.Row="1"
+                           Grid.Column="{OnPlatform WinUI=1, MacCatalyst=1,Default=0}"
+                           VerticalOptions="Fill"
+                           x:Name="SenstiveInfoContainerMobile"
+                           IsVisible="False"
+                           BackgroundColor="#F7F2FB">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="*" />
@@ -227,74 +373,115 @@ Text="&#xe72d;"/>
                         </Grid.RowDefinitions>
 
                         <!-- Label -->
-                        <Grid RowDefinitions="*,auto" Grid.Row="0"  ColumnDefinitions="auto,*" HeightRequest="56" VerticalOptions="Center">
-                            <Button x:Name="Back_Pattern" HorizontalOptions="Start" Grid.Row="0" Grid.Column="0" Margin="0" FontSize="24" TextColor="#1C1B1F" BackgroundColor="Transparent" ToolTipProperties.Text="Back" FontFamily="Maui Material Assets" Clicked="OnCancelClicked" IsVisible="{OnPlatform Android=true, iOS=true, Default=false}"
-Text="&#xe72d;"/>
-                            <Label Text="Select the sensitive information to be redacted" TextColor="#1C1B1F" Grid.Column="1" LineBreakMode="WordWrap" Margin="5,0" VerticalOptions="Center" FontSize="14" FontAttributes="Bold"/>
-                            <BoxView Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" HeightRequest="1" Opacity="1" BackgroundColor="{AppThemeBinding Light=#CAC4D0, Dark=#CAC4D0}"/>
+                        <Grid RowDefinitions="*,auto"
+                              Grid.Row="0"
+                              ColumnDefinitions="auto,*"
+                              HeightRequest="56"
+                              VerticalOptions="Center">
+                            <Button x:Name="Back_Pattern"
+                                    HorizontalOptions="Start"
+                                    Grid.Row="0"
+                                    Grid.Column="0"
+                                    Margin="0"
+                                    FontSize="24"
+                                    TextColor="#1C1B1F"
+                                    BackgroundColor="Transparent"
+                                    ToolTipProperties.Text="Back"
+                                    FontFamily="Maui Material Assets"
+                                    Clicked="OnCancelClicked"
+                                    IsVisible="{OnPlatform Android=true, iOS=true, Default=false}"
+                                    Text="&#xe72d;" />
+                            <Label Text="Select the sensitive information to be redacted"
+                                   TextColor="#1C1B1F"
+                                   Grid.Column="1"
+                                   LineBreakMode="WordWrap"
+                                   Margin="5,0"
+                                   VerticalOptions="Center"
+                                   FontSize="14"
+                                   FontAttributes="Bold" />
+                            <BoxView Grid.Row="1"
+                                     Grid.Column="0"
+                                     Grid.ColumnSpan="2"
+                                     HeightRequest="1"
+                                     Opacity="1"
+                                     BackgroundColor="{AppThemeBinding Light=#CAC4D0, Dark=#CAC4D0}" />
                         </Grid>
 
                         <!-- TreeView -->
                         <treeview:SfTreeView Grid.Row="1"
-                x:Name="sensitiveInfoViewMobile"
-                ItemsSource="{Binding SensitiveInfo}"
-                CheckBoxMode="Recursive"
-                AutoExpandMode="AllNodesExpanded"
-                NodePopulationMode="Instant"
-                ItemTemplateContextType="Node"
-                SelectionMode="None">
+                                             x:Name="sensitiveInfoViewMobile"
+                                             ItemsSource="{Binding SensitiveInfo}"
+                                             CheckBoxMode="Recursive"
+                                             AutoExpandMode="AllNodesExpanded"
+                                             NodePopulationMode="Instant"
+                                             ItemTemplateContextType="Node"
+                                             SelectionMode="None">
                             <treeview:SfTreeView.HierarchyPropertyDescriptors>
-                                <treeviewengine:HierarchyPropertyDescriptor TargetType="{x:Type local:TreeItem}" ChildPropertyName="Child"/>
+                                <treeviewengine:HierarchyPropertyDescriptor TargetType="{x:Type local:TreeItem}"
+                                                                            ChildPropertyName="Child" />
                             </treeview:SfTreeView.HierarchyPropertyDescriptors>
 
                             <treeview:SfTreeView.ItemTemplate>
                                 <DataTemplate>
                                     <!--CheckBox-->
                                     <checkbox:SfCheckBox x:Name="{Binding Content.NodeId}"
-                            Text="{Binding Content.NodeText}"
-                            VerticalOptions="Center"
-                            HorizontalOptions="Start"
-                            IsChecked="{Binding IsChecked, Mode=TwoWay}" />
+                                                         Text="{Binding Content.NodeText}"
+                                                         VerticalOptions="Center"
+                                                         HorizontalOptions="Start"
+                                                         IsChecked="{Binding IsChecked, Mode=TwoWay}" />
                                 </DataTemplate>
                             </treeview:SfTreeView.ItemTemplate>
                         </treeview:SfTreeView>
 
                         <!-- Redact and Cancel Buttons at the bottom -->
-                        <VerticalStackLayout Spacing="5" Grid.Row="2" HorizontalOptions="FillAndExpand" Margin="0,10">
-                            <BoxView HeightRequest="1" Opacity="1" BackgroundColor="{AppThemeBinding Light=#CAC4D0, Dark=#CAC4D0}"/>
-                            <StackLayout Orientation="Horizontal" Margin="24,10" HorizontalOptions="EndAndExpand" Spacing="20">
+                        <VerticalStackLayout Spacing="5"
+                                             Grid.Row="2"
+                                             HorizontalOptions="FillAndExpand"
+                                             Margin="0,10">
+                            <BoxView HeightRequest="1"
+                                     Opacity="1"
+                                     BackgroundColor="{AppThemeBinding Light=#CAC4D0, Dark=#CAC4D0}" />
+                            <StackLayout Orientation="Horizontal"
+                                         Margin="24,10"
+                                         HorizontalOptions="EndAndExpand"
+                                         Spacing="20">
                                 <Button Text="Cancel"
-           CornerRadius="20"
-           FontAttributes="Bold"
-           FontSize="14"
+                                        CornerRadius="20"
+                                        FontAttributes="Bold"
+                                        FontSize="14"
                                         Style="{StaticResource CancelButton}"
-           WidthRequest="110"
-           HeightRequest="40"
-           HorizontalOptions="End"
-           Clicked="OnCancelClicked" />
+                                        WidthRequest="110"
+                                        HeightRequest="40"
+                                        HorizontalOptions="End"
+                                        Clicked="OnCancelClicked" />
                                 <Button Text="Apply"
-                               x:Name="SelectRedactItem_Mobile"
+                                        x:Name="SelectRedactItem_Mobile"
                                         IsEnabled="False"
-                                         Style="{StaticResource ApplyButton}"
-           CornerRadius="20"
-           FontAttributes="Bold"
-           FontSize="14"
-           WidthRequest="110"
-           HeightRequest="40"
-           HorizontalOptions="End"
-           Clicked="OkClicked" />
+                                        Style="{StaticResource ApplyButton}"
+                                        CornerRadius="20"
+                                        FontAttributes="Bold"
+                                        FontSize="14"
+                                        WidthRequest="110"
+                                        HeightRequest="40"
+                                        HorizontalOptions="End"
+                                        Clicked="OkClicked" />
                             </StackLayout>
                         </VerticalStackLayout>
                     </Grid>
                     <Grid.Shadow>
-                        <Shadow Brush="#CAC4D0" Offset="0,0" Radius="5" />
+                        <Shadow Brush="#CAC4D0"
+                                Offset="0,0"
+                                Radius="5" />
                     </Grid.Shadow>
                 </Grid>
                 <!--Mobile UI-->
             </Grid>
             <!--Desktop UI-->
             <!-- TreeView on the right side -->
-            <Grid Grid.Column="{OnPlatform WinUI=1, MacCatalyst=1,Default=0}" x:Name="popupContainer" BackgroundColor="#F7F2FB" IsVisible="{OnPlatform WinUI=True,MacCatalyst=True,Default=False}">
+            <Grid Grid.Column="{OnPlatform WinUI=1, MacCatalyst=1,Default=0}"
+                  x:Name="popupContainer"
+                  BackgroundColor="#F7F2FB"
+                  IsVisible="{OnPlatform WinUI=True,MacCatalyst=True,Default=False}">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="7*" />
@@ -302,34 +489,60 @@ Text="&#xe72d;"/>
                 </Grid.RowDefinitions>
 
                 <!-- Label -->
-                <Grid Grid.Row="0" ColumnDefinitions="auto,*" HeightRequest="56" VerticalOptions="Center">
-                    <Label Text="&#xe7e1;" Margin="10,0,0,0" Grid.Column="0" TextColor="#1C1B1F" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontSize="14" FontFamily="MauiSampleFontIcon"/>
-                    <Label Margin="10,0" Grid.Column="1"  VerticalOptions="Center" TextColor="#1C1B1F"
-       Text="Select the following sensitive Patterns to get redacted"  FontFamily="MauiSampleFontIcon" FontAttributes="Bold"/>
+                <Grid Grid.Row="0"
+                      ColumnDefinitions="auto,*"
+                      HeightRequest="56"
+                      VerticalOptions="Center">
+                    <Label Text="&#xe7e1;"
+                           Margin="10,0,0,0"
+                           Grid.Column="0"
+                           TextColor="#1C1B1F"
+                           HorizontalTextAlignment="Center"
+                           VerticalTextAlignment="Center"
+                           FontSize="24"
+                           FontFamily="MauiSampleFontIcon" />
+                    <Label Margin="10,10"
+                           Grid.Column="1"
+                           VerticalOptions="Center"
+                           TextColor="#1C1B1F"
+                           Text="Select the information that needs to be redacted"
+                           FontFamily="MauiSampleFontIcon"/>
                 </Grid>
 
-                <Grid Grid.Row="1" RowDefinitions="auto,*,auto">
-                    <BoxView Grid.Row="0" HeightRequest="1" Opacity="1" BackgroundColor="{AppThemeBinding Light=#CAC4D0, Dark=#CAC4D0}"/>
+                <Grid Grid.Row="1"
+                      RowDefinitions="auto,*,auto">
+                    <BoxView Grid.Row="0"
+                             HeightRequest="1"
+                             Opacity="1"
+                             BackgroundColor="{AppThemeBinding Light=#CAC4D0, Dark=#CAC4D0}" />
                     <Listview:SfListView Grid.Row="1"
-                     x:Name="PatternView"
-                     ItemSize="100"
-                     AutoFitMode="Height"
-                     SelectionMode="Multiple"
-                     ItemsSource="{Binding Patterns}">
+                                         x:Name="PatternView"
+                                         ItemSize="100"
+                                         VerticalOptions="Center"
+                                         AutoFitMode="Height"
+                                         SelectionMode="Multiple"
+                                         ItemsSource="{Binding Patterns}">
                         <Listview:SfListView.ItemTemplate>
                             <DataTemplate>
-                                <checkbox:SfCheckBox  x:Name ="{Binding NodeId}"                                   
+                                <checkbox:SfCheckBox  x:Name="{Binding NodeId}"
                                                       Text="{Binding NodeText}"
                                                       VerticalOptions="Center"
-                                                      HorizontalOptions="Start"                                                     
+                                                      HorizontalOptions="Start"
                                                       IsChecked="{Binding IsChecked, Mode=TwoWay}" />
                             </DataTemplate>
                         </Listview:SfListView.ItemTemplate>
                     </Listview:SfListView>
-                    <BoxView Grid.Row="2 " HeightRequest="1" Opacity="1" BackgroundColor="{AppThemeBinding Light=#CAC4D0, Dark=#CAC4D0}"/>
+                    <BoxView Grid.Row="2 "
+                             HeightRequest="1"
+                             Opacity="1"
+                             BackgroundColor="{AppThemeBinding Light=#CAC4D0, Dark=#CAC4D0}" />
                 </Grid>
 
-                <ActivityIndicator x:Name="LoadingIndicator" Grid.Row="1" HeightRequest="40" Color="#6750A4" WidthRequest="40"/>
+                <ActivityIndicator x:Name="LoadingIndicator"
+                                   Grid.Row="1"
+                                   HeightRequest="40"
+                                   Color="#6750A4"
+                                   WidthRequest="40" />
 
                 <!-- Scan Button at the bottom -->
                 <Button Grid.Row="2"
@@ -338,7 +551,7 @@ Text="&#xe72d;"/>
                         Margin="20,15,50,0"
                         CornerRadius="20"
                         VerticalOptions="Start"
-                         Style="{StaticResource ApplyButton}"
+                        Style="{StaticResource ApplyButton}"
                         ToolTipProperties.Text="Click to get sensitive text collections"
                         FontAttributes="Bold"
                         FontSize="14"
@@ -346,11 +559,16 @@ Text="&#xe72d;"/>
                         HorizontalOptions="End"
                         Clicked="ScanClick" />
                 <Grid.Shadow>
-                    <Shadow Brush="#CAC4D0" Offset="0,0"  Radius="5" />
+                    <Shadow Brush="#CAC4D0"
+                            Offset="0,0"
+                            Radius="5" />
                 </Grid.Shadow>
             </Grid>
 
-            <Grid Grid.Column="{OnPlatform WinUI=1, MacCatalyst=1,Default=0}" x:Name="SenstiveInfoContainer"  IsVisible="False" BackgroundColor="#F7F2FB">
+            <Grid Grid.Column="{OnPlatform WinUI=1, MacCatalyst=1,Default=0}"
+                  x:Name="SenstiveInfoContainer"
+                  IsVisible="False"
+                  BackgroundColor="#F7F2FB">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="*" />
@@ -358,11 +576,32 @@ Text="&#xe72d;"/>
                 </Grid.RowDefinitions>
 
                 <!-- Label -->
-                <Grid RowDefinitions="*,auto" Grid.Row="0" ColumnDefinitions="auto,*" HeightRequest="56" VerticalOptions="Center">
-                    <Label Text="&#xe7e1;" Margin="10,0,0,0" Grid.Column="0" TextColor="#1C1B1F" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontSize="14" FontFamily="MauiSampleFontIcon"/>
+                <Grid RowDefinitions="*,auto"
+                      Grid.Row="0"
+                      ColumnDefinitions="auto,*"
+                      HeightRequest="56"
+                      VerticalOptions="Center">
+                    <Label Text="&#xe7e1;"
+                           Margin="10,0,0,0"
+                           Grid.Column="0"
+                           TextColor="#1C1B1F"
+                           HorizontalTextAlignment="Center"
+                           VerticalTextAlignment="Center"
+                           FontSize="14"
+                           FontFamily="MauiSampleFontIcon" />
                     <Label TextColor="#1C1B1F"
-       Text="Select the sensitive information to be redacted" Grid.Column="1" Margin="10,0" VerticalOptions="Center" FontSize="14"  FontFamily="MauiSampleFontIcon" FontAttributes="Bold"/>
-                    <BoxView Grid.Row="1" HeightRequest="1" Grid.ColumnSpan="2" Opacity="1" BackgroundColor="{AppThemeBinding Light=#CAC4D0, Dark=#CAC4D0}"/>
+                           Text="Select the sensitive information to be redacted"
+                           Grid.Column="1"
+                           Margin="10,0"
+                           VerticalOptions="Center"
+                           FontSize="14"
+                           FontFamily="MauiSampleFontIcon"
+                           FontAttributes="Bold" />
+                    <BoxView Grid.Row="1"
+                             HeightRequest="1"
+                             Grid.ColumnSpan="2"
+                             Opacity="1"
+                             BackgroundColor="{AppThemeBinding Light=#CAC4D0, Dark=#CAC4D0}" />
                 </Grid>
 
                 <!-- TreeView -->
@@ -372,64 +611,76 @@ Text="&#xe72d;"/>
                                      CheckBoxMode="Recursive"
                                      AutoExpandMode="AllNodesExpanded"
                                      NodePopulationMode="Instant"
-                                     ItemTemplateContextType="Node"                                     
+                                     ItemTemplateContextType="Node"
                                      SelectionMode="None">
 
                     <treeview:SfTreeView.HierarchyPropertyDescriptors>
-                        <treeviewengine:HierarchyPropertyDescriptor TargetType="{x:Type local:TreeItem}" ChildPropertyName="Child"/>
+                        <treeviewengine:HierarchyPropertyDescriptor TargetType="{x:Type local:TreeItem}"
+                                                                    ChildPropertyName="Child" />
                     </treeview:SfTreeView.HierarchyPropertyDescriptors>
 
                     <treeview:SfTreeView.ItemTemplate>
                         <DataTemplate>
                             <!--CheckBox-->
-                            <checkbox:SfCheckBox  x:Name ="{Binding Content.NodeId}"                                   
+                            <checkbox:SfCheckBox  x:Name="{Binding Content.NodeId}"
                                                   Text="{Binding Content.NodeText}"
                                                   VerticalOptions="Center"
-                                                  HorizontalOptions="Start"                                                     
+                                                  HorizontalOptions="Start"
                                                   IsChecked="{Binding IsChecked, Mode=TwoWay}" />
                         </DataTemplate>
                     </treeview:SfTreeView.ItemTemplate>
                 </treeview:SfTreeView>
-                
+
                 <!-- Redact and Cancel Buttons at the bottom -->
-                <VerticalStackLayout Spacing="5" Grid.Row="2" HorizontalOptions="FillAndExpand" Margin="0,10">
-                    <BoxView HeightRequest="1" Opacity="1" BackgroundColor="{AppThemeBinding Light=#CAC4D0, Dark=#CAC4D0}"/>
-                    <StackLayout  Orientation="Horizontal" HorizontalOptions="End" Spacing="8" Margin="24,10">
+                <VerticalStackLayout Spacing="5"
+                                     Grid.Row="2"
+                                     HorizontalOptions="FillAndExpand"
+                                     Margin="0,10">
+                    <BoxView HeightRequest="1"
+                             Opacity="1"
+                             BackgroundColor="{AppThemeBinding Light=#CAC4D0, Dark=#CAC4D0}" />
+                    <StackLayout  Orientation="Horizontal"
+                                  HorizontalOptions="End"
+                                  Spacing="8"
+                                  Margin="24,10">
                         <Button Text="Cancel"
-CornerRadius="20"
-FontAttributes="Bold"
-FontSize="14"
-WidthRequest="90"
-                                 Style="{StaticResource CancelButton}"
+                                CornerRadius="20"
+                                FontAttributes="Bold"
+                                FontSize="14"
+                                WidthRequest="90"
+                                Style="{StaticResource CancelButton}"
                                 Padding="8"
                                 HeightRequest="40"
-HorizontalOptions="End"
-            Clicked="OnCancelClicked" >
+                                HorizontalOptions="End"
+                                Clicked="OnCancelClicked">
                         </Button>
-                        <Button 
-                            x:Name="SelectRedactitem"
-                            Text="Apply"
-                            IsEnabled="False"
-                            CornerRadius="20"
-                            FontAttributes="Bold"
-                            Padding="8"
-                            FontSize="14"
-                             Style="{StaticResource ApplyButton}"
-                            WidthRequest="90"
-                            HeightRequest="40"
-                            HorizontalOptions="End"
-            Clicked="OkClicked" >
+                        <Button x:Name="SelectRedactitem"
+                                Text="Apply"
+                                IsEnabled="False"
+                                CornerRadius="20"
+                                FontAttributes="Bold"
+                                Padding="8"
+                                FontSize="14"
+                                Style="{StaticResource ApplyButton}"
+                                WidthRequest="90"
+                                HeightRequest="40"
+                                HorizontalOptions="End"
+                                Clicked="OkClicked">
                         </Button>
                     </StackLayout>
                 </VerticalStackLayout>
                 <Grid.Shadow>
-                    <Shadow Brush="#CAC4D0" Offset="0,0"  Radius="5" />
+                    <Shadow Brush="#CAC4D0"
+                            Offset="0,0"
+                            Radius="5" />
                 </Grid.Shadow>
             </Grid>
             <!--Desktop UI-->
         </Grid>
         <Grid.Shadow>
-            <Shadow Brush="{AppThemeBinding Light=#CAC4D0, Dark=#CAC4D0}" Offset="0,0" Radius="1" />
+            <Shadow Brush="{AppThemeBinding Light=#CAC4D0, Dark=#CAC4D0}"
+                    Offset="0,0"
+                    Radius="1" />
         </Grid.Shadow>
     </Grid>
 </ContentPage>

@@ -24,13 +24,13 @@ namespace SmartRedaction
             animation = new Animation();
             sensitiveInfoView.NodeChecked += SensitiveInfoView_NodeChecked;
             sensitiveInfoViewMobile.NodeChecked += SensitiveInfoView_NodeChecked;
-            CreateReduct.StateChanged += CreateReduct_StateChanged;
+            MarkRedaction.StateChanged += MarkRedaction_StateChanged;
             PdfViewer.AnnotationAdded += PdfViewer_AnnotationAdded;
             AddRedact.PropertyChanged += AddRedact_PropertyChanged;
             PdfViewer.DocumentLoaded += PdfViewer_DocumentLoaded;
         }
 
-        private void CreateReduct_StateChanged(object? sender, Syncfusion.Maui.Buttons.StateChangedEventArgs e)
+        private void MarkRedaction_StateChanged(object? sender, Syncfusion.Maui.Buttons.StateChangedEventArgs e)
         {
             if (e.IsChecked.HasValue && e.IsChecked.Value)
             {
@@ -48,9 +48,12 @@ namespace SmartRedaction
             {
                 Application.Current?.MainPage?.DisplayAlert("Alert", "The Azure API key or endpoint is missing or incorrect. Please verify your credentials", "OK");
                 MobileScan.IsEnabled = false;
-                MobileScan.Opacity = 0.5;
                 DesktopScanButton.IsEnabled = false;
-                DesktopScanButton.Opacity = 0.5;
+            }
+            else
+            {
+                MobileScan.IsEnabled = true;
+                DesktopScanButton.IsEnabled = true;
             }
         }
 
@@ -70,7 +73,7 @@ namespace SmartRedaction
 
         private void PdfViewer_AnnotationAdded(object? sender, AnnotationEventArgs e)
         {
-            if ((bool)CreateReduct.IsChecked && e.Annotation is SquareAnnotation)
+            if ((bool)MarkRedaction.IsChecked && e.Annotation is SquareAnnotation)
             {
                 e.Annotation.Name = $"RedactedRect{PdfViewer.Annotations.Count}";
                 e.Annotation.Author = "RedactedRect";
@@ -102,7 +105,7 @@ namespace SmartRedaction
                                 Width = item.Bounds.Width,
                                 Height = item.Bounds.Height
                             };
-                            SquareAnnotation annotation = new SquareAnnotation(Bounds, item.pageNumber)
+                            SquareAnnotation annotation = new SquareAnnotation(Bounds, item.PageNumber)
                             {
                                 Color = Colors.Red,    // Set stroke color
                                 BorderWidth = 1,       // Set stroke thickness
@@ -131,7 +134,7 @@ namespace SmartRedaction
                 {
                     foreach (TreeItem item in ViewModel.ChildNodes)
                     {
-                        if (item.pageNumber == int.Parse(treeItem.NodeId))
+                        if (item.PageNumber == int.Parse(treeItem.NodeId))
                         {
                             if (e.Node.IsChecked == true)
                             {
@@ -143,7 +146,7 @@ namespace SmartRedaction
                                     Width = item.Bounds.Width,
                                     Height = item.Bounds.Height
                                 };
-                                SquareAnnotation annotation = new SquareAnnotation(Bounds, item.pageNumber)
+                                SquareAnnotation annotation = new SquareAnnotation(Bounds, item.PageNumber)
                                 {
                                     Color = Colors.Red,
                                     BorderWidth = 1,
@@ -181,7 +184,7 @@ namespace SmartRedaction
                             Width = treeItem.Bounds.Width,
                             Height = treeItem.Bounds.Height
                         };
-                        SquareAnnotation annotation = new SquareAnnotation(Bounds, treeItem.pageNumber)
+                        SquareAnnotation annotation = new SquareAnnotation(Bounds, treeItem.PageNumber)
                         {
                             Color = Colors.Red,
                             BorderWidth = 1,
@@ -223,12 +226,7 @@ namespace SmartRedaction
             SenstiveInfoContainer.IsVisible = false;
         }
 
-        private float ConvertPointToPixel(float number)
-        {
-            return (number * 96f / 72f);
-        }
-
-        private string ExtractedTextFromPDF()
+        private string ExtractTextFromPDF()
         {
             List<string> extractedText = new List<string>();
             var documentSource = PdfViewer.DocumentSource;
@@ -238,25 +236,6 @@ namespace SmartRedaction
                 PdfLoadedDocument loadedDocument = new PdfLoadedDocument(stream);
                 // Loading page collections
                 PdfLoadedPageCollection loadedPages = loadedDocument.Pages;
-                // Extract annotations to a memory stream and convert to string
-                using (MemoryStream annotationStream = new MemoryStream())
-                {
-                    loadedDocument.ExportAnnotations(annotationStream, AnnotationDataFormat.Json);
-                    string annotations = ConvertToString(annotationStream);
-                    if (!String.IsNullOrEmpty(annotations))
-                        extractedText.Add("Annotations: " + annotations);
-                }
-                // Extract form fields to a memory stream and convert to string
-                using (MemoryStream formStream = new MemoryStream())
-                {
-                    if (loadedDocument.Form != null)
-                    {
-                        loadedDocument.Form.ExportData(formStream, DataFormat.Json, "form");
-                        string formFields = ConvertToString(formStream);
-                        if (!String.IsNullOrEmpty(formFields))
-                            extractedText.Add("Form fields: " + formFields);
-                    }
-                }
                 // Extract text from existing PDF document pages
                 for (int i = 0; i < loadedPages.Count; i++)
                 {
@@ -268,14 +247,6 @@ namespace SmartRedaction
                 return result;
             }
             return "";
-        }
-
-        private string ConvertToString(MemoryStream memoryStream)
-        {
-            // Reset the position of the MemoryStream to the beginning
-            memoryStream.Position = 0;
-            var reader = new StreamReader(memoryStream, System.Text.Encoding.UTF8);
-            return reader.ReadToEnd();
         }
 
         private void UpdateCheckedPatterns()
@@ -327,7 +298,7 @@ namespace SmartRedaction
             {
                 List<string> selectedItems = ViewModel.SelectedPatterns.ToList();
                 //Extract the text from the PDF
-                string extractedText = ExtractedTextFromPDF();
+                string extractedText = ExtractTextFromPDF();
                 //Find the text bounds with the selected patterns
                 ViewModel.textboundsDetails = await FindText(extractedText, selectedItems);
                 //Count the no. of bounds fetched
@@ -347,7 +318,6 @@ namespace SmartRedaction
                     sensitiveInfoView.ItemsSource = ViewModel.SensitiveInfo;
                     sensitiveInfoViewMobile.ItemsSource = null;
                     sensitiveInfoViewMobile.ItemsSource = ViewModel.SensitiveInfo;
-                    //ViewModel.OnAfterRender(ViewModel.dataFetched);
                 }
 #if WINDOWS || MACCATALYST
                 LoadingIndicator.IsRunning = false;
@@ -365,24 +335,30 @@ namespace SmartRedaction
                 Stream documentStream = (Stream)PdfViewer.DocumentSource;
                 //Remove the Prefixs
                 List<string> sensitiveInformations = RemovePrefix(sensitiveData, selectedItems);
-                Dictionary<int, List<TextBounds>> boundsData = FindTextBounds(documentStream, sensitiveInformations);
+                Dictionary<int, List<TextBounds>> boundsData = FindSensitiveContentsBounds(documentStream, sensitiveInformations);
                 return boundsData;
             }
             Dictionary<int, List<TextBounds>> temp = new Dictionary<int, List<TextBounds>>();
             return temp;
         }
 
-        internal async Task<List<string>> GetSensitiveDataFromPDF(string text, List<string> selectedItems)
+        /// <summary>
+        /// Returns the sensitive information present in the PDF document.
+        /// </summary>
+        /// <param name="text">The text present in the PDF document</param>
+        /// <param name="sensitiveInformationTypes">The sensitive information types to identify, such as names, addresses, or phone numbers. </param>
+        /// <returns></returns>
+        internal async Task<List<string>> GetSensitiveDataFromPDF(string text, List<string> sensitiveInformationTypes)
         {
             StringBuilder stringBuilder = new StringBuilder();
             stringBuilder.AppendLine("I have a block of text containing various pieces of information. Please help me identify and extract any Personally Identifiable Information (PII) present in the text. The PII categories I am interested in are:");
-            foreach (var item in selectedItems)
+            foreach (var item in sensitiveInformationTypes)
             {
                 stringBuilder.AppendLine(item);
             }
             stringBuilder.AppendLine("Please provide the extracted information as a plain list, separated by commas, without any prefix or numbering or extra content.");
             string prompt = stringBuilder.ToString();
-            var answer = await openAIService.GetAnswerFromGPT(prompt, ExtractedTextFromPDF());
+            var answer = await openAIService.GetAnswerFromGPT(prompt, ExtractTextFromPDF());
             if (answer != null)
             {
                 var output = answer.Trim();
@@ -396,36 +372,42 @@ namespace SmartRedaction
             return new List<string>();
         }
 
-        public Dictionary<int, List<TextBounds>> FindTextBounds(Stream stream, List<string> sensitiveInformations)
+        /// <summary>
+        /// Finds and returns the bounds of sensitive content within a PDF document.
+        /// </summary>
+        /// <param name="stream">The stream containing the PDF document.</param>
+        /// <param name="sensitiveContents">A list of sensitive content strings to search for.</param>
+        /// <returns>A dictionary where the key is the page number and the value is a list of TextBounds objects representing the sensitive content found on that page.</returns>
+        public Dictionary<int, List<TextBounds>> FindSensitiveContentsBounds(Stream stream, List<string> sensitiveContents)
         {
-            Dictionary<int, List<TextBounds>> accumulatedBounds = new Dictionary<int, List<TextBounds>>();
+            Dictionary<int, List<TextBounds>> sensitveContentsBounds = new Dictionary<int, List<TextBounds>>();
             using (PdfLoadedDocument loadedDocument = new PdfLoadedDocument(stream))
             {
-                foreach (var info in sensitiveInformations)
+                foreach (var content in sensitiveContents)
                 {
-                    if (!string.IsNullOrEmpty(info))
+                    if (!string.IsNullOrEmpty(content))
                     {
-                        Dictionary<int, List<RectangleF>> bounds;
+                        Dictionary<int, List<RectangleF>> contentBounds;
                         // Find the text bounds
-                        loadedDocument.FindText(info, out bounds);
+                        loadedDocument.FindText(content, out contentBounds);
                         // Merge bounds into accumulatedBounds
-                        foreach (var pair in bounds)
+                        foreach (var bounds in contentBounds)
                         {
-                            if (!accumulatedBounds.ContainsKey(pair.Key))
+                            if (!sensitveContentsBounds.ContainsKey(bounds.Key))
                             {
-                                accumulatedBounds[pair.Key] = new List<TextBounds>();
+                                sensitveContentsBounds[bounds.Key] = new List<TextBounds>();
                             }
                             // Add the bounds with the corresponding sensitive information
-                            accumulatedBounds[pair.Key].AddRange(pair.Value.Select(rect => new TextBounds
+                            sensitveContentsBounds[bounds.Key].AddRange(bounds.Value.Select(rect => new TextBounds
                             {
-                                SensitiveInformation = info,
+                                SensitiveInformation = content,
                                 Bounds = rect
                             }));
                         }
                     }
                 }
             }
-            return accumulatedBounds;
+            return sensitveContentsBounds;
         }
 
         private List<string> RemovePrefix(List<string> sensitiveInfo, List<string> selectedItems)
@@ -445,7 +427,7 @@ namespace SmartRedaction
 
         private void Redact()
         {
-            CreateReduct.IsChecked = false;
+            MarkRedaction.IsChecked = false;
             MemoryStream pdf = new MemoryStream();
             PdfViewer.SaveDocument(pdf);
             PdfLoadedDocument loadedDocument = new PdfLoadedDocument(pdf);
@@ -454,6 +436,7 @@ namespace SmartRedaction
                 List<PdfLoadedAnnotation> removeAnnotations = new List<PdfLoadedAnnotation>();
                 foreach (PdfLoadedAnnotation annotation in page.Annotations)
                 {
+                    // Iterate through the annotations that highlight the sensitive information and redact the content.
                     if (annotation is PdfLoadedRectangleAnnotation)
                     {
                         //Check the annot for Redaction

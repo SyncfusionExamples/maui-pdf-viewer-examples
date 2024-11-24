@@ -18,7 +18,6 @@
 		<UseMaui>true</UseMaui>
 		<SingleProject>true</SingleProject>
 		<ImplicitUsings>enable</ImplicitUsings>
-		<Nullable>enable</Nullable>
 
 		<!-- Display name -->
 		<ApplicationTitle>SmartRedaction</ApplicationTitle>
@@ -51,19 +50,19 @@
 
 		<!-- Custom Fonts -->
 		<MauiFont Include="Resources\Fonts\*" />
-		<MauiFont Include="Resources\Fonts\MauiSampleFontIcon.ttf"/>
+		<MauiFont Include="Resources\Fonts\MauiSampleFontIcon.ttf" />
 
 		<!-- Raw Assets (also remove the "Resources\Raw" prefix) -->
 		<MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <None Remove="Assets\reduction.pdf" />
+	  <None Remove="Assets\redaction.pdf" />
 	  <None Remove="Resources\Fonts\MauiSampleFontIcon.ttf" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <EmbeddedResource Include="Assets\reduction.pdf" />
+	  <EmbeddedResource Include="Assets\redaction.pdf" />
 	</ItemGroup>
 
 	<ItemGroup>

@@ -25,9 +25,8 @@ namespace SmartRedaction
 
         internal string[] SelectedPatterns = new string[] { };
         internal string[] CheckedInfo = new string[] { };
-        // public ObservableCollection<TreeItem> ChildNodes { get; set; } = new ObservableCollection<TreeItem>();
 
-       public ObservableCollection<TreeItem> ChildNodes = new ObservableCollection<TreeItem>();
+        public ObservableCollection<TreeItem> ChildNodes = new ObservableCollection<TreeItem>();
         internal bool dataFetched { get; set; } = false;
         internal bool dataRendered { get; set; } = false;
         internal Dictionary<int, List<TextBounds>> textboundsDetails;
@@ -50,7 +49,7 @@ namespace SmartRedaction
         {
             SensitiveInfo = new ObservableCollection<TreeItem>();
             LoadPatterns();
-            LoadPdfFile();     
+            LoadPdfFile();
         }
 
         private ICommand m_openDocumentCommand;
@@ -121,8 +120,6 @@ namespace SmartRedaction
                     new TreeItem { NodeId = "phoneNumbers", NodeText = "Phone Numbers", IsChecked=true },
                     new TreeItem { NodeId = "addresses", NodeText = "Addresses", IsChecked=true },
                     new TreeItem { NodeId = "dates", NodeText = "Dates", IsChecked=true },
-                    new TreeItem { NodeId = "faces", NodeText = "Faces" , IsChecked = true},
-                    new TreeItem { NodeId = "brandLogos", NodeText = "Brand Logos" , IsChecked = true},
                     new TreeItem { NodeId = "accountNumbers", NodeText = "Account Numbers" , IsChecked = true},
                     new TreeItem { NodeId = "creditCardNumbers", NodeText = "Credit Card Numbers" , IsChecked = true}
                 };
@@ -140,19 +137,19 @@ namespace SmartRedaction
                         {
                             NodeId = "RedactedRect" + annotCount++,
                             NodeText = textBounds.SensitiveInformation,
-                            pageNumber = detail.Key+1,
+                            PageNumber = detail.Key + 1,
                             Bounds = textBounds.Bounds,
                         });
                     }
                 }
 
                 // Group ChildNodes by pageNumber and convert Child list to ObservableCollection
-                var groupedByPage = ChildNodes.GroupBy(node => node.pageNumber)
+                var groupedByPage = ChildNodes.GroupBy(node => node.PageNumber)
                                               .Select(group => new TreeItem
                                               {
                                                   NodeId = group.Key.ToString(),
                                                   NodeText = "Page " + (group.Key),
-                                                  pageNumber = group.Key,
+                                                  PageNumber = group.Key,
                                                   Expanded = true,
                                                   Child = new ObservableCollection<TreeItem>(group.ToList()) // Convert to ObservableCollection
                                               })
@@ -170,10 +167,10 @@ namespace SmartRedaction
             }
         }
 
-        
+
         private void LoadPdfFile()
         {
-            _pdfFile = this.GetType().Assembly.GetManifestResourceStream("SmartRedaction.Assets.reduction.pdf");
+            _pdfFile = this.GetType().Assembly.GetManifestResourceStream("SmartRedaction.Assets.redaction.pdf");
             OnPropertyChanged(nameof(PdfFile));
         }
 
@@ -183,13 +180,13 @@ namespace SmartRedaction
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
-  
+
     public class TreeItem : INotifyPropertyChanged
     {
         public string NodeId { get; set; }
         public string NodeText { get; set; }
         public bool Expanded { get; set; }
-        public int pageNumber { get; set; }
+        public int PageNumber { get; set; }
         public RectangleF Bounds { get; set; }
         public ObservableCollection<TreeItem> Child { get; set; } = new ObservableCollection<TreeItem>();
 
