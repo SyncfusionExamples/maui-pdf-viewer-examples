@@ -484,7 +484,7 @@
                   IsVisible="{OnPlatform WinUI=True,MacCatalyst=True,Default=False}">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
-                    <RowDefinition Height="5*" />
+                    <RowDefinition Height="{OnPlatform WinUI='5*', MacCatalyst='3*'}" />
                     <RowDefinition Height="6*" />
                 </Grid.RowDefinitions>
 

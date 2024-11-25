@@ -88,7 +88,7 @@ namespace SmartRedaction
         {
             try
             {
-                if (Client != null && key != "AZURE_OPENAI_API_KEY")
+                if (Client != null && key != "OPENAI_API_KEY")
                 {
                     ChatHistory = string.Empty;
                     ChatHistory += $"System: {systemPrompt}\nUser: {extractedText}";
