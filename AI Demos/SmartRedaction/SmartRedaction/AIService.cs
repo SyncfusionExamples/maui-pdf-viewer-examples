@@ -1,10 +1,15 @@
-﻿using Azure;
+﻿using Microsoft.Extensions.AI;
 using Azure.AI.OpenAI;
+using Azure.Identity;
+using OpenAI;
+using Azure;
 
 namespace SmartRedaction
 {
     public class AIService
     {
+        #region Fields
+
         /// <summary>
         /// The EndPoint
         /// </summary>
@@ -18,49 +23,88 @@ namespace SmartRedaction
         /// <summary>
         /// The AI key
         /// </summary>
-        private string key = "AZURE_OPENAI_API_KEY";
+        private string key = "OPENAI_AI_KEY";
 
         /// <summary>
-        /// The AzureOpenAI client
+        /// The IChatClient instance
         /// </summary>
-        private OpenAIClient? client;
+        private IChatClient client;
 
         /// <summary>
-        /// The ChatCompletion option
+        /// The chat history
         /// </summary>
-        internal ChatCompletionsOptions? chatCompletions;
+        private string chatHistory;
+
+        #endregion
+
+        #region Properties
+
+        /// <summary>
+        /// Gets or sets the chat history
+        /// </summary>
+        public string ChatHistory
+        {
+            get { return chatHistory; }
+            set { chatHistory = value; }
+        }
+
+        /// <summary>
+        /// Gets or sets the IChatClient instance
+        /// </summary>
+        public IChatClient Client
+        {
+            get { return client; }
+            set { client = value; }
+        }
+
+        #endregion
+
+        #region Constructor
 
         public AIService()
         {
-            chatCompletions = new ChatCompletionsOptions
-            {
-                DeploymentName = this.DeploymentName,
-                Temperature = (float)1.2f,
-                NucleusSamplingFactor = (float)0.9,
-                FrequencyPenalty = 0.8f,
-                PresencePenalty = 0.8f
-            };
-            client = new OpenAIClient(new Uri(this.endpoint), new AzureKeyCredential(this.key));
+            InitializeClient();
         }
-        public async Task<string> GetAnswerFromGPT(string systemPrompt, string extractedtext)
+
+        #endregion
+
+        #region Methods
+
+        /// <summary>
+        /// Initializes the Azure OpenAI client
+        /// </summary>
+        private void InitializeClient()
+        {
+            client = new AzureOpenAIClient(new Uri(endpoint), new AzureKeyCredential(key)).AsChatClient(modelId: DeploymentName);
+        }
+
+        /// <summary>
+        /// Retrieves an answer from the GPT model using the provided system prompt and extracted text.
+        /// </summary>
+        /// <param name="systemPrompt">The system instruction for GPT.</param>
+        /// <param name="extractedText">The input text extracted from a source.</param>
+        /// <returns>A string containing the response from OpenAI or an empty string if an error occurs.</returns>
+        public async Task<string> GetAnswerFromGPT(string systemPrompt, string extractedText)
         {
             try
             {
-                string message = extractedtext;
-                if (this.client != null && this.chatCompletions != null && this.key != "AZURE_OPENAI_API_KEY")
+                if (Client != null && key != "AZURE_OPENAI_API_KEY")
                 {
-                    chatCompletions.Messages.Clear();
-                    chatCompletions.Messages.Add(new ChatRequestSystemMessage(systemPrompt));
-                    chatCompletions.Messages.Add(new ChatRequestUserMessage(message));
-                    var response = await client.GetChatCompletionsAsync(chatCompletions);
-                    return response.Value.Choices[0].Message.Content;
+                    ChatHistory = string.Empty;
+                    ChatHistory += $"System: {systemPrompt}\nUser: {extractedText}";
+                    var response = await Client.CompleteAsync(ChatHistory);
+                    return response.ToString();
                 }
-                return "";
+                else
+                    return string.Empty;
             }
             catch
             {
-                return "";
+                // Return an empty string if an exception occurs
+                return string.Empty;
             }
         }
+
+        #endregion
     }
 }
