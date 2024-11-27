@@ -454,7 +454,7 @@
                                         HeightRequest="40"
                                         HorizontalOptions="End"
                                         Clicked="OnCancelClicked" />
-                                <Button Text="Apply"
+                                <Button Text="Ok"
                                         x:Name="SelectRedactItem_Mobile"
                                         IsEnabled="False"
                                         Style="{StaticResource ApplyButton}"
@@ -655,7 +655,7 @@
                                 Clicked="OnCancelClicked">
                         </Button>
                         <Button x:Name="SelectRedactitem"
-                                Text="Apply"
+                                Text="Ok"
                                 IsEnabled="False"
                                 CornerRadius="20"
                                 FontAttributes="Bold"
