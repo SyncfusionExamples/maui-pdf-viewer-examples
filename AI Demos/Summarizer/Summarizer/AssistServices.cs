@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using Azure.AI.OpenAI;
 using Azure;
+using Microsoft.Extensions.AI;
 
 namespace Summarizer
 {
@@ -11,6 +12,7 @@ namespace Summarizer
     /// </summary>
     internal class AssistServices
     {
+        #region Fields
 
         /// <summary>
         /// Gets or sets the extracted text from a document.
@@ -30,29 +32,53 @@ namespace Summarizer
         /// <summary>
         /// The AI key
         /// </summary>
-        private string key = "AZURE_OPENAI_API_KEY";
+        private string key = "OPENAI_AI_KEY";
 
         /// <summary>
-        /// The AzureOpenAI client
+        /// The IChatClient instance
         /// </summary>
-        internal OpenAIClient? client;
+        private IChatClient? client;
 
         /// <summary>
-        /// The ChatCompletion option
+        /// The chat history
         /// </summary>
-        private ChatCompletionsOptions? chatCompletions;
+        private string? chatHistory;
+
+        #endregion
+
+        #region Properties
+
+        /// <summary>
+        /// Gets or sets the chat history
+        /// </summary>
+        public string? ChatHistory
+        {
+            get { return chatHistory; }
+            set { chatHistory = value; }
+        }
+
+        /// <summary>
+        /// Gets or sets the IChatClient instance
+        /// </summary>
+        public IChatClient? Client
+        {
+            get { return client; }
+            set { client = value; }
+        }
+
+        #endregion
 
         internal AssistServices()
         {
-            chatCompletions = new ChatCompletionsOptions
-            {
-                DeploymentName = this.DeploymentName,
-                Temperature = (float)1.2f,
-                NucleusSamplingFactor = (float)0.9,
-                FrequencyPenalty = 0.8f,
-                PresencePenalty = 0.8f
-            };
-            client = new OpenAIClient(new Uri(this.endpoint), new AzureKeyCredential(this.key));
+            InitializeClient();
+        }
+
+        /// <summary>
+        /// Initializes the Azure OpenAI client
+        /// </summary>
+        private void InitializeClient()
+        {
+            client = new AzureOpenAIClient(new Uri(endpoint), new AzureKeyCredential(key)).AsChatClient(modelId: DeploymentName);
         }
 
         /// <summary>
@@ -62,13 +88,12 @@ namespace Summarizer
         /// <returns>A predefined message requesting OpenAI connection for real-time queries.</returns>
         internal async Task<string> GetPrompt(string prompt)
         {
-            if (this.client != null && this.chatCompletions != null && this.key != "AZURE_OPENAI_API_KEY")
+            if (this.Client != null && key != "OPENAI_AI_KEY")
             {
-                chatCompletions.Messages.Clear();
-                chatCompletions.Messages.Add(new ChatRequestSystemMessage("Please provide the prompt for responce" + prompt));
-                chatCompletions.Messages.Add(new ChatRequestUserMessage(prompt));
-                var response = await client.GetChatCompletionsAsync(chatCompletions);
-                return response.Value.Choices[0].Message.Content;
+                ChatHistory = string.Empty;
+                ChatHistory += $"System: {"Please provide the prompt for responce" + prompt}\nUser: {prompt}";
+                var response = await Client.CompleteAsync(ChatHistory);
+                return response.ToString();
             }
             else
                 return "Please connect OpenAI for real time queries";
@@ -85,15 +110,14 @@ namespace Summarizer
             try
             {
                 // Use extracted text
-                if (this.ExtractedText != null && this.client != null && this.chatCompletions != null && this.key != "AZURE_OPENAI_API_KEY")
+                if (this.ExtractedText != null && this.Client != null && key != "OPENAI_AI_KEY")
                 {
                     string message = ExtractedText;
-                    var systemPrompt = "You are a helpful assistant. Use the provided PDF document pages and pick a precise page to answer the user question,Ignore about iTextSharp related points in the details, Strictly don't bold any text all text need to plain text. Pages: " + message;
-                    chatCompletions.Messages.Clear();
-                    chatCompletions.Messages.Add(new ChatRequestSystemMessage(systemPrompt));
-                    chatCompletions.Messages.Add(new ChatRequestUserMessage(question));
-                    var response = await client.GetChatCompletionsAsync(chatCompletions);
-                    return response.Value.Choices[0].Message.Content;
+                    var systemPrompt = "Read the PDF document contents, understand the concept, and select the precise page to answer the user's question. Ignore any points related to iTextSharp. Ensure that all text is plain and not bolded. Pages: Question: " + question;
+                    ChatHistory = string.Empty;
+                    ChatHistory += $"System: {systemPrompt}\nUser: {ExtractedText}";
+                    var response = await Client.CompleteAsync(ChatHistory);
+                    return response.ToString();
                 }
                 return "Please connect OpenAI for real time queries";
             }
@@ -137,13 +161,12 @@ namespace Summarizer
         {
             try
             {
-                if (this.ExtractedText != null && this.chatCompletions != null && this.client != null && this.key != "AZURE_OPENAI_API_KEY")
+                if (this.ExtractedText != null &&  this.Client != null && key != "OPENAI_AI_KEY")
                 {
-                    chatCompletions.Messages.Clear();
-                    chatCompletions.Messages.Add(new ChatRequestSystemMessage(systemPrompt));
-                    chatCompletions.Messages.Add(new ChatRequestUserMessage(ExtractedText));
-                    var response = await client.GetChatCompletionsAsync(chatCompletions);
-                    return response.Value.Choices[0].Message.Content;
+                    ChatHistory = string.Empty;
+                    ChatHistory += $"System: {systemPrompt}\nUser: {ExtractedText}";
+                    var response = await Client.CompleteAsync(ChatHistory);
+                    return response.ToString();
                 }
                 else
                     return "Please connect OpenAI for real time queries";

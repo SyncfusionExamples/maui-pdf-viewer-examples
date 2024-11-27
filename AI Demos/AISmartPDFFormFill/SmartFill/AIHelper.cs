@@ -1,10 +1,13 @@
-﻿using Azure.AI.OpenAI;
+﻿using Microsoft.Extensions.AI;
+using Azure.AI.OpenAI;
 using Azure;
 
 namespace SmartFill
 {
-    public class AIHelper 
+    public class AIHelper
     {
+
+        #region Fields
 
         /// <summary>
         /// The EndPoint
@@ -14,35 +17,64 @@ namespace SmartFill
         /// <summary>
         /// The Deployment name
         /// </summary>
-        internal string deploymentName = "DEPLOYMENT_NAME";
+        internal string DeploymentName = "DEPLOYMENT_NAME";
 
         /// <summary>
         /// The AI key
         /// </summary>
-        private string apiKey = "AZURE_OPENAI_API_KEY";
+        private string key = "OPENAI_AI_KEY";
 
         /// <summary>
-        /// The AzureOpenAI client
+        /// The IChatClient instance
         /// </summary>
-        // C#
-        internal OpenAIClient? openAIClient;
+        private IChatClient? client;
 
         /// <summary>
-        /// The ChatCompletion option
+        /// The chat history
         /// </summary>
-        private ChatCompletionsOptions? chatCompletionsOptions;
+        private string? chatHistory;
+
+        #endregion
+
+        #region Properties
+
+        /// <summary>
+        /// Gets or sets the chat history
+        /// </summary>
+        public string? ChatHistory
+        {
+            get { return chatHistory; }
+            set { chatHistory = value; }
+        }
+
+        /// <summary>
+        /// Gets or sets the IChatClient instance
+        /// </summary>
+        public IChatClient? Client
+        {
+            get { return client; }
+            set { client = value; }
+        }
+
+        #endregion
+
+        #region Constructor
 
         public AIHelper()
         {
-            chatCompletionsOptions = new ChatCompletionsOptions
-            {
-                DeploymentName = deploymentName,
-                Temperature = (float)1.2f,
-                NucleusSamplingFactor = (float)0.9,
-                FrequencyPenalty = 0.8f,
-                PresencePenalty = 0.8f
-            };
-            openAIClient = new OpenAIClient(new Uri(endpoint), new AzureKeyCredential(apiKey));
+            InitializeClient();
+        }
+
+        #endregion
+
+        #region Methods
+
+        /// <summary>
+        /// Initializes the Azure OpenAI client
+        /// </summary>
+        private void InitializeClient()
+        {
+            client = new AzureOpenAIClient(new Uri(endpoint), new AzureKeyCredential(key)).AsChatClient(modelId: DeploymentName);
         }
 
         /// <summary>
@@ -54,24 +86,24 @@ namespace SmartFill
         {
             try
             {
-                if (apiKey != "AZURE_OPENAI_API_KEY" && deploymentName != "DEPLOYMENT_NAME" && endpoint != "https://yourendpoint.com/")
+                if (key != "OPENAI_AI_KEY" && DeploymentName != "DEPLOYMENT_NAME" && endpoint != "https://yourendpoint.com/" && Client!=null)
                 {
-                    chatCompletionsOptions.Messages.Add(new ChatRequestUserMessage(userPrompt));
-                    var response = await openAIClient.GetChatCompletionsAsync(chatCompletionsOptions);
-                    return response.Value.Choices[0].Message.Content;
+                    ChatHistory = string.Empty;
+                    ChatHistory = ChatHistory + userPrompt;
+                    var response = await Client.CompleteAsync(ChatHistory);
+                    return response.ToString();
                 }
                 else
                 {
-                    await Application.Current.MainPage.DisplayAlert("Error", "Please provide your Azure OpenAI API key, deployment name, and endpoint in the AIHelper class.", "OK");
-                    return string.Empty;
+                    return " ";
                 }
             }
-            catch (Exception exception)
+            catch
             {
-                await Application.Current.MainPage.DisplayAlert("Error", exception.Message, "OK");
-                return string.Empty;
+                // Return an empty string if an exception occurs
+                return " ";
             }
         }
-
+        #endregion
     }
 }
