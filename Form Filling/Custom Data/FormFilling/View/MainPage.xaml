@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:FormFilling"
+             xmlns:syncfusion="clr-namespace:Syncfusion.Maui.PdfViewer;assembly=Syncfusion.Maui.PdfViewer" 
+             x:Class="FormFilling.MainPage">
+    <ContentPage.BindingContext>
+        <local:ViewModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.Resources>
+        <Style TargetType="Button">
+            <Setter Property="BorderWidth" Value="0" />
+            <Setter Property="FontSize" Value="18" />
+            <Setter Property="Padding" Value="4" />
+            <Setter Property="VerticalOptions" Value="Center" />
+            <Setter Property="VisualStateManager.VisualStateGroups">
+                <VisualStateGroupList>
+                    <VisualStateGroup x:Name="CommonStates">
+                        <VisualState x:Name="Normal">
+                            <VisualState.Setters>
+                                <Setter Property="TextColor" Value="#99000000" />
+                                <Setter Property="BackgroundColor" Value="Transparent" />
+                            </VisualState.Setters>
+                        </VisualState>
+                        <VisualState x:Name="Disabled">
+                            <VisualState.Setters>
+                                <Setter Property="TextColor" Value="#44000000" />
+                                <Setter Property="BackgroundColor" Value="Transparent" />
+                            </VisualState.Setters>
+                        </VisualState>
+                        <VisualState x:Name="Pressed">
+                            <VisualState.Setters>
+                                <Setter Property="TextColor" Value="#99000000" />
+                                <Setter Property="BackgroundColor" Value="#0F000000" />
+                            </VisualState.Setters>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateGroupList>
+            </Setter>
+        </Style>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <Grid RowDefinitions="40,*">
+            <ScrollView Orientation="Horizontal">
+            <HorizontalStackLayout Grid.Row="0" Spacing="20" Margin="20,0,0,0"
+                        HorizontalOptions="Start">
+                <Button Text="&#xe712;" 
+                        Command="{Binding OpenFileCommand}"
+                        IsVisible="{OnPlatform MacCatalyst=false}"
+                        FontFamily="Maui Material Assets"/>
+                <Button Text="&#xe75f;" x:Name="Save" FontFamily="Maui Material Assets"  Clicked="Save_Clicked" Margin="0,0,3,0"/>
+                <Button x:Name="Import" Text="&#xe782;" FontFamily="Maui Material Assets"  Clicked="Import_Clicked"/>
+                <Button x:Name="Export" Text="&#xe781;" FontFamily="Maui Material Assets"  Clicked="Export_Clicked"/>
+                    <VerticalStackLayout>
+                        <Label x:Name="PreviousCustomData"></Label>
+                        <Label x:Name="CurrentCustomData"></Label>
+                    </VerticalStackLayout>
+                </HorizontalStackLayout>
+                </ScrollView>
+             <syncfusion:SfPdfViewer x:Name="pdfViewer" Grid.Row="1" DocumentSource="{Binding PdfDocumentStream}" FormFieldValueChanged="PdfViewer_FormFieldValueChanged" />
+        </Grid>
+    </ContentPage.Content>
+
+</ContentPage>
