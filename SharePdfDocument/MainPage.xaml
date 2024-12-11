@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:syncfusion="clr-namespace:Syncfusion.Maui.PdfViewer;assembly=Syncfusion.Maui.PdfViewer"
+             x:Class="SharePDF.MainPage">
+
+    <Grid>
+        <syncfusion:SfPdfViewer  x:Name="PdfViewer"/>
+        <Button FontSize="24" 
+                ImageSource="icons_share_a.png"  
+                VerticalOptions="End" HorizontalOptions="End" Margin="0,0,40,50" CornerRadius="30" WidthRequest="60" HeightRequest="60" 
+                Clicked="SharePdf_Clicked"/>
+    </Grid>
+
+</ContentPage>
