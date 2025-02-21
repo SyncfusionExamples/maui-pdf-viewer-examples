@@ -45,7 +45,7 @@ namespace EncryptingPdf
             security.KeySize = PdfEncryptionKeySize.Key256Bit;
 
             //Set user password for the document.
-            security.UserPassword = "*****";
+           // security.UserPassword = "*****";
 
             // Create a file stream to save the PDF document. Here a file named "EncryptedPdf.pdf" is created in the application's data directory.
             string filepath = Path.Combine(FileSystem.Current.AppDataDirectory, "EncryptedPdf.pdf");
