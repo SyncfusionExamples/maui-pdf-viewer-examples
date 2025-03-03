@@ -36,17 +36,17 @@ namespace EncryptingPDF
             //Load existing PDF document.
             PdfLoadedDocument document = new PdfLoadedDocument(_inputPdfDocument);
 
-            //Create a document security.
-            PdfSecurity security = document.Security;
+            // //Create a document security.
+            // PdfSecurity security = document.Security;
 
-            //Set encryption algorithm.
-            security.Algorithm = PdfEncryptionAlgorithm.AES;
+            // //Set encryption algorithm.
+            // security.Algorithm = PdfEncryptionAlgorithm.AES;
 
-            //Set key size.
-            security.KeySize = PdfEncryptionKeySize.Key256Bit;
+            // //Set key size.
+            // security.KeySize = PdfEncryptionKeySize.Key256Bit;
 
-            //Set user password for the document.
-            security.UserPassword = "Sample@123";
+            // //Set user password for the document.
+            // security.UserPassword = "Sample@123";
 
             // Create a file stream to save the PDF document. Here a file named "EncryptedPdf.pdf" is created in the application's data directory.
             string filepath = Path.Combine(FileSystem.Current.AppDataDirectory, "EncryptedPdf.pdf");
