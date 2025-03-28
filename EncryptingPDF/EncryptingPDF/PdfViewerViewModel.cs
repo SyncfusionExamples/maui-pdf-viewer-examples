@@ -1,16 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Syncfusion.Pdf.Parsing;
+using Syncfusion.Pdf.Security;
 using System.ComponentModel;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EncryptingPDF
 {
     class PdfViewerViewModel
     {
+        private Stream? _inputPdfDocument;
         private Stream? pdfDocumentStream;
+        private FileStream outputStream;
 
         /// <summary>
         /// Occurs when a property value changes.
@@ -37,9 +36,34 @@ namespace EncryptingPDF
         /// Initializes a new instance of the <see cref="PdfViewerViewModel"/> class.
         /// </summary>
         public PdfViewerViewModel()
-        {
-            // Load the embedded PDF document stream.
-            pdfDocumentStream = typeof(App).GetTypeInfo().Assembly.GetManifestResourceStream("EncryptingPDF.Assets.PDF_Succinctly.pdf");
+        {            
+            //Accessing the PDF document that is added as embedded resource as stream.
+            _inputPdfDocument = typeof(App).GetTypeInfo().Assembly.GetManifestResourceStream("EncryptingPDF.Assets.PDF_Succinctly.pdf");
+
+            //Load existing PDF document.
+            PdfLoadedDocument document = new PdfLoadedDocument(_inputPdfDocument);
+
+            //Create a document security.
+            PdfSecurity security = document.Security;
+
+            //Set encryption algorithm.
+            security.Algorithm = PdfEncryptionAlgorithm.AES;
+
+            //Set key size.
+            security.KeySize = PdfEncryptionKeySize.Key256Bit;
+
+            //Set user password for the document.
+            security.UserPassword = "Sample@123";
+
+            // Create a file stream to save the PDF document. Here a file named "EncryptedPdf.pdf" is created in the application's data directory.
+            string filepath = Path.Combine(FileSystem.Current.AppDataDirectory, "EncryptedPdf.pdf");
+            outputStream = new FileStream(filepath, FileMode.Create, FileAccess.ReadWrite);
+
+            // Save the PDF document.
+            document.Save(outputStream);
+
+            //Assign the output file to property to use in the Document source for loading the PDF 
+            PdfDocumentStream = outputStream;
         }
 
         /// <summary>
