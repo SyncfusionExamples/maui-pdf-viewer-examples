@@ -10,6 +10,7 @@ namespace EncryptingPDF
         private Stream? _inputPdfDocument;
         private Stream? pdfDocumentStream;
         private FileStream outputStream;
+        private string? userPassword;
 
         /// <summary>
         /// Occurs when a property value changes.
@@ -36,24 +37,24 @@ namespace EncryptingPDF
         /// Initializes a new instance of the <see cref="PdfViewerViewModel"/> class.
         /// </summary>
         public PdfViewerViewModel()
-        {            
-            //Accessing the PDF document that is added as embedded resource as stream.
+        {
+            // Accessing the PDF document that is added as embedded resource as stream.
             _inputPdfDocument = typeof(App).GetTypeInfo().Assembly.GetManifestResourceStream("EncryptingPDF.Assets.PDF_Succinctly.pdf");
 
-            //Load existing PDF document.
+            // Load existing PDF document.
             PdfLoadedDocument document = new PdfLoadedDocument(_inputPdfDocument);
 
-            //Create a document security.
+            // Create a document security.
             PdfSecurity security = document.Security;
 
-            //Set encryption algorithm.
+            // Set encryption algorithm.
             security.Algorithm = PdfEncryptionAlgorithm.AES;
 
-            //Set key size.
+            // Set key size.
             security.KeySize = PdfEncryptionKeySize.Key256Bit;
-
-            //Set user password for the document.
-            security.UserPassword = "Sample@123";
+           
+            // Set the password
+            security.UserPassword = userPassword;
 
             // Create a file stream to save the PDF document. Here a file named "EncryptedPdf.pdf" is created in the application's data directory.
             string filepath = Path.Combine(FileSystem.Current.AppDataDirectory, "EncryptedPdf.pdf");
@@ -62,7 +63,7 @@ namespace EncryptingPDF
             // Save the PDF document.
             document.Save(outputStream);
 
-            //Assign the output file to property to use in the Document source for loading the PDF 
+            // Assign the output file to property to use in the Document source for loading the PDF
             PdfDocumentStream = outputStream;
         }
 
@@ -76,4 +77,3 @@ namespace EncryptingPDF
         }
     }
 }
-
