@@ -7,7 +7,7 @@
     <Grid RowDefinitions="Auto, *">       
         <Button ImageSource="icons8_share_b.png"  
                 VerticalOptions="Start"
-                HorizontalOptions="Start"               
+                HorizontalOptions="End"               
                 WidthRequest="50" 
                 HeightRequest="50"             
                 Clicked="SharePdf_Clicked"/>
