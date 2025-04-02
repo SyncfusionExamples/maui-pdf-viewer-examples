@@ -1,6 +1,6 @@
-# How to share the PDF document in .NET MAUI PDF Viewer?
+# How to share the PDF document with other apps using .NET MAUI PDF Viewer?
 
-This project demonstrates how to share a PDF document using .NET MAUI and Syncfusion PDF Viewer. The application loads a PDF file and enables users to share it through a button click.
+This project demonstrates how to share a PDF document with other apps in .NET MAUI PDF Viewer application using Syncfusion PDF Viewer. The application loads a PDF file and enables users to share it through a button click.
 
 # Features
 1. Load a PDF in the Syncfusion PDF Viewer.
@@ -18,13 +18,13 @@ In your MainPage.xaml.cs, the PDF Viewer is initialized with a PDF document embe
 ```csharp
 pdfViewer.DocumentSource = this.GetType().Assembly.GetManifestResourceStream("SharePDF.Assets.PDF_Succinctly.pdf");
 ```
-## 2. Share PDF Functionality
+## 2. To Share PDF 
 The SharePdf_Clicked method handles sharing the PDF:
 
-**Save Document:** The PDF is saved to the app's data directory.
-**Check File Existence:** Confirm the file exists before sharing.
-**Temporary File:** Use a temporary file to facilitate sharing.
-**ShareFileRequest:** Prepare the file for sharing using ShareFileRequest and call the Share API.
+1. Save the PDF to the app's data directory.
+2. Check if the file exists.
+3. Copy the file to a temporary location.
+4. Prepare and execute the share request.
 
 ```csharp
 private async void SharePdf_Clicked(object sender, EventArgs e)
