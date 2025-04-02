@@ -6,7 +6,7 @@
         {
             InitializeComponent();
             // Load the PDF into the PDF Viewer from embedded resources
-            pdfViewer.DocumentSource = this.GetType().Assembly.GetManifestResourceStream("SharePDF.Assets.PDF_Succinctly.pdf");
+            pdfViewer.DocumentSource = this.GetType().Assembly.GetManifestResourceStream("SharePDF.Assets.PDF_Succinctly1.pdf");
         }
 
         // Event handler for sharing the PDF when the share button is clicked

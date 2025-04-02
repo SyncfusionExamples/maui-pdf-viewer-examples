@@ -57,11 +57,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <None Remove="Assets\PDF_Succinctly.pdf" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <EmbeddedResource Include="Assets\PDF_Succinctly.pdf" />
+	  <EmbeddedResource Include="Assets\PDF_Succinctly1.pdf" />
 	</ItemGroup>
 
 	<ItemGroup>

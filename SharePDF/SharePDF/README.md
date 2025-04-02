@@ -2,7 +2,7 @@
 
 This project demonstrates how to share a PDF document with other apps in .NET MAUI PDF Viewer application using Syncfusion PDF Viewer. The application loads a PDF file and enables users to share it through a button click.
 
-# Features
+# Steps to share the PDF document with other apps using .NET MAUI PDF Viewer.
 1. Load a PDF in the Syncfusion PDF Viewer.
 2. Save the PDF document to a local file.
 3. Share the PDF using the mobile platform’s share functionality.
