@@ -1,6 +1,7 @@
 ﻿using Syncfusion.Pdf;
 using Syncfusion.Pdf.Graphics;
 using System.ComponentModel;
+using System.IO;
 
 
 namespace CreatePDF
@@ -38,28 +39,35 @@ namespace CreatePDF
             //Set the created PDF stream to pdfDocumentStream for loading it in PDF Viewer
             pdfDocumentStream = CreatePDF();
         }
-        private MemoryStream CreatePDF()
+        private Stream CreatePDF()
         {
-            //Create a new PDF document.
+            // Create a new PDF document.
             PdfDocument document = new PdfDocument();
-            //Add a page to the document.
+
+            // Add a page to the document.
             PdfPage page = document.Pages.Add();
-            //Create PDF graphics for the page.
+
+            // Create PDF graphics for the page.
             PdfGraphics graphics = page.Graphics;
 
-            //Set the standard font.
+            // Set the standard font.
             PdfFont font = new PdfStandardFont(PdfFontFamily.Helvetica, 20);
-            //Draw the text.
+            // Draw the text.
             graphics.DrawString("Hello World!!!", font, PdfBrushes.Black, new Syncfusion.Drawing.PointF(0, 0));
 
-            //Creating the stream object.
+            // Creating the stream object.
             MemoryStream stream = new MemoryStream();
-            //Save the document into memory stream.
+
+            // Save the document into memory stream.
             document.Save(stream);
-            //Close the document.
+
+            // Close the document.
             document.Close(true);
 
-           return stream;
+            if (stream.CanSeek)
+                stream.Position = 0;
+
+            return stream;
 
         }
         /// <summary>
