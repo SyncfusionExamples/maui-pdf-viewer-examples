@@ -12,7 +12,8 @@ This folder contains a sample project that demonstrates how to create a PDF docu
 
 # Steps
 ## 1. Create PDF
-Create the PDF using the PDF library and save the PDF using a memory stream. Create the below method in the PdfViewerViewModel class.
+In this example, we will load the PDF document through MVVM binding. Create a new C# file named PdfViewerViewModel.cs. Create the PDF using the PDF library and save the PDF as a stream. Create the following method in the PdfViewerViewModel class.
+Create the PDF using the PDF library and save the PDF as stream. Create the below method in the PdfViewerViewModel class.
 
 ```csharp
  private MemoryStream CreatePDF()
@@ -41,14 +42,15 @@ Create the PDF using the PDF library and save the PDF using a memory stream. Cre
         }
 ```
 ## 2. To load PDF in the PDF Viewer
-Initialize the PDF Viewer control in the .NET MAUI application and load the PDF stream to the PDF Viewer.
+Initialize the PDF Viewer control in the .NET MAUI application and load the PDF stream into the PDF Viewer by binding the PDF Viewer's `DocumentSource` to the PdfDocumentStream property of the PdfViewerViewModel class.
 
 ```xaml
  <syncfusion:SfPdfViewer x:Name="pdfViewer" DocumentSource="{Binding PdfDocumentStream}">
         </syncfusion:SfPdfViewer>
 ``` 
 
-In your ViewModel class, bind the PDF document stream: 
+In your PdfViewerViewModel class, set the created stream to the PdfDocumentStream property from the CreatePDF method. 
+
 ```csharp
 public class PdfViewerViewModel
 {
@@ -62,4 +64,4 @@ public class PdfViewerViewModel
 ``` 
 ## 3.Run the sample to view the PDF in the PDF Viewer.
 1. Build and deploy your .NET MAUI application on your preferred platform (Android, iOS, Windows, and Mac Catalyst).
-2. The PDF Viewer should display the "Hello World!!!" PDF document directly from the memory stream.
+2. The PDF Viewer should display the "This PDF was created using the Syncfusion PDF Library." PDF document directly from the stream.
