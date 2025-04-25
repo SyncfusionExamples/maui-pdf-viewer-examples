@@ -8,7 +8,7 @@
         <pv:SfPdfViewer x:Name="pdfViewer" Grid.Row="1"/>
         <HorizontalStackLayout HorizontalOptions="Start">
             <Button Text="&#xe75f;" 
-                FontFamily="Maui Material Assets"
+                FontFamily="MauiMaterialAssets"
                 Clicked="Save_Clicked"
                 HorizontalOptions="Start"></Button>
         </HorizontalStackLayout>
