@@ -30,7 +30,7 @@
                             FontSize="18"
                                
                                 HeightRequest="18"
-                            FontFamily="Maui Material Assets"
+                            FontFamily="MauiMaterialAssets"
                             VerticalOptions="Center"
                             Text="{Binding Icon}">
                             </Label>
