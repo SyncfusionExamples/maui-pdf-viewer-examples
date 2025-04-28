@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SignatureDemo.SignatureCaptureView"
+             xmlns:signaturePad="clr-namespace:Syncfusion.Maui.SignaturePad;assembly=Syncfusion.Maui.SignaturePad"
+             BackgroundColor="#80FFFFFF">
+    <Border Stroke="Gray"
+            StrokeThickness="1"
+            Background="White"
+            Padding="10"
+            HorizontalOptions="Center"
+            VerticalOptions="Center">
+        <VerticalStackLayout Spacing="10">
+            <!-- Title Bar -->
+            <Label Text="Add your signature"
+                   FontSize="20"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Start"/>
+
+            <Border HeightRequest="200"
+                    WidthRequest="360">
+                <!-- Signature Pad -->
+                <signaturePad:SfSignaturePad x:Name="signaturePad"
+                                             Margin="0"
+                                             HeightRequest="90"
+                                             WidthRequest="300"
+                                             StrokeColor="Black"
+                                             Background="LightGray" />
+            </Border>
+            <!-- Action Buttons -->
+            <HorizontalStackLayout HorizontalOptions="Center"
+                                   Spacing="10">
+                <Button Text="Clear"
+                        Clicked="OnClearClicked" WidthRequest="80"/>
+                <Button Text="OK"
+                        Margin="80,0,0,0"
+                        Clicked="OnOkClicked"
+                        WidthRequest="80"/>
+                <Button Text="Cancel"
+                        Clicked="OnCloseClicked"
+                        WidthRequest="80"/>
+            </HorizontalStackLayout>
+        </VerticalStackLayout>
+    </Border>
+</ContentView>

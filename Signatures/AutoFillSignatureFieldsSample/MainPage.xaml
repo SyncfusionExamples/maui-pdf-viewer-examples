@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SignatureDemo.MainPage"
+             xmlns:local="clr-namespace:SignatureDemo"
+             xmlns:syncfusion="clr-namespace:Syncfusion.Maui.PdfViewer;assembly=Syncfusion.Maui.PdfViewer">
+    <Grid>
+        <syncfusion:SfPdfViewer 
+            x:Name="pdfViewer" 
+            SignatureModalViewAppearing="pdfViewer_SignatureModalViewAppearing"/>
+        <local:SignatureCaptureView 
+            x:Name="signatureCaptureView" 
+            IsVisible="False" 
+            SignatureCreated="SignatureCaptureView_SignatureCreated"/>
+    </Grid>
+</ContentPage>
