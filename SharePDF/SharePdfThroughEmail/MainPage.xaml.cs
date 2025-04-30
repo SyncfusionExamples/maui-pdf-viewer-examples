@@ -61,19 +61,19 @@ namespace SharePdfThroughEmail
                     else
                     {
                         // Display an alert if email composition is not supported on the device.
-                        await DisplayAlert("Email Not Supported", "This device does not support email composition.", "OK");
+                        await DisplayAlert("Email Not Supported", "This device does not support composing emails.", "OK");
                     }
                 }
                 else
                 {
                     // Display an alert if the PDF file does not exist.
-                    await DisplayAlert("File Error", "The modified PDF file could not be located.", "OK");
+                    await DisplayAlert("File Error", "Unable to locate the modified PDF file.", "OK");
                 }
             }
             catch (Exception ex)
             {
                 // Handle exceptions and display any error messages to the user.
-                await DisplayAlert("An error occurred", ex.Message, "OK");
+                await DisplayAlert("Error", ex.Message, "OK");
             }
         }
     }
