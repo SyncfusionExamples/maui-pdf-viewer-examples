@@ -1,6 +1,6 @@
 ﻿using Foundation;
 
-namespace SharePDFThroughEmail
+namespace SharePDFToOtherApps
 {
     [Register("AppDelegate")]
     public class AppDelegate : MauiUIApplicationDelegate

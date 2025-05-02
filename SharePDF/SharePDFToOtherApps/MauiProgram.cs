@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using Syncfusion.Maui.Core.Hosting;
 
-namespace SharePDFThroughEmail
+namespace SharePDFToOtherApps
 {
     public static class MauiProgram
     {

@@ -1,7 +1,7 @@
 ﻿using ObjCRuntime;
 using UIKit;
 
-namespace SharePdfThroughEmail
+namespace SharePDFThroughEmail
 {
     public class Program
     {

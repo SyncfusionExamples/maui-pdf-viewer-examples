@@ -2,7 +2,7 @@ using System;
 using Microsoft.Maui;
 using Microsoft.Maui.Hosting;
 
-namespace SharePDFThroughEmail
+namespace SharePDFToOtherApps
 {
     internal class Program : MauiApplication
     {

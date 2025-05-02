@@ -1,15 +1,15 @@
 ﻿using System.Reflection;
 
-namespace SharePdfThroughEmail
+namespace SharePDFThroughEmail
 {
     public partial class MainPage : ContentPage
     {
+      
         public MainPage()
         {
             InitializeComponent();
-
             // Load the PDF document into the PDF Viewer using the DocumentSource property
-            pdfViewer.DocumentSource = typeof(App).GetTypeInfo().Assembly.GetManifestResourceStream("SharePdfThroughEmail.Assets.PDF_Succinctly.pdf");            
+            pdfViewer.DocumentSource = typeof(App).GetTypeInfo().Assembly.GetManifestResourceStream("SharePDFThroughEmail.Assets.PDF_Succinctly.pdf");
         }
 
         // Event handler for sharing the PDF through email when the associated button is clicked.
@@ -77,4 +77,5 @@ namespace SharePdfThroughEmail
             }
         }
     }
+
 }

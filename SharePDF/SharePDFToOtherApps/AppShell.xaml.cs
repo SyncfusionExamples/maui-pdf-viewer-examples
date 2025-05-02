@@ -1,4 +1,4 @@
-﻿namespace SharePDFThroughEmail
+﻿namespace SharePDFToOtherApps
 {
     public partial class AppShell : Shell
     {

@@ -1,4 +1,4 @@
-﻿namespace SharePDFThroughEmail
+﻿namespace SharePDFToOtherApps
 {
     public partial class App : Application
     {

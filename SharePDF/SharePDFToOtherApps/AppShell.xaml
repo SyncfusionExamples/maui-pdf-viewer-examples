@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <Shell
-    x:Class="SharePDFThroughEmail.AppShell"
+    x:Class="SharePDFToOtherApps.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:SharePDFThroughEmail"
+    xmlns:local="clr-namespace:SharePDFToOtherApps"
     Shell.FlyoutBehavior="Flyout"
-    Title="SharePDFThroughEmail">
+    Title="SharePDFToOtherApps">
 
     <ShellContent
         Title="Home"
