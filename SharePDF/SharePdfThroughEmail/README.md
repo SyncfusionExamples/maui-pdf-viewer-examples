@@ -10,6 +10,7 @@ This project demonstrates how to build a .NET MAUI application that opens the de
 # Prerequisites
 1. .NET MAUI installed.
 2. Syncfusion.Maui.PdfViewer NuGet package.
+3.  Platform-specific configuration is required to enable email functionality. For detailed setup instructions, refer to the [Getting Started guide for Email functionality in .NET MAUI](https://learn.microsoft.com/en-us/dotnet/maui/platform-integration/communication/email?view=net-maui-9.0&tabs=android#get-started).
 
 # Steps
 ## 1. Set Up the PDF Viewer
@@ -27,7 +28,6 @@ The SharePDFThroughMail_Clicked method handles sharing the PDF using mail:
 3. Check if the default mail service allows email composition using the [Email.Default.IsComposeSupported](https://learn.microsoft.com/en-us/dotnet/api/microsoft.maui.applicationmodel.communication.iemail.iscomposesupported?view=net-maui-9.0#microsoft-maui-applicationmodel-communication-iemail-iscomposesupported) API.
 4. Create an [EmailMessage](https://learn.microsoft.com/en-us/dotnet/api/microsoft.maui.applicationmodel.communication.emailmessage) with a descriptive subject, message body, and identified recipient.
 5. Attach the previously generated file to the [EmailMessage.Attachments](https://learn.microsoft.com/en-us/dotnet/api/microsoft.maui.applicationmodel.communication.emailmessage.attachments?view=net-maui-9.0#microsoft-maui-applicationmodel-communication-emailmessage-attachments). 
-6. To enable email functionality, platform-specific configuration is required. For detailed instructions, please refer to the [Getting started](https://learn.microsoft.com/en-us/dotnet/maui/platform-integration/communication/email?view=net-maui-9.0&tabs=android#get-started) guide.
 
 ```csharp
  private async void SharePDFThroughMail_Clicked(object sender, EventArgs e)
