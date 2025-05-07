@@ -23,10 +23,10 @@
             <ImageButton Source="zoom_in.png" HeightRequest="32" Clicked="PdfViewer2_ZoomOutClicked"/>
         </HorizontalStackLayout>
         <Border Stroke="Gray" StrokeThickness="1" Grid.Row="1" Grid.Column="0">
-            <syncfusion:SfPdfViewer x:Name="PdfViewer1"/>
+            <syncfusion:SfPdfViewer x:Name="PdfViewer1" ShowToolbars="False"/>
         </Border>
         <Border Stroke="Gray" StrokeThickness="1" Grid.Row="1" Grid.Column="1">
-            <syncfusion:SfPdfViewer  x:Name="PdfViewer2"/>
+            <syncfusion:SfPdfViewer  x:Name="PdfViewer2" ShowToolbars="False"/>
         </Border>
     </Grid>
 </ContentPage>
