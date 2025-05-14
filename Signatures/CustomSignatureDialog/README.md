@@ -23,7 +23,7 @@ The project demonstrates how to create a customized signature pad in the applica
 
 2. **Create a Custom Signature Dialog Using SfSignaturePad:**
 
-1. ** Set Up the Grid Layout for the Dialog:**
+1. **Set Up the Grid Layout for the Dialog:**
 
 - Create a Grid to organize the layout for the signature dialog.
 - Define three rows for different controls and three columns for layout flexibility.
@@ -100,22 +100,19 @@ To suppress the built-in signature dialog, wire the [SignatureModalViewAppearing
 pdfViewer.SignatureModalViewAppearing += PdfViewer_SignatureModalViewAppearing;
 
 // Handle the custom signature dialog visiblity in the event handler.
- private void PdfViewer_SignatureModalViewAppearing(object? sender, FormFieldModalViewAppearingEventArgs e)
- {
-     e.Cancel = true;
-     if (signaturelayout != null)
-     {
-         if (signaturelayout.IsVisible)
-         {
-             signatureView?.Clear();
-             signaturelayout.IsVisible = false;
-         }
-         else
-         {
-             signaturelayout.IsVisible = true;
-         }
-     }
- }
+private void PdfViewer_SignatureModalViewAppearing(object? sender, FormFieldModalViewAppearingEventArgs e)
+{
+   e.Cancel = true; // Cancel default dialog
+   if (e.FormField != null && e.FormField is SignatureFormField formField)
+   {
+      signatureFormField = formField; // Store form field for signature placement
+   }
+   if (signaturelayout != null)
+   {
+      signaturelayout.IsVisible = true; // Show custom signature dialog
+      signatureButton.IsVisible = false; // Hide signature button
+   }
+}
 ```
 ## Usage
 

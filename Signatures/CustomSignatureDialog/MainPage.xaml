@@ -67,8 +67,13 @@
                         </Button.Shadow>
                     </Button>
                 </Grid>
+                <Border x:Name="toast" Grid.Row="1" BackgroundColor="Black" Padding="8" VerticalOptions="Center" HorizontalOptions="Center" Opacity="0">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="4"/>
+                    </Border.StrokeShape>
+                    <Label x:Name="toastText" VerticalOptions="Center" VerticalTextAlignment="Center" HorizontalOptions="Center" TextColor="White"/>
+                </Border>
             </Grid>
-
         </Grid>
     </ContentPage.Content>
 </ContentPage>
