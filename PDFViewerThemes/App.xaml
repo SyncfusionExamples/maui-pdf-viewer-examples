@@ -325,8 +325,8 @@
                     <Color x:Key="SfPdfViewerSignaturePadCancelPressedBackgroundColor">aqua</Color>                   
                     <Color x:Key="SfPdfViewerSignatureViewTextLayoutTextColor">#E6E1E5</Color>
                     <Color x:Key="SfPdfViewerSignatureViewUploadTabButtonHoverTextColor">#D0BCFF</Color>
-                    <Color x:Key="SfPdfViewerThicknessDialogBackground">#302D38</Color>
-                    <Color x:Key="SfPdfViewerOpacityDialogBackground">#302D38</Color>
+                    <Color x:Key="SfPdfViewerThicknessDialogBackgroundColor">#302D38</Color>
+                    <Color x:Key="SfPdfViewerOpacityDialogBackgroundColor">#302D38</Color>
                     <Color x:Key="SfPdfViewerSearchDialogCloseButtonNormalBackgroundColor">#00000000</Color>
                     <Color x:Key="SfPdfViewerSearchDialogCloseButtonNormalBorderColor">#00000000</Color>
                     <Color x:Key="SfPdfViewerSearchDialogCloseButtonHoverBackgroundColor">aqua</Color>
@@ -334,7 +334,7 @@
                     <Color x:Key="SfPdfViewerSearchDialogCloseButtonHoverBorderColor">aqua</Color>
                     <Color x:Key="SfPdfViewerSearchDialogCloseButtonPressedBackgroundColor">aqua</Color>
                     <Color x:Key="SfPdfViewerSearchDialogCloseButtonPressedTextColor">#CAC4D0</Color>
-                    <Color x:Key="SfPdfViewerSearchDialogCloseButtonPressedBorder">aqua</Color>
+                    <Color x:Key="SfPdfViewerSearchDialogCloseButtonPressedBorderColor">aqua</Color>
                     <Color x:Key="SfPdfViewerSearchDialogCloseButtonDisabledBackgroundColor">#00000000</Color>
                     <Color x:Key="SfPdfViewerSearchDialogCloseButtonDisabledTextColor">#61E6E1E5</Color>
                     <Color x:Key="SfPdfViewerSearchDialogCloseButtonDisabledBorderColor">#00000000</Color>
@@ -360,7 +360,7 @@
                     <Color x:Key="SfPdfViewerSearchDialogSearchButtonDisabledBackgroundColor">#00000000</Color>
                     <Color x:Key="SfPdfViewerSearchDialogSearchButtonDisabledBorderColor">#00000000</Color>
                     <Color x:Key="SfPdfViewerSearchDialogPreviousSearchButtonNormalBackgroundColor">#00000000</Color>
-                    <Color x:Key="SfPdfViewerSearchDialogPreviousSearchButtonNormalBorder">#00000000</Color>
+                    <Color x:Key="SfPdfViewerSearchDialogPreviousSearchButtonNormalBorderColor">#00000000</Color>
                     <Color x:Key="SfPdfViewerSearchDialogPreviousSearchButtonHoverBackgroundColor">aqua</Color>
                     <Color x:Key="SfPdfViewerSearchDialogPreviousSearchButtonHoverTextColor">#E6E1E5</Color>
                     <Color x:Key="SfPdfViewerSearchDialogPreviousSearchButtonHoverBorderColor">aqua</Color>
