@@ -40,6 +40,7 @@ You can customize the appearance of `SfPdfViewer` by merging theme keys directly
     </Application.Resources>
 </Application>
 ```
+For more detailed guidance on applying themes, please refer to the [Syncfusion MAUI Themes User Guide](https://help.syncfusion.com/maui/themes/themes).       
 
 ### Step 3: Load PDF into the PDF Viewer
 Initialize the PDF Viewer control in your .NET MAUI application and bind the `DocumentSource` property of the PDF Viewer to the PdfDocumentStream property defined in the PdfViewerViewModel class.
