@@ -34,7 +34,7 @@ namespace PDFViewerThemes
         public PdfViewerViewModel()
         {
             // Load the embedded PDF document stream.
-            pdfDocumentStream = typeof(App).GetTypeInfo().Assembly.GetManifestResourceStream("PDFViewerThemes.Assets.form_document.pdf");
+            pdfDocumentStream = typeof(App).GetTypeInfo().Assembly.GetManifestResourceStream("PDFViewerThemes.Assets.PDF_Succinctly.pdf");
         }
 
         /// <summary>
