@@ -10,7 +10,8 @@ namespace PdfViewerAnnotations
         {
             InitializeComponent();
             Stream? stream = typeof(MainPage).GetTypeInfo().Assembly.GetManifestResourceStream("PdfViewerAnnotations.Assets.Annotations.pdf");
-            PDFViewer.LoadDocument(stream);
+            if (stream != null)
+                PDFViewer.LoadDocument(stream);
         }
 
         private void AddHighlightAnnotation(object sender, EventArgs e)
@@ -44,11 +45,15 @@ namespace PdfViewerAnnotations
             //Obtain the annotation collection.
             ReadOnlyObservableCollection<Annotation> annotations = PDFViewer.Annotations;
 
-            //Obtain the first annotation in the annotation collection.
-            Annotation firstAnnotation = annotations[3];
+            if (annotations != null && annotations.Count > 3 && annotations[3] != null)
+            {
 
-            //Remove the annotation using RemoveAnnotation method of `SfPdfViewer`.
-            PDFViewer.RemoveAnnotation(firstAnnotation);
+                //Obtain the annotation in the annotation collection.
+                Annotation annotation = annotations[3];
+
+                //Remove the annotation using RemoveAnnotation method of `SfPdfViewer`.
+                PDFViewer.RemoveAnnotation(annotation);
+            }
         }
 
         void EditAnnotation(object sender, EventArgs e)
@@ -56,24 +61,31 @@ namespace PdfViewerAnnotations
             // Obtain the annotation collection using
             ReadOnlyObservableCollection<Annotation> annotations = PDFViewer.Annotations;
 
-            // Obtain the first annotation in the annotation collection.
-            Annotation annotation = annotations[4];
+            if (annotations != null && annotations.Count > 4 && annotations[4] != null)
+            {
 
-            // Edit the annotation properties.
-            annotation.Color = Colors.Green; //Stroke color.
-            annotation.Opacity = 0.75f; // 75% Opacity
+                // Obtain the first annotation in the annotation collection.
+                Annotation annotation = annotations[4];
+
+                // Edit the annotation properties.
+                annotation.Color = Colors.Green; //Stroke color.
+                annotation.Opacity = 0.75f; // 75% Opacity
+
+            }
         }
 
         void PerformUndo(object sender, EventArgs e)
         {
             // Undo the last operation using the UndoCommand of `SfPdfViewer` instance.
-            PDFViewer.UndoCommand!.Execute(true);
+            if (PDFViewer.UndoCommand != null)
+                PDFViewer.UndoCommand.Execute(true);
         }
 
         void PerformRedo(object sender, EventArgs e)
         {
             // Redo the last operation using the RedoCommand of `SfPdfViewer` instance.
-            PDFViewer.RedoCommand!.Execute(true);
+            if (PDFViewer.RedoCommand != null)
+                PDFViewer.RedoCommand.Execute(true);
         }
     }
 
