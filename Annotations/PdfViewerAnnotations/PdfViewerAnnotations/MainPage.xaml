@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:syncfusion="clr-namespace:Syncfusion.Maui.PdfViewer;assembly=Syncfusion.Maui.PdfViewer"
+             x:Class="PdfViewerAnnotations.MainPage">
+
+    <ContentPage.Content>
+        <Grid>
+            <!-- Define two rows: One for toolbar and one for PDF viewer -->
+            <Grid.RowDefinitions>
+                <RowDefinition Height="45"/>
+                <!-- Toolbar row -->
+                <RowDefinition Height="*"/>
+                <!-- PDF viewer row -->
+            </Grid.RowDefinitions>
+
+            <!-- Toolbar: Contains title and scrollable buttons -->
+            <Grid Grid.Row="0" ColumnDefinitions="Auto,*">
+                <!-- Fixed Title Label at the starting -->
+                <Label Text="PDF Viewer" FontSize="16" VerticalOptions="Center" Grid.Column="0" Margin="10,0,10,0"/>
+
+                <!-- Scrollable Buttons at the ending -->
+                <ScrollView Orientation="Horizontal" HorizontalScrollBarVisibility="Never" HorizontalOptions="End"  Grid.Column="1">
+                    <HorizontalStackLayout Spacing="10" Padding="0,0,15,0">
+                        <Button Text="Add Annotation" FontFamily="MauiMaterialAssets" Clicked="AddHighlightAnnotation"/>
+                        <Button Text="Remove Annotation" FontFamily="MauiMaterialAssets" Clicked="RemoveAnnotation" />
+                        <Button Text="Edit Annotation" FontFamily="MauiMaterialAssets" Clicked="EditAnnotation" />
+                        <Button Text="Undo Annotation" FontFamily="MauiMaterialAssets" Clicked="PerformUndo"/>
+                        <Button Text="Redo Annotation" FontFamily="MauiMaterialAssets" Clicked="PerformRedo"/>
+                    </HorizontalStackLayout>
+                </ScrollView>
+
+
+            </Grid>
+            <!-- PDF Viewer Component -->
+            <syncfusion:SfPdfViewer x:Name="PDFViewer" ShowToolbars="False" Grid.Row="1"/>
+        </Grid>
+    </ContentPage.Content>
+
+</ContentPage>
