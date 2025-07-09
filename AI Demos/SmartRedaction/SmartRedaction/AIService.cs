@@ -23,7 +23,7 @@ namespace SmartRedaction
         /// <summary>
         /// The AI key
         /// </summary>
-        private string key = "OPENAI_AI_KEY";
+        private string key = "API_KEY";
 
         /// <summary>
         /// The IChatClient instance
