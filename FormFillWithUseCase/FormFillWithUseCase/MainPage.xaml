@@ -8,7 +8,7 @@
 
     <!-- Main container for the page content -->
     <Grid>
-        <!-- Syncfusion PDF Viewer component 
+        <!-- Syncfusion® PDF Viewer component 
              Displays PDF documents and allows interaction with form fields. 
              The 'FormFieldFocusChanged' event triggers when a user interacts with form fields -->
         <viewer:SfPdfViewer x:Name="pdfViewer" FormFieldFocusChanged="PdfViewer_FormFieldFocusChanged"/>
@@ -30,7 +30,7 @@
              Appears when the user interacts with a Date of Birth field in the PDF -->
         <Grid x:Name="datePickerGrid" IsVisible="False">
             <Grid BackgroundColor="Black" Opacity="0.5" />
-            <!-- Syncfusion DatePicker control for date selection 
+            <!-- Syncfusion® DatePicker control for date selection 
                  Includes 'Ok' and 'Cancel' button event handlers for user interaction -->
             <picker:SfDatePicker x:Name="datePicker" 
                                  WidthRequest="250" 

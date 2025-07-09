@@ -205,7 +205,7 @@
                             TextColor="#99000000"
                             Margin="05"
                             FontSize="24"
-                            FontFamily="Maui Material Assets"
+                            FontFamily="MauiMaterialAssets"
                             HorizontalOptions="Start"
                             VerticalOptions="Center" />
                     <Button x:Name="Save"
@@ -219,7 +219,7 @@
                             TextColor="#99000000"
                             Style="{StaticResource buttonIconStyle}"
                             FontSize="24"
-                            FontFamily="Maui Material Assets"
+                            FontFamily="MauiMaterialAssets"
                             HorizontalOptions="Start"
                             VerticalOptions="Center" />
                     <HorizontalStackLayout Padding="0"
@@ -297,7 +297,7 @@
                                     TextColor="#1C1B1F"
                                     BackgroundColor="Transparent"
                                     ToolTipProperties.Text="Back"
-                                    FontFamily="Maui Material Assets"
+                                    FontFamily="MauiMaterialAssets"
                                     Clicked="OpenCloseMobileRedactLayout"
                                     IsVisible="{OnPlatform Android=true, iOS=true, Default=false}"
                                     Text="&#xe72d;" />
@@ -387,7 +387,7 @@
                                     TextColor="#1C1B1F"
                                     BackgroundColor="Transparent"
                                     ToolTipProperties.Text="Back"
-                                    FontFamily="Maui Material Assets"
+                                    FontFamily="MauiMaterialAssets"
                                     Clicked="OnCancelClicked"
                                     IsVisible="{OnPlatform Android=true, iOS=true, Default=false}"
                                     Text="&#xe72d;" />

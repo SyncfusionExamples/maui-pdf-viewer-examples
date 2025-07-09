@@ -59,24 +59,25 @@
                 <HorizontalStackLayout Grid.Column="0" Spacing="8" Margin="10,0,0,0"
                         HorizontalOptions="Start">
                     <Button Text="&#xe700;"
+                            FontFamily="MauiMaterialAssets"
                             PropertyChanged="Button_PropertyChanged"
                             Command="{Binding OpenFileCommand}"
                             IsVisible="{OnPlatform MacCatalyst=false}"/>
-                    <Button Margin="2,0,0,0" Text="&#xe75f;" FontSize="18" x:Name="Save" FontFamily="Maui Material Assets" Clicked="Save_Clicked"/>
-                    <Button x:Name="Import" Text="&#xe782;" FontSize="18" FontFamily="Maui Material Assets" Margin="0,0,3,0" Clicked="Import_Clicked"/>
-                    <Button x:Name="Export" Text="&#xe781;" FontSize="18" FontFamily="Maui Material Assets" Margin="0,0,3,0" Clicked="Export_Clicked"/>
+                    <Button Margin="2,0,0,0" Text="&#xe75f;" FontSize="18" x:Name="Save" FontFamily="MauiMaterialAssets" Clicked="Save_Clicked"/>
+                    <Button x:Name="Import" Text="&#xe782;" FontSize="18" FontFamily="MauiMaterialAssets" Margin="0,0,3,0" Clicked="Import_Clicked"/>
+                    <Button x:Name="Export" Text="&#xe781;" FontSize="18" FontFamily="MauiMaterialAssets" Margin="0,0,3,0" Clicked="Export_Clicked"/>
                     <BoxView HeightRequest="24" WidthRequest="2" BackgroundColor="DarkGray"></BoxView>
-                    <Button Text="&#xe788;" Margin="2,0,0,0"  FontSize="22" x:Name="AnnotationMenu" FontFamily="Maui Material Assets" Clicked="AnnotationMenu_Clicked"/>
+                    <Button Text="&#xe788;" Margin="2,0,0,0"  FontSize="22" x:Name="AnnotationMenu" FontFamily="MauiMaterialAssets" Clicked="AnnotationMenu_Clicked"/>
                 </HorizontalStackLayout >
                 <HorizontalStackLayout 
                         Grid.Column="1" Spacing="6"
                         HorizontalOptions="End" Margin="0,0,10,0">
-                    <Button x:Name="Lock" IsVisible="false" Text="&#xe77b;" FontSize="18" FontFamily="Maui Material Assets" Clicked="LockUnlock_Clicked" Margin="2,0,0,2"/>
-                    <Button x:Name="Unlock" IsVisible="false" Text="&#xe77c;" FontSize="18" FontFamily="Maui Material Assets" Clicked="LockUnlock_Clicked" Margin="2,0,0,2"/>
-                    <Button Text="&#xe70f;" Margin="2,0,0,0" FontSize="18" x:Name="delete" IsVisible="false" FontFamily="Maui Material Assets" Clicked="Delete_Clicked"/>
-                    <Button Text="&#xe767;" Margin="2,0,0,0"  FontSize="18" x:Name="ColorPalatte" FontFamily="Maui Material Assets" Clicked="ColorPalatte_Clicked" IsVisible="false"/>
-                    <Button Text="&#xe744;" Background="{OnPlatform WinUI=Transparent,Android=Transparent}" Margin="2,0,0,0" x:Name="Undo" FontFamily="Maui Material Assets" Command="{Binding Path=UndoCommand,Source={x:Reference PdfViewer}}"/>
-                    <Button Text="&#xe745;" Background="{OnPlatform WinUI=Transparent,Android=Transparent}" Margin="2,0,0,0" FontSize="18" x:Name="Redo" FontFamily="Maui Material Assets" Command="{Binding Path=RedoCommand,Source={x:Reference PdfViewer}}"/>
+                    <Button x:Name="Lock" IsVisible="false" Text="&#xe77b;" FontSize="18" FontFamily="MauiMaterialAssets" Clicked="LockUnlock_Clicked" Margin="2,0,0,2"/>
+                    <Button x:Name="Unlock" IsVisible="false" Text="&#xe77c;" FontSize="18" FontFamily="MauiMaterialAssets" Clicked="LockUnlock_Clicked" Margin="2,0,0,2"/>
+                    <Button Text="&#xe70f;" Margin="2,0,0,0" FontSize="18" x:Name="delete" IsVisible="false" FontFamily="MauiMaterialAssets" Clicked="Delete_Clicked"/>
+                    <Button Text="&#xe767;" Margin="2,0,0,0"  FontSize="18" x:Name="ColorPalatte" FontFamily="MauiMaterialAssets" Clicked="ColorPalatte_Clicked" IsVisible="false"/>
+                    <Button Text="&#xe744;" Background="{OnPlatform WinUI=Transparent,Android=Transparent}" Margin="2,0,0,0" x:Name="Undo" FontFamily="MauiMaterialAssets" Command="{Binding Path=UndoCommand,Source={x:Reference PdfViewer}}"/>
+                    <Button Text="&#xe745;" Background="{OnPlatform WinUI=Transparent,Android=Transparent}" Margin="2,0,0,0" FontSize="18" x:Name="Redo" FontFamily="MauiMaterialAssets" Command="{Binding Path=RedoCommand,Source={x:Reference PdfViewer}}"/>
                 </HorizontalStackLayout>
             </Grid>
             <Grid Grid.Row="2" x:Name="AnnotationMenuGrid" IsVisible="false" HeightRequest="40" BackgroundColor="#FFF6F6F6">
@@ -87,8 +88,8 @@
                 <HorizontalStackLayout 
                         Grid.Column="1" Margin="8,0,12,0" x:Name="EditOption" IsVisible="true" 
                         HorizontalOptions="End">
-                    <Button  Text="&#xe767;"  Margin="8,0,0,0"  FontSize="18" x:Name="ColorPalette" IsVisible="true" FontFamily="Maui Material Assets"/>
-                    <Button Text="&#xe70f;" Margin="8,0,0,0" FontSize="18" x:Name="Delete" IsVisible="false" FontFamily="Maui Material Assets" Clicked="Delete_Clicked"/>
+                    <Button  Text="&#xe767;"  Margin="8,0,0,0"  FontSize="18" x:Name="ColorPalette" IsVisible="true" FontFamily="MauiMaterialAssets"/>
+                    <Button Text="&#xe70f;" Margin="8,0,0,0" FontSize="18" x:Name="Delete" IsVisible="false" FontFamily="MauiMaterialAssets" Clicked="Delete_Clicked"/>
                 </HorizontalStackLayout>
 
             </Grid>

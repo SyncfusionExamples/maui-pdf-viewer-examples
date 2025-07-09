@@ -71,12 +71,12 @@
             <HorizontalStackLayout Grid.Column="0" IsVisible="{OnPlatform WinUI=True, MacCatalyst=True, Default=False}" HorizontalOptions="Center">
                 <Button x:Name="goToPreviousPageButton"
         ToolTipProperties.Text="Click to go to previous page" TextColor="#1C1B1F" BackgroundColor="Transparent"
-        Text="&#xe708;" FontFamily="Maui Material Assets" FontSize="24" Clicked="PreviousPage" IsEnabled="False"
+        Text="&#xe708;" FontFamily="MauiMaterialAssets" FontSize="24" Clicked="PreviousPage" IsEnabled="False"
         Margin="0,0,8,0"
         Style="{StaticResource buttonIconStyle}"/>
                 <Button x:Name="goToNextPageButton"
         ToolTipProperties.Text="Click to go to next page" TextColor="#1C1B1F"  Clicked="NextPage"
-        Text="&#xe705;" FontFamily="Maui Material Assets"  FontSize="24"
+        Text="&#xe705;" FontFamily="MauiMaterialAssets"  FontSize="24"
         Margin="0,0,8,0"
         Style="{StaticResource buttonIconStyle}"/>
                 <inputLayout:SfTextInputLayout Stroke="#49454F" ContainerBackground="Transparent" OutlineCornerRadius="4" HeightRequest="40" WidthRequest="58" FocusedStrokeThickness="1" ReserveSpaceForAssistiveLabels="False" Padding="0,-2.9,0,0" InputViewPadding="0" ContainerType="Outlined">
@@ -120,7 +120,7 @@
             <Grid Grid.Row="1" RowDefinitions="auto,auto">
                 <Grid ColumnDefinitions="auto,auto,*">
                     <Label x:Name="AIAssist" Grid.Column="1"  TextColor="#49454F" FontSize="{OnPlatform Android=16, iOS=16}" Text="AI Assistant" HorizontalOptions="Start" VerticalOptions="Center" Padding="18" FontFamily="Roboto" FontAttributes="Bold"/>
-                    <Button x:Name="close" Grid.Column="3" TextColor="#49454F" Style="{StaticResource buttonIconStyle}" BorderWidth="0" Clicked="AIAssistant_Clicked" CornerRadius="20" FontSize="24" Text="&#xe70b;" HorizontalOptions="End" FontFamily="Maui Material Assets" WidthRequest="40" HeightRequest="40" ToolTipProperties.Text="Close" Padding="0" Margin="0,0,14,0">
+                    <Button x:Name="close" Grid.Column="3" TextColor="#49454F" Style="{StaticResource buttonIconStyle}" BorderWidth="0" Clicked="AIAssistant_Clicked" CornerRadius="20" FontSize="24" Text="&#xe70b;" HorizontalOptions="End" FontFamily="MauiMaterialAssets" WidthRequest="40" HeightRequest="40" ToolTipProperties.Text="Close" Padding="0" Margin="0,0,14,0">
                     </Button>
                 </Grid>
             </Grid>

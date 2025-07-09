@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:syncfusion="clr-namespace:Syncfusion.Maui.PdfViewer;assembly=Syncfusion.Maui.PdfViewer"            
+             xmlns:local="clr-namespace:CustomSignatureDialog"
+             x:DataType="local:PdfViewerViewModel"
+             x:Class="CustomSignatureDialog.MainPage">
+
+    <ContentPage.BindingContext>
+        <local:PdfViewerViewModel x:Name="viewModel"/>
+    </ContentPage.BindingContext>
+    <ContentPage.Resources>
+        <Style x:Key="buttonIconStyle" TargetType="Button">
+            <Setter Property="BorderWidth" Value="0" />
+            <Setter Property="FontSize" Value="18" />
+            <Setter Property="Padding" Value="4" />
+            <Setter Property="VerticalOptions" Value="Center" />
+            <Setter Property="BackgroundColor" Value="Transparent"/>
+            <Setter Property="TextColor" Value="#99000000"/>
+            <Setter Property="FontFamily" Value="MauiMaterialAssets" />
+            <Setter Property="VisualStateManager.VisualStateGroups">
+                <VisualStateGroupList>
+                    <VisualStateGroup x:Name="CommonStates">
+                        <VisualState x:Name="Normal">
+                            <VisualState.Setters>
+                                <Setter Property="BackgroundColor" Value="Transparent" />
+                                <Setter  Property="Opacity" Value="1"/>
+                            </VisualState.Setters>
+                        </VisualState>
+                        <VisualState x:Name="Disabled">
+                            <VisualState.Setters>
+                                <Setter Property="BackgroundColor" Value="Transparent" />
+                                <Setter  Property="Opacity" Value="0.25"/>
+                            </VisualState.Setters>
+                        </VisualState>
+                        <VisualState x:Name="Pressed">
+                            <VisualState.Setters>
+                                <Setter Property="BackgroundColor" Value="#14000000" />
+                            </VisualState.Setters>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateGroupList>
+            </Setter>
+        </Style>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <Grid x:Name="signature">
+            <Grid RowDefinitions="50,*">
+                <Grid Grid.Row="0" BackgroundColor="#F3EDF7">
+                    <HorizontalStackLayout Spacing="20" Margin="20,0,0,0" HorizontalOptions="Start">
+                        <Button x:Name="openButton" ToolTipProperties.Text="Open PDF" Style="{x:StaticResource buttonIconStyle}" Text="&#xe712;"  Command="{Binding OpenCommand}" />
+                        <Button x:Name="saveAsButton" ToolTipProperties.Text="Save as" Style="{x:StaticResource buttonIconStyle}" Text="&#xe75f;"  Clicked="saveAsButton_Clicked" />
+                    </HorizontalStackLayout>
+                    <Button HorizontalOptions="End" x:Name="deleteButton" IsVisible="False" Margin="0,0,10,0" Style="{x:StaticResource buttonIconStyle}"  ToolTipProperties.Text="Delete signature"  Text="&#xe70f;" Clicked="deleteButton_Clicked" />
+                </Grid>
+                <Grid Grid.Row="1" >
+                    <syncfusion:SfPdfViewer x:Name="pdfViewer" DocumentSource="{Binding FileData.Stream}" 
+                    AnnotationSelected="pdfViewer_AnnotationSelected"
+                    AnnotationDeselected="pdfViewer_AnnotationDeselected"
+                    Tapped="PdfViewerTapped"
+                    ShowToolbars="False"
+                    ShowScrollHead="False"/>
+
+                    <Button x:Name="signatureButton" Background="#6750A4" FontSize="24" ToolTipProperties.Text="Click to add signature" FontFamily="MauiMaterialAssets" Text="&#xe737;" TextColor="White" VerticalOptions="End" HorizontalOptions="End" Margin="0,0,50,50" CornerRadius="30" WidthRequest="60" HeightRequest="60" Clicked="signatureButton_Clicked">
+                        <Button.Shadow>
+                            <Shadow Brush="Black" Offset="0,0" Radius="5" Opacity="0.5" />
+                        </Button.Shadow>
+                    </Button>
+                </Grid>
+                <Border x:Name="toast" Grid.Row="1" BackgroundColor="Black" Padding="8" VerticalOptions="Center" HorizontalOptions="Center" Opacity="0">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="4"/>
+                    </Border.StrokeShape>
+                    <Label x:Name="toastText" VerticalOptions="Center" VerticalTextAlignment="Center" HorizontalOptions="Center" TextColor="White"/>
+                </Border>
+            </Grid>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
