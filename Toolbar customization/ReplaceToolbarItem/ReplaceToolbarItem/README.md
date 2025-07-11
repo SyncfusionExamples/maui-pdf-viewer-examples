@@ -1,27 +1,45 @@
-# [Android, iOS] How to customize the more options drop down?
-This project demonstrates how to build a .NET MAUI application that customize the more options drop down in mobile platform, by replacing the more option item with a new item in the index of the more option item in Android and IOS platform.
+# [Android, iOS] How to replace the toolbar item by another toolbar item?
+This project demonstrates how to build a .NET MAUI application that customize the toolbar items in mobile platform, by replacing the existing toolbar item with a new toolbar item in the index of the removed existing toolbar item in Android and IOS platform.
 
 # Prerequisites
 1. A .NET MAUI project set up.
 2. The Syncfusion PDF Viewer NuGet package is installed.
 
 # Steps
+
 ## 1.Install Required NuGet Package
 To get started, create a new https://dotnet.microsoft.com/en-us/learn/maui/first-app-tutorial/create and ensure the following package is installed in your .NET MAUI project:
+
 https://www.nuget.org/packages/Syncfusion.Maui.PdfViewer
+
 You can install this package using the NuGet Package Manager or the NuGet CLI.
 
 ## 2. Initialize the PDF Viewer in XAML
+
 Start by adding the Syncfusion PDF Viewer control to your XAML file.
-a. Add the Syncfusion namespace in your MainPage.xaml:
+
+**a. Add the Syncfusion namespace in your MainPage.xaml:**
+
 Define the XAML namespace to enable access to the PDF Viewer.
-XAML: xmlns:syncfusion="clr-namespace:Syncfusion.Maui.PdfViewer;assembly=Syncfusion.Maui.PdfViewer"
 
-b. Add the PDF Viewer control to your layout:
+**XAML:**
+
+```xaml
+xmlns:syncfusion="clr-namespace:Syncfusion.Maui.PdfViewer;assembly=Syncfusion.Maui.PdfViewer"
+```
+
+**b. Add the PDF Viewer control to your layout:**
+
 Initialize the SfPdfViewer in the XAML file. This will display the PDF Viewer in your app. You can load any PDF document into this Viewer.
-<syncfusion:SfPdfViewer x:Name="pdfViewer" DocumentLoaded="PdfViewerDocumentLoaded"></syncfusion:SfPdfViewer>
 
-c. Load the PDF in the PDF Viewer control:
+**XAML:**
+
+```xaml
+<syncfusion:SfPdfViewer x:Name="pdfViewer" DocumentLoaded="PdfViewerDocumentLoaded"></syncfusion:SfPdfViewer>
+```
+
+**c. Load the PDF in the PDF Viewer control:**
+
 In your MainPage.xaml.cs, the PDF Viewer is initialized with a PDF document embedded in your resources.
 
 ```csharp
@@ -30,6 +48,7 @@ pdfViewer.LoadDocument(stream);
 ```
 
 ## 3. Replace the existing item with another item in the top toolbar in Android and IOS platform.
+
 In the document loaded event:
  1. Get the index value of the more items in the top toolbar using the more item name.
  2. Get the more items value in the top toolbar using the more item name.
