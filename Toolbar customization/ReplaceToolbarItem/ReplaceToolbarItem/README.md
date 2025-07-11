@@ -1,20 +1,20 @@
-# [Android, iOS] How to replace the toolbar item by another toolbar item?
-This project demonstrates how to build a .NET MAUI application that customize the toolbar items in mobile platform, by replacing the existing toolbar item with a new toolbar item in the index of the removed existing toolbar item in Android and IOS platform.
+# [Android, iOS] How to replace a toolbar item with another toolbar item?
+This project demonstrates how to build a .NET MAUI application that replaces the existing toolbar item with a new toolbar item in the index of the removed existing toolbar item in Android and IOS platform.
 
-# Prerequisites
+## Prerequisites
 1. A .NET MAUI project set up.
-2. The Syncfusion PDF Viewer NuGet package is installed.
+2. The Syncfusion PDF Viewer NuGet package is installed - https://www.nuget.org/packages/Syncfusion.Maui.PdfViewer.
 
-# Steps
+## Steps
 
-## 1.Install Required NuGet Package
+### 1.Install Required NuGet Package
 To get started, create a new https://dotnet.microsoft.com/en-us/learn/maui/first-app-tutorial/create and ensure the following package is installed in your .NET MAUI project:
 
 https://www.nuget.org/packages/Syncfusion.Maui.PdfViewer
 
 You can install this package using the NuGet Package Manager or the NuGet CLI.
 
-## 2. Initialize the PDF Viewer in XAML
+### 2. Initialize the PDF Viewer in XAML
 
 Start by adding the Syncfusion PDF Viewer control to your XAML file.
 
@@ -43,35 +43,35 @@ Initialize the SfPdfViewer in the XAML file. This will display the PDF Viewer in
 In your MainPage.xaml.cs, the PDF Viewer is initialized with a PDF document embedded in your resources.
 
 ```csharp
-Stream stream = typeof(App).GetTypeInfo().Assembly.GetManifestResourceStream("Toolabarissue.Assets.PDF_Succinctly.pdf");
+Stream stream = typeof(App).GetTypeInfo().Assembly.GetManifestResourceStream("ReplaceToolbarItem.Assets.PDF_Succinctly.pdf");
 pdfViewer.LoadDocument(stream);
 ```
 
-## 3. Replace the existing item with another item in the top toolbar in Android and IOS platform.
+### 3. Replace the existing item with another item in the top toolbar in Android and IOS platform.
 
-In the document loaded event:
- 1. Get the index value of the more items in the top toolbar using the more item name.
- 2. Get the more items value in the top toolbar using the more item name.
- 3. Remove the more item using the more item name.
- 4. Creating a new button.
- 5. Insert the new created button as item in the index of the more items which is removed from the top toolbar.
+In the document loaded event: (For example, the toolbar item we consider here is "MoreOptions" toolbar item, which includes "Outline" and "Print" as its dropdown options)
+ 1. Get the index value of the toolbar item in the top toolbar using their name .
+ 2. Get the toolbar item from the top toolbar using their name.
+ 3. Remove the toolbar item from the top toolbar using their name.
+ 4. Create a new button.
+ 5. Insert the newly created button as item in the index of the toolbar item which is removed from the top toolbar.
 
 ```csharp
 private void PdfViewerDocumentLoaded(object sender, EventArgs e)
 {
 
 #if ANDROID || IOS
-            // Getting the index value of the more item toolbar item from the top toolbar.
+            // Get the index value of the "MoreItem" toolbar item from the top toolbar.
             var index = (int)pdfViewer?.Toolbars?.GetByName("TopToolbar")?.Items?.GetByName("MoreItem")?.Index;
 
-            // Get the more item from the top toolbar.
+            // Get the "MoreItem" toolbar item from the top toolbar.
             var item = pdfViewer.Toolbars?.GetByName("TopToolbar")?.Items?.GetByName("MoreItem");
 
             if (item != null)
-                // Remove the more item from the top toolbar.
+                // Remove the "MoreItem" toolbar item from the top toolbar.
                 pdfViewer.Toolbars?.GetByName("TopToolbar")?.Items?.Remove(item);
             
-            // Creating a new print button to replace the more item.
+            // Creating a new print button to replace the "MoreItem" toolbar item.
             Button printButton = new Button
             {
                 Text = "\ue77f",
@@ -86,13 +86,12 @@ private void PdfViewerDocumentLoaded(object sender, EventArgs e)
 
             };
 
-            // replacing the print button in the index of the more item. 
+            // Replace the print button at the index of the "MoreItem" toolbar item. 
             pdfViewer.Toolbars?.GetByName("TopToolbar")?.Items?.Insert(index, new Syncfusion.Maui.PdfViewer.ToolbarItem(printButton, "printButton"));
 #endif
 
 }
 ```
 
-# Run the App
-1. Build and run the application on your preferred platform.
-2. Load the PDF in the viewer.
+## Run the App
+Build and run the application on your preferred platform.
