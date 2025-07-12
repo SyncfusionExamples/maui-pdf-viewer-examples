@@ -1,5 +1,5 @@
 # How to replace a toolbar item with another toolbar item?
-This project demonstrates how to build a .NET MAUI application that replaces the existing toolbar item with a new toolbar item in the index of the removed existing toolbar item.
+This project demonstrates how to build a .NET MAUI application that replaces the existing toolbar item with a new toolbar item in the index of the removed existing toolbar item. As a example, the toolbar item we consider here is "MoreOptions" toolbar item, which includes "Outline" and "Print" as its dropdown options on top toolbar in Android and IOS platform
 
 ## Prerequisites
 1. A .NET MAUI project set up.
@@ -49,7 +49,7 @@ pdfViewer.LoadDocument(stream);
 
 ### 3. Replace the existing item with another item in the top toolbar in Android and IOS platform.
 
-In the document loaded event: (For example, the toolbar item we consider here is "MoreOptions" toolbar item, which includes "Outline" and "Print" as its dropdown options on Android and IOS platform toolbar)
+In the document loaded event: (The toolbar item we used is "MoreOptions" toolbar item, which includes "Outline" and "Print" as its dropdown options on top toolbar in Android and IOS platform)
  1. Get the index value of the toolbar item in the top toolbar using their name .
  2. Get the toolbar item from the top toolbar using their name.
  3. Remove the toolbar item from the top toolbar using their name.
