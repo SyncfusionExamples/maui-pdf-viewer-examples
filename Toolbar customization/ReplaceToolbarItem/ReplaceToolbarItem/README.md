@@ -1,5 +1,5 @@
 # How to replace a toolbar item with another toolbar item?
-This project demonstrates how to build a .NET MAUI application that replaces the existing toolbar item with a new toolbar item in the index of the removed existing toolbar item. As a example, the toolbar item we consider here is "MoreOptions" toolbar item, which includes "Outline" and "Print" as its dropdown options on top toolbar in Android and IOS platform
+This project demonstrates how to build a .NET MAUI application that replaces the existing toolbar item with a new toolbar item in the index of the removed existing toolbar item. As an example, the toolbar item we consider for replacing is the "MoreOptions" item, which includes "Outline" and "Print" as dropdown options on the top toolbar in both Android and iOS platforms
 
 ## Prerequisites
 1. A .NET MAUI project set up.
@@ -49,7 +49,7 @@ pdfViewer.LoadDocument(stream);
 
 ### 3. Replace the existing item with another item in the top toolbar in Android and IOS platform.
 
-In the document loaded event: (The toolbar item we used is "MoreOptions" toolbar item, which includes "Outline" and "Print" as its dropdown options on top toolbar in Android and IOS platform)
+In the document loaded event: (The toolbar item we're replacing is the "MoreOptions" item, which includes "Outline" and "Print" as its dropdown options on the top toolbar in both Android and iOS platforms.)
  1. Get the index value of the toolbar item in the top toolbar using their name .
  2. Get the toolbar item from the top toolbar using their name.
  3. Remove the toolbar item from the top toolbar using their name.
@@ -95,7 +95,7 @@ private void PdfViewerDocumentLoaded(object sender, EventArgs e)
 
 ## note:
 
-We can replace the existing item using a new item in Windows and MAC platform, by using the toolbar and toolbar items used in the Windows and MAC platform.
+We can replace the existing toolbar item using a new toolbar item in Windows and MAC platform, by using the toolbars and toolbar items names used in the Windows and MAC platform.
 
 Toolbar name: https://help.syncfusion.com/maui/pdf-viewer/toolbar#desktop-toolbar-names
 
