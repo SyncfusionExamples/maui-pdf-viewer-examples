@@ -49,7 +49,7 @@ pdfViewer.LoadDocument(stream);
 
 ### 3. Replace the existing item with another item in the top toolbar in Android and IOS platform.
 
-In the document loaded event: (The toolbar item we're replacing is the "MoreOptions" item, which includes "Outline" and "Print" as its dropdown options on the top toolbar in both Android and iOS platforms.)
+In the document loaded event: (The toolbar item we used in below step for replacing is the "MoreOptions" item, which includes "Outline" and "Print" as its dropdown options on the top toolbar in both Android and iOS platforms.)
  1. Get the index value of the toolbar item in the top toolbar using their name .
  2. Get the toolbar item from the top toolbar using their name.
  3. Remove the toolbar item from the top toolbar using their name.
