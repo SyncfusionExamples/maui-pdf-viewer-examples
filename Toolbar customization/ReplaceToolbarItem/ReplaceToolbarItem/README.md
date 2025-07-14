@@ -3,14 +3,14 @@ This project demonstrates how to build a .NET MAUI application that replaces the
 
 ## Prerequisites
 1. A .NET MAUI project set up.
-2. The Syncfusion PDF Viewer NuGet package is installed - https://www.nuget.org/packages/Syncfusion.Maui.PdfViewer.
+2. The Syncfusion PDF Viewer NuGet package is installed - [Syncfusion.Maui.PdfViewer](https://www.nuget.org/packages/Syncfusion.Maui.PdfViewer).
 
 ## Steps
 
 ### 1.Install Required NuGet Package
-To get started, create a new https://dotnet.microsoft.com/en-us/learn/maui/first-app-tutorial/create and ensure the following package is installed in your .NET MAUI project:
+To get started, create a new [Maui App](https://dotnet.microsoft.com/en-us/learn/maui/first-app-tutorial/create) and ensure the following package is installed in your .NET MAUI project:
 
-https://www.nuget.org/packages/Syncfusion.Maui.PdfViewer
+[Syncfusion.Maui.PdfViewer](https://www.nuget.org/packages/Syncfusion.Maui.PdfViewer)
 
 You can install this package using the NuGet Package Manager or the NuGet CLI.
 
@@ -30,7 +30,7 @@ xmlns:syncfusion="clr-namespace:Syncfusion.Maui.PdfViewer;assembly=Syncfusion.Ma
 
 **b. Add the PDF Viewer control to your layout:**
 
-Initialize the SfPdfViewer in the XAML file. This will display the PDF Viewer in your app. You can load any PDF document into this Viewer.
+Initialize the SfPdfViewer in the XAML file. This will display the PDF Viewer in your app. You can load any PDF document into this Viewer and wire the DocumentLoaded event for the PdfViewer.
 
 **XAML:**
 
@@ -49,7 +49,7 @@ pdfViewer.LoadDocument(stream);
 
 ### 3. Replace the existing item with another item in the top toolbar in Android and IOS platform.
 
-In the document loaded event: (The toolbar item we used in below step for replacing is the "MoreOptions" item, which includes "Outline" and "Print" as its dropdown options on the top toolbar in both Android and iOS platforms.)
+In the wired document loaded event: (The toolbar item we used in below step for replacing is the "MoreOptions" item, which includes "Outline" and "Print" as its dropdown options on the top toolbar in both Android and iOS platforms.)
  1. Get the index value of the toolbar item in the top toolbar using their name .
  2. Get the toolbar item from the top toolbar using their name.
  3. Remove the toolbar item from the top toolbar using their name.
@@ -97,9 +97,9 @@ private void PdfViewerDocumentLoaded(object sender, EventArgs e)
 
 We can replace the existing toolbar item using a new toolbar item in Windows and MAC platform, by using the toolbars and toolbar items names used in the Windows and MAC platform.
 
-Toolbar name: https://help.syncfusion.com/maui/pdf-viewer/toolbar#desktop-toolbar-names
+Toolbar name: [Toolbar Names](https://help.syncfusion.com/maui/pdf-viewer/toolbar#desktop-toolbar-names)
 
-Toolbar item name: https://help.syncfusion.com/maui/pdf-viewer/toolbar#desktop-toolbar-item-names
+Toolbar item name: [Toolbar Item Names](https://help.syncfusion.com/maui/pdf-viewer/toolbar#desktop-toolbar-item-names)
 
 ## Run the App
 
