@@ -54,7 +54,7 @@ In the wired document loaded event: (The toolbar item we used in below step for 
  2. Get the toolbar item from the top toolbar using their name.
  3. Remove the toolbar item from the top toolbar using their name.
  4. Create a new button.
- 5. Insert the newly created button as item in the index of the toolbar item which is removed from the top toolbar.
+ 5. Replace the toolbar item by the newly created button as a toolbar item using the index value of the toolbar item.
 
 ```csharp
 private void PdfViewerDocumentLoaded(object sender, EventArgs e)
