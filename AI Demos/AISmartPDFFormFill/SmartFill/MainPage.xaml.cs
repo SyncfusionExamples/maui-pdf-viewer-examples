@@ -1,5 +1,6 @@
 ﻿using Syncfusion.Maui.PdfViewer;
 using Syncfusion.Pdf.Parsing;
+using System.Net;
 
 namespace SmartFill;
 
@@ -31,12 +32,14 @@ public partial class MainPage : ContentPage
 #if ANDROID || IOS
         MobileCopiedData.IsVisible = true;
 #endif
+        if (chatService.DeploymentName != "DEPLOYMENT_NAME")
+            SubmitForm.IsEnabled = true;
     }
 
     private async void Clipboard_ClipboardContentChanged(object? sender, EventArgs e)
     {
         string? copiedText = await Clipboard.GetTextAsync();
-        if (string.IsNullOrEmpty(copiedText) == false && chatService.deploymentName!= "DEPLOYMENT_NAME")
+        if (string.IsNullOrEmpty(copiedText) == false &&  chatService.DeploymentName!= "DEPLOYMENT_NAME")
         {
             SubmitForm.IsEnabled = true;
             StartBubbleAnimation();

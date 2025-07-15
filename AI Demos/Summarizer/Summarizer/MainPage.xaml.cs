@@ -53,26 +53,6 @@ public partial class MainPage : ContentPage
             PdfLoadedPageCollection loadedPages = loadedDocument.Pages;
             await Task.Run(() =>
             {
-                // Extract annotations to a memory stream and convert to string
-                using (MemoryStream annotationStream = new MemoryStream())
-                {
-                    loadedDocument.ExportAnnotations(annotationStream, AnnotationDataFormat.Json);
-                    string annotations = ConvertToString(annotationStream);
-                    if (!String.IsNullOrEmpty(annotations))
-                        extractedText.Add("Annotations: " + annotations);
-                }
-
-                // Extract form fields to a memory stream and convert to string
-                using (MemoryStream formStream = new MemoryStream())
-                {
-                    if (loadedDocument.Form != null)
-                    {
-                        loadedDocument.Form.ExportData(formStream, DataFormat.Json, "form");
-                        string formFields = ConvertToString(formStream);
-                        if (!String.IsNullOrEmpty(formFields))
-                            extractedText.Add("Form fields: " + formFields);
-                    }
-                }
                 // Extract text from existing PDF document pages
                 for (int i = 0; i < loadedPages.Count; i++)
                 {

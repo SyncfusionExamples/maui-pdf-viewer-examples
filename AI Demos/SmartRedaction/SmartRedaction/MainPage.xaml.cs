@@ -69,6 +69,16 @@ namespace SmartRedaction
         {
             AddRedact.IsEnabled = true;
             MobileRedactLayout.IsVisible = false;
+#if WINDOWS || MACCATALYST
+            popupContainer.IsVisible = !popupContainer.IsVisible;
+            SenstiveInfoContainer.IsVisible = false;
+            SelectRedactitem.IsEnabled = false;
+#else
+            popupContainerMobile.IsVisible = !popupContainerMobile.IsVisible;
+            SenstiveInfoContainerMobile.IsVisible = false;
+#endif
+            ViewModel.SensitiveInfo.Clear();
+
         }
 
         private void PdfViewer_AnnotationAdded(object? sender, AnnotationEventArgs e)

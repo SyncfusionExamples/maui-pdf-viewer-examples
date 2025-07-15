@@ -72,7 +72,10 @@
 		<PackageReference Include="Syncfusion.Maui.Buttons" Version="*" />
 		<PackageReference Include="Syncfusion.Maui.PdfViewer" Version="*" />
 		<PackageReference Include="Syncfusion.Maui.TreeView" Version="*" />
-		<PackageReference Include="Azure.AI.OpenAI" Version="1.0.0-beta.15" />
+		<PackageReference Include="Azure.AI.OpenAI" Version="2.0.0" />
+		<PackageReference Include="Azure.Identity" Version="1.13.1" />
+		<PackageReference Include="Microsoft.Extensions.AI.OpenAI" Version="9.0.1-preview.1.24570.5" />
+		<PackageReference Include="System.Private.Uri" Version="4.3.2" />
 	</ItemGroup>
 
 </Project>
