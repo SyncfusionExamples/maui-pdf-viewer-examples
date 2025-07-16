@@ -1,5 +1,5 @@
 # How to replace a built-in toolbar item with a custom application-level control in .NET MAUI PDF Viewer?
-This project demonstrates how to replace the existing built-in toolbar item with a custom application-level control in the index of the removed existing built-in toolbar item in .NET MAUI PDF Viewer. As an example, the built-in toolbar item we consider for replacing is the "MoreOptions" item, which includes "Outline" and "Print" as dropdown options on the top toolbar in both Android and iOS platforms and the custom application-level control is button.
+This project demonstrates how to replace an existing built-in toolbar item with a custom application-level control in the position of the removed toolbar item in the .NET MAUI PDF Viewer. For example, the built-in toolbar item we are replacing is the "MoreOptions" item, which includes "Outline" and "Print" as dropdown options on the top toolbar for both Android and iOS platforms, while the custom application-level control is a button.
 
 ## Prerequisites
 1. A .NET MAUI project set up.
@@ -15,7 +15,6 @@ To get started, create a new [Maui App](https://dotnet.microsoft.com/en-us/learn
 You can install this package using the NuGet Package Manager or the NuGet CLI.
 
 ### 2. Initialize the PDF Viewer in XAML
-
 Start by adding the Syncfusion PDF Viewer control to your XAML file.
 
 **a. Add the Syncfusion namespace in your MainPage.xaml:**
@@ -60,7 +59,6 @@ The event is triggered when the document loaded.
 ```
 
 ### 3. Replace the existing item with another item in the top toolbar in Android and IOS platform.
-
 In the DocumentLoaded event handler:
  1. Retrieve the toolbar item from the top toolbar by its name.
  2. Determine the index position of the retrieved toolbar item within the top toolbar.
@@ -114,11 +112,9 @@ private void PdfViewerDocumentLoaded(object sender, EventArgs e)
 ```
 
 ## Note:
-
 We can replace the existing built-in toolbar item with a custom application-level control in Windows and MAC platform by using the [Toolbar Names](https://help.syncfusion.com/maui/pdf-viewer/toolbar#desktop-toolbar-names) and [Toolbar Item Names](https://help.syncfusion.com/maui/pdf-viewer/toolbar#desktop-toolbar-item-names) specified for the Windows and MAC platform.
 
 ## Run the App
-
 Build and run the application on your Android and IOS platform.
 
 
