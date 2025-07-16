@@ -1,5 +1,5 @@
 # How to replace a built-in toolbar item with a custom application-level control in .NET MAUI PDF Viewer?
-This project demonstrates how to replace the existing built-in toolbar item with a custom application-level control in the index of the removed existing built-in toolbar item. As an example, the built-in toolbar item we consider for replacing is the "MoreOptions" item, which includes "Outline" and "Print" as dropdown options on the top toolbar in both Android and iOS platforms and the custom application-level control is button.
+This project demonstrates how to replace the existing built-in toolbar item with a custom application-level control in the index of the removed existing built-in toolbar item in .NET MAUI PDF Viewer. As an example, the built-in toolbar item we consider for replacing is the "MoreOptions" item, which includes "Outline" and "Print" as dropdown options on the top toolbar in both Android and iOS platforms and the custom application-level control is button.
 
 ## Prerequisites
 1. A .NET MAUI project set up.
