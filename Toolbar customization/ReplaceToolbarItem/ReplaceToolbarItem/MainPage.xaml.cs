@@ -18,17 +18,17 @@ namespace ReplaceToolbarItem
 
 #if ANDROID || IOS
 
-            // Get the "MoreOptions" toolbar item from the top toolbar.
+            // Retrieve the toolbar item named "MoreOptions" from the "TopToolbar"
             var item = pdfViewer.Toolbars?.GetByName("TopToolbar")?.Items?.GetByName("MoreItem");
 
-            // Get the index of the "MoreOptions" toolbar item from the top toolbar.
+            // Obtain the index value of the retrieved toolbar item
             var index = (item?.Index != null) ? (int)item.Index : -1;
 
             if (item != null)
                 // Remove the "MoreOptions" toolbar item from the top toolbar.
                 pdfViewer.Toolbars?.GetByName("TopToolbar")?.Items?.Remove(item);
 
-            // Creating a new print button to replace the "MoreOptions" toolbar item.
+            // Create a new print button to replace the "MoreOptions" toolbar item.
             Button printButton = new Button
             {
                 Text = "\ue77f",
@@ -41,6 +41,12 @@ namespace ReplaceToolbarItem
                 IsEnabled = true,
                 Padding = 10,
 
+            };
+
+            // Add a click event handler to the newly created button for initiating document printing
+            printButton.Clicked += (s, e) =>
+            {
+                pdfViewer.PrintDocument();
             };
 
             // Replace the print button at the index of the "MoreOptions" toolbar item. 

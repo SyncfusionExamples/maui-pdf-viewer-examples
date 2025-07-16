@@ -61,12 +61,13 @@ The event is triggered when the document loaded.
 
 ### 3. Replace the existing item with another item in the top toolbar in Android and IOS platform.
 
-In the wired document loaded event:
- 1. Get the toolbar item from the top toolbar using its name.
- 2. Obtain the index value of the toolbar item in the top toolbar using its name.
- 3. Remove the toolbar item from the top toolbar using its name.
+In the DocumentLoaded event handler:
+ 1. Retrieve the toolbar item from the top toolbar by its name.
+ 2. Determine the index position of the retrieved toolbar item within the top toolbar.
+ 3. Remove the retrieved toolbar item from the top toolbar using its name.
  4. Create a new button.
- 5. Replace the toolbar item by the newly created button as a toolbar item using the index value of the toolbar item.
+ 5. Add a click event handler to the newly created button to verify that the actions are executed correctly.
+ 6. Replace the retrieved toolbar item with the new created button in the toolbar, using the previously obtained retrieved toolbar item index position.
 
 ```csharp
 private void PdfViewerDocumentLoaded(object sender, EventArgs e)
@@ -74,10 +75,10 @@ private void PdfViewerDocumentLoaded(object sender, EventArgs e)
 
 #if ANDROID || IOS
 
-            // Get the "MoreOptions" toolbar item from the top toolbar.
+            // Retrieve the toolbar item named "MoreOptions" from the "TopToolbar"
             var item = pdfViewer.Toolbars?.GetByName("TopToolbar")?.Items?.GetByName("MoreItem");
 
-            // Get the index of the "MoreOptions" toolbar item from the top toolbar.
+            // Obtain the index value of the retrieved toolbar item
             var index = (item?.Index != null) ? (int)item.Index : -1;
 
             if (item != null)
@@ -97,6 +98,12 @@ private void PdfViewerDocumentLoaded(object sender, EventArgs e)
                 IsEnabled = true,
                 Padding = 10,
 
+            };
+
+            // Add a click event handler to the newly created button for initiating document printing
+            printButton.Clicked += (s, e) =>
+            {
+                pdfViewer.PrintDocument();
             };
 
             // Replace the print button at the index of the "MoreOptions" toolbar item. 
