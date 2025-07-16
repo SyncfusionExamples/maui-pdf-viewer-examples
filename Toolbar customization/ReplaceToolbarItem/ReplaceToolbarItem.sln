@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36203.30 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReplaceToolbarItem", "ReplaceToolbarItem\ReplaceToolbarItem.csproj", "{FD2A6499-CC7B-4A8C-9ED3-4ABC875F618D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FD2A6499-CC7B-4A8C-9ED3-4ABC875F618D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FD2A6499-CC7B-4A8C-9ED3-4ABC875F618D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FD2A6499-CC7B-4A8C-9ED3-4ABC875F618D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FD2A6499-CC7B-4A8C-9ED3-4ABC875F618D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4760BA1F-733E-49A4-889D-C903667B4B93}
+	EndGlobalSection
+EndGlobal
