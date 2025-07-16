@@ -62,9 +62,9 @@ The event is triggered when the document loaded.
 ### 3. Replace the existing item with another item in the top toolbar in Android and IOS platform.
 
 In the wired document loaded event:
- 1. Get the toolbar item from the top toolbar using their name.
- 2. Get the index value of the toolbar item in the top toolbar using their name .
- 3. Remove the toolbar item from the top toolbar using their name.
+ 1. Get the toolbar item from the top toolbar using its name.
+ 2. Obtain the index value of the toolbar item in the top toolbar using its name.
+ 3. Remove the toolbar item from the top toolbar using its name.
  4. Create a new button.
  5. Replace the toolbar item by the newly created button as a toolbar item using the index value of the toolbar item.
 
@@ -108,7 +108,7 @@ private void PdfViewerDocumentLoaded(object sender, EventArgs e)
 
 ## Note:
 
-We can replace the existing built-in toolbar item using a custom application-level control in Windows and MAC platform, by using the [Toolbar Names](https://help.syncfusion.com/maui/pdf-viewer/toolbar#desktop-toolbar-names) and [Toolbar Item Names](https://help.syncfusion.com/maui/pdf-viewer/toolbar#desktop-toolbar-item-names) used in the Windows and MAC platform.
+We can replace the existing built-in toolbar item with a custom application-level control in Windows and MAC platform, by using the [Toolbar Names](https://help.syncfusion.com/maui/pdf-viewer/toolbar#desktop-toolbar-names) and [Toolbar Item Names](https://help.syncfusion.com/maui/pdf-viewer/toolbar#desktop-toolbar-item-names) specified for the Windows and MAC platform.
 
 ## Run the App
 
