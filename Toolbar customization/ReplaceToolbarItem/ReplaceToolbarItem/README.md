@@ -101,6 +101,7 @@ private void PdfViewerDocumentLoaded(object sender, EventArgs e)
             // Add a click event handler to the newly created button for initiating document printing
             printButton.Clicked += (s, e) =>
             {
+                // The PrintDocument method contains the code for printing the document.
                 pdfViewer.PrintDocument();
             };
 
