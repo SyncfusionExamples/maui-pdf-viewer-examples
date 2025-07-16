@@ -108,7 +108,7 @@ private void PdfViewerDocumentLoaded(object sender, EventArgs e)
 
 ## Note:
 
-We can replace the existing built-in toolbar item with a custom application-level control in Windows and MAC platform, by using the [Toolbar Names](https://help.syncfusion.com/maui/pdf-viewer/toolbar#desktop-toolbar-names) and [Toolbar Item Names](https://help.syncfusion.com/maui/pdf-viewer/toolbar#desktop-toolbar-item-names) specified for the Windows and MAC platform.
+We can replace the existing built-in toolbar item with a custom application-level control in Windows and MAC platform by using the [Toolbar Names](https://help.syncfusion.com/maui/pdf-viewer/toolbar#desktop-toolbar-names) and [Toolbar Item Names](https://help.syncfusion.com/maui/pdf-viewer/toolbar#desktop-toolbar-item-names) specified for the Windows and MAC platform.
 
 ## Run the App
 
