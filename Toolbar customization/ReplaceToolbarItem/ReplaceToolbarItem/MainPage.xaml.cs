@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using Microsoft.Maui.Controls;
+using System.Reflection;
 
 namespace ReplaceToolbarItem
 {
@@ -11,15 +12,19 @@ namespace ReplaceToolbarItem
             Stream? stream = typeof(App).GetTypeInfo().Assembly.GetManifestResourceStream("ReplaceToolbarItem.Assets.PDF_Succinctly.pdf");
             // Load the stream into the pdfViewer control.
             pdfViewer.LoadDocument(stream);
+            // Call a custom method to replace the default toolbar items in the PDF viewer
+            ReplaceToolbarItem();
         }
 
-        private void PdfViewerDocumentLoaded(object sender, EventArgs e)
+        private void ReplaceToolbarItem()
         {
-
 #if ANDROID || IOS
 
+            // Retrieve the top toolbar using its name"
+            var toolbar = pdfViewer.Toolbars?.GetByName("TopToolbar");
+
             // Retrieve the toolbar item named "MoreOptions" from the "TopToolbar"
-            var item = pdfViewer.Toolbars?.GetByName("TopToolbar")?.Items?.GetByName("MoreItem");
+            var item = toolbar?.Items?.GetByName("MoreItem");
 
             // Obtain the index value of the retrieved toolbar item
             var index = (item?.Index != null) ? (int)item.Index : -1;
@@ -51,7 +56,7 @@ namespace ReplaceToolbarItem
             };
 
             // Replace the print button at the index of the "MoreOptions" toolbar item. 
-            pdfViewer.Toolbars?.GetByName("TopToolbar")?.Items?.Insert(index, new Syncfusion.Maui.PdfViewer.ToolbarItem(printButton, "printButton"));
+            toolbar?.Items?.Insert(index, new Syncfusion.Maui.PdfViewer.ToolbarItem(printButton, "printButton"));
 #endif
 
         }

@@ -48,33 +48,32 @@ In your MainPage.xaml.cs, the PDF Viewer is initialized with a PDF document embe
     pdfViewer.LoadDocument(stream);
 ```
 
-**d. Wire the document loaded event for the pdfViewer control**
+**d. Call the custom method named "ReplaceToolbarItem" in the main page constructor to replace the default toolbar items in the PDF viewer **
 
-The event is triggered when the document loaded.
-
-**XAML:**
-
-```xaml
-    <syncfusion:SfPdfViewer x:Name="pdfViewer" DocumentLoaded="PdfViewerDocumentLoaded"></syncfusion:SfPdfViewer>
+```csharp
+    ReplaceToolbarItem();
 ```
 
 ### 3. Replace the existing item with another item in the top toolbar in Android and IOS platform.
-In the DocumentLoaded event handler:
- 1. Retrieve the toolbar item from the top toolbar by its name.
- 2. Determine the index position of the retrieved toolbar item within the top toolbar.
- 3. Remove the retrieved toolbar item from the top toolbar using its name.
- 4. Create a new button.
- 5. Add a click event handler to the newly created button to verify that the actions are executed correctly.
- 6. Replace the retrieved toolbar item with the new created button in the toolbar, using the previously obtained retrieved toolbar item index position.
+In the "ReplaceToolbarItem" method,
+ 1. Retrieve the top toolbar by its name.
+ 2. Retrieve the toolbar item from the top toolbar by its name.
+ 3. Determine the index position of the retrieved toolbar item within the top toolbar.
+ 4. Remove the retrieved toolbar item from the top toolbar using its name.
+ 5. Create a new button.
+ 6. Add a click event handler to the newly created button to verify that the actions are executed correctly.
+ 7. Replace the retrieved toolbar item with the new created button in the toolbar, using the previously obtained retrieved toolbar item index position.
 
 ```csharp
-private void PdfViewerDocumentLoaded(object sender, EventArgs e)
+private void ReplaceToolbarItem()
 {
-
 #if ANDROID || IOS
 
+            // Retrieve the top toolbar using its name"
+            var toolbar = pdfViewer.Toolbars?.GetByName("TopToolbar");
+
             // Retrieve the toolbar item named "MoreOptions" from the "TopToolbar"
-            var item = pdfViewer.Toolbars?.GetByName("TopToolbar")?.Items?.GetByName("MoreItem");
+            var item = toolbar?.Items?.GetByName("MoreItem");
 
             // Obtain the index value of the retrieved toolbar item
             var index = (item?.Index != null) ? (int)item.Index : -1;
@@ -106,7 +105,7 @@ private void PdfViewerDocumentLoaded(object sender, EventArgs e)
             };
 
             // Replace the print button at the index of the "MoreOptions" toolbar item. 
-            pdfViewer.Toolbars?.GetByName("TopToolbar")?.Items?.Insert(index, new Syncfusion.Maui.PdfViewer.ToolbarItem(printButton, "printButton"));
+            toolbar?.Items?.Insert(index, new Syncfusion.Maui.PdfViewer.ToolbarItem(printButton, "printButton"));
 #endif
 
 }

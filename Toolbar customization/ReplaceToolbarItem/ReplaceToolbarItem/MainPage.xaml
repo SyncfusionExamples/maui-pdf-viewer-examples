@@ -5,7 +5,7 @@
              x:Class="ReplaceToolbarItem.MainPage">
 
     <Grid>
-        <syncfusion:SfPdfViewer x:Name="pdfViewer" DocumentLoaded="PdfViewerDocumentLoaded">
+        <syncfusion:SfPdfViewer x:Name="pdfViewer">
         </syncfusion:SfPdfViewer>
     </Grid>
 
