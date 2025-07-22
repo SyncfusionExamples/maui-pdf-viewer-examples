@@ -59,7 +59,7 @@ namespace OpenPDFFromBase64String.ViewModel
             string base64Text = reader.ReadToEnd();
 
             // Decode the Base64 string into a byte array.
-            byte[] decodedBytes = Convert.FromBase64String(base64Text);
+            byte[] decodedBytes = System.Convert.FromBase64String(base64Text);
 
             // return the byte array.
             return decodedBytes;
