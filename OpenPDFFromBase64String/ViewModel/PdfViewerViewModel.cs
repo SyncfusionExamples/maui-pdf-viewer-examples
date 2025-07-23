@@ -41,7 +41,7 @@ namespace OpenPDFFromBase64String.ViewModel
         /// </summary>
         private void SetPdfDocumentByteArray()
         {
-            // Assign the returned byte array to the PdfDocumentByteArray variable
+            // Assign the returned byte array to the PdfDocumentByteArray property
             PdfDocumentByteArray = GetByteArrayFromBase64String();
         }
 
