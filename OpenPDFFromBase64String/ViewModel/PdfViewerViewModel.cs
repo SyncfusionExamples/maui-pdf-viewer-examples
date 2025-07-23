@@ -64,6 +64,7 @@ namespace OpenPDFFromBase64String.ViewModel
             // return the byte array.
             return decodedBytes;
         }
+
         public void OnPropertyChanged(string name)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
