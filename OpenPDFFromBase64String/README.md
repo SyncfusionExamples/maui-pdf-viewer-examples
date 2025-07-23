@@ -4,6 +4,7 @@ This project demonstrates how to open a PDF document from a given base64 string 
 ## Prerequisites
 1. A .NET MAUI project set up.
 2. The [Syncfusion.Maui.PdfViewer](https://www.nuget.org/packages/Syncfusion.Maui.PdfViewer) package is installed.
+3. Base64 string converted PDF text file. (In your project, create a folder named Assets (if it doesn't already exist). Add the text file containing base64 string text file (For example PDFEncodedBase64String.txt) in the Assets folder of your project, and set its Build Action to EmbeddedResource. (The pdf which is converted as base64 string text is [PDF_Succinctly1928776572](https://s3.amazonaws.com/files2.syncfusion.com/dtsupport/directtrac/general/pd/PDF_Succinctly1928776572.pdf?AWSAccessKeyId=AKIAWH6GYCX354WITGDG&Expires=1753248365&Signature=ra3pQ1YDz2FAUjGvceLmZHTl834%3D) which has 62 pages)).
 
 ## Steps 
 1. Get the current executing assembly.
