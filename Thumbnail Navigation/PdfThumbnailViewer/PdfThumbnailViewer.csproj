@@ -62,6 +62,18 @@
 		<!-- Embedded Resources -->
 	</ItemGroup>
 
+	<ItemGroup>
+	  <AndroidJavaSource Remove="Images\**" />
+	  <AndroidLibrary Remove="Images\**" />
+	  <AndroidNativeLibrary Remove="Images\**" />
+	  <Compile Remove="Images\**" />
+	  <EmbeddedResource Remove="Images\**" />
+	  <JavaSourceJar Remove="Images\**" />
+	  <None Remove="Images\**" />
+	  <ProguardConfiguration Remove="Images\**" />
+	  <TransformFile Remove="Images\**" />
+	</ItemGroup>
+
 
 	<ItemGroup>
 		<PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
