@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:syncfusion="clr-namespace:Syncfusion.Maui.PdfViewer;assembly=Syncfusion.Maui.PdfViewer"
+             xmlns:viewmodels="clr-namespace:PdfThumbnailViewer.ViewModels"
+             xmlns:models="clr-namespace:PdfThumbnailViewer.Models"
+             x:Class="PdfThumbnailViewer.MainPage"
+             xmlns:converters="clr-namespace:PdfThumbnailViewer.Converters"
+             x:DataType="viewmodels:PdfThumbnailViewModel"
+             Title="PDF Thumbnail Viewer">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:BooleanToColorConverter x:Key="BoolToColorConverter" />
+            <converters:BoolToHeightConverter x:Key="BoolToHeightConverter" />
+            <converters:BoolToTextConverter x:Key="BoolToTextConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.BindingContext>
+        <viewmodels:PdfThumbnailViewModel />
+    </ContentPage.BindingContext>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="{Binding ThumbnailsMaximized, Converter={StaticResource BoolToHeightConverter}, ConverterParameter='200,40'}" />
+        </Grid.RowDefinitions>
+
+        <!-- PDF Viewer -->
+        <syncfusion:SfPdfViewer x:Name="PdfViewer"
+                                Grid.Row="0" />
+
+        <!-- Separator between PDF Viewer and Thumbnail pane -->
+        <Border Grid.Row="1"
+                BackgroundColor="#BBB"
+                HeightRequest="1"
+                VerticalOptions="Start"
+                HorizontalOptions="Fill" />
+        <!-- Thumbnail ScrollView -->
+        <Grid Grid.Row="1"
+              BackgroundColor="#f5f5f5"
+              Margin="0,1,0,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <Label Text="Page Thumbnails"
+                   Grid.Row="0"
+                   Margin="8,0,8,0"
+                   VerticalTextAlignment="Center"
+                   VerticalOptions="Center"
+                   FontAttributes="Bold" />
+
+            <Button Grid.Row="0"
+                    Text="{Binding ThumbnailsMaximized, Converter={StaticResource BoolToTextConverter}}"
+                    Command="{Binding ToggleThumbnailsCommand}"
+                    FontFamily="MauiMaterialAssets"
+                    HeightRequest="32"
+                    WidthRequest="32"
+                    Margin="8,0"
+                    FontSize="16"
+                    TextColor="Black"
+                    BackgroundColor="Transparent"
+                    HorizontalOptions="End"
+                    VerticalOptions="Center" />
+
+            <ScrollView Grid.Row="1"
+                        Orientation="Horizontal">
+                <HorizontalStackLayout BindableLayout.ItemsSource="{Binding Thumbnails}">
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate x:DataType="models:PageThumbnail">
+                            <Border Margin="5"
+                                    Padding="2"
+                                    StrokeThickness="1"
+                                    Stroke="{Binding IsSelected, Converter={StaticResource BoolToColorConverter}}"
+                                    StrokeShape="RoundRectangle 3"
+                                    WidthRequest="100"
+                                    HeightRequest="130">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*" />
+                                        <RowDefinition Height="20" />
+                                    </Grid.RowDefinitions>
+
+                                    <Image Grid.Row="0"
+                                           Source="{Binding ThumbnailImage}"
+                                           Aspect="AspectFit" />
+
+                                    <Label Grid.Row="1"
+                                           Text="{Binding PageNumber}"
+                                           HorizontalOptions="Center" />
+
+                                    <Grid.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding NavigateToPageCommand}"
+                                                              CommandParameter="{Binding}" />
+                                    </Grid.GestureRecognizers>
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </HorizontalStackLayout>
+            </ScrollView>
+        </Grid>
+        <!-- Loading Indicator -->
+        <ActivityIndicator Grid.Row="1"
+                           IsRunning="{Binding IsLoading}"
+                           IsVisible="{Binding IsLoading}"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center" />
+    </Grid>
+</ContentPage>
