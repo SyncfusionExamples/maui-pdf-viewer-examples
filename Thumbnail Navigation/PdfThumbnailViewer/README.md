@@ -13,8 +13,8 @@ This sample demonstrates how to build a cross-platform PDF Viewer with a visual 
 
 ## Technologies Used
 - [.NET MAUI](https://dotnet.microsoft.com/en-us/apps/maui)
-- [Syncfusion.Maui.PdfViewer](https://www.syncfusion.com/maui-controls/pdf-viewer)
-- [Syncfusion.Maui.PdfToImageConverter](https://www.syncfusion.com/maui-controls/pdf-to-image-converter)
+- [Syncfusion.Maui.PdfViewer](https://www.syncfusion.com/maui-controls/maui-pdf-viewer)
+- [Syncfusion.Maui.PdfToImageConverter](https://help.syncfusion.com/cr/maui/Syncfusion.Maui.PdfToImageConverter.html)
 
 ## Quick Start
 
