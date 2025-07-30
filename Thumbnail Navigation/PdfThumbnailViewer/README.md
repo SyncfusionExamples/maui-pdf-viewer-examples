@@ -19,7 +19,7 @@ This sample demonstrates how to build a cross-platform PDF Viewer with a visual 
 ## Quick Start
 
 1. **Clone or Download** this repository.
-2. **Open in Visual Studio** with the .NET MAUI workload installed.
+2. **Open the project in Visual Studio** with the .NET MAUI workload installed.
 3. **Restore NuGet Packages** if necessary.
 4. **Adjust Embedded PDF:**
     - Place your own PDF file in `Assets/` folder if you want and update the ViewModel resource name if needed.
@@ -29,7 +29,6 @@ This sample demonstrates how to build a cross-platform PDF Viewer with a visual 
 
 - ViewModel creates page thumbnails via `Syncfusion.Maui.PdfToImageConverter`, populates `ObservableCollection<PageThumbnail>`.
 - UI (XAML) binds thumbnail list to a horizontal scrollable border-strip via `BindableLayout` and `FlexLayout`.
-- Compiled bindings (`x:DataType`) used throughout for runtime safety and performance.
 - Color, icon, and height converters enable clean MVVM-driven UI logic separation.
 - All navigation, loading, and selection state are observable and refactor-friendly.
 
