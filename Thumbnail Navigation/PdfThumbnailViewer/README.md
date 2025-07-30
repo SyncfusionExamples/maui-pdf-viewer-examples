@@ -34,7 +34,7 @@ This sample demonstrates how to build a cross-platform PDF Viewer with a visual 
 - All navigation, loading, and selection state are observable and refactor-friendly.
 
 ## Screenshot
-<img src="Images/Thumbnail Navigation Gif.gif"/>
+<img src="Images/Thumbnail Navigation Gif.gif" Width="400"/>
 
 ## How It Works
 - When the app loads a PDF, each page is converted asynchronously to an image stream.
