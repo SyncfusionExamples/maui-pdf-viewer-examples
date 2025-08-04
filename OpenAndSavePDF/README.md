@@ -78,6 +78,8 @@ The created save and open button is inserted in the specific toolbar by the [Ins
 
 ## To Create and handle custom DocumentSaveInitiated event.
 
+The built-in toolbar in .NET MAUI PdfViewer does not include a Save button, and consequently, the `DocumentSaveInitiated` event is not available by default. To enable save functionality in the .NET MAUI PdfViewer, you can use the [SaveDocument](https://help.syncfusion.com/cr/maui/Syncfusion.Maui.PdfViewer.SfPdfViewer.html#Syncfusion_Maui_PdfViewer_SfPdfViewer_SaveDocument_System_IO_Stream_) method. To extend this capability, you can implement a custom DocumentSaveInitiated event in the application level by following the below-mentioned steps:
+
 ### Step 1: Create a custom event argument class
 
 Construct a `DocumentSaveEventArgs` class having `SaveStream` property, having constructor with one `Stream` parameter used to carry the saved stream. 
