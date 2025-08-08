@@ -11,7 +11,7 @@ This project demonstrate how to insert the save and open options in the toolbar 
 
 To insert an item at a specific index in the toolbar in [SfPdfViewer](https://help.syncfusion.com/cr/maui/Syncfusion.Maui.PdfViewer.SfPdfViewer.html), begin by creating the desired UI element. Next, convert that element into a [ToolbarItem](https://help.syncfusion.com/cr/maui/Syncfusion.Maui.PdfViewer.ToolbarItem.html#Syncfusion_Maui_PdfViewer_ToolbarItem__ctor_Microsoft_Maui_Controls_View_System_String) using the ToolbarItem method. Finally, add the newly created ToolbarItem to the toolbar using the [Insert](https://help.syncfusion.com/cr/maui/Syncfusion.Maui.PdfViewer.ToolbarItemCollection.html#Syncfusion_Maui_PdfViewer_ToolbarItemCollection_Insert_System_Int32_Syncfusion_Maui_PdfViewer_ToolbarItem_) or [Add](https://help.syncfusion.com/cr/maui/Syncfusion.Maui.PdfViewer.ToolbarItemCollection.html#Syncfusion_Maui_PdfViewer_ToolbarItemCollection_Add_Syncfusion_Maui_PdfViewer_ToolbarItem_) method. Here we are using [Insert](https://help.syncfusion.com/cr/maui/Syncfusion.Maui.PdfViewer.ToolbarItemCollection.html#Syncfusion_Maui_PdfViewer_ToolbarItemCollection_Insert_System_Int32_Syncfusion_Maui_PdfViewer_ToolbarItem_) method to include the open and save button in the toolbar item.
 
-### Step 1: Definition of the handler for the save and open button.
+### Step 1: Definition and implementation the logic for the event handler of the save and open button.
 
 In the save button click event handler, get memory stream to save the document and the document is saved in the given stream using the [SaveDocumentAsync](https://help.syncfusion.com/cr/maui/Syncfusion.Maui.PdfViewer.SfPdfViewer.html#Syncfusion_Maui_PdfViewer_SfPdfViewer_SaveDocumentAsync_System_IO_Stream_System_Threading_CancellationToken_) method in the [SfPdfViewer](https://help.syncfusion.com/cr/maui/Syncfusion.Maui.PdfViewer.SfPdfViewer.html).
 
@@ -123,6 +123,7 @@ The created save and open button is inserted in the specific toolbar by the [Ins
             // Inserting save file option button as toolbar item in the top toolbar for the mobile platform.
             pdfViewer?.Toolbars?.GetByName("TopToolbar")?.Items?.Insert(1, new Syncfusion.Maui.PdfViewer.ToolbarItem(fileSaveButton, "FileSaveButton"));
 ```
+
 ## To Create and handle custom DocumentSaveInitiated event.
 
 ### Step 1: Create a custom event argument class
