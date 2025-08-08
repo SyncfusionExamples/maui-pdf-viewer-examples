@@ -102,7 +102,7 @@ namespace InsertToolbarItems
                 currentFileName = fileData.FileName;
 
                 // Passing the stream in the "LoadDocumentAsync" method to load the pdf.
-                pdfViewer.LoadDocument(fileData.Stream);
+                await pdfViewer.LoadDocumentAsync(fileData.Stream);
             }
         }
 
