@@ -203,22 +203,30 @@ namespace PDFAutoSaveEdits
         {
             if (PdfViewer != null && !string.IsNullOrEmpty(_currentFilePath))
             {
-                NotificationText = "Saving - " + _currentFileName + "...";
-
-                // Create a memory stream to hold the saved PDF data
-                using var saveStream = new MemoryStream();
-
-                // Save the PDF document with all modifications to memory stream
-                await PdfViewer.SaveDocumentAsync(saveStream);
-
-                // Write the saved PDF data back to the original file
-                using (var fileStream = new FileStream(_currentFilePath, FileMode.Create, FileAccess.Write))
+                FileInfo fileInfo = new FileInfo(_currentFilePath);
+                if (fileInfo.IsReadOnly == false)
                 {
-                    saveStream.Position = 0;
-                    await saveStream.CopyToAsync(fileStream);
-                }
+                    NotificationText = "Saving - " + _currentFileName + "...";
 
-                NotificationText = _currentFileName + " - Saved successfully";
+                    // Create a memory stream to hold the saved PDF data
+                    using var saveStream = new MemoryStream();
+
+                    // Save the PDF document with all modifications to memory stream
+                    await PdfViewer.SaveDocumentAsync(saveStream);
+
+                    // Write the saved PDF data back to the original file
+                    using (var fileStream = new FileStream(_currentFilePath, FileMode.Create, FileAccess.Write))
+                    {
+                        saveStream.Position = 0;
+                        await saveStream.CopyToAsync(fileStream);
+                    }
+
+                    NotificationText = _currentFileName + " - Saved successfully";
+                }
+                else
+                {
+                    NotificationText = _currentFileName + " is read-only and cannot be saved";
+                }
             }
             else
             {
