@@ -96,7 +96,7 @@ namespace InsertToolbarItems
         private async void FileOpenButton_Clicked(object? sender, EventArgs e)
         {
             // Choose the pdf file using file picker option and convert the selected pdf to stream.
-            PdfFileData? fileData = await FileService.OpenFile("pdf");
+            PdfFileData? fileData = await FileService.OpenFileRequest("pdf");
             if (fileData != null)
             {
                 currentFileName = fileData.FileName;
@@ -105,7 +105,6 @@ namespace InsertToolbarItems
                 await pdfViewer.LoadDocumentAsync(fileData.Stream);
             }
         }
-
         private async void SavePDFDocument(Stream saveStream)
         {
             if (!string.IsNullOrEmpty(currentFileName))
