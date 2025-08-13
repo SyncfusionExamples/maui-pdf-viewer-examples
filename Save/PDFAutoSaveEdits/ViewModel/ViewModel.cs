@@ -157,7 +157,7 @@ namespace PDFAutoSaveEdits
                         { DevicePlatform.Android, new[] { "application/pdf" } },
                         { DevicePlatform.iOS, new[] { "com.adobe.pdf" } },
                         { DevicePlatform.WinUI, new[] { ".pdf" } },
-                        { DevicePlatform.macOS, new[] { "pdf" } },
+                        { DevicePlatform.MacCatalyst, new[] { "pdf" } },
                 });
 
             // Configure file picker options
