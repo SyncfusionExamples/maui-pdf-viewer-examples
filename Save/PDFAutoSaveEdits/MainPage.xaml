@@ -1,10 +1,14 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:pdfViewer="clr-namespace:Syncfusion.Maui.PdfViewer;assembly=Syncfusion.Maui.PdfViewer"
              x:Class="PDFAutoSaveEdits.MainPage">
+    
+    <!-- Resource definitions for styling UI components -->
     <ContentPage.Resources>
         <ResourceDictionary>
+            
+            <!-- Style for toolbar buttons with modern appearance and visual states -->
             <Style x:Key="ToolbarButtonStyle"
                    TargetType="Button">
                 <Setter Property="CornerRadius"
@@ -19,18 +23,19 @@
                         Value="White" />
                 <Setter Property="FontAttributes"
                         Value="Bold" />
-                <!-- Visual states -->
+
+                <!-- Visual state management for enabled/disabled states -->
                 <Setter Property="VisualStateManager.VisualStateGroups">
                     <VisualStateGroupList>
                         <VisualStateGroup Name="CommonStates">
+                            <!-- Normal state - default blue appearance -->
                             <VisualState Name="Normal" />
+
+                            <!-- Disabled state - muted gray appearance -->
                             <VisualState Name="Disabled">
                                 <VisualState.Setters>
-                                    <!-- Muted gray background -->
                                     <Setter Property="BackgroundColor"
                                             Value="#E5E7EB" />
-
-                                    <!-- Dark gray text for strong contrast -->
                                     <Setter Property="TextColor"
                                             Value="#1F2937" />
                                 </VisualState.Setters>
@@ -39,47 +44,38 @@
                     </VisualStateGroupList>
                 </Setter>
             </Style>
-
-
-            <Style x:Key="NotificationLabelStyle"
-                   TargetType="Label">
-                <Setter Property="TextColor"
-                        Value="#059669" />
-                <Setter Property="FontSize"
-                        Value="Medium" />
-                <Setter Property="IsVisible"
-                        Value="False" />
-                <Setter Property="Opacity"
-                        Value="0" />
-            </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
 
+    <!-- Main layout container with two rows: toolbar and PDF viewer -->
     <Grid RowSpacing="0">
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />    <!-- Toolbar row - auto-sized -->
+            <RowDefinition Height="*" />       <!-- PDF viewer row - fills remaining space -->
         </Grid.RowDefinitions>
 
-        <!-- Top toolbar -->
+        <!-- Top toolbar containing file operations and status notifications -->
         <Border Grid.Row="0"
                 BackgroundColor="#F3F4F6"
                 Padding="12"
                 StrokeThickness="0">
             <Grid ColumnSpacing="12">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />      <!-- Notification area - takes remaining space -->
+                    <ColumnDefinition Width="Auto" />   <!-- Button area - auto-sized -->
                 </Grid.ColumnDefinitions>
 
-                <!-- Notification Label -->
+                <!-- Status notification display showing current operation or file state -->
                 <Label Grid.Column="0"
                        x:Name="NotificationLabel"
-                       Text="{Binding NotficationText}"
+                       Text="{Binding NotificationText}"
                        HorizontalOptions="Start"
                        VerticalOptions="Center" />
+                
+                <!-- Horizontal container for toolbar buttons and controls -->
                 <HorizontalStackLayout Grid.Column="1">
-                    <!-- Open File Button -->
+                    
+                    <!-- File open button - uses Material Design folder icon -->
                     <Button x:Name="OpenButton"
                             Text="&#xe712;"
                             FontSize="20"
@@ -89,44 +85,44 @@
                             Style="{StaticResource ToolbarButtonStyle}"
                             Command="{Binding OpenPdfCommand}" />
 
-                    <!-- Save File Button -->
-                    <Button Grid.Column="1"
-                            x:Name="SaveButton"
+                    <!-- Manual save button - enabled only when auto-save is disabled -->
+                    <!-- Uses InverseBooleanConverter to enable when IsAutoSaveEnabled is false -->
+                    <Button x:Name="SaveButton"
                             FontSize="20"
                             Text="&#xe75f;"
                             VerticalOptions="Center"
                             FontFamily="MauiMaterialAssets"
-                            ToolTipProperties.Text="Save PDF file"
+                            ToolTipProperties.Text="Save PDF file manually"
                             Style="{StaticResource ToolbarButtonStyle}"
                             Command="{Binding SavePdfCommand}"
                             IsEnabled="{Binding IsAutoSaveEnabled, Converter={StaticResource InverseBooleanConverter}}"/>
 
-                    <!-- AutoSave Toggle -->
-                    <Border 
-                        StrokeThickness="1" Padding="0,0,12,0" 
-                        Margin="4,0" Stroke="LightGray"
+                    <!-- Auto-save toggle control with checkbox and label -->
+                    <Border StrokeThickness="1" 
+                            Padding="0,0,12,0" 
+                            Margin="4,0" 
+                            Stroke="LightGray"
                             VerticalOptions="Center">
-                        <StackLayout Orientation="Horizontal"
-                                     VerticalOptions="Center">
-                            <CheckBox IsChecked="{Binding IsAutoSaveEnabled}"
-                                      VerticalOptions="Center" />
-                            <Label Text="Auto Save"
-                                   VerticalOptions="Center" />
+                        <StackLayout Orientation="Horizontal" VerticalOptions="Center">
+                            <!-- Checkbox bound to auto-save enabled property -->
+                            <CheckBox IsChecked="{Binding IsAutoSaveEnabled}" VerticalOptions="Center" />
+                            <Label Text="Auto Save" VerticalOptions="Center" />
                         </StackLayout>
                     </Border>
+                    
                 </HorizontalStackLayout>
             </Grid>
         </Border>
 
-        <!-- PDF Viewer -->
-        <pdfViewer:SfPdfViewer 
-            Grid.Row="1"
-            x:Name="PdfViewer"
-            DocumentLoaded="PdfViewer_DocumentLoaded"
-            DocumentUnloaded="PdfViewer_DocumentUnloaded"
-            AnnotationAdded="PdfViewer_AnnotationAdded"
-            AnnotationRemoved="PdfViewer_AnnotationRemoved"
-            AnnotationEdited="PdfViewer_AnnotationEdited"
-            FormFieldValueChanged="PdfViewer_FormFieldValueChanged"/>
+        <!-- Syncfusion PDF Viewer control with event handlers for document editing -->
+        <!-- Events are wired to track all types of PDF modifications for auto-save -->
+        <pdfViewer:SfPdfViewer Grid.Row="1"
+                               x:Name="PdfViewer"
+                               DocumentLoaded="PdfViewer_DocumentLoaded"
+                               DocumentUnloaded="PdfViewer_DocumentUnloaded"
+                               AnnotationAdded="PdfViewer_AnnotationAdded"
+                               AnnotationRemoved="PdfViewer_AnnotationRemoved"
+                               AnnotationEdited="PdfViewer_AnnotationEdited"
+                               FormFieldValueChanged="PdfViewer_FormFieldValueChanged" />
     </Grid>
 </ContentPage>
