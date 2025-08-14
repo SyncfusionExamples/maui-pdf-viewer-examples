@@ -177,10 +177,10 @@ namespace PDFAutoSaveEdits
                 var stream = await result.OpenReadAsync();
                 if (PdfViewer != null)
                 {
-                    NotificationText = "Opening - " + _currentFileName + "...";
-                    PdfViewer.DocumentSource = stream;
                     _currentFilePath = result.FullPath;
                     _currentFileName = result.FileName;
+                    NotificationText = "Opening - " + _currentFileName + "...";
+                    PdfViewer.DocumentSource = stream;
                 }
                 else
                 {
