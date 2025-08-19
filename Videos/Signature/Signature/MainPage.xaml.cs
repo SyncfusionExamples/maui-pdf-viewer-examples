@@ -12,7 +12,8 @@ namespace Signature
 
             // Load the PDF document from embedded resources
             Stream? stream = typeof(MainPage).GetTypeInfo().Assembly.GetManifestResourceStream("Signature.Assets.handwritten-signature.pdf");
-            PdfViewer.LoadDocument(stream);
+            if (stream != null)
+                PdfViewer.LoadDocument(stream);
         }
 
         // Enables signature annotation mode in the PDF viewer
