@@ -17,7 +17,7 @@ namespace AutoSavePDFinAWS
         /// <summary>
         /// Name of the currently loaded PDF file
         /// </summary>
-        private string? _currentFilePath = string.Empty;
+        private string? _currentFileName = string.Empty;
 
         /// <summary>
         /// Text displayed to user showing current operation status
@@ -74,11 +74,11 @@ namespace AutoSavePDFinAWS
                     // Update notification text based on document load state
                     if (value == false)
                     {
-                        NotificationText = FilePath + " - Closed";
+                        NotificationText = _currentFileName + " - Closed";
                     }
                     else
                     {
-                        NotificationText = FilePath + " - Opened";
+                        NotificationText = _currentFileName + " - Opened";
                     }
                     _isDocumentLoaded = value;
                     OnPropertyChanged("IsDocumentLoaded");
@@ -131,22 +131,6 @@ namespace AutoSavePDFinAWS
         }
 
         /// <summary>
-        /// The file path where the file is saved and opened into the PdfViewer. 
-        /// </summary>
-        public string? FilePath
-        {
-            get
-            {
-                return _currentFilePath;
-            }
-            set
-            {
-                _currentFilePath = value;
-                OnPropertyChanged("FilePath");
-            }
-        }
-
-        /// <summary>
         /// Command for opening/selecting a PDF file from device storage
         /// </summary>
         public Command OpenPdfCommand { get; }
@@ -170,7 +154,7 @@ namespace AutoSavePDFinAWS
                 // Assigned the stream to the "PdfDocumentStream" property.
                 PdfViewer.DocumentSource = pdfStream;
 
-            NotificationText = "Opening - " + $"{FilePath}" + "...";
+            NotificationText = "Opening - " + $"{_currentFileName}" + "...";
         }
 
         private MemoryStream OpenFileFromS3()
@@ -187,7 +171,7 @@ namespace AutoSavePDFinAWS
                 };
 
                 // Get the file path.
-                FilePath = bucketName + "/" + objectKey;
+                _currentFileName = objectKey;
 
                 // Execute the request to get the object from S3.
                 using (var response = s3Client.GetObjectAsync(request).Result)
@@ -232,12 +216,12 @@ namespace AutoSavePDFinAWS
             };
 
             // Get the file path.
-            FilePath = bucketName + "/" + objectKey;
+            _currentFileName = objectKey;
 
             // Upload the File to AWS S3 using "UploadAsync" method in the "TransferUtility" class.
             await transferUtility.UploadAsync(uploadRequest);
 
-            NotificationText = FilePath + " - Saved successfully";
+            NotificationText = _currentFileName + " - Saved successfully";
         }
 
         public async void SavePdf()
@@ -262,7 +246,7 @@ namespace AutoSavePDFinAWS
             else
             {
                 // Just notify user that document has been edited
-                NotificationText = FilePath + " - Edited (Auto-save disabled)";
+                NotificationText = _currentFileName + " - Edited (Auto-save disabled)";
             }
         }
     }
