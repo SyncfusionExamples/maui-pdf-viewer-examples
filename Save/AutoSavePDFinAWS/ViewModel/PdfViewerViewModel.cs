@@ -215,9 +215,6 @@ namespace AutoSavePDFinAWS
                 ContentType = "application/pdf" // Set the MIME type to indicate it's a PDF.
             };
 
-            // Get the file path.
-            _currentFileName = objectKey;
-
             // Upload the File to AWS S3 using "UploadAsync" method in the "TransferUtility" class.
             await transferUtility.UploadAsync(uploadRequest);
 
@@ -226,6 +223,9 @@ namespace AutoSavePDFinAWS
 
         public async void SavePdf()
         {
+            // Update notification content that save is started.
+            NotificationText = "Saving - " + _currentFileName + "...";
+
             // Create a new memory stream to hold the saved PDF document
             Stream savedStream = new MemoryStream();
 
