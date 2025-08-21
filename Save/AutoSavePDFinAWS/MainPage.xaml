@@ -4,11 +4,11 @@
              xmlns:pdfViewer="clr-namespace:Syncfusion.Maui.PdfViewer;assembly=Syncfusion.Maui.PdfViewer"
              x:Class="AutoSavePDFinAWS.MainPage">
 
-    <!-- Resource definitions for styling UI components -->
+    <!-- UI resource definitions -->
     <ContentPage.Resources>
         <ResourceDictionary>
 
-            <!-- Style for toolbar buttons with modern appearance and visual states -->
+            <!-- Toolbar button style -->
             <Style x:Key="ToolbarButtonStyle"
            TargetType="Button">
                 <Setter Property="CornerRadius"
@@ -24,7 +24,7 @@
                 <Setter Property="FontAttributes"
                 Value="Bold" />
 
-                <!-- Visual state management for enabled/disabled states -->
+                <!-- Visual states for button -->
                 <Setter Property="VisualStateManager.VisualStateGroups">
                     <VisualStateGroupList>
                         <VisualStateGroup Name="CommonStates">
@@ -47,7 +47,7 @@
         </ResourceDictionary>
     </ContentPage.Resources>
 
-    <!-- Main layout container with two rows: toolbar and PDF viewer -->
+    <!-- Main layout grid -->
     <Grid RowSpacing="0">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -56,7 +56,7 @@
             <!-- PDF viewer row - fills remaining space -->
         </Grid.RowDefinitions>
 
-        <!-- Top toolbar containing file operations and status notifications -->
+        <!-- Toolbar -->
         <Border Grid.Row="0"
         BackgroundColor="#F3F4F6"
         Padding="12"
@@ -69,18 +69,17 @@
                     <!-- Button area - auto-sized -->
                 </Grid.ColumnDefinitions>
 
-                <!-- Status notification display showing current operation or file state -->
+                <!-- Status notification label -->
                 <Label Grid.Column="0"
                x:Name="NotificationLabel"
                Text="{Binding NotificationText}"
                HorizontalOptions="Start"
                VerticalOptions="Center" />
 
-                <!-- Horizontal container for toolbar buttons and controls -->
+                <!-- Toolbar controls -->
                 <HorizontalStackLayout Grid.Column="1">
 
-                    <!-- Manual save button - enabled only when auto-save is disabled -->
-                    <!-- Uses InverseBooleanConverter to enable when IsAutoSaveEnabled is false -->
+                    <!-- Save button (manual) -->
                     <Button x:Name="SaveButton"
                     FontSize="20"
                     Text="&#xe75f;"
@@ -91,14 +90,13 @@
                     Command="{Binding SavePdfCommand}"
                     IsEnabled="{Binding IsAutoSaveEnabled, Converter={StaticResource InverseBooleanConverter}}"/>
 
-                    <!-- Auto-save toggle control with checkbox and label -->
+                    <!-- Auto-save toggle -->
                     <Border StrokeThickness="1" 
                     Padding="0,0,12,0" 
                     Margin="4,0" 
                     Stroke="LightGray"
                     VerticalOptions="Center">
                         <StackLayout Orientation="Horizontal" VerticalOptions="Center">
-                            <!-- Checkbox bound to auto-save enabled property -->
                             <CheckBox IsChecked="{Binding IsAutoSaveEnabled}" VerticalOptions="Center" />
                             <Label Text="Auto Save" VerticalOptions="Center" />
                         </StackLayout>
@@ -108,8 +106,7 @@
             </Grid>
         </Border>
 
-        <!-- Syncfusion PDF Viewer control with event handlers for document editing -->
-        <!-- Events are wired to track all types of PDF modifications for auto-save -->
+        <!-- PDF Viewer with event handlers -->
         <pdfViewer:SfPdfViewer Grid.Row="1"
                        x:Name="PdfViewer"
                        DocumentLoaded="PdfViewer_DocumentLoaded"
