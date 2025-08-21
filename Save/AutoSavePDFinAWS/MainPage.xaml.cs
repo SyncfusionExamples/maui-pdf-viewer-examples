@@ -18,6 +18,8 @@
 
             // Provide PDF Viewer reference to ViewModel for document operations
             ViewModel.PdfViewer = PdfViewer;
+
+            ViewModel.LoadPDF();
         }
 
         /// <summary>

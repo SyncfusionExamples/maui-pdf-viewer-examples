@@ -79,16 +79,6 @@
                 <!-- Horizontal container for toolbar buttons and controls -->
                 <HorizontalStackLayout Grid.Column="1">
 
-                    <!-- File open button - uses Material Design folder icon -->
-                    <Button x:Name="OpenButton"
-                    Text="&#xe712;"
-                    FontSize="20"
-                    ToolTipProperties.Text="Open PDF file"
-                    FontFamily="MauiMaterialAssets"
-                    VerticalOptions="Center"
-                    Style="{StaticResource ToolbarButtonStyle}"
-                    Command="{Binding OpenPdfCommand}" />
-
                     <!-- Manual save button - enabled only when auto-save is disabled -->
                     <!-- Uses InverseBooleanConverter to enable when IsAutoSaveEnabled is false -->
                     <Button x:Name="SaveButton"

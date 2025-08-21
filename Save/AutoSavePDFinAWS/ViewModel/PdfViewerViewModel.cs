@@ -22,7 +22,7 @@ namespace AutoSavePDFinAWS
         /// <summary>
         /// Text displayed to user showing current operation status
         /// </summary>
-        private string _notificationText = "No PDF loaded. Please click the OPEN button to select a PDF file.";
+        private string _notificationText = string.Empty;
 
         /// <summary>
         /// Flag indicating whether auto-save is enabled
@@ -35,23 +35,22 @@ namespace AutoSavePDFinAWS
         private bool _isDocumentLoaded = false;
 
         // Set your AWS credentials and region
-        string accessKey = "YOUR_ACCESS_KEY";
+        private string accessKey = "YOUR_ACCESS_KEY";
 
-        string secretKey = "YOUR_SECRET_KEY";
+        private string secretKey = "YOUR_SECRET_KEY";
 
-        RegionEndpoint region = RegionEndpoint.YOUR_REGION; // Change to your desired region
+        private RegionEndpoint region = RegionEndpoint.YOUR_REGION; // Change to your desired region
 
         // Specify the bucket name and object key
-        string bucketName = "YOUR_BUCKET_NAME";
+        private string bucketName = "YOUR_BUCKET_NAME";
 
-        string objectKey = "YOUR_OBJECT_KEY";
+        private string objectKey = "YOUR_OBJECT_KEY";
 
         /// <summary>
         /// Constructor of the view model class
         /// </summary>
         public PdfViewerViewModel()
         {
-            OpenPdfCommand = new Command(LoadPDF);
             SavePdfCommand = new Command(SavePdf);
         }
 
@@ -131,11 +130,6 @@ namespace AutoSavePDFinAWS
         }
 
         /// <summary>
-        /// Command for opening/selecting a PDF file from device storage
-        /// </summary>
-        public Command OpenPdfCommand { get; }
-
-        /// <summary>
         /// Command for manually saving the current PDF document
         /// </summary>
         public Command SavePdfCommand { get; }
@@ -153,8 +147,6 @@ namespace AutoSavePDFinAWS
             if(PdfViewer != null)
                 // Assigned the stream to the "PdfDocumentStream" property.
                 PdfViewer.DocumentSource = pdfStream;
-
-            NotificationText = "Opening - " + $"{_currentFileName}" + "...";
         }
 
         private MemoryStream OpenFileFromS3()
