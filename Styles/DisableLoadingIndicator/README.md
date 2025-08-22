@@ -13,7 +13,9 @@ The loading indicator is visible in the following scenarios:
 - When a PDF document is loaded into the PDF Viewer.
 - While rendering individual pages, particularly when scrolling through large or complex PDF documents.
 
-Currently, there is no direct API available to completely disable the loading indicator in the PDF Viewer control. However, as a workaround, you can alter its visibility by setting the loading indicator color to Transparent in the `App.xaml` file using the [Themes key in .NET MAUI PdfViewer](https://help.syncfusion.com/maui/themes/keys#sfpdfviewer). This effectively hides the indicator and for further details, refer to the following code example.
+Currently, there is no direct API available to completely disable the loading indicator in the PDF Viewer control. However, as a workaround, you can alter its visibility by setting the loading indicator color to Transparent in the `App.xaml` file using the [Themes key available for .NET MAUI PdfViewer](https://help.syncfusion.com/maui/themes/keys#sfpdfviewer). This effectively hides the indicator.
+
+To apply this workaround, you need to merge the `SfPdfViewerTheme` key into your application resources and assign the loading indicator color as Transparent using the [Themes key in .NET MAUI PdfViewer](https://help.syncfusion.com/maui/themes/keys#sfpdfviewer) as shown in the below code example.
 
 **Xaml**
 
@@ -30,8 +32,6 @@ Currently, there is no direct API available to completely disable the loading in
 
 1. Build and run the application on all platforms.
 2. Navigate through multiple pages by scrolling.
-3. Change the zoom mode and scroll through the PDF document.
-4. Test with both large and small PDF files.
 
 
 
