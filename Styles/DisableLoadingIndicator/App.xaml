@@ -9,7 +9,9 @@
                 <ResourceDictionary Source="Resources/Styles/Colors.xaml" />
                 <ResourceDictionary Source="Resources/Styles/Styles.xaml" />
                 <ResourceDictionary>
+                    <!-- Defines a custom theme label for SfPdfViewer. This signals the control to apply custom styling. -->
                     <x:String x:Key="SfPdfViewerTheme">Custom Theme</x:String>
+                    <!-- Sets the loading indicator color to Transparent to visually hide it -->
                     <Color x:Key="SfPdfViewerLoadingIndicatorColor">Transparent</Color>
                 </ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
