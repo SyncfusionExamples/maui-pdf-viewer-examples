@@ -31,7 +31,8 @@ To apply this workaround, you need to merge the `SfPdfViewerTheme` key into your
 ## Run the App
 
 1. Build and run the application on all platforms.
-2. Navigate through multiple pages by scrolling.
+2. During initial PDF loading, ensure loading indicator is disabled.
+2. Navigate through multiple pages by scrolling and confirm that the loading indicator remains hidden throughout page rendering. 
 
 
 
