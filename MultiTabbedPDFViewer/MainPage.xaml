@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MultiTabbedPDFViewer.MainPage"
+             xmlns:syncfusion="clr-namespace:Syncfusion.Maui.PdfViewer;assembly=Syncfusion.Maui.PdfViewer"
+             xmlns:tabView="clr-namespace:Syncfusion.Maui.TabView;assembly=Syncfusion.Maui.TabView"
+             xmlns:viewModels="clr-namespace:MultiTabbedPDFViewer">
+
+    <ContentPage.BindingContext>
+        <viewModels:PdfViewerViewModel x:Name="viewModel"/>
+    </ContentPage.BindingContext>
+    <Grid>
+        <tabView:SfTabView IndicatorBackground="{DynamicResource PrimaryLight}"
+                       IndicatorPlacement="Top"
+                       TabBarPlacement="Bottom"
+                       Loaded="SfTabView_Loaded"
+                      >
+            <tabView:SfTabItem Header="doc 1" x:Name="tab1">
+            </tabView:SfTabItem>
+            <tabView:SfTabItem Header="doc 2" x:Name="tab2">
+            </tabView:SfTabItem>
+        </tabView:SfTabView>
+    </Grid>
+
+</ContentPage>
