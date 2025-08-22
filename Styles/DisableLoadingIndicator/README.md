@@ -10,8 +10,8 @@ This project demonstrate how to disable the loading indicator in [SfPdfViewer](h
 ## Disable the loading indicator.
 
 The loading indicator is visible in the following scenarios:
-- When a PDF document is loaded into the PDF Viewer.
-- When scroll through large PDF documents to load and render pages on demand.
+- Initial PDF loading process.
+- Delay in the page rendering process on large documents while navigations.
 
 Currently, there is no direct API available to completely disable the loading indicator in the PDF Viewer control. However, as a workaround, you can alter its visibility by setting the loading indicator color to Transparent using the [Themes key available for .NET MAUI PdfViewer](https://help.syncfusion.com/maui/themes/keys#sfpdfviewer). This effectively hides the loading indicator.
 
