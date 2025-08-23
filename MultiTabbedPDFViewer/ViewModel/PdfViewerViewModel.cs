@@ -1,53 +1,43 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MultiTabbedPDFViewer
 {
     public class PdfViewerViewModel : INotifyPropertyChanged
     {
+        private ObservableCollection<Stream>? _pdfDocuments;
+
         /// <summary>
         /// Constructor of the view model class
         /// </summary>
         public PdfViewerViewModel()
         {
+            // Initialize the collection
+            PDFDocuments = new ObservableCollection<Stream>();
+
             //Accessing the PDF document that is added as embedded resource as stream.
-            _documentSource = typeof(App).GetTypeInfo().Assembly.GetManifestResourceStream("MultiTabbedPDFViewer.Assets.PDF_Succinctly.pdf");
-            _documentSource2 = typeof(App).GetTypeInfo().Assembly.GetManifestResourceStream("MultiTabbedPDFViewer.Assets.form_document.pdf");
+            Stream? documentSource = typeof(App).GetTypeInfo().Assembly.GetManifestResourceStream("MultiTabbedPDFViewer.Assets.PDF_Succinctly.pdf");
+            Stream? documentSource1 = typeof(App).GetTypeInfo().Assembly.GetManifestResourceStream("MultiTabbedPDFViewer.Assets.form_document.pdf");
+            Stream? documentSource2 = typeof(App).GetTypeInfo().Assembly.GetManifestResourceStream("MultiTabbedPDFViewer.Assets.Annotations.pdf");
+            if (documentSource != null)
+                PDFDocuments.Add(documentSource);
+            if (documentSource1 != null)
+                PDFDocuments.Add(documentSource1);
+            if (documentSource2 != null)
+                PDFDocuments.Add(documentSource2);
         }
 
-        private Stream? _documentSource;
-
         /// <summary>
-        /// The PDF document stream that is loaded into the instance of the PDF viewer. 
+        /// Collection of PDF document streams for the ListView
         /// </summary>
-        public Stream? PDFDocumentSource
+        public ObservableCollection<Stream>? PDFDocuments
         {
-            get => _documentSource;
+            get => _pdfDocuments;
             set
             {
-                _documentSource = value;
-                OnPropertyChanged(nameof(PDFDocumentSource));
-            }
-        }
-
-
-        private Stream? _documentSource2;
-
-        /// <summary>
-        /// The PDF document stream that is loaded into the instance of the PDF viewer. 
-        /// </summary>
-        public Stream? PDFDocumentSource2
-        {
-            get => _documentSource2;
-            set
-            {
-                _documentSource2 = value;
-                OnPropertyChanged(nameof(PDFDocumentSource2));
+                _pdfDocuments = value;
+                OnPropertyChanged(nameof(PDFDocuments));
             }
         }
 

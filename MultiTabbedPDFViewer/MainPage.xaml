@@ -11,13 +11,15 @@
     </ContentPage.BindingContext>
     <Grid>
         <tabView:SfTabView IndicatorBackground="{DynamicResource PrimaryLight}"
-                       IndicatorPlacement="Top"
-                       TabBarPlacement="Bottom"
-                       Loaded="SfTabView_Loaded"
-                      >
+                   IndicatorPlacement="Top"
+                   TabBarPlacement="Bottom"
+                   Loaded="SfTabView_Loaded"
+                  >
             <tabView:SfTabItem Header="doc 1" x:Name="tab1">
             </tabView:SfTabItem>
             <tabView:SfTabItem Header="doc 2" x:Name="tab2">
+            </tabView:SfTabItem>
+            <tabView:SfTabItem Header="doc 3" x:Name="tab3">
             </tabView:SfTabItem>
         </tabView:SfTabView>
     </Grid>
