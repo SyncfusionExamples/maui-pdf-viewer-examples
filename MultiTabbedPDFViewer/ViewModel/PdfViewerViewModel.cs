@@ -1,6 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Reflection;
+using static Android.Hardware.Camera;
 
 namespace MultiTabbedPDFViewer
 {
@@ -20,6 +21,7 @@ namespace MultiTabbedPDFViewer
             Stream? documentSource = typeof(App).GetTypeInfo().Assembly.GetManifestResourceStream("MultiTabbedPDFViewer.Assets.PDF_Succinctly.pdf");
             Stream? documentSource1 = typeof(App).GetTypeInfo().Assembly.GetManifestResourceStream("MultiTabbedPDFViewer.Assets.form_document.pdf");
             Stream? documentSource2 = typeof(App).GetTypeInfo().Assembly.GetManifestResourceStream("MultiTabbedPDFViewer.Assets.Annotations.pdf");
+            // Add the PDF streams to the collection if they are successfully retrieved
             if (documentSource != null)
                 PDFDocuments.Add(documentSource);
             if (documentSource1 != null)
@@ -29,7 +31,7 @@ namespace MultiTabbedPDFViewer
         }
 
         /// <summary>
-        /// Collection of PDF document streams for the ListView
+        /// Collection of PDF document streams.
         /// </summary>
         public ObservableCollection<Stream>? PDFDocuments
         {

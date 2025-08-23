@@ -89,7 +89,61 @@ In the MainPage constructor, set the [ZoomMode](https://help.syncfusion.com/cr/m
     pdfViewer2.ZoomMode = ZoomMode.FitToWidth;
 ```
 
-### 5. Loading the pdfViewer in different tabs using the SfTabView Loaded event handler.
+### 5. PdfViewerViewModel class
+
+**C#:**
+
+```csharp
+    public class PdfViewerViewModel : INotifyPropertyChanged
+    {
+        private ObservableCollection<Stream>? _pdfDocuments;
+
+        /// <summary>
+        /// Constructor of the view model class
+        /// </summary>
+        public PdfViewerViewModel()
+        {
+            // Initialize the collection
+            PDFDocuments = new ObservableCollection<Stream>();
+
+            //Accessing the PDF document that is added as embedded resource as stream.
+            Stream? documentSource = typeof(App).GetTypeInfo().Assembly.GetManifestResourceStream("MultiTabbedPDFViewer.Assets.PDF_Succinctly.pdf");
+            Stream? documentSource1 = typeof(App).GetTypeInfo().Assembly.GetManifestResourceStream("MultiTabbedPDFViewer.Assets.form_document.pdf");
+            Stream? documentSource2 = typeof(App).GetTypeInfo().Assembly.GetManifestResourceStream("MultiTabbedPDFViewer.Assets.Annotations.pdf");
+            // Add the PDF streams to the collection if they are successfully retrieved
+            if (documentSource != null)
+                PDFDocuments.Add(documentSource);
+            if (documentSource1 != null)
+                PDFDocuments.Add(documentSource1);
+            if (documentSource2 != null)
+                PDFDocuments.Add(documentSource2);
+        }
+
+        /// <summary>
+        /// Collection of PDF document streams.
+        /// </summary>
+        public ObservableCollection<Stream>? PDFDocuments
+        {
+            get => _pdfDocuments;
+            set
+            {
+                _pdfDocuments = value;
+                OnPropertyChanged(nameof(PDFDocuments));
+            }
+        }
+
+        /// <summary>
+        /// An event to detect the change in the value of a property.
+        /// </summary>
+        public event PropertyChangedEventHandler? PropertyChanged;
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+    }
+```
+
+### 6. Loading the pdfViewer in different tabs using the SfTabView Loaded event handler.
 
 In the SfTabView `Loaded` event handler, evaluate the header text of each SfTabItem. Based on the header, assign the appropriate PDF stream to the [DocumentSource](https://help.syncfusion.com/cr/maui/Syncfusion.Maui.PdfViewer.SfPdfViewer.html#Syncfusion_Maui_PdfViewer_SfPdfViewer_DocumentSource) property of the corresponding SfPdfViewer instance. Then, set that PdfViewer instance as the content of the respective SfTabItem
 
