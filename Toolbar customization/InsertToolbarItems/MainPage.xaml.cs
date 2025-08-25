@@ -116,13 +116,19 @@ namespace InsertToolbarItems
                     // Open the file explorer using the file picker, select a location to save the PDF, save the file to the chosen path, and retrieve the saved file location for display.
                     string ? filePath = await FileService.SaveAsAsync(currentFileName, saveStream);
 
-                    // Display the saved file path.
-                    await Application.Current!.Windows[0].Page!.DisplayAlert("File saved", $"The file is saved to {filePath}", "OK");
+                    var mainPage = Application.Current?.Windows[0].Page;
+
+                    if(mainPage != null)
+                        // Display the saved file path.
+                        await mainPage.DisplayAlert("File saved", $"The file is saved to {filePath}", "OK");
                 }
                 catch (Exception exception)
                 {
-                    // Display the error message when the file is not saved.
-                    await Application.Current!.Windows[0].Page!.DisplayAlert("Error", $"The file is not saved. {exception.Message}", "OK");
+                    var mainPage = Application.Current?.Windows[0].Page;
+
+                    if(mainPage != null)
+                        // Display the error message when the file is not saved.
+                        await mainPage.DisplayAlert("Error", $"The file is not saved. {exception.Message}", "OK");
                 }
             }
         }
