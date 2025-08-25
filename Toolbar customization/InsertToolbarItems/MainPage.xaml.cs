@@ -116,6 +116,7 @@ namespace InsertToolbarItems
                     // Open the file explorer using the file picker, select a location to save the PDF, save the file to the chosen path, and retrieve the saved file location for display.
                     string ? filePath = await FileService.SaveAsAsync(currentFileName, saveStream);
 
+                    // Safely storing the main page of the application.
                     var mainPage = Application.Current?.Windows[0].Page;
 
                     if(mainPage != null)
@@ -124,6 +125,7 @@ namespace InsertToolbarItems
                 }
                 catch (Exception exception)
                 {
+                    // Safely storing the main page of the application.
                     var mainPage = Application.Current?.Windows[0].Page;
 
                     if(mainPage != null)
