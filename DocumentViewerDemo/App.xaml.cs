@@ -4,7 +4,7 @@
     {
         public App()
         {
-            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("Ngo9BigBOggjHTQxAR8/V1JEaF1cWWhAYVJ0WmFZfVtgcV9GYlZRRmYuP1ZhSXxWdk1hXH9WcXBVTmNaVEJ9XEI=");
+            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("Add valid license key");
             InitializeComponent();
         }
 
