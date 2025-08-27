@@ -7,7 +7,7 @@ This project demonstrates how to open and view multiple document formats—includi
 3. [Syncfusion.Maui.TabView](https://www.nuget.org/packages/Syncfusion.Maui.TabView) package.
 4. [Syncfusion.DocIORenderer.NET](https://www.nuget.org/packages/Syncfusion.DocIORenderer.NET) package to convert Word document to PDF.
 5. [Syncfusion.Pdf.Imaging.NET](https://www.nuget.org/packages/Syncfusion.Pdf.Imaging.NET) package used to draw the image files to PDF.
-6. [Syncfusion.Presentation.NET](https://www.nuget.org/packages/Syncfusion.Presentation.NET) package used to read write and converting the PowerPoint presentation programmatically.
+6. [Syncfusion.Presentation.NET](https://www.nuget.org/packages/Syncfusion.Presentation.NET) package used to read, write and converting the PowerPoint presentation programmatically.
 7. [Syncfusion.PresentationRenderer.NET](https://www.nuget.org/packages/Syncfusion.PresentationRenderer.NET) package to preserve the original appearance of the PowerPoint presentation in the converted PDF document.
 8. [Syncfusion.XlsIORenderer.NET](https://www.nuget.org/packages/Syncfusion.XlsIORenderer.NET) package to convert the Excel document to PDF document.
 9. [Syncfusion.XpsToPdfConverter.NET](https://www.nuget.org/packages/Syncfusion.XpsToPdfConverter.NET) package used to convert.xps format file to PDF document file.
@@ -54,9 +54,5 @@ Assign the saved PDF stream to the [DocumentSource](https://help.syncfusion.com/
 ## Run the App
 
 1. Build and run the application on all platforms.
-1. Switch to all tabs and check whether all pdf is loading.
-1. Ensure all behaviors of PdfViewer in all PdfViewer tabs.
-
-
-
-
+2. Switch to all tabs and check whether all pdf is loading.
+3. Ensure all behaviors of PdfViewer in all PdfViewer tabs.
