@@ -19,7 +19,7 @@ namespace MultiTabbedPDFViewer
             pdfViewer2.ZoomMode = ZoomMode.FitToWidth;
         }
 
-        async void SfTabView_Loaded(System.Object sender, System.EventArgs e)
+        private void SfTabView_Loaded(System.Object sender, System.EventArgs e)
         {
             // Ensure the viewModel is not null before proceeding
             if (viewModel?.PDFDocuments != null)
@@ -27,7 +27,6 @@ namespace MultiTabbedPDFViewer
                 // Check if the first tab's header matches "doc 1"
                 if (tab1.Header.Equals("doc 1"))
                 {
-                    await Task.Delay(80); // Slight delay to ensure UI is ready
                     pdfViewer.DocumentSource = viewModel.PDFDocuments[0]; // Assign the stream to the "DocumentSource" property of the PdfViewer control
                     tab1.Content = pdfViewer; // Set the content of tab1 to the pdfViewer.
                 }
@@ -35,17 +34,15 @@ namespace MultiTabbedPDFViewer
                 // Check if the second tab's header matches "doc 2"
                 if (tab2.Header.Equals("doc 2"))
                 {
-                    await Task.Delay(80); // Slight delay to ensure UI is ready
                     pdfViewer1.DocumentSource = viewModel.PDFDocuments[1]; // Assign the stream to the "DocumentSource" property of the PdfViewer control
-                    tab2.Content = pdfViewer1; // Set the content of tab1 to the pdfViewer1.
+                    tab2.Content = pdfViewer1; // Set the content of tab2 to the pdfViewer1.
                 }
 
                 // Check if the third tab's header matches "doc 3"
                 if (tab3.Header.Equals("doc 3"))
                 {
-                    await Task.Delay(80); // Slight delay to ensure UI is ready
                     pdfViewer2.DocumentSource = viewModel.PDFDocuments[2]; // Assign the stream to the "DocumentSource" property of the PdfViewer control
-                    tab3.Content = pdfViewer2; // Set the content of tab1 to the pdfViewer1.
+                    tab3.Content = pdfViewer2; // Set the content of tab3 to the pdfViewer1.
                 }
             }
         }

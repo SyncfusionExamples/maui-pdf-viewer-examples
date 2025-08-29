@@ -108,7 +108,7 @@ In the MainPage constructor, set the [ZoomMode](https://help.syncfusion.com/cr/m
 
             //Accessing the PDF document that is added as embedded resource as stream.
             Stream? documentSource = typeof(App).GetTypeInfo().Assembly.GetManifestResourceStream("MultiTabbedPDFViewer.Assets.PDF_Succinctly.pdf");
-            Stream? documentSource1 = typeof(App).GetTypeInfo().Assembly.GetManifestResourceStream("MultiTabbedPDFViewer.Assets.form_document.pdf");
+            Stream? documentSource1 = typeof(App).GetTypeInfo().Assembly.GetManifestResourceStream("MultiTabbedPDFViewer.Assets.rotated_document.pdf");
             Stream? documentSource2 = typeof(App).GetTypeInfo().Assembly.GetManifestResourceStream("MultiTabbedPDFViewer.Assets.Annotations.pdf");
             // Add the PDF streams to the collection if they are successfully retrieved
             if (documentSource != null)
@@ -150,36 +150,33 @@ In the SfTabView `Loaded` event handler, evaluate the header text of each SfTabI
 **C#:**
 
 ```csharp
-    async void SfTabView_Loaded(System.Object sender, System.EventArgs e)
+    private void SfTabView_Loaded(System.Object sender, System.EventArgs e)
+    {
+        // Ensure the viewModel is not null before proceeding
+        if (viewModel?.PDFDocuments != null)
         {
-            // Ensure the viewModel is not null before proceeding
-            if (viewModel?.PDFDocuments != null)
+            // Check if the first tab's header matches "doc 1"
+            if (tab1.Header.Equals("doc 1"))
             {
-                // Check if the first tab's header matches "doc 1"
-                if (tab1.Header.Equals("doc 1"))
-                {
-                    await Task.Delay(80); // Slight delay to ensure UI is ready
-                    pdfViewer.DocumentSource = viewModel.PDFDocuments[0]; // Assign the stream to the "DocumentSource" property of the PdfViewer control
-                    tab1.Content = pdfViewer; // Set the content of tab1 to the pdfViewer.
-                }
+                pdfViewer.DocumentSource = viewModel.PDFDocuments[0]; // Assign the stream to the "DocumentSource" property of the PdfViewer control
+                tab1.Content = pdfViewer; // Set the content of tab1 to the pdfViewer.
+            }
 
-                // Check if the second tab's header matches "doc 2"
-                if (tab2.Header.Equals("doc 2"))
-                {
-                    await Task.Delay(80); // Slight delay to ensure UI is ready
-                    pdfViewer1.DocumentSource = viewModel.PDFDocuments[1]; // Assign the stream to the "DocumentSource" property of the PdfViewer control
-                    tab2.Content = pdfViewer1; // Set the content of tab1 to the pdfViewer1.
-                }
+            // Check if the second tab's header matches "doc 2"
+            if (tab2.Header.Equals("doc 2"))
+            {
+                pdfViewer1.DocumentSource = viewModel.PDFDocuments[1]; // Assign the stream to the "DocumentSource" property of the PdfViewer control
+                tab2.Content = pdfViewer1; // Set the content of tab2 to the pdfViewer1.
+            }
 
-                // Check if the third tab's header matches "doc 3"
-                if (tab3.Header.Equals("doc 3"))
-                {
-                    await Task.Delay(80); // Slight delay to ensure UI is ready
-                    pdfViewer2.DocumentSource = viewModel.PDFDocuments[2]; // Assign the stream to the "DocumentSource" property of the PdfViewer control
-                    tab3.Content = pdfViewer2; // Set the content of tab1 to the pdfViewer1.
-                }
+            // Check if the third tab's header matches "doc 3"
+            if (tab3.Header.Equals("doc 3"))
+            {
+                pdfViewer2.DocumentSource = viewModel.PDFDocuments[2]; // Assign the stream to the "DocumentSource" property of the PdfViewer control
+                tab3.Content = pdfViewer2; // Set the content of tab3 to the pdfViewer1.
             }
         }
+    }
 ```
 
 ### 6. Subscription of TabView Loaded event. 

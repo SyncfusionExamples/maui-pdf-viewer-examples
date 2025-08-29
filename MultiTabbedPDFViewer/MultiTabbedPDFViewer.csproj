@@ -61,14 +61,14 @@
 
 	<ItemGroup>
 	  <None Remove="Assets\Annotations.pdf" />
-	  <None Remove="Assets\form_document.pdf" />
 	  <None Remove="Assets\PDF_Succinctly.pdf" />
+	  <None Remove="Assets\rotated_document.pdf" />
 	</ItemGroup>
 
 	<ItemGroup>
 	  <EmbeddedResource Include="Assets\Annotations.pdf" />
-	  <EmbeddedResource Include="Assets\form_document.pdf" />
 	  <EmbeddedResource Include="Assets\PDF_Succinctly.pdf" />
+	  <EmbeddedResource Include="Assets\rotated_document.pdf" />
 	</ItemGroup>
 
 	<ItemGroup>
