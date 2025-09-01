@@ -15,6 +15,7 @@
         <tabView:SfTabView IndicatorBackground="{DynamicResource PrimaryLight}"
                IndicatorPlacement="Bottom"
                TabBarPlacement="Top"
+               TabWidthMode="SizeToContent"
                Loaded="SfTabView_Loaded"
               >
             <tabView:SfTabItem Header="PDF_Succinctly.pdf" x:Name="tab1">
@@ -23,11 +24,11 @@
             </tabView:SfTabItem>
             <tabView:SfTabItem Header="Autumn Leaves.jpg" x:Name="tab3">
             </tabView:SfTabItem>
-            <tabView:SfTabItem Header="InputTemplate.xlsx" x:Name="tab4">
+            <tabView:SfTabItem Header="Template.pptx" x:Name="tab4">
             </tabView:SfTabItem>
-            <tabView:SfTabItem Header="Input.xps" x:Name="tab5">
+            <tabView:SfTabItem Header="InputTemplate.xlsx" x:Name="tab5">
             </tabView:SfTabItem>
-            <tabView:SfTabItem Header="Template.pptx" x:Name="tab6">
+            <tabView:SfTabItem Header="Input.xps" x:Name="tab6">
             </tabView:SfTabItem>
         </tabView:SfTabView>
     </Grid>
