@@ -37,9 +37,9 @@ namespace DocumentViewerDemo
             Stream? documentSource = typeof(App).GetTypeInfo().Assembly.GetManifestResourceStream("DocumentViewerDemo.Assets.PDF_Succinctly.pdf");
             Stream? documentSource1 = typeof(App).GetTypeInfo().Assembly.GetManifestResourceStream("DocumentViewerDemo.Assets.Input.docx");
             Stream? documentSource2 = typeof(App).GetTypeInfo().Assembly.GetManifestResourceStream("DocumentViewerDemo.Assets.Autumn Leaves.jpg");
-            Stream? documentSource3 = typeof(App).GetTypeInfo().Assembly.GetManifestResourceStream("DocumentViewerDemo.Assets.InputTemplate.xlsx");
-            Stream? documentSource4 = typeof(App).GetTypeInfo().Assembly.GetManifestResourceStream("DocumentViewerDemo.Assets.Input.xps");
-            Stream? documentSource5 = typeof(App).GetTypeInfo().Assembly.GetManifestResourceStream("DocumentViewerDemo.Assets.Template.pptx");
+            Stream? documentSource3 = typeof(App).GetTypeInfo().Assembly.GetManifestResourceStream("DocumentViewerDemo.Assets.Template.pptx");
+            Stream? documentSource4 = typeof(App).GetTypeInfo().Assembly.GetManifestResourceStream("DocumentViewerDemo.Assets.InputTemplate.xlsx");
+            Stream? documentSource5 = typeof(App).GetTypeInfo().Assembly.GetManifestResourceStream("DocumentViewerDemo.Assets.Input.xps");
             if (documentSource != null)
                 PDFDocuments.Add(documentSource);
             if (documentSource1 != null)
@@ -157,8 +157,17 @@ namespace DocumentViewerDemo
 
         internal Stream? ConvertImageToPdf(Stream? imageStream)
         {
+            // Load the image from stream
+            PdfBitmap image = new PdfBitmap(imageStream);
+
             //Create a new PDF document
             PdfDocument pdfDocument = new PdfDocument();
+
+            // Set page size to match image size
+            PdfPageSettings pageSettings = new PdfPageSettings();
+            pageSettings.Size = new Syncfusion.Drawing.SizeF(image.Width, image.Height);
+
+            pdfDocument.PageSettings = pageSettings;
 
             //Add a page to the document
             PdfPage page = pdfDocument.Pages.Add();
@@ -166,10 +175,8 @@ namespace DocumentViewerDemo
             //Create PDF graphics for the page
             PdfGraphics graphics = page.Graphics;
 
-            PdfBitmap image = new PdfBitmap(imageStream);
-
             //Draw the image
-            graphics.DrawImage(image, 0, 0);
+            graphics.DrawImage(image, 0, 0, image.Width, image.Height);
 
             //Creating the stream object
             MemoryStream stream = new MemoryStream();

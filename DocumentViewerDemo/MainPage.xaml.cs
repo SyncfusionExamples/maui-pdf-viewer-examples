@@ -1,4 +1,5 @@
-﻿using Syncfusion.Maui.PdfViewer;
+﻿using Syncfusion.Maui.Core;
+using Syncfusion.Maui.PdfViewer;
 
 namespace DocumentViewerDemo
 {
@@ -15,6 +16,12 @@ namespace DocumentViewerDemo
         {
             InitializeComponent();
 
+            AddSaveOptionToolbarItems(pdfViewer);
+            AddSaveOptionToolbarItems(pdfViewer1);
+            AddSaveOptionToolbarItems(pdfViewer2);
+            AddSaveOptionToolbarItems(pdfViewer3);
+            AddSaveOptionToolbarItems(pdfViewer4);
+            AddSaveOptionToolbarItems(pdfViewer5);
             // Set the zoom mode of three PDF viewers to fit the width of the container
             pdfViewer.ZoomMode = ZoomMode.FitToWidth;
             pdfViewer1.ZoomMode = ZoomMode.FitToWidth;
@@ -24,8 +31,72 @@ namespace DocumentViewerDemo
             pdfViewer5.ZoomMode = ZoomMode.FitToWidth;
         }
 
+        void AddSaveOptionToolbarItems(SfPdfViewer pdfViewer)
+        {
+
+            // Create new save button
+            Button fileSaveButton = new Button
+            {
+                Text = "\ue75f", // Set button text
+                FontSize = 24, // Set button text font size
+                FontFamily = "MauiMaterialAssets", // Set button text font family
+                BackgroundColor = Colors.Transparent, // Set background for the button
+                BorderColor = Colors.Transparent, // Set border color for the button
+                TextColor = Color.FromArgb("#49454F"), // Set button text color
+                CornerRadius = 5 // Set corner radius of the button
+            };
+
+            // Subscription of click event for the save button
+            fileSaveButton.Clicked += FileSaveButton_Clicked;
+
+            // Set the tooltip text on hover
+            ToolTipProperties.SetText(fileSaveButton, "Save");
+
+#if !WINDOWS && !MACCATALYST
+            // Inserting save file option button as toolbar item in the top toolbar for the mobile platform.
+            pdfViewer?.Toolbars?.GetByName("TopToolbar")?.Items?.Insert(1, new Syncfusion.Maui.PdfViewer.ToolbarItem(fileSaveButton, "FileSaveButton"));
+#else
+            // Inserting save file option button as toolbar item in the top toolbar for the desktop platform.
+            pdfViewer?.Toolbars?.GetByName("PrimaryToolbar")?.Items?.Insert(1, new Syncfusion.Maui.PdfViewer.ToolbarItem(fileSaveButton, "FileSaveButton"));
+#endif
+        }
+
+        private async void FileSaveButton_Clicked(object? sender, EventArgs e)
+        {
+            // Create a new memory stream to hold the saved PDF document
+            Stream savedStream = new MemoryStream();
+
+            // Asynchronously save the current document content into the memory stream
+            await pdfViewer.SaveDocumentAsync(savedStream); 
+            
+            try
+            {
+                savedStream.Position = 0;
+
+                // Open the file explorer using the file picker, select a location to save the PDF, save the file to the chosen path, and retrieve the saved file location for display.
+                string? filePath = await FileService.SaveAsAsync("Saved.pdf", savedStream);
+
+                // Safely storing the main page of the application.
+                var mainPage = Application.Current?.Windows[0].Page;
+
+                if (mainPage != null)
+                    // Display the saved file path.
+                    await mainPage.DisplayAlert("File saved", $"The file is saved to {filePath}", "OK");
+            }
+            catch (Exception exception)
+            {
+                // Safely storing the main page of the application.
+                var mainPage = Application.Current?.Windows[0].Page;
+
+                if (mainPage != null)
+                    // Display the error message when the file is not saved.
+                    await mainPage.DisplayAlert("Error", $"The file is not saved. {exception.Message}", "OK");
+            }
+        }
+
         private void SfTabView_Loaded(System.Object sender, System.EventArgs e)
         {
+
             // Ensure the viewModel is not null before proceeding
             if (viewModel?.PDFDocuments != null)
             {
@@ -51,25 +122,25 @@ namespace DocumentViewerDemo
                 }
 
 
-                // Check if the fourth tab's header matches "InputTemplate.xlsx"
-                if (tab4.Header.Equals("InputTemplate.xlsx"))
+                // Check if the fourth tab's header matches "Template.pptx"
+                if (tab4.Header.Equals("Template.pptx"))
                 {
-                    pdfViewer3.DocumentSource = viewModel.ConvertXlsxToPdf(viewModel.PDFDocuments[3]); // Assign the stream to the "DocumentSource" property of the PdfViewer control
+                    pdfViewer3.DocumentSource = viewModel.ConvertPptToPdf(viewModel.PDFDocuments[3]); // Assign the stream to the "DocumentSource" property of the PdfViewer control
                     tab4.Content = pdfViewer3; // Set the content of tab1 to the pdfViewer1.
                 }
 
 
-                // Check if the fifth tab's header matches "Input.xps"
-                if (tab5.Header.Equals("Input.xps"))
+                // Check if the fifth tab's header matches "InputTemplate.xlsx"
+                if (tab5.Header.Equals("InputTemplate.xlsx"))
                 {
-                    pdfViewer4.DocumentSource = viewModel.ConvertXpsToPdf(viewModel.PDFDocuments[4]); // Assign the stream to the "DocumentSource" property of the PdfViewer control
+                    pdfViewer4.DocumentSource = viewModel.ConvertXlsxToPdf(viewModel.PDFDocuments[4]); // Assign the stream to the "DocumentSource" property of the PdfViewer control
                     tab5.Content = pdfViewer4; // Set the content of tab1 to the pdfViewer1.
                 }
 
-                // Check if the sixth tab's header matches "Template.pptx"
-                if (tab6.Header.Equals("Template.pptx"))
+                // Check if the sixth tab's header matches "Input.xps"
+                if (tab6.Header.Equals("Input.xps"))
                 {
-                    pdfViewer5.DocumentSource = viewModel.ConvertPptToPdf(viewModel.PDFDocuments[5]); // Assign the stream to the "DocumentSource" property of the PdfViewer control
+                    pdfViewer5.DocumentSource = viewModel.ConvertXpsToPdf(viewModel.PDFDocuments[5]); // Assign the stream to the "DocumentSource" property of the PdfViewer control
                     tab6.Content = pdfViewer5; // Set the content of tab1 to the pdfViewer1.
                 }
             }
