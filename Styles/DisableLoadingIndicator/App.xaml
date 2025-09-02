@@ -1,0 +1,20 @@
+﻿<?xml version = "1.0" encoding = "UTF-8" ?>
+<Application xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:DisableLoadingIndicator"
+             x:Class="DisableLoadingIndicator.App">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Resources/Styles/Colors.xaml" />
+                <ResourceDictionary Source="Resources/Styles/Styles.xaml" />
+                <ResourceDictionary>
+                    <!-- Defines a custom theme label for SfPdfViewer. This signals the control to apply custom styling. -->
+                    <x:String x:Key="SfPdfViewerTheme">Custom Theme</x:String>
+                    <!-- Sets the loading indicator color to Transparent to visually hide it -->
+                    <Color x:Key="SfPdfViewerLoadingIndicatorColor">Transparent</Color>
+                </ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>
