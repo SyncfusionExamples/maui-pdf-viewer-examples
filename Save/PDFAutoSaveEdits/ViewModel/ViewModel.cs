@@ -157,7 +157,7 @@ namespace PDFAutoSaveEdits
                         { DevicePlatform.Android, new[] { "application/pdf" } },
                         { DevicePlatform.iOS, new[] { "com.adobe.pdf" } },
                         { DevicePlatform.WinUI, new[] { ".pdf" } },
-                        { DevicePlatform.macOS, new[] { "pdf" } },
+                        { DevicePlatform.MacCatalyst, new[] { "pdf" } },
                 });
 
             // Configure file picker options
@@ -173,16 +173,14 @@ namespace PDFAutoSaveEdits
             var result = await FilePicker.Default.PickAsync(options);
             if (result != null)
             {
-                NotificationText = "Loading - " + result.FileName + "...";
-
                 // Open the selected file as a stream and load it into the PDF viewer
                 var stream = await result.OpenReadAsync();
                 if (PdfViewer != null)
                 {
-                    PdfViewer.DocumentSource = stream;
                     _currentFilePath = result.FullPath;
                     _currentFileName = result.FileName;
                     NotificationText = "Opening - " + _currentFileName + "...";
+                    PdfViewer.DocumentSource = stream;
                 }
                 else
                 {
@@ -221,7 +219,7 @@ namespace PDFAutoSaveEdits
                         await saveStream.CopyToAsync(fileStream);
                     }
 
-                    NotificationText = _currentFileName + " - Saved successfully";
+                    NotificationText = _currentFileName + " - Saved";
                 }
                 else
                 {
