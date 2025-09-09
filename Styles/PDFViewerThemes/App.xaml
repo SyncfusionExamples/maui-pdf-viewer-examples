@@ -62,7 +62,7 @@
                     <Color x:Key="SfPdfViewerNormalOutlineMenuItemHoverBackgroundColor">aqua</Color>
                     <Color x:Key="SfPdfViewerBookmarkTextInputFocusedStrokeColor">#D0BCFF</Color>
                     <Color x:Key="SfPdfViewerControlBackgroundColor">#322E3A</Color>
-                    <Color x:Key="SfPdfViewerLoadingIndicatorColor">Transparent</Color>
+                    <Color x:Key="SfPdfViewerLoadingIndicatorColor">#D0BCFF</Color>
                     <Color x:Key="SfPdfViewerColorPaletteSelectedButtonStrokeColor">#E6E1E5</Color>
                     <Color x:Key="SfPdfViewerSliderThumbOverlayStyleColor">#1FD0BCFF</Color>
                     <Color x:Key="SfPdfViewerSliderThumbStyleColor">#D0BCFF</Color>
