@@ -5,12 +5,10 @@
              xmlns:local="clr-namespace:DetectPdfChanges" 
              x:DataType="local:PdfViewerViewModel"
              x:Class="DetectPdfChanges.MainPage">
-
-
+    
     <ContentPage.BindingContext>
         <local:PdfViewerViewModel />
     </ContentPage.BindingContext>
-
     <ContentPage.Content>
         <syncfusion:SfPdfViewer x:Name="PdfViewer" 
                                 DocumentSource="{Binding PdfDocumentStream}"
@@ -19,5 +17,4 @@
                                 AnnotationEdited="PdfViewer_AnnotationEdited"
                                 AnnotationRemoved="PdfViewer_AnnotationRemoved"/>
     </ContentPage.Content>
-
 </ContentPage>

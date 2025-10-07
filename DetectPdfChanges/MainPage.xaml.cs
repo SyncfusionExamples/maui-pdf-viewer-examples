@@ -18,7 +18,6 @@ namespace DetectPdfChanges
                 else
                     Application.Current.Windows[0].Page?.DisplayAlert("PDF Edited", $"{e.FormField} value is changed.", "OK");
             }
-
         }
 
         private void PdfViewer_AnnotationAdded(object sender, AnnotationEventArgs e)

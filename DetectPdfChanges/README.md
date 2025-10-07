@@ -45,7 +45,7 @@ Initialize the SfPdfViewer in the XAML file. This will display the PDF Viewer in
 
 ### 3. PdfViewerViewModel Class
 
-In your PdfViewerViewModel.cs, store the stream of a PDF document embedded with your resource.
+In your `PdfViewerViewModel.cs`, store the stream of a PDF document embedded with your resource.
 
 ```csharp
     
@@ -92,7 +92,7 @@ In your PdfViewerViewModel.cs, store the stream of a PDF document embedded with 
 
 ### 4. Binding the PDF stream to the .NET MAUI PDFViewer
 
-Assign the PDF stream obtained to the [DocumentSource](https://help.syncfusion.com/cr/maui/Syncfusion.Maui.PdfViewer.SfPdfViewer.html#Syncfusion_Maui_PdfViewer_SfPdfViewer_DocumentSource) property in the .NET MAUI PDFViewer.
+Bind the PDF stream obtained to the [DocumentSource](https://help.syncfusion.com/cr/maui/Syncfusion.Maui.PdfViewer.SfPdfViewer.html#Syncfusion_Maui_PdfViewer_SfPdfViewer_DocumentSource) property in the .NET MAUI PDFViewer.
 
 **a. Namespace Declaration**
 
@@ -192,10 +192,6 @@ The event handlers are wired to detect the changes made in the PDF document.
 
 ## Run the App
 
-1. Build and run the application in all platform.
+1. Build and run the application in all platforms.
 2. Add, edit, and remove the annotation.
 3. Edit the form fields.
-
-
-
-
