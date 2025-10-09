@@ -192,10 +192,10 @@ To match the text color of newly added toolbar item with that of default toolbar
 
 #if !WINDOWS && !MACCATALYST
     // Inserting open file option button as toolbar item in the top toolbar for the mobile platform.
-    PdfViewer?.Toolbars?.GetByName("TopToolbar")?.Items?.Insert(0, new Syncfusion.Maui.PdfViewer.ToolbarItem(fileOpenButton, "FileOpenButton"));
+    PdfViewer?.Toolbars?.GetByName("TopToolbar")?.Items?.Insert(0, new Syncfusion.Maui.PdfViewer.ToolbarItem(fileOpenButton, "OpenFile"));
 #else
     // Inserting open file option button as toolbar item in the primary toolbar for the desktop platform.
-    PdfViewer?.Toolbars?.GetByName("PrimaryToolbar")?.Items?.Insert(0, new Syncfusion.Maui.PdfViewer.ToolbarItem(fileOpenButton, "FileOpenButton"));
+    PdfViewer?.Toolbars?.GetByName("PrimaryToolbar")?.Items?.Insert(0, new Syncfusion.Maui.PdfViewer.ToolbarItem(fileOpenButton, "OpenFile"));
 #endif
 ```
 
@@ -205,7 +205,7 @@ To set the tooltip to a newly added toolbar item like the default items in the t
 
 ``` csharp
     // Set the tooltip text
-    ToolTipProperties.SetText(fileOpenButton, "Open File");
+    ToolTipProperties.SetText(fileOpenButton, "OpenFile");
 ```
 
 ## Run the App
