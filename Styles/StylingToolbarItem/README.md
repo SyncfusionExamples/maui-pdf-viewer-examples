@@ -158,8 +158,9 @@ This namespace enables access to the PDF Viewer control.
 **C#:**
 
 ```csharp
-    Stream? stream = typeof(App).GetTypeInfo().Assembly.GetManifestResourceStream("ReplaceToolbarItem.Assets.PDF_Succinctly.pdf");
-    
+    //Accessing the PDF document that is added as embedded resource as stream.
+    Stream? documentStream = typeof(App).GetTypeInfo().Assembly.GetManifestResourceStream("StylingToolbarItem.Assets.PDF_Succinctly.pdf");
+
     // Assigning stream to "DocumentSource" property.
     pdfViewer.DocumentSource = DocumentStream;
 ```
