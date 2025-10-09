@@ -15,26 +15,39 @@ public partial class PDFViewerPage : ContentPage
         // Assigning stream to "DocumentSource" property.
         PdfViewer.DocumentSource = documentStream;
 
-        // Calling "AddFileOperationsToolbarItems" for to add save and open options toolbar item in toolbar
+        // Calling "AddFileOperationsToolbarItems" for to add save and open options toolbar item in toolbar.
         AddFileOperationsToolbarItem();
+
+        // Wiring "DocumentLoaded" event to enable the button. 
+        PdfViewer.DocumentLoaded += PdfViewer_DocumentLoaded;
+    }
+
+    private void PdfViewer_DocumentLoaded(object? sender, EventArgs? e)
+    {
+        if (fileOpenButton != null)
+        {
+            // Enable the fileOpenButton to allow user interaction.
+            fileOpenButton.IsEnabled = true;
+            fileOpenButton.Opacity = 1; // Set the opacity of the button.
+        }
     }
 
     void AddFileOperationsToolbarItem()
     {
-        // Create new open button
+        // Create new open button.
         fileOpenButton = new Button
         {
-            Text = "\ue712", // Set button text
-            FontSize = 24, // Set button text font size
-            FontFamily = "MauiMaterialAssets", // Set button text font family
-            BackgroundColor = Colors.Transparent, // Set background for the button
-            BorderColor = Colors.Transparent, // Set border color for the button
-            CornerRadius = 5, // Set corner radius of the button
-            Opacity = 1,
-            IsEnabled = true
+            Text = "\ue712", // Set button text.
+            FontSize = 24, // Set button text font size.
+            FontFamily = "MauiMaterialAssets", // Set button text font family.
+            BackgroundColor = Colors.Transparent, // Set background for the button.
+            BorderColor = Colors.Transparent, // Set border color for the button.
+            CornerRadius = 5, // Set corner radius of the button.
+            Opacity = 0.5, // Set opacity of the button.
+            IsEnabled = false, // Disable the button.
         };
 
-        //Subscription of click event for the open file button
+        //Subscription of click event for the open file button.
         fileOpenButton.Clicked += FileOpenButton_Clicked;
 
         //Set color based on theme.
@@ -42,7 +55,7 @@ public partial class PDFViewerPage : ContentPage
         Color.FromArgb("#49454F"),
         Color.FromArgb("#CAC4D0"));
 
-        // Set the tooltip text on hover
+        // Set the tooltip text.
         ToolTipProperties.SetText(fileOpenButton, "OpenFile");
 
 #if !WINDOWS && !MACCATALYST

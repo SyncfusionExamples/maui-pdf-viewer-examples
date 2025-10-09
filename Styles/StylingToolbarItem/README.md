@@ -164,7 +164,6 @@ This namespace enables access to the PDF Viewer control.
     pdfViewer.DocumentSource = DocumentStream;
 ```
 
-
 ### 9. Matching semantics of the custom toolbar item with default toolbar item
 
 To match the text color of newly added toolbar item with that of default toolbar item in the toolbar, set the color of the [TextColor](https://learn.microsoft.com/en-us/dotnet/api/microsoft.maui.controls.button.textcolor?view=net-maui-9.0) for the button as that of the default toolbar item using the [SetAppThemeColor](https://learn.microsoft.com/en-us/dotnet/api/microsoft.maui.controls.bindableobjectextensions.setappthemecolor?view=net-maui-9.0) method. Refer to the below code example.
@@ -181,8 +180,6 @@ To match the text color of newly added toolbar item with that of default toolbar
         BackgroundColor = Colors.Transparent, // Set background for the button
         BorderColor = Colors.Transparent, // Set border color for the button
         CornerRadius = 5, // Set corner radius of the button
-        Opacity = 1,
-        IsEnabled = true
     };
 
     //Set color based on theme.
