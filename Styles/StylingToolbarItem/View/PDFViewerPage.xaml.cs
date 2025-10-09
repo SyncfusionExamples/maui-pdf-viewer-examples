@@ -43,14 +43,14 @@ public partial class PDFViewerPage : ContentPage
         Color.FromArgb("#CAC4D0"));
 
         // Set the tooltip text on hover
-        ToolTipProperties.SetText(fileOpenButton, "Open File");
+        ToolTipProperties.SetText(fileOpenButton, "OpenFile");
 
 #if !WINDOWS && !MACCATALYST
         // Inserting open file option button as toolbar item in the top toolbar for the mobile platform.
-        PdfViewer?.Toolbars?.GetByName("TopToolbar")?.Items?.Insert(0, new Syncfusion.Maui.PdfViewer.ToolbarItem(fileOpenButton, "FileOpenButton"));
+        PdfViewer?.Toolbars?.GetByName("TopToolbar")?.Items?.Insert(0, new Syncfusion.Maui.PdfViewer.ToolbarItem(fileOpenButton, "OpenFile"));
 #else
         // Inserting open file option button as toolbar item in the primary toolbar for the desktop platform.
-        PdfViewer?.Toolbars?.GetByName("PrimaryToolbar")?.Items?.Insert(0, new Syncfusion.Maui.PdfViewer.ToolbarItem(fileOpenButton, "FileOpenButton"));
+        PdfViewer?.Toolbars?.GetByName("PrimaryToolbar")?.Items?.Insert(0, new Syncfusion.Maui.PdfViewer.ToolbarItem(fileOpenButton, "OpenFile"));
 #endif
     }
 
