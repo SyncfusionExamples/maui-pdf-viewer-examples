@@ -203,8 +203,3 @@ The created save and open button is inserted in the specific toolbar by the [Ins
 **After insertion of save and open file option in the toolbar**
 
 <img src="Images/After Toolbar Item Insertion.png" Width="600"/>
-
-
-
-
-
