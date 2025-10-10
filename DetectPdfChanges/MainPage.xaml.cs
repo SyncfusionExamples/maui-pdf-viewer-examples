@@ -12,12 +12,7 @@ namespace DetectPdfChanges
         private void PdfViewer_FormFieldValueChanged(object sender, FormFieldValueChangedEventArgs e)
         {
             if (Application.Current != null)
-            {
-                if(e.FormField is not ListBoxFormField)
-                    Application.Current.Windows[0].Page?.DisplayAlert("PDF Edited", $"{e.FormField} value is changed from \"{e.OldValue}\" to \"{e.NewValue}\".", "OK");
-                else
-                    Application.Current.Windows[0].Page?.DisplayAlert("PDF Edited", $"{e.FormField} value is changed.", "OK");
-            }
+                Application.Current.Windows[0].Page?.DisplayAlert("PDF Edited", $"{e.FormField} value is changed.", "OK");
         }
 
         private void PdfViewer_AnnotationAdded(object sender, AnnotationEventArgs e)
