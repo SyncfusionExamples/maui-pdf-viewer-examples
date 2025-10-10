@@ -209,9 +209,4 @@ To set the tooltip to a newly added toolbar item like the default items in the t
 ## Run the App
 
 1. Build and run the application on all platforms.
-2. Switch the theme and check the color and tooltip of the newly added item in the PdfViewer. 
-
-
-
-
-
+2. Switch the theme and check the color and tooltip of the newly added item in the PdfViewer.
