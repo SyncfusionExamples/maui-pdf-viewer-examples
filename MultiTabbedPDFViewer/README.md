@@ -206,6 +206,6 @@ For to load the pdf document in the TabView, wire the Loaded event
 
 1. Build and run the application in all the platforms.
 2. Switch the tabs.
-3. Add some annotations in both PdfViewer tabs.
-4. Make some text selection in both PdfViewer tabs.
-5. Do search process in both PdfViewer tabs.
+3. Add some annotations in all PdfViewer tabs.
+4. Make some text selection in all PdfViewer tabs.
+5. Do search process in all PdfViewer tabs.
