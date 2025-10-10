@@ -1,0 +1,50 @@
+﻿<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:syncfusion="clr-namespace:Syncfusion.Maui.PdfViewer;assembly=Syncfusion.Maui.PdfViewer"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Signature.MainPage">
+
+    <ContentPage.Content>
+        <Grid>
+            <!-- Define layout with two rows: one for header/buttons, one for PDF viewer -->
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <!-- Top row: Header and action buttons -->
+            <Grid Grid.Row="0" ColumnDefinitions="Auto,*">
+                <!-- Title label for the PDF viewer -->
+                <Label Text="PDF Viewer"
+                       FontSize="16"
+                       VerticalOptions="Center"
+                       Grid.Column="0"
+                       Margin="10,0,0,0" />
+
+                <!-- Scrollable horizontal layout for signature action buttons -->
+                <ScrollView Orientation="Horizontal"
+                            HorizontalScrollBarVisibility="Never"
+                            HorizontalOptions="End"
+                            Grid.Column="1">
+                    <HorizontalStackLayout Spacing="10" Padding="0,0,15,0">
+                        <!-- Button to enable signature drawing mode -->
+                        <Button Text="Add Signature"
+                                Clicked="OnAddSignatureClicked" />
+
+                        <!-- Button to add a predefined handwritten signature -->
+                        <Button Text="Add Handwritten Signature"
+                                Clicked="OnAddHandwrittenSignatureClicked" />
+
+                        <!-- Button to add an image-based signature -->
+                        <Button Text="Add Image Signature"
+                                Clicked="OnAddImageSignatureClicked" />
+                    </HorizontalStackLayout>
+                </ScrollView>
+            </Grid>
+
+            <!-- Main content: PDF viewer control without toolbars -->
+            <syncfusion:SfPdfViewer x:Name="PdfViewer"
+                                    ShowToolbars="False"
+                                    Grid.Row="1" />
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
