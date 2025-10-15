@@ -17,16 +17,16 @@ namespace MultiTabbedPDFViewer
             PDFDocuments = new ObservableCollection<Stream>();
 
             //Accessing the PDF document that is added as embedded resource as stream.
-            Stream? documentSource = typeof(App).GetTypeInfo().Assembly.GetManifestResourceStream("MultiTabbedPDFViewer.Assets.PDF_Succinctly.pdf");
-            Stream? documentSource1 = typeof(App).GetTypeInfo().Assembly.GetManifestResourceStream("MultiTabbedPDFViewer.Assets.restrictedDocument.pdf");
-            Stream? documentSource2 = typeof(App).GetTypeInfo().Assembly.GetManifestResourceStream("MultiTabbedPDFViewer.Assets.Annotations.pdf");
+            Stream? documentSource1 = typeof(App).GetTypeInfo().Assembly.GetManifestResourceStream("MultiTabbedPDFViewer.Assets.PDF_Succinctly.pdf");
+            Stream? documentSource2 = typeof(App).GetTypeInfo().Assembly.GetManifestResourceStream("MultiTabbedPDFViewer.Assets.restrictedDocument.pdf");
+            Stream? documentSource3 = typeof(App).GetTypeInfo().Assembly.GetManifestResourceStream("MultiTabbedPDFViewer.Assets.Annotations.pdf");
             // Add the PDF streams to the collection if they are successfully retrieved
-            if (documentSource != null)
-                PDFDocuments.Add(documentSource);
             if (documentSource1 != null)
                 PDFDocuments.Add(documentSource1);
             if (documentSource2 != null)
                 PDFDocuments.Add(documentSource2);
+            if (documentSource3 != null)
+                PDFDocuments.Add(documentSource3);
         }
 
         /// <summary>

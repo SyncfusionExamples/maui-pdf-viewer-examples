@@ -71,9 +71,9 @@ Define the XAML namespace to enable access to the PdfViewer.
 
 ```csharp
      // Create three instances of SfPdfViewer for displaying PDF documents
-     SfPdfViewer pdfViewer = new SfPdfViewer();
      SfPdfViewer pdfViewer1 = new SfPdfViewer();
      SfPdfViewer pdfViewer2 = new SfPdfViewer();
+     SfPdfViewer pdfViewer3 = new SfPdfViewer();
 ```
 
 ### 4. Set the ZoomMode for the two PdfViewer instance in the `MainPage.cs` file.
@@ -84,9 +84,9 @@ In the MainPage constructor, set the [ZoomMode](https://help.syncfusion.com/cr/m
 
 ```csharp
     // Set the zoom mode of three PDF viewers to fit the width of the container
-    pdfViewer.ZoomMode = ZoomMode.FitToWidth;
     pdfViewer1.ZoomMode = ZoomMode.FitToWidth;
     pdfViewer2.ZoomMode = ZoomMode.FitToWidth;
+    pdfViewer3.ZoomMode = ZoomMode.FitToWidth;
 ```
 
 ### 5. PdfViewerViewModel class
@@ -107,16 +107,16 @@ In the MainPage constructor, set the [ZoomMode](https://help.syncfusion.com/cr/m
             PDFDocuments = new ObservableCollection<Stream>();
 
             //Accessing the PDF document that is added as embedded resource as stream.
-            Stream? documentSource = typeof(App).GetTypeInfo().Assembly.GetManifestResourceStream("MultiTabbedPDFViewer.Assets.PDF_Succinctly.pdf");
-            Stream? documentSource1 = typeof(App).GetTypeInfo().Assembly.GetManifestResourceStream("MultiTabbedPDFViewer.Assets.rotated_document.pdf");
-            Stream? documentSource2 = typeof(App).GetTypeInfo().Assembly.GetManifestResourceStream("MultiTabbedPDFViewer.Assets.Annotations.pdf");
+            Stream? documentSource1 = typeof(App).GetTypeInfo().Assembly.GetManifestResourceStream("MultiTabbedPDFViewer.Assets.PDF_Succinctly.pdf");
+            Stream? documentSource2 = typeof(App).GetTypeInfo().Assembly.GetManifestResourceStream("MultiTabbedPDFViewer.Assets.rotated_document.pdf");
+            Stream? documentSource3 = typeof(App).GetTypeInfo().Assembly.GetManifestResourceStream("MultiTabbedPDFViewer.Assets.Annotations.pdf");
             // Add the PDF streams to the collection if they are successfully retrieved
-            if (documentSource != null)
-                PDFDocuments.Add(documentSource);
             if (documentSource1 != null)
                 PDFDocuments.Add(documentSource1);
             if (documentSource2 != null)
                 PDFDocuments.Add(documentSource2);
+            if (documentSource3 != null)
+                PDFDocuments.Add(documentSource3);
         }
 
         /// <summary>
@@ -158,22 +158,22 @@ In the SfTabView `Loaded` event handler, evaluate the header text of each SfTabI
             // Check if the first tab's header matches "doc 1"
             if (tab1.Header.Equals("doc 1"))
             {
-                pdfViewer.DocumentSource = viewModel.PDFDocuments[0]; // Assign the stream to the "DocumentSource" property of the PdfViewer control
-                tab1.Content = pdfViewer; // Set the content of tab1 to the pdfViewer.
+                pdfViewer1.DocumentSource = viewModel.PDFDocuments[0]; // Assign the stream to the "DocumentSource" property of the PdfViewer control
+                tab1.Content = pdfViewer1; // Set the content of tab1 to the pdfViewer1.
             }
 
             // Check if the second tab's header matches "doc 2"
             if (tab2.Header.Equals("doc 2"))
             {
-                pdfViewer1.DocumentSource = viewModel.PDFDocuments[1]; // Assign the stream to the "DocumentSource" property of the PdfViewer control
-                tab2.Content = pdfViewer1; // Set the content of tab2 to the pdfViewer1.
+                pdfViewer2.DocumentSource = viewModel.PDFDocuments[1]; // Assign the stream to the "DocumentSource" property of the PdfViewer control
+                tab2.Content = pdfViewer2; // Set the content of tab2 to the pdfViewer2.
             }
 
             // Check if the third tab's header matches "doc 3"
             if (tab3.Header.Equals("doc 3"))
             {
-                pdfViewer2.DocumentSource = viewModel.PDFDocuments[2]; // Assign the stream to the "DocumentSource" property of the PdfViewer control
-                tab3.Content = pdfViewer2; // Set the content of tab3 to the pdfViewer1.
+                pdfViewer3.DocumentSource = viewModel.PDFDocuments[2]; // Assign the stream to the "DocumentSource" property of the PdfViewer control
+                tab3.Content = pdfViewer3; // Set the content of tab3 to the pdfViewer3.
             }
         }
     }
