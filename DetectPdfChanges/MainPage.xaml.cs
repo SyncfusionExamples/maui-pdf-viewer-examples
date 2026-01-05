@@ -9,28 +9,37 @@ namespace DetectPdfChanges
             InitializeComponent();
         }
 
-        private void PdfViewer_FormFieldValueChanged(object sender, FormFieldValueChangedEventArgs e)
+        private async void PdfViewer_FormFieldValueChanged(object sender, FormFieldValueChangedEventArgs e)
         {
-            if (Application.Current != null)
-                Application.Current.Windows[0].Page?.DisplayAlert("PDF Edited", $"{e.FormField} value is changed.", "OK");
+            var page = Application.Current?.Windows?.FirstOrDefault()?.Page;
+            if (page is null)
+                return;
+
+            await page.DisplayAlertAsync("PDF Edited", $"{e.FormField} value is changed.", "OK");
         }
 
-        private void PdfViewer_AnnotationAdded(object sender, AnnotationEventArgs e)
+        private async void PdfViewer_AnnotationAdded(object sender, AnnotationEventArgs e)
         {
-            if (Application.Current != null)
-                Application.Current.Windows[0].Page?.DisplayAlert("PDF Edited", "Annotation is added.", "OK");
+            var page = Application.Current?.Windows?.FirstOrDefault()?.Page;
+            if (page is null)
+                return;
+            await page.DisplayAlertAsync("PDF Edited", "Annotation is added.", "OK");
         }
 
-        private void PdfViewer_AnnotationEdited(object sender, AnnotationEventArgs e)
+        private async void PdfViewer_AnnotationEdited(object sender, AnnotationEventArgs e)
         {
-            if (Application.Current != null)
-                Application.Current.Windows[0].Page?.DisplayAlert("PDF Edited", $"Annotation is edited.", "OK");
+            var page = Application.Current?.Windows?.FirstOrDefault()?.Page;
+            if (page is null)
+                return;
+            await page.DisplayAlertAsync("PDF Edited", $"Annotation is edited.", "OK");
         }
 
-        private void PdfViewer_AnnotationRemoved(object sender, AnnotationEventArgs e)
+        private async void PdfViewer_AnnotationRemoved(object sender, AnnotationEventArgs e)
         {
-            if(Application.Current != null)
-                Application.Current.Windows[0].Page?.DisplayAlert("PDF Edited", $"Annotation is removed.", "OK");
+            var page = Application.Current?.Windows?.FirstOrDefault()?.Page;
+            if (page is null)
+                return;
+            await page.DisplayAlertAsync("PDF Edited", $"Annotation is removed.", "OK");
         }
     }
 }
