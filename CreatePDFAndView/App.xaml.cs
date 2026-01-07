@@ -7,8 +7,10 @@
             Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("Add license key");
 
             InitializeComponent();
-
-            MainPage = new AppShell();
+        }
+        protected override Window CreateWindow(IActivationState? activationState)
+        {
+            return new Window(new AppShell());
         }
     }
 }

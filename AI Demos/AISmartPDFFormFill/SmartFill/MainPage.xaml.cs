@@ -196,7 +196,7 @@ public partial class MainPage : ContentPage
 
         var stream = new FileStream(filePath, FileMode.Create, FileAccess.Write);
         PdfViewer.SaveDocument(stream);
-        Application.Current?.MainPage?.DisplayAlert("Success", $"Document saved successfully at:\n{filePath}", "OK");
+        Application.Current?.Windows?.FirstOrDefault()?.Page?.DisplayAlertAsync("Success", $"Document saved successfully at:\n{filePath}", "OK");
 
     }
 

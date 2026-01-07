@@ -30,7 +30,7 @@ namespace SmartRedaction
             PdfViewer.DocumentLoaded += PdfViewer_DocumentLoaded;
         }
 
-        private void MarkRedaction_StateChanged(object? sender, Syncfusion.Maui.Buttons.StateChangedEventArgs e)
+        private void MarkRedaction_StateChanged(object sender, Syncfusion.Maui.Buttons.StateChangedEventArgs e)
         {
             if (e.IsChecked.HasValue && e.IsChecked.Value)
             {
@@ -42,11 +42,11 @@ namespace SmartRedaction
                 PdfViewer.AnnotationMode = AnnotationMode.None;
         }
 
-        private void PdfViewer_DocumentLoaded(object? sender, EventArgs? e)
+        private void PdfViewer_DocumentLoaded(object sender, EventArgs e)
         {
             if (openAIService.DeploymentName == "DEPLOYMENT_NAME")
             {
-                Application.Current?.MainPage?.DisplayAlert("Alert", "The Azure API key or endpoint is missing or incorrect. Please verify your credentials", "OK");
+                Application.Current?.Windows?.FirstOrDefault()?.Page?.DisplayAlertAsync("Alert", "The Azure API key or endpoint is missing or incorrect. Please verify your credentials", "OK");
                 MobileScan.IsEnabled = false;
                 DesktopScanButton.IsEnabled = false;
             }
@@ -57,7 +57,7 @@ namespace SmartRedaction
             }
         }
 
-        private void AddRedact_PropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
+        private void AddRedact_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             if (AddRedact.IsEnabled)
                 AddRedact.Opacity = 1;
@@ -81,9 +81,9 @@ namespace SmartRedaction
 
         }
 
-        private void PdfViewer_AnnotationAdded(object? sender, AnnotationEventArgs e)
+        private void PdfViewer_AnnotationAdded(object sender, AnnotationEventArgs e)
         {
-            if ((bool)MarkRedaction.IsChecked && e.Annotation is SquareAnnotation)
+            if (MarkRedaction.IsChecked != null && (bool)MarkRedaction.IsChecked && e.Annotation is SquareAnnotation)
             {
                 e.Annotation.Name = $"RedactedRect{PdfViewer.Annotations.Count}";
                 e.Annotation.Author = "RedactedRect";
@@ -93,7 +93,7 @@ namespace SmartRedaction
                 SelectRedactitem.IsEnabled = true;
         }
 
-        private void SensitiveInfoView_NodeChecked(object? sender, NodeCheckedEventArgs e)
+        private void SensitiveInfoView_NodeChecked(object sender, NodeCheckedEventArgs e)
         {
             if (e.Node?.Content is TreeItem treeItem)
             {
@@ -498,7 +498,7 @@ namespace SmartRedaction
             var filePath = Path.Combine(FileSystem.AppDataDirectory, "SavedSample.pdf");
             var stream = new FileStream(filePath, FileMode.Create, FileAccess.Write);
             PdfViewer.SaveDocument(stream);
-            Application.Current?.MainPage?.DisplayAlert("Success", $"Document saved successfully at:\n{filePath}", "OK");
+            Application.Current?.Windows?.FirstOrDefault()?.Page?.DisplayAlertAsync("Success", $"Document saved successfully at:\n{filePath}", "OK");
         }
 
         private void OpenCloseMobileRedactLayout(object sender, EventArgs e)

@@ -1,11 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.8.34330.188
+# Visual Studio Version 18
+VisualStudioVersion = 18.1.11312.151 d18.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FormFilling", "FormFilling.csproj", "{17B0F9CC-C0CE-4E0D-B1A1-FF7F2105726A}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Syncfusion.Maui.PdfViewer", "..\..\..\maui-pdfviewer\maui\src\PDFViewer\Syncfusion.Maui.PdfViewer.csproj", "{B74E4F08-3F69-447B-A179-E80E5B703862}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,12 +21,6 @@ Global
 		{17B0F9CC-C0CE-4E0D-B1A1-FF7F2105726A}.Release-Xml|Any CPU.ActiveCfg = Release|Any CPU
 		{17B0F9CC-C0CE-4E0D-B1A1-FF7F2105726A}.Release-Xml|Any CPU.Build.0 = Release|Any CPU
 		{17B0F9CC-C0CE-4E0D-B1A1-FF7F2105726A}.Release-Xml|Any CPU.Deploy.0 = Release|Any CPU
-		{B74E4F08-3F69-447B-A179-E80E5B703862}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B74E4F08-3F69-447B-A179-E80E5B703862}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B74E4F08-3F69-447B-A179-E80E5B703862}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B74E4F08-3F69-447B-A179-E80E5B703862}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B74E4F08-3F69-447B-A179-E80E5B703862}.Release-Xml|Any CPU.ActiveCfg = Release-Xml|Any CPU
-		{B74E4F08-3F69-447B-A179-E80E5B703862}.Release-Xml|Any CPU.Build.0 = Release-Xml|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -163,12 +163,12 @@ namespace InvisbleSignatureDemo
                 if (fileName != null)
                 {
                     string? filePath = await FileService.SaveAsAsync(fileName, signatureValidatedStream);
-                    await Application.Current!.MainPage!.DisplayAlert("File saved", $"The file is saved to {filePath}", "OK");
+                    Application.Current?.Windows?.FirstOrDefault()?.Page?.DisplayAlertAsync("File saved", $"The file is saved to {filePath}", "OK");
                 }
             }
             catch (Exception exception)
             {
-                await Application.Current!.MainPage!.DisplayAlert("Error", $"The file is not saved. {exception.Message}", "OK");
+                Application.Current?.Windows?.FirstOrDefault()?.Page?.DisplayAlertAsync("Error", $"The file is not saved. {exception.Message}", "OK");
             }
         }
 
@@ -190,9 +190,9 @@ namespace InvisbleSignatureDemo
                             {
                                 Stream? pfxFile = assembly.GetManifestResourceStream(basePath + keyFileName);
                                 byte[] data = new byte[pfxFile!.Length];
-                                pfxFile.Read(data, 0, data.Length);
+                                pfxFile.ReadAsync(data, 0, data.Length);
                                 X509Certificate2Collection collection = new X509Certificate2Collection();
-                                X509Certificate2 certificate = new X509Certificate2(data, "password123");
+                                X509Certificate2 certificate = X509CertificateLoader.LoadPkcs12(data, "password123");
                                 collection.Add(certificate);
                                 PdfSignatureValidationResult result = signatureField.ValidateSignature(collection);
                                 if (result.IsDocumentModified)

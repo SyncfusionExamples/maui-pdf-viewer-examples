@@ -313,7 +313,7 @@ namespace CustomToolbar
                     message = ex.Message;
                 else
                     message = "File open failed.";
-                _ = Application.Current.MainPage.DisplayAlert("Error", message, "OK");
+                _ = Application.Current?.Windows?.FirstOrDefault()?.Page?.DisplayAlertAsync("Error", message, "OK");
             }
             return null;
         }

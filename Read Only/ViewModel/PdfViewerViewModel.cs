@@ -5,12 +5,12 @@ namespace PdfViewerExample
 {
     internal class PdfViewerViewModel: INotifyPropertyChanged
     {
-        private Stream? m_pdfDocumentStream;
+        private Stream m_pdfDocumentStream;
 
         /// <summary>
         /// An event to detect the change in the value of a property.
         /// </summary>
-        public event PropertyChangedEventHandler? PropertyChanged;
+        public event PropertyChangedEventHandler PropertyChanged;
 
         /// <summary>
         /// The PDF document stream that is loaded into the instance of the PDF viewer. 
