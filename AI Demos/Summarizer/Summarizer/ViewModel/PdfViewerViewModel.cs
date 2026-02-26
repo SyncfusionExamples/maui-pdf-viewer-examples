@@ -77,8 +77,8 @@ namespace Summarizer
         public async Task GetResult(string query)
         {
             await Task.Delay(1);
-            var reply = await assistService.GetSolutionToPrompt(query);
-            var suggestion = await assistService.GetSuggestion(query);
+            var reply = await assistService.GetDocumentGroundedAnswerAsync(query);
+            var suggestion = await assistService.GetSuggestionsAsync(query);
             AssistItem botMessage = new AssistItem() { Text = reply, Suggestion = suggestion };
             this.Messages.Add(botMessage);
         }
@@ -94,7 +94,7 @@ namespace Summarizer
         {
             this.ShowLoading = true;
             var response = ((AssistItem)obj).Text;
-            var query = await assistService.GetPrompt(response);
+            var query = await assistService.GetPromptAsync(response);
             await this.GetResult(query).ConfigureAwait(true);
             this.ShowLoading = false;
         }

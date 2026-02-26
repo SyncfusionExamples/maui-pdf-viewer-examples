@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFrameworks>net9.0-android;net9.0-ios;net9.0-maccatalyst</TargetFrameworks>
-		<TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net9.0-windows10.0.19041.0</TargetFrameworks>
+		<TargetFrameworks>net10.0-android;net10.0-ios;net10.0-maccatalyst</TargetFrameworks>
+		<TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net10.0-windows10.0.19041.0</TargetFrameworks>
 		<!-- Uncomment to also build the tizen app. You will need to install tizen by following this: https://github.com/Samsung/Tizen.NET -->
 		<!-- <TargetFrameworks>$(TargetFrameworks);net8.0-tizen</TargetFrameworks> -->
 
@@ -19,7 +19,7 @@
 		<SingleProject>true</SingleProject>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
-
+		<SkipValidateMauiImplicitPackageReferences>true</SkipValidateMauiImplicitPackageReferences>
 		<!-- Display name -->
 		<ApplicationTitle>Summarizer</ApplicationTitle>
 
@@ -61,38 +61,25 @@
 	  <None Remove="Assets\summarizeDoc.pdf" />
 	  <None Remove="Resources\Fonts\MauiSampleFontIcon.ttf" />
 	</ItemGroup>
-
+	<PropertyGroup>
+		<NoWarn>$(NoWarn);SKEXP0001;SKEXP0002;SKEXP0003</NoWarn>
+	</PropertyGroup>
 	<ItemGroup>
 	  <EmbeddedResource Include="Assets\summarizeDoc.pdf" />
 	</ItemGroup>
-
-	<ItemGroup>
-		<PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
-		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="$(MauiVersion)" />
-		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="9.0.0" />
-		<PackageReference Include="Microsoft.SemanticKernel" Version="1.12.0" />
-		<PackageReference Include="Syncfusion.Maui.PdfViewer" Version="*" />
-		<PackageReference Include="Syncfusion.Maui.AIAssistView" Version="*" />
-		<PackageReference Include="Syncfusion.Pdf.NET" Version="*" />
-		<PackageReference Include="Syncfusion.Compression.NET" Version="*" />
-		<PackageReference Include="Syncfusion.Maui.Calendar" Version="*" />
-		<PackageReference Include="Syncfusion.Maui.Chat" Version="*" />
-		<PackageReference Include="Syncfusion.Maui.Inputs" Version="*" />
-		<PackageReference Include="Syncfusion.Maui.Picker" Version="*" />
-		<PackageReference Include="Syncfusion.Maui.Popup" Version="*" />
-		<PackageReference Include="Syncfusion.Maui.Core" Version="*" />
-		<PackageReference Include="Syncfusion.Maui.Buttons" Version="*" />
-		<PackageReference Include="Syncfusion.Maui.SignaturePad" Version="*" />
-		<PackageReference Include="Syncfusion.Maui.DataSource" Version="*" />
-		<PackageReference Include="Syncfusion.Maui.GridCommon" Version="*" />
-		<PackageReference Include="Syncfusion.Maui.ListView" Version="*" />
-		<PackageReference Include="Syncfusion.Maui.PdfToImageConverter" Version="*" />
-		<PackageReference Include="Syncfusion.Maui.Sliders" Version="*" />
-		<PackageReference Include="Syncfusion.Maui.TabView" Version="*" />
-		<PackageReference Include="Syncfusion.Pdf.Imaging.NET" Version="*" />
-		<PackageReference Include="Azure.AI.OpenAI" Version="2.0.0" />
-		<PackageReference Include="Azure.Identity" Version="1.13.1" />
-		<PackageReference Include="Microsoft.Extensions.AI.OpenAI" Version="9.0.1-preview.1.24570.5" />
+	<PropertyGroup>
+		<NoWarn>$(NoWarn);SKEXP0001</NoWarn>
+	</PropertyGroup>
+		<ItemGroup>
+			<PackageReference Include="Syncfusion.Maui.PdfViewer" Version="*" />
+			<PackageReference Include="Syncfusion.Maui.AIAssistView" Version="*" />
+			<PackageReference Include="Syncfusion.Pdf.NET" Version="*" />
+			<PackageReference Include="Microsoft.Extensions.AI" Version="*" />
+			<PackageReference Include="Azure.AI.OpenAI" Version="*" />
+			<PackageReference Include="Microsoft.Extensions.AI.OpenAI" Version="10.2.0-preview.1.26063.2" />
+			<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="*" />
+			<PackageReference Include="Azure.Identity" Version="*" />
+			<PackageReference Include="Microsoft.ML" Version="*" />
 	</ItemGroup>
 
 </Project>

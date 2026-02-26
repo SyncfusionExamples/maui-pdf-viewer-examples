@@ -17,15 +17,12 @@ public partial class MainPage : ContentPage
 
     private async void PdfViewer_DocumentLoaded(object? sender, EventArgs? e)
     {
-        AssistServices AI = new AssistServices();
-        if (AI.DeploymentName == "DEPLOYMENT_NAME")
-            Application.Current?.MainPage?.DisplayAlert("Alert", "The Azure API key or endpoint is missing or incorrect. Please verify your credentials", "OK");
+        if (viewModel.assistService.DeploymentName == "DEPLOYMENT_NAME")
+        {
+            await Application.Current?.Windows?.FirstOrDefault()?.Page?.DisplayAlertAsync("Alert","The Azure API key or endpoint is missing or incorrect. Please verify your credentials","OK")!;
+        }
+
         await LoadPDFDataAsync();
-        var reply = await viewModel.assistService.GetAnswerFromGPT("Read the PDF document contents and understand the concept. Provide summary for this in 3 to 4 simple sentences. Ignore about iTextSharp related points in the details");
-        var suggestion = await viewModel.assistService.GetSuggestion("Provide short Summary for the document");
-        AssistItem botMessage = new AssistItem() { Text = reply, Suggestion = suggestion };
-        viewModel.Messages.Add(botMessage);
-        viewModel.ShowLoading = false;
     }
 
     private void AIAssistant_Clicked(object? sender, EventArgs e)
@@ -42,36 +39,28 @@ public partial class MainPage : ContentPage
 
     internal async Task LoadPDFDataAsync()
     {
-        await Task.Delay(100);
         var documentSource = PdfViewer.DocumentSource;
-        List<string> extractedText = new List<string>();
-        if (documentSource != null)
-        {
-            Stream stream = (Stream)documentSource;
-            PdfLoadedDocument loadedDocument = new PdfLoadedDocument(stream);
-            // Loading page collections
-            PdfLoadedPageCollection loadedPages = loadedDocument.Pages;
-            await Task.Run(() =>
-            {
-                // Extract text from existing PDF document pages
-                for (int i = 0; i < loadedPages.Count; i++)
-                {
-                    string text = $"... Page {i + 1} ...\n";
-                    text += loadedPages[i].ExtractText();
-                    extractedText.Add(text);
-                }
-                string result = string.Join(Environment.NewLine, extractedText);
-                viewModel.assistService.ExtractedText = result;
-            });
-        }
-    }
+        if (documentSource == null) return;
 
-    private string ConvertToString(MemoryStream memoryStream)
-    {
-        // Reset the position of the MemoryStream to the beginning
-        memoryStream.Position = 0;
-        var reader = new StreamReader(memoryStream, System.Text.Encoding.UTF8);
-        return reader.ReadToEnd();
+        var pages = new List<(int PageNumber, string Text)>();
+
+        var stream = (Stream)documentSource;
+        if (stream.CanSeek) stream.Position = 0;
+
+        await Task.Run(() =>
+        {
+            using var loadedDocument = new PdfLoadedDocument(stream);
+            var loadedPages = loadedDocument.Pages;
+
+            for (int i = 0; i < loadedPages.Count; i++)
+            {
+                var pageNumber = i + 1;
+                var text = loadedPages[i].ExtractText() ?? string.Empty;
+                pages.Add((pageNumber, $"... Page {pageNumber} ...\n{text}"));
+            }
+        });
+
+        await viewModel.assistService.BuildPdfIndexAsync(pages);
     }
 
     private void PreviousPage(object? sender, EventArgs e)
