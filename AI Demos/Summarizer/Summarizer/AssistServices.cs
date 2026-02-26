@@ -1,4 +1,6 @@
-﻿using Syncfusion.Maui.AIAssistView;
+﻿using OpenAI.Chat;
+using Summarizer.Services;
+using Syncfusion.Maui.AIAssistView;
 using System.Collections.ObjectModel;
 using Azure.AI.OpenAI;
 using Azure;
@@ -17,7 +19,7 @@ namespace Summarizer
         /// <summary>
         /// Gets or sets the extracted text from a document.
         /// </summary>
-        internal string? ExtractedText { get; set; }
+        internal string? ExtractedDocumentText { get; set; }
 
         /// <summary>
         /// The EndPoint
@@ -37,12 +39,12 @@ namespace Summarizer
         /// <summary>
         /// The IChatClient instance
         /// </summary>
-        private IChatClient? client;
+        private IChatClient? _chatClient;
 
         /// <summary>
         /// The chat history
         /// </summary>
-        private string? chatHistory;
+        private string? _chatTranscript;
 
         #endregion
 
@@ -51,26 +53,32 @@ namespace Summarizer
         /// <summary>
         /// Gets or sets the chat history
         /// </summary>
-        public string? ChatHistory
+        public string? ChatTranscript
         {
-            get { return chatHistory; }
-            set { chatHistory = value; }
+            get { return _chatTranscript; }
+            set { _chatTranscript = value; }
         }
 
         /// <summary>
         /// Gets or sets the IChatClient instance
         /// </summary>
-        public IChatClient? Client
+        public IChatClient? ChatClient
         {
-            get { return client; }
-            set { client = value; }
+            get { return _chatClient; }
+            set { _chatClient = value; }
         }
 
         #endregion
 
+        private readonly TextEmbeddingGenerator _embeddingGenerator = new();
+        private readonly PdfSemanticIndex _semanticIndex;
+        private bool _isIndexReady;
+        private readonly List<(int PageNumber, string Text)> _indexedPages = new();
+
         internal AssistServices()
         {
-            InitializeClient();
+            _semanticIndex = new PdfSemanticIndex(_embeddingGenerator);
+            InitializeChatClient();
         }
 
         /// <summary>
@@ -78,103 +86,130 @@ namespace Summarizer
         /// </summary>
         private void InitializeClient()
         {
-            client = new AzureOpenAIClient(new Uri(endpoint), new AzureKeyCredential(key)).AsChatClient(modelId: DeploymentName);
+            AzureOpenAIClient azureOpenAiClient = new AzureOpenAIClient(new Uri(endpoint), new AzureKeyCredential(key));
+
+            ChatClient chatClient = azureOpenAiClient.GetChatClient(DeploymentName);
+            _chatClient = chatClient.AsIChatClient();
         }
 
-        /// <summary>
-        /// Generates a static prompt message.
-        /// </summary>
-        /// <param name="prompt">The input prompt string.</param>
-        /// <returns>A predefined message requesting OpenAI connection for real-time queries.</returns>
-        internal async Task<string> GetPrompt(string prompt)
+        private bool IsConfigured
         {
-            if (this.Client != null && key != "OPENAI_AI_KEY")
+            get
             {
-                ChatHistory = string.Empty;
-                ChatHistory += $"System: {"Please provide the prompt for responce" + prompt}\nUser: {prompt}";
-                var response = await Client.CompleteAsync(ChatHistory);
-                return response.ToString();
-            }
-            else
-                return "Please connect OpenAI for real time queries";
-        }
-
-        /// <summary>
-        /// Gets a solution to a given prompt by using either local embeddings or extracted text,
-        /// depending on the platform.
-        /// </summary>
-        /// <param name="question">The user's question to be processed.</param>
-        /// <returns>A task representing the asynchronous operation, with a solution string as the result.</returns>
-        internal async Task<string> GetSolutionToPrompt(string question)
-        {
-            try
-            {
-                // Use extracted text
-                if (this.ExtractedText != null && this.Client != null && key != "OPENAI_AI_KEY")
-                {
-                    string message = ExtractedText;
-                    var systemPrompt = "Read the PDF document contents, understand the concept, and select the precise page to answer the user's question. Ignore any points related to iTextSharp. Ensure that all text is plain and not bolded. Pages: Question: " + question;
-                    ChatHistory = string.Empty;
-                    ChatHistory += $"System: {systemPrompt}\nUser: {ExtractedText}";
-                    var response = await Client.CompleteAsync(ChatHistory);
-                    return response.ToString();
-                }
-                return "Please connect OpenAI for real time queries";
-            }
-            catch
-            {
-                return "Please connect OpenAI for real time queries";
+                return _chatClient != null
+                    && !string.IsNullOrWhiteSpace(key)
+                    && key != "API_KEY"
+                    && !string.IsNullOrWhiteSpace(endpoint)
+                    && endpoint != "https://yourendpoint.com/"
+                    && DeploymentName != "DEPLOYMENT_NAME";
             }
         }
 
-        /// <summary>
-        /// Generates suggestions based on a given prompt.
-        /// </summary>
-        /// <param name="prompt">The input prompt string.</param>
-        /// <returns>A task representing the asynchronous operation, with an <see cref="AssistItemSuggestion"/> object as the result.</returns>
-        internal async Task<AssistItemSuggestion> GetSuggestion(string prompt)
+        internal async Task BuildPdfIndexAsync(IReadOnlyList<(int PageNumber, string Text)> pages, CancellationToken cancellationToken = default)
         {
-            var chatSuggestions = new AssistItemSuggestion();
-            var suggestions = new ObservableCollection<ISuggestion>();
-            var suggestion = await GetAnswerFromGPT("You are a helpful assistant. Your task is to analyze the provided text and generate 3 short diverse questions and each question should not exceed 10 words.");
-            if (suggestion != "Please connect OpenAI for real time queries")
+            _indexedPages.Clear();
+            _indexedPages.AddRange(pages);
+
+            _embeddingGenerator.TrainOnCorpusTexts(pages.Select(page => page.Text));
+            await _semanticIndex.BuildIndexFromPagesAsync(pages, cancellationToken);
+
+            _isIndexReady = true;
+        }
+
+        private Task<List<string>> GetRelevantContextAsync(string query, int topK = 6, double minScore = 0.2, CancellationToken cancellationToken = default)
+        {
+            if (!_isIndexReady)
             {
-                string[] parts = suggestion.Split(new string[] { "1. ", "2. ", "3. " }, StringSplitOptions.RemoveEmptyEntries);
-                // Store the parts in separate variables
-                string question1 = parts.Length > 0 ? parts[0].Trim() : string.Empty;
-                string question2 = parts.Length > 1 ? parts[1].Trim() : string.Empty;
-                string question3 = parts.Length > 2 ? parts[2].Trim() : string.Empty;
-                suggestions.Add(new AssistSuggestion() { Text = question1 });
-                suggestions.Add(new AssistSuggestion() { Text = question2 });
-                suggestions.Add(new AssistSuggestion() { Text = question3 });
-                chatSuggestions.Items = suggestions;
+                List<string> emptyContext = new List<string>();
+                return Task.FromResult(emptyContext);
             }
+
+            return _semanticIndex.GetRelevantContextChunksAsync(query, topK, 8, minScore, cancellationToken);
+        }
+
+        /// <summary>
+        /// Gets a general chat completion for a prompt (non-PDF grounded).
+        /// </summary>
+        internal async Task<string> GetPromptAsync(string prompt)
+        {
+            if (!IsConfigured)
+                return "Please connect OpenAI for real time queries";
+
+            string systemPrompt = "You are a helpful assistant. Provide a clear response to the user.";
+            _chatTranscript = $"System: {systemPrompt}\nUser: {prompt}";
+
+            ChatResponse response = await _chatClient!.GetResponseAsync(_chatTranscript);
+            return response.ToString();
+        }
+
+        /// <summary>
+        /// Answers a question using only the indexed PDF context.
+        /// </summary>
+        internal async Task<string> GetDocumentGroundedAnswerAsync(string question)
+        {
+            if (!IsConfigured)
+                return "Please connect OpenAI for real time queries";
+
+            List<string> contextChunks = await GetRelevantContextAsync(question, topK: 6, minScore: 0.2);
+            if (contextChunks==null || contextChunks.Count == 0)
+                return "I couldn't index the PDF yet. Please load the document first.";
+
+            string contextBlock = string.Join("\n\n---\n\n", contextChunks);
+
+            string systemPrompt =
+                "Answer the user's question using ONLY the provided document context.\n\n" +
+                "If the question is unrelated to the document (and is not a greeting/polite message), respond politely in a <p> tag saying you cannot answer because it is not relevant to the document.\n" +
+                "Keep the answer concise and derived from the document.\n" +
+                "Format the answer as HTML only (no <html>/<body> wrapper).\n" +
+                "All text must be the same font size. Headers should be bold but not larger than body text.\n" +
+                "Put bold text inside a <p> tag, and normal content in separate <p> tags.\n\n" +
+                $"DOCUMENT CONTEXT:\n{contextBlock}\n\n" +
+                $"QUESTION:\n{question}";
+
+            _chatTranscript = $"System: {systemPrompt}\nUser: {question}";
+
+            ChatResponse response = await _chatClient!.GetResponseAsync(_chatTranscript);
+            return response.ToString();
+        }
+
+        internal async Task<AssistItemSuggestion> GetSuggestionsAsync(string prompt)
+        {
+            AssistItemSuggestion chatSuggestions = new AssistItemSuggestion();
+            ObservableCollection<ISuggestion> suggestions = new ObservableCollection<ISuggestion>();
+
+            if (!IsConfigured || !_isIndexReady)
+                return chatSuggestions;
+
+            List<string> contextChunks = await GetRelevantContextAsync(prompt, topK: 5, minScore: 0.15);
+            if (contextChunks==null ||contextChunks.Count == 0)
+                return chatSuggestions;
+
+            string contextBlock = string.Join("\n\n---\n\n", contextChunks);
+
+            string systemPrompt =
+                "You are a helpful assistant. Generate 3 short diverse questions based on the context.\n" +
+                "Each question must not exceed 10 words.\n" +
+                "Do not add any other content or description.\n" +
+                "Output strictly as:\n1. ...\n2. ...\n3. ...\n\n" +
+                $"CONTEXT:\n{contextBlock}";
+
+            _chatTranscript = $"System: {systemPrompt}\nUser: {prompt}";
+
+            ChatResponse response = await _chatClient!.GetResponseAsync(_chatTranscript);
+            string suggestionText = response.ToString();
+
+            string[] parts = suggestionText.Split(new[] { "1. ", "2. ", "3. " }, StringSplitOptions.RemoveEmptyEntries);
+
+            string question1 = parts.Length > 0 ? parts[0].Trim() : string.Empty;
+            string question2 = parts.Length > 1 ? parts[1].Trim() : string.Empty;
+            string question3 = parts.Length > 2 ? parts[2].Trim() : string.Empty;
+
+            if (!string.IsNullOrWhiteSpace(question1)) suggestions.Add(new AssistSuggestion { Text = question1 });
+            if (!string.IsNullOrWhiteSpace(question2)) suggestions.Add(new AssistSuggestion { Text = question2 });
+            if (!string.IsNullOrWhiteSpace(question3)) suggestions.Add(new AssistSuggestion { Text = question3 });
+
+            chatSuggestions.Items = suggestions;
             return chatSuggestions;
-        }
-
-        /// <summary>
-        /// Gets an answer from the GPT model using only a system prompt.
-        /// </summary>
-        /// <param name="systemPrompt">The system prompt to guide the AI.</param>
-        /// <returns>A task representing the asynchronous operation, with the answer string as the result.</returns>
-        internal async Task<string> GetAnswerFromGPT(string systemPrompt)
-        {
-            try
-            {
-                if (this.ExtractedText != null &&  this.Client != null && key != "OPENAI_AI_KEY")
-                {
-                    ChatHistory = string.Empty;
-                    ChatHistory += $"System: {systemPrompt}\nUser: {ExtractedText}";
-                    var response = await Client.CompleteAsync(ChatHistory);
-                    return response.ToString();
-                }
-                else
-                    return "Please connect OpenAI for real time queries";
-            }
-            catch
-            {
-                return "Please connect OpenAI for real time queries";
-            }
         }
     }
 }
