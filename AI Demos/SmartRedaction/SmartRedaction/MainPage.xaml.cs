@@ -6,6 +6,7 @@ using Syncfusion.Maui.TreeView;
 using Syncfusion.Pdf.Interactive;
 using Syncfusion.Pdf.Redaction;
 using Syncfusion.Maui.PdfViewer;
+using System.Collections.Specialized;
 using System.Collections.ObjectModel;
 
 namespace SmartRedaction
@@ -25,28 +26,33 @@ namespace SmartRedaction
             sensitiveInfoView.NodeChecked += SensitiveInfoView_NodeChecked;
             sensitiveInfoViewMobile.NodeChecked += SensitiveInfoView_NodeChecked;
             MarkRedaction.StateChanged += MarkRedaction_StateChanged;
-            PdfViewer.AnnotationAdded += PdfViewer_AnnotationAdded;
             AddRedact.PropertyChanged += AddRedact_PropertyChanged;
             PdfViewer.DocumentLoaded += PdfViewer_DocumentLoaded;
+            var redactionMarks = PdfViewer.RedactionMarks as INotifyCollectionChanged;
+            if (redactionMarks!=null)
+                redactionMarks.CollectionChanged += OnRedactionMarksChanged;
         }
 
-        private void MarkRedaction_StateChanged(object? sender, Syncfusion.Maui.Buttons.StateChangedEventArgs e)
+        private void OnRedactionMarksChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            var hasItems = PdfViewer.RedactionMarks != null && PdfViewer.RedactionMarks.Count > 0 && MarkRedaction?.IsChecked == true;
+            if (hasItems == true)
+                AddRedact.IsEnabled = hasItems;
+        }
+
+        private void MarkRedaction_StateChanged(object sender, Syncfusion.Maui.Buttons.StateChangedEventArgs e)
         {
             if (e.IsChecked.HasValue && e.IsChecked.Value)
-            {
-                PdfViewer.AnnotationMode = AnnotationMode.Square;
-                PdfViewer.AnnotationSettings.Square.BorderWidth = 1;
-                PdfViewer.AnnotationSettings.Author = "RedactedRect";
-            }
+                PdfViewer.RedactionMode = RedactionMode.Rect;
             else
-                PdfViewer.AnnotationMode = AnnotationMode.None;
+                PdfViewer.RedactionMode = RedactionMode.None;
         }
 
-        private void PdfViewer_DocumentLoaded(object? sender, EventArgs? e)
+        private void PdfViewer_DocumentLoaded(object sender, EventArgs e)
         {
             if (openAIService.DeploymentName == "DEPLOYMENT_NAME")
             {
-                Application.Current?.MainPage?.DisplayAlert("Alert", "The Azure API key or endpoint is missing or incorrect. Please verify your credentials", "OK");
+                Application.Current?.Windows?.FirstOrDefault()?.Page?.DisplayAlertAsync("Alert", "The Azure API key or endpoint is missing or incorrect. Please verify your credentials", "OK");
                 MobileScan.IsEnabled = false;
                 DesktopScanButton.IsEnabled = false;
             }
@@ -55,9 +61,11 @@ namespace SmartRedaction
                 MobileScan.IsEnabled = true;
                 DesktopScanButton.IsEnabled = true;
             }
+            ViewModel.ChildNodes.Clear();
+            ViewModel.SensitiveInfo.Clear();
         }
 
-        private void AddRedact_PropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
+        private void AddRedact_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             if (AddRedact.IsEnabled)
                 AddRedact.Opacity = 1;
@@ -81,98 +89,75 @@ namespace SmartRedaction
 
         }
 
-        private void PdfViewer_AnnotationAdded(object? sender, AnnotationEventArgs e)
-        {
-            if ((bool)MarkRedaction.IsChecked && e.Annotation is SquareAnnotation)
-            {
-                e.Annotation.Name = $"RedactedRect{PdfViewer.Annotations.Count}";
-                e.Annotation.Author = "RedactedRect";
-                AddRedact.IsEnabled = true;
-            }
-            else if (e.Annotation is SquareAnnotation)
-                SelectRedactitem.IsEnabled = true;
-        }
-
-        private void SensitiveInfoView_NodeChecked(object? sender, NodeCheckedEventArgs e)
+        private void SensitiveInfoView_NodeChecked(object sender, NodeCheckedEventArgs e)
         {
             if (e.Node?.Content is TreeItem treeItem)
             {
                 // Access the NodeText
                 string nodeId = treeItem.NodeId;
                 string nodeText = treeItem.NodeText;
-                // Add or remove annotation for "Select All" nodes
+                // Add or remove Redaction mark for "Select All" nodes
                 if (nodeId == "Select All")
                 {
                     foreach (TreeItem item in ViewModel.ChildNodes)
                     {
+                        RectF bounds = new RectF()
+                        {
+                            X = item.Bounds.X,
+                            Y = item.Bounds.Y,
+                            Width = item.Bounds.Width,
+                            Height = item.Bounds.Height
+                        };
                         if (e.Node.IsChecked == true)
                         {
-                            // Create a rectangle annotation
-                            RectF Bounds = new RectF()
-                            {
-                                X = item.Bounds.X,
-                                Y = item.Bounds.Y,
-                                Width = item.Bounds.Width,
-                                Height = item.Bounds.Height
-                            };
-                            SquareAnnotation annotation = new SquareAnnotation(Bounds, item.PageNumber)
-                            {
-                                Color = Colors.Red,    // Set stroke color
-                                BorderWidth = 1,       // Set stroke thickness
-                                Name = item.NodeId     // Set annotation ID
-                            };
-                            // Add the annotation to the PDF viewer
-                            PdfViewer.AddAnnotation(annotation);
+                            // Create a Reedaction Mark
+                            RedactionMark mark = new RedactionMark(bounds, item.PageNumber);
+                            PdfViewer.AddRedactionMark(mark);
                         }
                         else
                         {
-                            // Find and remove the corresponding annotation
-                            ReadOnlyObservableCollection<Annotation> annotations = PdfViewer.Annotations;
-                            foreach (Annotation annotation in annotations)
+                            // Find and remove the corresponding Redaction Mark
+                            ReadOnlyObservableCollection<RedactionMark> redactions = PdfViewer.RedactionMarks;
+                            foreach (RedactionMark redaction in redactions)
                             {
-                                if (annotation.Name == item.NodeId)
+                                if (redaction.Bounds == bounds && redaction.PageNumber == item.PageNumber)
                                 {
-                                    PdfViewer.RemoveAnnotation(annotation);
+                                    PdfViewer.RemoveRedactionMark(redaction);
                                     break;
                                 }
                             }
                         }
                     }
                 }
-                // Add or remove annotation for a specific page
+                // Add or remove Redaction Mark for a specific page
                 else if (nodeText.Contains("Page"))
                 {
                     foreach (TreeItem item in ViewModel.ChildNodes)
                     {
-                        if (item.PageNumber == int.Parse(treeItem.NodeId))
+                        RectF bounds = new RectF()
+                        {
+                            X = item.Bounds.X,
+                            Y = item.Bounds.Y,
+                            Width = item.Bounds.Width,
+                            Height = item.Bounds.Height
+                        };
+                        if (item.PageNumber == int.Parse(treeItem?.NodeId))
                         {
                             if (e.Node.IsChecked == true)
                             {
-                                // Create and add annotation for the specific page
-                                RectF Bounds = new RectF()
-                                {
-                                    X = item.Bounds.X,
-                                    Y = item.Bounds.Y,
-                                    Width = item.Bounds.Width,
-                                    Height = item.Bounds.Height
-                                };
-                                SquareAnnotation annotation = new SquareAnnotation(Bounds, item.PageNumber)
-                                {
-                                    Color = Colors.Red,
-                                    BorderWidth = 1,
-                                    Name = item.NodeId
-                                };
-                                PdfViewer.AddAnnotation(annotation);
+                                // Create and add Redaction mark for the specific page
+                                RedactionMark mark = new RedactionMark(bounds, item.PageNumber);
+                                PdfViewer.AddRedactionMark(mark);
                             }
                             else
                             {
-                                // Remove annotation for the specific page
-                                ReadOnlyObservableCollection<Annotation> annotations = PdfViewer.Annotations;
-                                foreach (Annotation annotation in annotations)
+                                // Remove Redaction mark for the specific page
+                                ReadOnlyObservableCollection<RedactionMark> redactions = PdfViewer.RedactionMarks;
+                                foreach (RedactionMark redaction in redactions)
                                 {
-                                    if (annotation.Name == item.NodeId)
+                                    if (redaction.Bounds == bounds && redaction.PageNumber == item.PageNumber)
                                     {
-                                        PdfViewer.RemoveAnnotation(annotation);
+                                        PdfViewer.RemoveRedactionMark(redaction);
                                         break;
                                     }
                                 }
@@ -180,45 +165,40 @@ namespace SmartRedaction
                         }
                     }
                 }
-                // Add or remove annotation for other nodes
+                // Add or remove Redaction Marks for other nodes
                 else
                 {
+
+                    // Create and Add Redaction Marks
+                    RectF bounds = new RectF()
+                    {
+                        X = treeItem.Bounds.X,
+                        Y = treeItem.Bounds.Y,
+                        Width = treeItem.Bounds.Width,
+                        Height = treeItem.Bounds.Height
+                    };
                     // Handle other specific nodes
                     if (e.Node.IsChecked == true)
                     {
-                        // Create and add annotation
-                        RectF Bounds = new RectF()
-                        {
-                            X = treeItem.Bounds.X,
-                            Y = treeItem.Bounds.Y,
-                            Width = treeItem.Bounds.Width,
-                            Height = treeItem.Bounds.Height
-                        };
-                        SquareAnnotation annotation = new SquareAnnotation(Bounds, treeItem.PageNumber)
-                        {
-                            Color = Colors.Red,
-                            BorderWidth = 1,
-                            Name = treeItem.NodeId
-                        };
-                        PdfViewer.AddAnnotation(annotation);
+                        RedactionMark marks = new RedactionMark(bounds, treeItem.PageNumber);
+                        PdfViewer.AddRedactionMark(marks);
                     }
                     else
                     {
-                        // Remove annotation
-                        ReadOnlyObservableCollection<Annotation> annotations = PdfViewer.Annotations;
-                        foreach (Annotation annotation in annotations)
+                        // Remove Redaction mark
+                        ReadOnlyObservableCollection<RedactionMark> redactions = PdfViewer.RedactionMarks;
+                        foreach (RedactionMark redaction in redactions)
                         {
-                            if (annotation.Name == treeItem.NodeId)
+                            if (redaction.Bounds == bounds && redaction.PageNumber == treeItem.PageNumber)
                             {
-                                PdfViewer.RemoveAnnotation(annotation);
+                                PdfViewer.RemoveRedactionMark(redaction);
                                 break;
                             }
                         }
                     }
                 }
             }
-            if (PdfViewer.Annotations.Count >= 1 &&
-    PdfViewer.Annotations.OfType<SquareAnnotation>().Count(a => !string.IsNullOrEmpty(a.Author) || a.Name.Contains("RedactedRect") || a.Author.Contains("RedactedRect")) >= 1)
+            if (PdfViewer.RedactionMarks != null && PdfViewer.RedactionMarks.Count >= 0)
             {
                 SelectRedactitem.IsEnabled = true;
                 SelectRedactItem_Mobile.IsEnabled = true;
@@ -438,40 +418,7 @@ namespace SmartRedaction
         private void Redact()
         {
             MarkRedaction.IsChecked = false;
-            MemoryStream pdf = new MemoryStream();
-            PdfViewer.SaveDocument(pdf);
-            PdfLoadedDocument loadedDocument = new PdfLoadedDocument(pdf);
-            foreach (PdfLoadedPage page in loadedDocument.Pages)
-            {
-                List<PdfLoadedAnnotation> removeAnnotations = new List<PdfLoadedAnnotation>();
-                foreach (PdfLoadedAnnotation annotation in page.Annotations)
-                {
-                    // Iterate through the annotations that highlight the sensitive information and redact the content.
-                    if (annotation is PdfLoadedRectangleAnnotation)
-                    {
-                        //Check the annot for Redaction
-                        if (annotation.Name.Contains("RedactedRect") || annotation.Author.Contains("RedactedRect"))
-                        {
-                            removeAnnotations.Add(annotation);
-                            PdfRedaction redaction = new PdfRedaction(annotation.Bounds, Syncfusion.Drawing.Color.Black);
-                            page.AddRedaction(redaction);
-                            annotation.Flatten = true;
-                        }
-
-                    }
-                }
-                //Remove from the Annotation list
-                foreach (PdfLoadedAnnotation annotation in removeAnnotations)
-                {
-                    page.Annotations.Remove(annotation);
-                }
-            }
-            loadedDocument.Redact();
-            //Reload the document to view the redaction
-            MemoryStream stream = new MemoryStream();
-            loadedDocument.Save(stream);
-            PdfViewer.LoadDocument(stream);
-            loadedDocument.Close(true);
+            PdfViewer.RedactAsync();
             AddRedact.IsEnabled = false;
         }
 
@@ -498,7 +445,7 @@ namespace SmartRedaction
             var filePath = Path.Combine(FileSystem.AppDataDirectory, "SavedSample.pdf");
             var stream = new FileStream(filePath, FileMode.Create, FileAccess.Write);
             PdfViewer.SaveDocument(stream);
-            Application.Current?.MainPage?.DisplayAlert("Success", $"Document saved successfully at:\n{filePath}", "OK");
+            Application.Current?.Windows?.FirstOrDefault()?.Page?.DisplayAlertAsync("Success", $"Document saved successfully at:\n{filePath}", "OK");
         }
 
         private void OpenCloseMobileRedactLayout(object sender, EventArgs e)

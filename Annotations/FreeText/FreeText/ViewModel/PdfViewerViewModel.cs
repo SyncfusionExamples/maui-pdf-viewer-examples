@@ -7,7 +7,7 @@ namespace FreeText
     public class PdfViewerViewModel : INotifyPropertyChanged
     {
         private ICommand _openFileCommand;
-        private Stream _documentStream;
+        private Stream? _documentStream;
         private float selectedThickness;
         private float selectedOpacity;
         private float selectedFontSize;
@@ -15,12 +15,12 @@ namespace FreeText
         /// <summary>
         /// Occurs when a property is changed.
         /// </summary>
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler? PropertyChanged;
 
         /// <summary>
         /// Stores the PDF document stream.
         /// </summary>
-        public Stream PdfDocumentStream
+        public Stream? PdfDocumentStream
         {
             get => _documentStream;
             set
@@ -102,7 +102,7 @@ namespace FreeText
         /// <summary>
         /// Picks the file from the disc using the given option and creates the stream.
         /// </summary>
-        public async Task<FileResult> PickAndShow(PickOptions options)
+        public async Task<FileResult?> PickAndShow(PickOptions options)
         {
             try
             {
@@ -121,7 +121,7 @@ namespace FreeText
                     message = ex.Message;
                 else
                     message = "File open failed.";
-                _ = Application.Current.MainPage.DisplayAlert("Error", message, "OK");
+                _ = Application.Current?.Windows?.FirstOrDefault()?.Page?.DisplayAlertAsync("Error", message, "OK");
             }
             return null;
         }

@@ -1,7 +1,9 @@
+using CommunityToolkit.Mvvm.Messaging;
+using CommunityToolkit.Mvvm.Messaging.Messages;
 using Microsoft.Maui.Platform;
 using Syncfusion.Maui.PdfViewer;
-using System.Reflection;
 using Syncfusion.Maui.Sliders;
+using System.Reflection;
 
 namespace Stamp;
 
@@ -48,16 +50,16 @@ public partial class MainPage : ContentPage
 #endif
         PdfViewer.Tapped += PdfViewer_Tapped;
 
-        MessagingCenter.Subscribe<StampDialog, StampType>(this, "Built-inStamp", (sender, stampType) =>
+        WeakReferenceMessenger.Default.Register<BuiltInStampMessage>(this, (recipient, message) =>
         {
-            StampType = stampType;
+            StampType = message.Value;
             ImageStream = null;
             StampMode = true;
         });
 
-        MessagingCenter.Subscribe<StampDialog, Stream>(this, "CustomStamp", (sender, stream) =>
+        WeakReferenceMessenger.Default.Register<CustomStampMessage>(this, (recipient, message)=>
         {
-            ImageStream = stream;
+            ImageStream = message.Value;
             StampMode = true;
         });
     }
@@ -284,7 +286,7 @@ public partial class MainPage : ContentPage
         string targetFile = Path.Combine(FileSystem.Current.AppDataDirectory, "Saved.pdf");
         using FileStream outputStream = File.Create(targetFile);
         PdfViewer.SaveDocument(outputStream);
-        await DisplayAlert("Document Saved", "The document has been saved to the file " + targetFile, "OK");
+        await DisplayAlertAsync("Document Saved", "The document has been saved to the file " + targetFile, "OK");
     }
 
     /// <summary>
@@ -298,10 +300,10 @@ public partial class MainPage : ContentPage
             Stream inputStream = File.OpenRead(fileName);
             inputStream.Position = 0;
             await PdfViewer.ImportAnnotationsAsync(inputStream, Syncfusion.Pdf.Parsing.AnnotationDataFormat.XFdf);
-            await DisplayAlert("Information", "Annotations Loaded from the " + fileName, "OK");
+            await DisplayAlertAsync("Information", "Annotations Loaded from the " + fileName, "OK");
         }
         else
-            await DisplayAlert("XFDF file Not Found", "No xfdf files available for import. Please export the annotations to an xfdf file and then import. ", "OK");
+            await DisplayAlertAsync("XFDF file Not Found", "No xfdf files available for import. Please export the annotations to an xfdf file and then import. ", "OK");
     }
 
     /// <summary>
@@ -327,7 +329,17 @@ public partial class MainPage : ContentPage
         // Copy the file to the Directory
         using FileStream outputStream = File.Create(targetFile);
         await inputStream.CopyToAsync(outputStream);
-        await DisplayAlert("Annotations exported", "The annotations are exported to the file " + targetFile, "OK");
+        await DisplayAlertAsync("Annotations exported", "The annotations are exported to the file " + targetFile, "OK");
     }
     #endregion
+}
+
+public sealed class BuiltInStampMessage : ValueChangedMessage<StampType>
+{
+    public BuiltInStampMessage(StampType value) : base(value) { }
+}
+
+public sealed class CustomStampMessage : ValueChangedMessage<Stream>
+{
+    public CustomStampMessage(Stream value) : base(value) { }
 }

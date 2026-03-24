@@ -7,7 +7,7 @@ namespace Shapes
     public class PdfViewerViewModel : INotifyPropertyChanged
     {
         private ICommand _openFileCommand;
-        private Stream _documentStream;
+        private Stream? _documentStream;
         private float _selectedThickness;
         private float _selectedOpacity;
         private float _selectedFillColorOpacity;
@@ -20,7 +20,7 @@ namespace Shapes
         /// <summary>
         /// Stores the PDF document stream.
         /// </summary>
-        public Stream PdfDocumentStream
+        public Stream? PdfDocumentStream
         {
             get => _documentStream;
             set
@@ -112,7 +112,7 @@ namespace Shapes
         /// <summary>
         /// Picks the file from the disc using the given option and creates the stream.
         /// </summary>
-        public async Task<FileResult> PickAndShow(PickOptions options)
+        public async Task<FileResult?> PickAndShow(PickOptions options)
         {
             try
             {
@@ -131,7 +131,7 @@ namespace Shapes
                     message = ex.Message;
                 else
                     message = "File open failed.";
-                _ = Application.Current.MainPage.DisplayAlert("Error", message, "OK");
+                _ = Application.Current?.Windows?.FirstOrDefault()?.Page?.DisplayAlertAsync("Error", message, "OK");
             }
             return null;
         }

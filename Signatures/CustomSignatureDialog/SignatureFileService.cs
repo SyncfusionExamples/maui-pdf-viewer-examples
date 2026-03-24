@@ -45,7 +45,7 @@ public class SignatureFileService
                     else
                     {
                         var page = Application.Current?.Windows[0]?.Page;
-                        page?.DisplayAlert("Error", $"Pick a file of type {fileExtension}", "OK");
+                        page?.DisplayAlertAsync("Error", $"Pick a file of type {fileExtension}", "OK");
                     }                    
                 }
             }
@@ -55,7 +55,7 @@ public class SignatureFileService
         {
             string message = !string.IsNullOrEmpty(ex.Message) ? ex.Message : "File open failed.";
             var page = Application.Current?.Windows[0]?.Page;
-            page?.DisplayAlert("Error", message, "OK");
+            page?.DisplayAlertAsync("Error", message, "OK");
         }
         return null;
     }

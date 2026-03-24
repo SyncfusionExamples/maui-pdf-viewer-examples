@@ -9,7 +9,7 @@ namespace FreeText;
 public partial class MainPage : ContentPage
 {
    
-    Annotation SelectedAnnotation;
+    Annotation? SelectedAnnotation;
 
     public MainPage()
     {
@@ -134,7 +134,7 @@ public partial class MainPage : ContentPage
     /// <summary>
     /// Handles the deselection of an annotation, resetting the UI and hiding the editor controls.
     /// </summary>
-    private void PdfViewer_AnnotationDeselected(object sender, AnnotationEventArgs e)
+    private void PdfViewer_AnnotationDeselected(object? sender, AnnotationEventArgs? e)
     {
         SelectedAnnotation = null;
         ColorPalatte.IsVisible = false;
@@ -147,9 +147,9 @@ public partial class MainPage : ContentPage
     /// <summary>
     /// Handles the selection of an annotation, updating the UI to display the appropriate editor controls and options.
     /// </summary>
-    private void PdfViewer_AnnotationSelected(object sender, AnnotationEventArgs e)
+    private void PdfViewer_AnnotationSelected(object? sender, AnnotationEventArgs? e)
     {
-        SelectedAnnotation = e.Annotation;
+        SelectedAnnotation = e?.Annotation;
         delete.IsVisible = true;
         if (SelectedAnnotation is FreeTextAnnotation freeText)
         {
@@ -228,7 +228,7 @@ public partial class MainPage : ContentPage
         string targetFile = Path.Combine(FileSystem.Current.AppDataDirectory, "Saved.pdf");
         using FileStream outputStream = File.Create(targetFile);
         await PdfViewer.SaveDocumentAsync(outputStream);
-        await DisplayAlert("Document Saved", "The document has been saved to the file " + targetFile, "OK");
+        await DisplayAlertAsync("Document Saved", "The document has been saved to the file " + targetFile, "OK");
     }
 
     /// <summary>
@@ -245,14 +245,14 @@ public partial class MainPage : ContentPage
     /// Copies the contents of the input stream to a file in the application's data directory.
     /// </summary>
     /// <param name="inputStream">The input stream containing the data to be copied.</param>
-    /// <param name="filename">The name of the target file.</param>
+    /// <param name="fileName">The name of the target file.</param>
     /// <returns>A task representing the asynchronous operation.</returns>
     private async Task CopyFileToAppDataDirectory(Stream inputStream, string fileName)
     {
         string targetFile = Path.Combine(FileSystem.Current.AppDataDirectory, fileName);
         using FileStream outputStream = File.Create(targetFile);
         await inputStream.CopyToAsync(outputStream);
-        await DisplayAlert("Annotations Exported", "The annotations are exported to the file " + targetFile  , " OK");
+        await DisplayAlertAsync("Annotations Exported", "The annotations are exported to the file " + targetFile  , " OK");
     }
 
     /// <summary>
@@ -263,9 +263,9 @@ public partial class MainPage : ContentPage
         if (SelectedAnnotation != null)
         {
             SelectedAnnotation.IsLocked = !SelectedAnnotation.IsLocked;
-        }
-        Unlock.IsVisible = SelectedAnnotation.IsLocked;
-        Lock.IsVisible = !SelectedAnnotation.IsLocked;
+            Unlock.IsVisible = SelectedAnnotation.IsLocked;
+            Lock.IsVisible = !SelectedAnnotation.IsLocked;
+        }        
     }
 
     /// <summary>
@@ -279,10 +279,10 @@ public partial class MainPage : ContentPage
             Stream inputStream = File.OpenRead(fileName);
             inputStream.Position = 0;
             await PdfViewer.ImportAnnotationsAsync(inputStream, Syncfusion.Pdf.Parsing.AnnotationDataFormat.XFdf);
-            await DisplayAlert("Information", "Annotations Loaded from the " + fileName, "OK");
+            await DisplayAlertAsync("Information", "Annotations Loaded from the " + fileName, "OK");
         }
         else
-            await DisplayAlert("XFDF file Not Found", "No xfdf files available for import. Please export the annotations to an xfdf file and then import. ", "OK");
+            await DisplayAlertAsync("XFDF file Not Found", "No xfdf files available for import. Please export the annotations to an xfdf file and then import. ", "OK");
     }
 
     /// <summary>

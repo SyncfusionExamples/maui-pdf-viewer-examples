@@ -47,13 +47,13 @@
                 else
                 {
                     // Display an error message if the file does not exist
-                    await DisplayAlert("Error", "PDF file not found.", "OK");
+                    await DisplayAlertAsync("Error", "PDF file not found.", "OK");
                 }
             }
             catch (Exception ex)
             {
                 // Display an error message for any exceptions that occur during the process
-                await DisplayAlert("Error", ex.Message, "OK");
+                await DisplayAlertAsync("Error", ex.Message, "OK");
             }
         }
 

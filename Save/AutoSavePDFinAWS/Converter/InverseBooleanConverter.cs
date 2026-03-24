@@ -23,7 +23,7 @@ namespace AutoSavePDFinAWS
         /// <param name="culture">Culture information for the conversion (not used)</param>
         /// <returns>The inverted boolean value</returns>
         /// <exception cref="InvalidOperationException">Thrown when target type is not boolean</exception>
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        public object Convert(object? value, Type? targetType, object? parameter, CultureInfo culture)
         {
             // Validate that the target type is boolean
             if (targetType != typeof(bool))
@@ -43,7 +43,7 @@ namespace AutoSavePDFinAWS
         /// <param name="culture">Culture information for the conversion</param>
         /// <returns>Not supported</returns>
         /// <exception cref="NotSupportedException">Always thrown as this operation is not supported</exception>
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        public object ConvertBack(object? value, Type? targetType, object? parameter, CultureInfo culture)
         {
             throw new NotSupportedException("InverseBooleanConverter does not support ConvertBack operation");
         }

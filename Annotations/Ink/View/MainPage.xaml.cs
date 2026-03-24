@@ -5,7 +5,7 @@ namespace Ink;
 
 public partial class MainPage : ContentPage
 {
-    Annotation SelectedAnnotation;
+    Annotation? SelectedAnnotation;
     //When loading password protected files, it is used to wait the current thread's execution, until the user enters the password.
     private ManualResetEvent manualResetEvent = new ManualResetEvent(false);
 
@@ -64,7 +64,7 @@ public partial class MainPage : ContentPage
     /// Event handler for the "AnnotationDeselected" event of the PdfViewer.
     /// Clears the selected annotation and adjusts the visibility and layout of the EditorControl and associated UI elements.
     /// </summary>
-    private void PdfViewer_AnnotationDeselected(object sender, AnnotationEventArgs e)
+    private void PdfViewer_AnnotationDeselected(object? sender, AnnotationEventArgs? e)
     {
         SelectedAnnotation = null;
         inkEditor.IsVisible = false;
@@ -76,9 +76,9 @@ public partial class MainPage : ContentPage
     /// Event handler for the "AnnotationSelected" event of the PdfViewer.
     /// Handles the selection of an annotation by updating UI elements in the EditorControl based on the selected annotation type.
     /// </summary>
-    private void PdfViewer_AnnotationSelected(object sender, AnnotationEventArgs e)
+    private void PdfViewer_AnnotationSelected(object? sender, AnnotationEventArgs? e)
     {
-        SelectedAnnotation = e.Annotation;
+        SelectedAnnotation = e?.Annotation;
         if(SelectedAnnotation is InkAnnotation inkAnnotation)
         {
             inkEditor.SelectedThickness = inkAnnotation.BorderWidth;
@@ -94,8 +94,11 @@ public partial class MainPage : ContentPage
         {
             AnnotationPropertyGrid.IsVisible = true;
         }
-        UnlockButton.IsVisible = SelectedAnnotation.IsLocked ? true : false;
-        Lockbutton.IsVisible = SelectedAnnotation.IsLocked ? false : true;
+        if(SelectedAnnotation != null)
+        {
+            UnlockButton.IsVisible = SelectedAnnotation.IsLocked ? true : false;
+            Lockbutton.IsVisible = SelectedAnnotation.IsLocked ? false : true;
+        }        
     }
 
     /// <summary>
@@ -166,9 +169,9 @@ public partial class MainPage : ContentPage
         if (SelectedAnnotation != null)
         {
             SelectedAnnotation.IsLocked = !SelectedAnnotation.IsLocked;
-        }
-        UnlockButton.IsVisible = SelectedAnnotation.IsLocked ? true : false;
-        Lockbutton.IsVisible = SelectedAnnotation.IsLocked ? false : true;
+            UnlockButton.IsVisible = SelectedAnnotation.IsLocked ? true : false;
+            Lockbutton.IsVisible = SelectedAnnotation.IsLocked ? false : true;
+        }       
     }
 
     /// <summary>
@@ -179,7 +182,7 @@ public partial class MainPage : ContentPage
         string targetFile = Path.Combine(FileSystem.Current.AppDataDirectory, "Saved.pdf");
         using FileStream outputStream = File.Create(targetFile);
         await PdfViewer.SaveDocumentAsync(outputStream);
-        await DisplayAlert("Document Saved", "The document has been saved to the file " + targetFile, "OK");
+        await DisplayAlertAsync("Document Saved", "The document has been saved to the file " + targetFile, "OK");
     }
 
 
@@ -194,10 +197,10 @@ public partial class MainPage : ContentPage
             Stream inputStream = File.OpenRead(fileName);
             inputStream.Position = 0;
             await PdfViewer.ImportAnnotationsAsync(inputStream, Syncfusion.Pdf.Parsing.AnnotationDataFormat.XFdf);
-            await DisplayAlert("Information", "Annotations Loaded from the " + fileName, "OK");
+            await DisplayAlertAsync("Information", "Annotations Loaded from the " + fileName, "OK");
         }
         else
-            await DisplayAlert("XFDF file Not Found", "No xfdf files available for import. Please export the annotations to an xfdf file and then import. ", "OK");
+            await DisplayAlertAsync("XFDF file Not Found", "No xfdf files available for import. Please export the annotations to an xfdf file and then import. ", "OK");
     }
 
     /// <summary>
@@ -223,6 +226,6 @@ public partial class MainPage : ContentPage
         // Copy the file to the AppDataDirectory
         using FileStream outputStream = File.Create(targetFile);
         await inputStream.CopyToAsync(outputStream);
-        await DisplayAlert("Annotations exported", "The annotations are exported to the file " + targetFile, "OK");
+        await DisplayAlertAsync("Annotations exported", "The annotations are exported to the file " + targetFile, "OK");
     }
 }

@@ -124,7 +124,7 @@ public partial class MainPage : ContentPage
     /// Handles the event when the opacity of the editor control changes and updates the opacity of the selected annotation.
     /// If no annotation is selected, it sets the default opacity for text markups.
     /// </summary>
-    private void FreeTextEditor_OpacityChanged(object? sender, float e)
+    private void FreeTextEditor_OpacityChanged(object sender, float e)
     {
         if (SelectedAnnotation != null && (SelectedAnnotation is HighlightAnnotation || SelectedAnnotation is UnderlineAnnotation || SelectedAnnotation is StrikeOutAnnotation || SelectedAnnotation is SquigglyAnnotation))
             SelectedAnnotation.Opacity = e;
@@ -159,7 +159,7 @@ public partial class MainPage : ContentPage
     /// Handles the event when the color of the editor control changes and updates the color of the selected annotation.
     /// If no annotation is selected, it sets the default color for text markups.
     /// </summary>
-    private void FreeTextEditor_FontColorChanged(object? sender, Color e)
+    private void FreeTextEditor_FontColorChanged(object sender, Color e)
     {
         if (SelectedAnnotation != null && (SelectedAnnotation is HighlightAnnotation || SelectedAnnotation is UnderlineAnnotation || SelectedAnnotation is StrikeOutAnnotation || SelectedAnnotation is SquigglyAnnotation))
             SelectedAnnotation.Color = e;
@@ -358,7 +358,7 @@ public partial class MainPage : ContentPage
         string targetFile = Path.Combine(FileSystem.Current.AppDataDirectory, "Saved.pdf");
         using FileStream outputStream = File.Create(targetFile);
         PdfViewer.SaveDocument(outputStream);
-        await DisplayAlert("Document Saved", "The document has been saved to the file " + targetFile, "OK");
+        await DisplayAlertAsync("Document Saved", "The document has been saved to the file " + targetFile, "OK");
     }
 
     /// <summary>
@@ -384,10 +384,10 @@ public partial class MainPage : ContentPage
             Stream inputStream = File.OpenRead(fileName);
             inputStream.Position = 0;
             await PdfViewer.ImportAnnotationsAsync(inputStream, Syncfusion.Pdf.Parsing.AnnotationDataFormat.XFdf);
-            await DisplayAlert("Information", "Annotations Loaded from the " + fileName, "OK");
+            await DisplayAlertAsync("Information", "Annotations Loaded from the " + fileName, "OK");
         }
         else
-            await DisplayAlert("XFDF file Not Found", "No xfdf files available for import. Please export the annotations to an xfdf file and then import. ", "OK");
+            await DisplayAlertAsync("XFDF file Not Found", "No xfdf files available for import. Please export the annotations to an xfdf file and then import. ", "OK");
     }
 
     /// <summary>
@@ -413,7 +413,7 @@ public partial class MainPage : ContentPage
         // Copy the file to the Directory
         using FileStream outputStream = File.Create(targetFile);
         await inputStream.CopyToAsync(outputStream);
-        await DisplayAlert("Annotations exported", "The annotations are exported to the file " + targetFile, "OK");
+        await DisplayAlertAsync("Annotations exported", "The annotations are exported to the file " + targetFile, "OK");
     }
     
     private void EditOption_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)

@@ -32,12 +32,12 @@ namespace FormFilling
             string targetFile = Path.Combine(FileSystem.Current.AppDataDirectory, "Saved.pdf");
             using FileStream outputStream = File.Create(targetFile);
             pdfViewer.SaveDocument(outputStream);
-            await DisplayAlert("Document Saved", "The document has been saved to the file " + targetFile, "OK");
+            await DisplayAlertAsync("Document Saved", "The document has been saved to the file " + targetFile, "OK");
         }
         /// <summary>
         /// Handles the event when the "Import" button is clicked, importing annotations from an XFDF file.
         /// </summary>
-        private void Import_Clicked(object sender, EventArgs e)
+        private async void Import_Clicked(object sender, EventArgs e)
         {
             string fileName = Path.Combine(FileSystem.Current.AppDataDirectory, "Export.xfdf");
             if (File.Exists(fileName))
@@ -45,10 +45,10 @@ namespace FormFilling
                 Stream inputStream = File.OpenRead(fileName);
                 inputStream.Position = 0;
                 pdfViewer.ImportFormData(inputStream, Syncfusion.Pdf.Parsing.DataFormat.XFdf);
-                DisplayAlert("Form data imported", "Form data from the " + fileName + " file are imported", "OK");
+                await DisplayAlertAsync("Form data imported", "Form data from the " + fileName + " file are imported", "OK");
             }
             else
-                DisplayAlert("No files to import", "There are no xfdf files to import. Please export the form data to an xfdf file and then import. ", "OK");
+                await DisplayAlertAsync("No files to import", "There are no xfdf files to import. Please export the form data to an xfdf file and then import. ", "OK");
         }
 
         /// <summary>
@@ -73,7 +73,7 @@ namespace FormFilling
             // Copy the file to the AppDataDirectory
             using FileStream outputStream = File.Create(targetFile);
             await inputStream.CopyToAsync(outputStream);
-            await DisplayAlert("Form data exported", "The form data are exported to the file " + targetFile, "OK");
+            await DisplayAlertAsync("Form data exported", "The form data are exported to the file " + targetFile, "OK");
         }
 
     }

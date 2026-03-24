@@ -102,7 +102,7 @@ namespace OpenLocalFile
                     message = ex.Message;
                 else
                     message = "File open failed.";
-                Application.Current?.MainPage?.DisplayAlert("Error", message, "OK");
+                Application.Current?.Windows?.FirstOrDefault()?.Page?.DisplayAlertAsync("Error", message, "OK");
             }
         }
     }

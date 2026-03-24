@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36203.30 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DetectPdfChanges", "DetectPdfChanges.csproj", "{EE2D7816-9746-44D3-B79D-5A332BA94360}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EE2D7816-9746-44D3-B79D-5A332BA94360}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EE2D7816-9746-44D3-B79D-5A332BA94360}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EE2D7816-9746-44D3-B79D-5A332BA94360}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EE2D7816-9746-44D3-B79D-5A332BA94360}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C193A17D-474D-428F-A7E1-CDF6640246CF}
+	EndGlobalSection
+EndGlobal

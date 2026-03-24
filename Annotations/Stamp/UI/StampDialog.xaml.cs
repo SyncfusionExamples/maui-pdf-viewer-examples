@@ -1,3 +1,4 @@
+using CommunityToolkit.Mvvm.Messaging;
 using Syncfusion.Maui.PdfViewer;
 using System.Reflection;
 
@@ -59,11 +60,11 @@ public partial class StampDialog : ContentView
         }
         if (imageStream == null)
         {
-            MessagingCenter.Send<StampDialog, StampType>(this, "Built-inStamp", stampType);
+            WeakReferenceMessenger.Default.Send(new BuiltInStampMessage(stampType));
         }
         else
         {
-            MessagingCenter.Send<StampDialog, Stream>(this, "CustomStamp", imageStream);
+            WeakReferenceMessenger.Default.Send(new CustomStampMessage(imageStream));
         }
         this.IsVisible = false;
     }

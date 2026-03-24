@@ -44,7 +44,7 @@
                             return new PdfFileData(result.FileName, await result.OpenReadAsync());
                         }
                         else
-                            Application.Current?.MainPage?.DisplayAlert("Error", $"Pick a file of type {fileExtension}", "OK");
+                            Application.Current?.Windows?.FirstOrDefault()?.Page?.DisplayAlertAsync("Error", $"Pick a file of type {fileExtension}", "OK");
                     }
                 }
                 return null;
@@ -56,7 +56,7 @@
                     message = ex.Message;
                 else
                     message = "File open failed.";
-                Application.Current?.MainPage?.DisplayAlert("Error", message, "OK");
+                Application.Current?.Windows?.FirstOrDefault()?.Page?.DisplayAlertAsync("Error", message, "OK");
             }
             return null;
         }
