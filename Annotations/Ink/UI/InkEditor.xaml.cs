@@ -10,9 +10,9 @@ public partial class InkEditor : ContentView
     internal float SelectedOpacity { get; set; } = 1;
     internal float SelectedThickness { get; set; } = 5;
     
-    internal event EventHandler<Microsoft.Maui.Graphics.Color> ColorChanged;
-    internal event EventHandler<float> ThicknessChanged;
-    internal event EventHandler<float> OpacityChanged;
+    internal event EventHandler<Microsoft.Maui.Graphics.Color>? ColorChanged;
+    internal event EventHandler<float>? ThicknessChanged;
+    internal event EventHandler<float>? OpacityChanged;
 
     Button? PreButton = null;
     public InkEditor()
@@ -60,14 +60,17 @@ public partial class InkEditor : ContentView
     }
 
 #if MACCATALYST
-    Frame Colorpaletteborder = new Frame()
+    Border Colorpaletteborder = new Border()
     {
         BackgroundColor = Color.FromArgb("#EEE8F4"),
-        BorderColor = Color.FromArgb("#26000000"),
+        Stroke = Color.FromArgb("#26000000"),
         Padding = new Thickness(0),
         VerticalOptions = LayoutOptions.Start,
         HorizontalOptions = LayoutOptions.Start,
-        CornerRadius = 12,
+        StrokeShape = new RoundRectangle
+        {
+            CornerRadius = new CornerRadius(12)
+        },
         Shadow = new Shadow
         {
             Offset = new Point(-1, 0),
@@ -185,7 +188,7 @@ public partial class InkEditor : ContentView
 #else
             selectedColorButtonHighlightStroke.Margin = new Thickness(0, 0, 2, 0);
 #endif
-            ColorChanged.Invoke(this, GetColor(button));
+            ColorChanged?.Invoke(this, GetColor(button));
         }
         if (selectedColorButtonHighlightStroke.Parent == null)
         {
@@ -216,13 +219,13 @@ public partial class InkEditor : ContentView
     {
         float opacity = (float)shapeStrokeOpacitySlider.Value;
         SelectedOpacity = opacity;
-        OpacityChanged.Invoke(this,opacity);
+        OpacityChanged?.Invoke(this,opacity);
     }
     
     private void SfSlider_ValueChangeEnd(object sender, EventArgs e)
     {
         float thickness = (float)FreetextStroke.Value;
         SelectedThickness = thickness;
-        ThicknessChanged.Invoke(this, thickness);
+        ThicknessChanged?.Invoke(this, thickness);
     }
 }

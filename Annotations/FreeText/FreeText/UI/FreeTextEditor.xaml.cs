@@ -13,12 +13,12 @@ public partial class FreeTextEditor : ContentView
     internal float SelectedFontSize { get; set; } = 12;
     internal float SelectedThickness { get; set; } = 1;
 
-    internal event EventHandler<Microsoft.Maui.Graphics.Color> FillColorChanged;
-    internal event EventHandler<Microsoft.Maui.Graphics.Color> FontColorChanged;
-    internal event EventHandler<Microsoft.Maui.Graphics.Color> BorderColorChanged;
-    internal event EventHandler<float> BorderThicknessChanged;
-    internal event EventHandler<float> OpacityChanged;
-    internal event EventHandler<double> FontSizeChanged;
+    internal event EventHandler<Microsoft.Maui.Graphics.Color>? FillColorChanged;
+    internal event EventHandler<Microsoft.Maui.Graphics.Color>? FontColorChanged;
+    internal event EventHandler<Microsoft.Maui.Graphics.Color>? BorderColorChanged;
+    internal event EventHandler<float>? BorderThicknessChanged;
+    internal event EventHandler<float>? OpacityChanged;
+    internal event EventHandler<double>? FontSizeChanged;
 
     Button? PreButton = null;
     public FreeTextEditor()
@@ -27,7 +27,7 @@ public partial class FreeTextEditor : ContentView
         Colorpaletteborder.Content = MyGrid;
         this.Content = Colorpaletteborder;
         tabView.SelectionChanged += OnSelectionChanged;
-        tabView.LayoutChanged += TabView_LayoutChanged;
+        tabView.SizeChanged += TabView_LayoutChanged;
         this.PropertyChanged += FreeTextFillColorPalatte_PropertyChanged;
     }
 
@@ -100,14 +100,17 @@ public partial class FreeTextEditor : ContentView
     }
 
 #if MACCATALYST
-    Frame Colorpaletteborder = new Frame()
+    Border Colorpaletteborder = new Border()
     {
         BackgroundColor = Color.FromArgb("#EEE8F4"),
-        BorderColor = Color.FromArgb("#26000000"),
+        Stroke = Color.FromArgb("#26000000"),
         Padding = new Thickness(0),
         VerticalOptions = LayoutOptions.Start,
         HorizontalOptions = LayoutOptions.Start,
-        CornerRadius = 12,
+        StrokeShape = new RoundRectangle
+        {
+            CornerRadius = new CornerRadius(12)
+        },
         Shadow = new Shadow
         {
             Offset = new Point(-1, 0),
@@ -219,7 +222,7 @@ public partial class FreeTextEditor : ContentView
             button.WidthRequest = 40;
             button.CornerRadius = 40;
 #if MACCATALYST || IOS
-            PreButton.CornerRadius = 17;
+            PreButton?.CornerRadius = 17;
 #endif
             button.HorizontalOptions = LayoutOptions.Center;
             button.VerticalOptions = LayoutOptions.Center;
@@ -227,7 +230,7 @@ public partial class FreeTextEditor : ContentView
             int row = Grid.GetRow(button);
             Grid.SetColumn(selectedColorButtonHighlight, column);
             Grid.SetRow(selectedColorButtonHighlight, row);
-            FillColorChanged.Invoke(this, GetColor(button));
+            FillColorChanged?.Invoke(this, GetColor(button));
         }
         if (selectedColorButtonHighlight.Parent == null)
         {
@@ -263,7 +266,7 @@ public partial class FreeTextEditor : ContentView
             button.WidthRequest = 40;
             button.CornerRadius = 40;
 #if MACCATALYST || IOS
-            PreButton.CornerRadius = 17;
+            PreButton?.CornerRadius = 17;
 #endif
             button.HorizontalOptions = LayoutOptions.Center;
             button.VerticalOptions = LayoutOptions.Center;
@@ -271,7 +274,7 @@ public partial class FreeTextEditor : ContentView
             int row = Grid.GetRow(button);
             Grid.SetColumn(selectedColorButtonHighlightStroke, column);
             Grid.SetRow(selectedColorButtonHighlightStroke, row);
-            BorderColorChanged.Invoke(this, GetColor(button));
+            BorderColorChanged?.Invoke(this, GetColor(button));
         }
         if (selectedColorButtonHighlightStroke.Parent == null)
         {
@@ -282,27 +285,27 @@ public partial class FreeTextEditor : ContentView
     {
         float opacity = (float)FreeTextOpacitySlider.Value;
         SelectedOpacity = opacity;
-        OpacityChanged.Invoke(this,opacity);
+        OpacityChanged?.Invoke(this,opacity);
     }
 
     private void ShapeFillColorOpacitySlidervalue_Chnaged(object sender, EventArgs e)
     {
         float opacity = (float)shapeFillColorOpacitySlider.Value;
         SelectedOpacity = opacity;
-        OpacityChanged.Invoke(this, opacity);
+        OpacityChanged?.Invoke(this, opacity);
     }
 
     private void SfSlider_ValueChangeEnd(object sender, EventArgs e)
     {
         float thickness = (float)FreetextStroke.Value;
         SelectedThickness = thickness;
-        BorderThicknessChanged.Invoke(this, thickness);
+        BorderThicknessChanged?.Invoke(this, thickness);
     }
 
     private void FontSizeSliderValueChanged(object sender, EventArgs e)
     {
         SelectedFontSize = (float)textSize.Value;
-        FontSizeChanged.Invoke(this, textSize.Value);
+        FontSizeChanged?.Invoke(this, textSize.Value);
     }
 
     private void FontColorButton_Clicked(object sender, EventArgs e)
@@ -333,7 +336,7 @@ public partial class FreeTextEditor : ContentView
             button.WidthRequest = 40;
             button.CornerRadius = 40;
 #if MACCATALYST || IOS
-            PreButton.CornerRadius = 17;
+            PreButton?.CornerRadius = 17;
 #endif
             button.HorizontalOptions = LayoutOptions.Center;
             button.VerticalOptions = LayoutOptions.Center;
@@ -341,7 +344,7 @@ public partial class FreeTextEditor : ContentView
             int row = Grid.GetRow(button);
             Grid.SetColumn(selectedFontColorHighlight, column);
             Grid.SetRow(selectedFontColorHighlight, row);
-            FontColorChanged.Invoke(this, GetColor(button));
+            FontColorChanged?.Invoke(this, GetColor(button));
         }
         if (selectedFontColorHighlight.Parent == null)
         {

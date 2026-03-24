@@ -117,7 +117,7 @@ public partial class FlattenOptions : ContentView
             stream.CopyTo(fileStream);
         }
 #endif
-        Application.Current!.MainPage!.DisplayAlert("Information", "Successfully saved", "OK"); // Display a success message.
+        Application.Current?.Windows?.FirstOrDefault()?.Page?.DisplayAlertAsync("Information", "Successfully saved", "OK"); // Display a success message.
     }
 
     // Method to clear the selection in the ListView.

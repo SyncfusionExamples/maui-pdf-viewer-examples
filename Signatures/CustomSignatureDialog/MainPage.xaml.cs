@@ -139,13 +139,13 @@ namespace CustomSignatureDialog
                 {
                     // Save the document to a file
                     string? filePath = await FileService.SaveAsAsync(viewModel.FileData.FileName, outStream);
-                    await DisplayAlert("File saved", $"The file is saved to {filePath}", "OK");
+                    await DisplayAlertAsync("File saved", $"The file is saved to {filePath}", "OK");
                 }
             }
             catch (Exception exception)
             {
                 // Notify the user if the save operation fails
-                await DisplayAlert("Error", $"The file is not saved. {exception.Message}", "OK");
+                await DisplayAlertAsync("Error", $"The file is not saved. {exception.Message}", "OK");
             }
         }
 
@@ -248,7 +248,7 @@ namespace CustomSignatureDialog
             toast.Opacity = 1;
             toastText.Text = text; // Set text for the toast message
             toast.InputTransparent = true; // Disable input interference
-            await toast.FadeTo(0, 2000, Easing.SinIn); // Animate fade-out over 2 seconds
+            await toast.FadeToAsync(0, 2000, Easing.SinIn); // Animate fade-out over 2 seconds
         }
     }
 }

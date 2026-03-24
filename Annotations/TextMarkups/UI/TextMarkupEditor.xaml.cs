@@ -5,16 +5,16 @@ namespace TextMarkups;
 
 public partial class TextMarkupEditor : ContentView
 {
-    Ellipse? selectedColorButtonHighlight;
-    Ellipse? selectedColorButtonHighlightStroke;
-    Ellipse? selectedFontColorHighlight;
+    Ellipse selectedColorButtonHighlight;
+    Ellipse selectedColorButtonHighlightStroke;
+    Ellipse selectedFontColorHighlight;
 
     internal float SelectedOpacity { get; set; } = 1;
     
     internal event EventHandler<Microsoft.Maui.Graphics.Color> ColorChanged;
     internal event EventHandler<float> OpacityChanged;
 
-    Button? PreButton = null;
+    Button PreButton = null;
     public TextMarkupEditor()
 	{
 		InitializeComponent();
@@ -24,7 +24,7 @@ public partial class TextMarkupEditor : ContentView
         this.PropertyChanged += FreeTextFillColorPalatte_PropertyChanged;
     }
 
-    private void FreeTextFillColorPalatte_PropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
+    private void FreeTextFillColorPalatte_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
     {
         if (e.PropertyName == nameof(IsVisible))
         {
@@ -71,14 +71,17 @@ public partial class TextMarkupEditor : ContentView
     }
 
 #if MACCATALYST
-    Frame Colorpaletteborder = new Frame()
+    Border Colorpaletteborder = new Border()
     {
         BackgroundColor = Color.FromArgb("#EEE8F4"),
-        BorderColor = Color.FromArgb("#26000000"),
+        Stroke = Color.FromArgb("#26000000"),
         Padding = new Thickness(0),
         VerticalOptions = LayoutOptions.Start,
         HorizontalOptions = LayoutOptions.Start,
-        CornerRadius = 12,
+        StrokeShape = new RoundRectangle
+        {
+            CornerRadius = new CornerRadius(12)
+        },
         Shadow = new Shadow
         {
             Offset = new Point(-1, 0),
@@ -111,7 +114,7 @@ public partial class TextMarkupEditor : ContentView
     };
 #endif
 
-    private void OnSelectionChanged(object? sender, TabSelectionChangedEventArgs e)
+    private void OnSelectionChanged(object sender, TabSelectionChangedEventArgs e)
     {
         if (e.OldIndex != e.NewIndex)
         {

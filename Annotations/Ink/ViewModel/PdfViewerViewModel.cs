@@ -6,15 +6,15 @@ namespace Ink
     public class PdfViewerViewModel : INotifyPropertyChanged
     {
         private ICommand _openFileCommand;
-        private Stream _documentStream;
+        private Stream? _documentStream;
         private float selectedThickness;
         private float selectedOpacity;
 
         /// <summary>
         /// Occurs when a property is changed.
         /// </summary>
-        public event PropertyChangedEventHandler PropertyChanged;
-        public Stream PdfDocumentStream
+        public event PropertyChangedEventHandler? PropertyChanged;
+        public Stream? PdfDocumentStream
         {
             get => _documentStream;
             set
@@ -84,7 +84,7 @@ namespace Ink
         /// <summary>
         /// Picks the file from the disc using the given option and creates the stream.
         /// </summary>
-        public async Task<FileResult> PickAndShow(PickOptions options)
+        public async Task<FileResult?> PickAndShow(PickOptions options)
         {
             try
             {
@@ -102,7 +102,7 @@ namespace Ink
                     message = ex.Message;
                 else
                     message = "File open failed.";
-                _ = Application.Current.MainPage.DisplayAlert("Error", message, "OK");
+                _ = Application.Current?.Windows?.FirstOrDefault()?.Page?.DisplayAlertAsync("Error", message, "OK");
             }
             return null;
         }

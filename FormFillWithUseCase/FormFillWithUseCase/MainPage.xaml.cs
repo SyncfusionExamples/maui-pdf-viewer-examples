@@ -208,7 +208,7 @@ namespace FormFillWithUseCase
             // Show errors if any, otherwise validation passed
             if (errors.Count > 0)
             {
-                await DisplayAlert("Errors", string.Join("\n", errors), "Try Again");
+                await DisplayAlertAsync("Errors", string.Join("\n", errors), "Try Again");
                 return false;
             }
             else

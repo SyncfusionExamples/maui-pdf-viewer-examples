@@ -34,8 +34,8 @@ namespace SmartRedaction
         internal int textBoundsCount = 0;
 
 
-        private Stream? _pdfFile;
-        public Stream? PdfFile
+        private Stream _pdfFile;
+        public Stream PdfFile
         {
             get { return _pdfFile; }
             set
@@ -105,7 +105,7 @@ namespace SmartRedaction
                     message = ex.Message;
                 else
                     message = "File open failed.";
-                Application.Current?.MainPage?.DisplayAlert("Error", message, "OK");
+                Application.Current?.Windows?.FirstOrDefault()?.Page?.DisplayAlertAsync("Error", message, "OK");
             }
 
         }
@@ -174,7 +174,7 @@ namespace SmartRedaction
             OnPropertyChanged(nameof(PdfFile));
         }
 
-        public event PropertyChangedEventHandler? PropertyChanged;
+        public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
@@ -201,7 +201,7 @@ namespace SmartRedaction
             }
         }
 
-        public event PropertyChangedEventHandler? PropertyChanged;
+        public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));

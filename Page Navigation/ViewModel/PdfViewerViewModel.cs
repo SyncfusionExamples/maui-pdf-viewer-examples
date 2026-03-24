@@ -5,7 +5,7 @@ namespace PageNavigation
 {
     internal class PdfViewerViewModel:INotifyPropertyChanged
     {
-        private Stream? pdfDocumentStream;
+        private Stream pdfDocumentStream;
         private int pageNumber;
         private int? pageCount;
         private bool canGoToPreviousPage = true;
@@ -16,7 +16,7 @@ namespace PageNavigation
         /// <summary>
         /// An event to detect the change in the value of a property.
         /// </summary>
-        public event PropertyChangedEventHandler? PropertyChanged;
+        public event PropertyChangedEventHandler PropertyChanged;
 
         /// <summary>
         /// The PDF document stream that is loaded into the instance of the PDF viewer. 

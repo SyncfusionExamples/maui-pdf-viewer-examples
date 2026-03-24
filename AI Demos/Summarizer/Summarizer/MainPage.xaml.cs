@@ -19,7 +19,7 @@ public partial class MainPage : ContentPage
     {
         AssistServices AI = new AssistServices();
         if (AI.DeploymentName == "DEPLOYMENT_NAME")
-            Application.Current?.MainPage?.DisplayAlert("Alert", "The Azure API key or endpoint is missing or incorrect. Please verify your credentials", "OK");
+            Application.Current?.Windows?.FirstOrDefault()?.Page?.DisplayAlertAsync("Alert", "The Azure API key or endpoint is missing or incorrect. Please verify your credentials", "OK");
         await LoadPDFDataAsync();
         var reply = await viewModel.assistService.GetAnswerFromGPT("Read the PDF document contents and understand the concept. Provide summary for this in 3 to 4 simple sentences. Ignore about iTextSharp related points in the details");
         var suggestion = await viewModel.assistService.GetSuggestion("Provide short Summary for the document");

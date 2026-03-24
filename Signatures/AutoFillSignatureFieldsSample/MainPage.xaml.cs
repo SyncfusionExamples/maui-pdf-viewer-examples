@@ -41,7 +41,7 @@ namespace SignatureDemo
                 if (relevantFields.Count() > 0)
                 {
                     // Prompt the user for applying the signature across relevant fields
-                    bool applyEverywhere = await DisplayAlert("Signature Created",
+                    bool applyEverywhere = await DisplayAlertAsync("Signature Created",
                         $"Signature for {userRole} successfully created. Would you like to apply this signature to all relevant fields?",
                         "Yes", "No");
 
@@ -59,7 +59,7 @@ namespace SignatureDemo
                         }
 
                         // Show a success message with the number of fields updated
-                        await DisplayAlert("Success",
+                        await DisplayAlertAsync("Success",
                             $"{updatedFieldsCount} fields updated with the signature for {userRole}.",
                             "OK");
                     }

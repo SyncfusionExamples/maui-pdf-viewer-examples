@@ -15,7 +15,7 @@ namespace PdfViewerExample
         /// <summary>
         /// The PDF document stream that is loaded into the instance of the PDF viewer. 
         /// </summary>
-        public Stream PdfDocumentStream
+        public Stream? PdfDocumentStream
         {
             get
             {

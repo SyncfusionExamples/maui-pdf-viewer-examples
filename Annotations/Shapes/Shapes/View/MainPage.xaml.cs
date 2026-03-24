@@ -436,7 +436,7 @@ public partial class MainPage : ContentPage
         string targetFile = Path.Combine(FileSystem.Current.AppDataDirectory, "Saved.pdf");
         using FileStream outputStream = File.Create(targetFile);
         await PdfViewer.SaveDocumentAsync(outputStream);
-        await DisplayAlert("Document Saved", "The document has been saved to the file " + targetFile, "OK");
+        await DisplayAlertAsync("Document Saved", "The document has been saved to the file " + targetFile, "OK");
     }
 
     private void Lock_Clicked(object sender, EventArgs e)
@@ -476,7 +476,7 @@ public partial class MainPage : ContentPage
         string targetFile = Path.Combine(FileSystem.Current.AppDataDirectory, fileName);
         using FileStream outputStream = File.Create(targetFile);
         await inputStream.CopyToAsync(outputStream);
-        await DisplayAlert("Annotations Exported", "The annotations are exported to the file " + targetFile  , " OK");
+        await DisplayAlertAsync("Annotations Exported", "The annotations are exported to the file " + targetFile  , " OK");
     }
     private void EditOption_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
     {
@@ -511,10 +511,10 @@ public partial class MainPage : ContentPage
             Stream inputStream = File.OpenRead(fileName);
             inputStream.Position = 0;
             await PdfViewer.ImportAnnotationsAsync(inputStream, Syncfusion.Pdf.Parsing.AnnotationDataFormat.XFdf);
-            await DisplayAlert("Information", "Annotations Loaded from the " + fileName, "OK");
+            await DisplayAlertAsync("Information", "Annotations Loaded from the " + fileName, "OK");
         }
         else
-            await DisplayAlert("XFDF file Not Found", "No xfdf files available for import. Please export the annotations to an xfdf file and then import. ", "OK");
+            await DisplayAlertAsync("XFDF file Not Found", "No xfdf files available for import. Please export the annotations to an xfdf file and then import. ", "OK");
     }
 
     private void ColorPalatte_Clicked(object sender, EventArgs e)
