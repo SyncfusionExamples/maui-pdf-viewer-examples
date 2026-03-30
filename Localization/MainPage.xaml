@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"             
+             xmlns:local="clr-namespace:Localization"
+             xmlns:editors="clr-namespace:Syncfusion.Maui.Inputs;assembly=Syncfusion.Maui.Inputs"
+             x:Class="Localization.MainPage"
+             x:DataType="local:PdfViewerViewModel">
+
+    <ContentPage.BindingContext>
+        <local:PdfViewerViewModel x:Name="viewModel" />
+    </ContentPage.BindingContext>
+
+    <ContentPage.Content>
+        <Grid>
+            <StackLayout Padding="40"
+                         HorizontalOptions="Center"
+                         VerticalOptions="Center"
+                         Spacing="20">
+
+                <Label Text="Select a language and click &quot;Open PDF Viewer&quot; to view the PDF."
+                       FontSize="18"
+                       HorizontalTextAlignment="Start" />
+
+                <editors:SfComboBox x:Name="comboBox"
+                                    HorizontalOptions="Start"
+                                    FontSize="18"
+                                    HeightRequest="50"
+                                    WidthRequest="140"
+                                    IsClearButtonVisible="false"
+                                    DropdownWidth="140"
+                                    ItemsSource="{Binding Languages}"
+                                    SelectedItem="{Binding SelectedLanguage, Mode=TwoWay}" />
+
+                <Button Text="Open PDF Viewer"
+                        FontSize="18"
+                        HorizontalOptions="Start"
+                        WidthRequest="200"
+                        Clicked="OpenPdfViewerPage" />
+            </StackLayout>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

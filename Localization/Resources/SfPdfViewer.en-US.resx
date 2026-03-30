@@ -1,0 +1,590 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+	<data name="AddBookmark" xml:space="preserve">
+    <value>Add bookmark</value>
+  </data>
+	<data name="AddFreeTextToastMessage" xml:space="preserve">
+    <value>Tap to add a free text</value>
+  </data>
+	<data name="AddHighlightToastMessage" xml:space="preserve">
+    <value>Drag over a text to highlight it</value>
+  </data>
+	<data name="AddReply" xml:space="preserve">
+    <value>Add reply</value>
+  </data>
+	<data name="AddSignature" xml:space="preserve">
+    <value>Add signature</value>
+  </data>
+	<data name="AddSignatureToastMessage" xml:space="preserve">
+    <value>Tap to add the signature</value>
+  </data>
+	<data name="AddSquigglyToastMessage" xml:space="preserve">
+    <value>Drag over a text to add a squiggly underline</value>
+  </data>
+	<data name="AddStampToastMessage" xml:space="preserve">
+    <value>Tap to add the stamp</value>
+  </data>
+	<data name="AddStickyNoteToastMessage" xml:space="preserve">
+    <value>Tap to add a sticky note</value>
+  </data>
+	<data name="AddStrikeoutToastMessage" xml:space="preserve">
+    <value>Drag over a text to strike it through</value>
+  </data>
+	<data name="AddUnderlineToastMessage" xml:space="preserve">
+    <value>Drag over a text to underline it</value>
+  </data>
+	<data name="AddYourComment" xml:space="preserve">
+    <value>Add your comment...</value>
+  </data>
+	<data name="Annotations" xml:space="preserve">
+    <value>Annotations</value>
+  </data>
+	<data name="Apply" xml:space="preserve">
+    <value>Apply</value>
+  </data>
+	<data name="ApplyRedactionsConfirmation" xml:space="preserve">
+    <value>You are about to permanently remove all content marked for redaction. Once the document is saved, this action cannot be undone.
+
+Are you sure you want to continue?</value>
+  </data>
+	<data name="Arrow" xml:space="preserve">
+    <value>Arrow</value>
+  </data>
+	<data name="Back" xml:space="preserve">
+    <value>Back</value>
+  </data>
+	<data name="Bookmarks" xml:space="preserve">
+    <value>Bookmarks</value>
+  </data>
+	<data name="Border" xml:space="preserve">
+    <value>Border</value>
+  </data>
+	<data name="Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+	<data name="CanOpenWebPage" xml:space="preserve">
+    <value>Do you want to open</value>
+  </data>
+	<data name="Circle" xml:space="preserve">
+    <value>Circle</value>
+  </data>
+	<data name="Clear" xml:space="preserve">
+    <value>Clear</value>
+  </data>
+	<data name="Close" xml:space="preserve">
+    <value>CLOSE</value>
+  </data>
+	<data name="Cloud" xml:space="preserve">
+    <value>Cloud</value>
+  </data>
+	<data name="Color" xml:space="preserve">
+    <value>Color</value>
+  </data>
+	<data name="ColorPicker" xml:space="preserve">
+    <value>Color picker</value>
+  </data>
+	<data name="Comment" xml:space="preserve">
+    <value>Comment</value>
+  </data>
+	<data name="Comments" xml:space="preserve">
+    <value>Comments</value>
+  </data>
+	<data name="ContinuousPage" xml:space="preserve">
+    <value>Continuous page</value>
+  </data>
+	<data name="Copy" xml:space="preserve">
+    <value>Copy</value>
+  </data>
+	<data name="Create" xml:space="preserve">
+    <value>Create</value>
+  </data>
+	<data name="CreateSignature" xml:space="preserve">
+    <value>Create Signature</value>
+  </data>
+	<data name="CreateStamps" xml:space="preserve">
+    <value>Create Stamps</value>
+  </data>
+	<data name="CurrentPage" xml:space="preserve">
+    <value>Current Page</value>
+  </data>
+	<data name="CustomStamps" xml:space="preserve">
+    <value>Custom Stamps</value>
+  </data>
+	<data name="CustomText" xml:space="preserve">
+    <value>Custom Text</value>
+  </data>
+	<data name="Delete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+	<data name="DocumentLoadFailed" xml:space="preserve">
+    <value>Failed to load the PDF document.</value>
+  </data>
+	<data name="DragAndDropImage" xml:space="preserve">
+    <value>Drag and drop an image here.</value>
+  </data>
+	<data name="Draw" xml:space="preserve">
+    <value>Draw</value>
+  </data>
+	<data name="DrawArrowToastMessage" xml:space="preserve">
+    <value>Drag to draw an arrow</value>
+  </data>
+	<data name="DrawCircleToastMessage" xml:space="preserve">
+    <value>Drag to draw a circle</value>
+  </data>
+	<data name="DrawCloudToastMessage" xml:space="preserve">
+    <value>Tap to begin drawing a cloud</value>
+  </data>
+	<data name="DrawInkToastMessage" xml:space="preserve">
+    <value>Drag to draw an ink</value>
+  </data>
+	<data name="DrawLineToastMessage" xml:space="preserve">
+    <value>Drag to draw a line</value>
+  </data>
+	<data name="DrawPolygonToastMessage" xml:space="preserve">
+    <value>Tap to begin drawing a polygon</value>
+  </data>
+	<data name="DrawPolylineToastMessage" xml:space="preserve">
+    <value>Tap to begin drawing a polyline</value>
+  </data>
+	<data name="DrawSquareToastMessage" xml:space="preserve">
+    <value>Drag to draw a square</value>
+  </data>
+	<data name="Draw your signature" xml:space="preserve">
+    <value>Draw your signature</value>
+  </data>
+	<data name="Edit" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+	<data name="EditYourComment" xml:space="preserve">
+    <value>Edit your comment...</value>
+  </data>
+	<data name="Enter" xml:space="preserve">
+    <value>Enter</value>
+  </data>
+	<data name="EnterPassword" xml:space="preserve">
+    <value>Enter Password</value>
+  </data>
+	<data name="EraseInkToastMessage" xml:space="preserve">
+    <value>Drag over an ink to erase it</value>
+  </data>
+	<data name="Error" xml:space="preserve">
+    <value>Error</value>
+  </data>
+	<data name="EvenPagesOnly" xml:space="preserve">
+    <value>Even Pages Only</value>
+  </data>
+	<data name="Fill" xml:space="preserve">
+    <value>Fill</value>
+  </data>
+	<data name="FillColor" xml:space="preserve">
+    <value>Fill Color</value>
+  </data>
+	<data name="FillOpacity" xml:space="preserve">
+    <value>Fill Opacity</value>
+  </data>
+	<data name="FitToPage" xml:space="preserve">
+    <value>Fit to Page</value>
+  </data>
+	<data name="FitToWidth" xml:space="preserve">
+    <value>Fit to Width</value>
+  </data>
+	<data name="Font" xml:space="preserve">
+    <value>Font</value>
+  </data>
+	<data name="FontColor" xml:space="preserve">
+    <value>Font Color</value>
+  </data>
+	<data name="FontSize" xml:space="preserve">
+    <value>Font size</value>
+  </data>
+	<data name="FreeText" xml:space="preserve">
+    <value>Free text</value>
+  </data>
+	<data name="FreeTextEditorPlaceHolder" xml:space="preserve">
+    <value>Text…</value>
+  </data>
+	<data name="GoToPage" xml:space="preserve">
+    <value>Go to Page</value>
+  </data>
+	<data name="GuestUser" xml:space="preserve">
+    <value>Guest user</value>
+  </data>
+	<data name="Help" xml:space="preserve">
+    <value>Help</value>
+  </data>
+	<data name="Highlight" xml:space="preserve">
+    <value>Highlight</value>
+  </data>
+	<data name="Ink" xml:space="preserve">
+    <value>Ink</value>
+  </data>
+	<data name="InkEraser" xml:space="preserve">
+    <value>Ink eraser</value>
+  </data>
+	<data name="Insert" xml:space="preserve">
+    <value>Insert</value>
+  </data>
+	<data name="InvalidPageNumber" xml:space="preserve">
+    <value>Invalid page number</value>
+  </data>
+	<data name="InvalidPasswordError" xml:space="preserve">
+    <value>An encrypted document cannot be opened. The password is invalid.</value>
+  </data>
+	<data name="Key" xml:space="preserve">
+    <value>Key</value>
+  </data>
+	<data name="Line" xml:space="preserve">
+    <value>Line</value>
+  </data>
+	<data name="MarkPageRange" xml:space="preserve">
+    <value>Mark Page Range</value>
+  </data>
+	<data name="MatchCase" xml:space="preserve">
+    <value>Match case</value>
+  </data>
+	<data name="MoreItems" xml:space="preserve">
+    <value>More items</value>
+  </data>
+	<data name="NewParagraph" xml:space="preserve">
+    <value>New Paragraph</value>
+  </data>
+	<data name="NextPage" xml:space="preserve">
+    <value>Next page</value>
+  </data>
+	<data name="NoBookmarks" xml:space="preserve">
+    <value>No Bookmarks</value>
+  </data>
+	<data name="NoColor" xml:space="preserve">
+    <value>No Color</value>
+  </data>
+	<data name="NoComments" xml:space="preserve">
+    <value>No comments available</value>
+  </data>
+	<data name="NoMatchesWereFoundToastMessage" xml:space="preserve">
+    <value>No matches were found.</value>
+  </data>
+	<data name="NoMoreMatchesWereFoundToastMessage" xml:space="preserve">
+    <value>No more matches were found.</value>
+  </data>
+	<data name="NoOutline" xml:space="preserve">
+    <value>No outline</value>
+  </data>
+	<data name="Note" xml:space="preserve">
+    <value>Note</value>
+  </data>
+	<data name="OddPagesOnly" xml:space="preserve">
+    <value>Odd Pages Only</value>
+  </data>
+	<data name="of" xml:space="preserve">
+    <value>of</value>
+  </data>
+	<data name="Ok" xml:space="preserve">
+    <value>OK</value>
+  </data>
+	<data name="Opacity" xml:space="preserve">
+    <value>Opacity</value>
+  </data>
+	<data name="Open" xml:space="preserve">
+    <value>OPEN</value>
+  </data>
+	<data name="OpenWebPage" xml:space="preserve">
+    <value>Open Web Page</value>
+  </data>
+	<data name="Outline" xml:space="preserve">
+    <value>Outline</value>
+  </data>
+	<data name="OutlineColor" xml:space="preserve">
+    <value>Outline Color</value>
+  </data>
+	<data name="Page" xml:space="preserve">
+    <value>Page</value>
+  </data>
+	<data name="PageByPage" xml:space="preserve">
+    <value>Page by page</value>
+  </data>
+	<data name="PageCount" xml:space="preserve">
+    <value>Page count</value>
+  </data>
+	<data name="PageLayoutMode" xml:space="preserve">
+    <value>Page layout mode</value>
+  </data>
+	<data name="PageNumberEntry" xml:space="preserve">
+    <value>Page number entry</value>
+  </data>
+	<data name="PageNumberHint" xml:space="preserve">
+    <value>Enter page number here</value>
+  </data>
+	<data name="PageRange" xml:space="preserve">
+    <value>Page Range</value>
+  </data>
+	<data name="Paragraph" xml:space="preserve">
+    <value>Paragraph</value>
+  </data>
+	<data name="PasswordErrorHint" xml:space="preserve">
+    <value>Check your password</value>
+  </data>
+	<data name="Polygon" xml:space="preserve">
+    <value>Polygon</value>
+  </data>
+	<data name="Polyline" xml:space="preserve">
+    <value>Polyline</value>
+  </data>
+	<data name="PreviousPage" xml:space="preserve">
+    <value>Previous page</value>
+  </data>
+	<data name="Print" xml:space="preserve">
+    <value>Print</value>
+  </data>
+	<data name="Properties" xml:space="preserve">
+    <value>Properties</value>
+  </data>
+	<data name="Redaction" xml:space="preserve">
+    <value>Redaction</value>
+  </data>
+	<data name="RedactArea" xml:space="preserve">
+    <value>Redact Area</value>
+  </data>
+	<data name="RedactedAreaFillColor" xml:space="preserve">
+    <value>Redacted Area Fill Color</value>
+  </data>
+	<data name="RedactionMarkAppearance" xml:space="preserve">
+    <value>Redaction Mark Appearance</value>
+  </data>
+	<data name="RedactionProperties" xml:space="preserve">
+    <value>Redaction Properties</value>
+  </data>
+	<data name="RedactPages" xml:space="preserve">
+    <value>Redact Pages</value>
+  </data>
+	<data name="RedactText" xml:space="preserve">
+    <value>Redact Text</value>
+  </data>
+	<data name="Redo" xml:space="preserve">
+    <value>Redo</value>
+  </data>
+	<data name="Rename" xml:space="preserve">
+    <value>Rename</value>
+  </data>
+	<data name="RepeatOverlayText" xml:space="preserve">
+    <value>Repeat Overlay Text</value>
+  </data>
+	<data name="Replies" xml:space="preserve">
+    <value>Replies</value>
+  </data>
+	<data name="Reply" xml:space="preserve">
+    <value>Reply</value>
+  </data>
+	<data name="RequestPassword" xml:space="preserve">
+    <value>This PDF file is protected. Please enter the password to open it.</value>
+  </data>
+	<data name="Save" xml:space="preserve">
+    <value>Save</value>
+  </data>
+	<data name="SaveSignature" xml:space="preserve">
+    <value>Save Signature</value>
+  </data>
+	<data name="Search" xml:space="preserve">
+    <value>Search</value>
+  </data>
+	<data name="SearchPlaceholder" xml:space="preserve">
+    <value>Search in document</value>
+  </data>
+	<data name="Shapes" xml:space="preserve">
+    <value>Shapes</value>
+  </data>
+	<data name="Signature" xml:space="preserve">
+    <value>Signature</value>
+  </data>
+	<data name="SpecificPage" xml:space="preserve">
+    <value>Specific Page</value>
+  </data>
+	<data name="Square" xml:space="preserve">
+    <value>Square</value>
+  </data>
+	<data name="Squiggly" xml:space="preserve">
+    <value>Squiggly</value>
+  </data>
+	<data name="Stamps" xml:space="preserve">
+    <value>Stamps</value>
+  </data>
+	<data name="StandardStamps" xml:space="preserve">
+    <value>Standard Stamps</value>
+  </data>
+	<data name="StickyNote" xml:space="preserve">
+    <value>Sticky note</value>
+  </data>
+	<data name="StickyNoteEditorPlaceholder" xml:space="preserve">
+    <value>Write Your Note...</value>
+  </data>
+	<data name="StickyNoteIcons" xml:space="preserve">
+    <value>Sticky note icons</value>
+  </data>
+	<data name="Strikeout" xml:space="preserve">
+    <value>Strikeout</value>
+  </data>
+	<data name="Stroke" xml:space="preserve">
+    <value>Stroke</value>
+  </data>
+	<data name="Text" xml:space="preserve">
+    <value>Text</value>
+  </data>
+	<data name="TextColor" xml:space="preserve">
+    <value>Text color</value>
+  </data>
+	<data name="TextFillColor" xml:space="preserve">
+    <value>Text fill color</value>
+  </data>
+	<data name="TextMarkups" xml:space="preserve">
+    <value>Text markups</value>
+  </data>
+	<data name="Thickness" xml:space="preserve">
+    <value>Thickness</value>
+  </data>
+	<data name="Type" xml:space="preserve">
+    <value>Type</value>
+  </data>
+	<data name="TypeSignaturePlaceHolder" xml:space="preserve">
+    <value>Type your signature</value>
+  </data>
+	<data name="Underline" xml:space="preserve">
+    <value>Underline</value>
+  </data>
+	<data name="Undo" xml:space="preserve">
+    <value>Undo</value>
+  </data>
+	<data name="Upload" xml:space="preserve">
+    <value>Upload</value>
+  </data>
+	<data name="UploadImage" xml:space="preserve">
+    <value>Upload an image</value>
+  </data>
+	<data name="UseOverlayText" xml:space="preserve">
+    <value>Use Overlay Text</value>
+  </data>
+	<data name="Warning" xml:space="preserve">
+    <value>Warning</value>
+  </data>
+	<data name="XFAFormNotSupportedMessage" xml:space="preserve">
+    <value>This PDF cannot be loaded because it contains an XFA form.</value>
+  </data>
+	<data name="ZoomMode" xml:space="preserve">
+    <value>Zoom mode</value>
+  </data>
+</root>
