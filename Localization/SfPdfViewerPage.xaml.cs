@@ -1,5 +1,4 @@
 using Syncfusion.Maui.PdfViewer;
-using System.Diagnostics;
 using System.Reflection;
 using System.Resources;
 

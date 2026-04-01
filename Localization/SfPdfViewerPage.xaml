@@ -4,8 +4,8 @@
              xmlns:syncfusion="clr-namespace:Syncfusion.Maui.PdfViewer;assembly=Syncfusion.Maui.PdfViewer"               
              x:Class="Localization.SfPdfViewerPage">
 
-    <ContentPage.Content>
+    <Grid>
         <syncfusion:SfPdfViewer x:Name="pdfViewer"/>
-    </ContentPage.Content>
+    </Grid>
 
 </ContentPage>
