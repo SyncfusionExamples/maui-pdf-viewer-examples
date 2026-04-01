@@ -71,7 +71,8 @@ public partial class MainPage : ContentPage
                                 $"1. The input data is not directly provided as the field name; you need to think and merge appropriately. " +
                                 $"2. When comparing input data and field names, ignore case sensitivity. " +
                                 $"3. First, determine the best match for the field name. If there isn’t an exact match, use the input data to find a close match. " +
-                                $"4. Remove ```xml and ``` if they are present in the code.";
+                                $"4. Remove ```xml and ``` if they are present in the code."+ 
+                                $"5. Output must contain ONLY valid XFDF XML. No explanations, headings, notes, or additional text.";
             string xfdfContent = await chatService.GetChatCompletion(prompt);
             if (string.IsNullOrEmpty(xfdfContent) == false)
                 FillPdfForm(xfdfContent);
