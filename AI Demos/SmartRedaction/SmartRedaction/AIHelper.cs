@@ -6,7 +6,7 @@ using Azure;
 
 namespace SmartRedaction
 {
-    public class AIService
+    public class AIHelper
     {
         #region Fields
 
@@ -61,7 +61,7 @@ namespace SmartRedaction
 
         #region Constructor
 
-        public AIService()
+        public AIHelper()
         {
             InitializeClient();
         }
