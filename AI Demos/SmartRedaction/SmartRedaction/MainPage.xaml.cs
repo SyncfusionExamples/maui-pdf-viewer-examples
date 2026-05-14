@@ -13,7 +13,7 @@ namespace SmartRedaction
 {
     public partial class MainPage : ContentPage
     {
-        private AIService openAIService;
+        private AIHelper openAIHelper;
         private bool tapped;
         Animation animation;
 
@@ -21,7 +21,7 @@ namespace SmartRedaction
         {
             InitializeComponent();
             BindingContext = new SmartRedactionViewModel();
-            openAIService = new AIService();
+            openAIHelper = new AIHelper();
             animation = new Animation();
             sensitiveInfoView.NodeChecked += SensitiveInfoView_NodeChecked;
             sensitiveInfoViewMobile.NodeChecked += SensitiveInfoView_NodeChecked;
@@ -50,7 +50,7 @@ namespace SmartRedaction
 
         private void PdfViewer_DocumentLoaded(object sender, EventArgs e)
         {
-            if (openAIService.DeploymentName == "DEPLOYMENT_NAME")
+            if (openAIHelper.DeploymentName == "DEPLOYMENT_NAME")
             {
                 Application.Current?.Windows?.FirstOrDefault()?.Page?.DisplayAlertAsync("Alert", "The Azure API key or endpoint is missing or incorrect. Please verify your credentials", "OK");
                 MobileScan.IsEnabled = false;
@@ -348,7 +348,7 @@ namespace SmartRedaction
             }
             stringBuilder.AppendLine("Please provide the extracted information as a plain list, separated by commas, without any prefix or numbering or extra content.");
             string prompt = stringBuilder.ToString();
-            var answer = await openAIService.GetAnswerFromGPT(prompt, ExtractTextFromPDF());
+            var answer = await openAIHelper.GetAnswerFromGPT(prompt, ExtractTextFromPDF());
             if (answer != null)
             {
                 var output = answer.Trim();
