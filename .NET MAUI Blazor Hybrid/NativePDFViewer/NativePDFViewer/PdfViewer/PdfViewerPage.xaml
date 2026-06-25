@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:pdf="clr-namespace:Syncfusion.Maui.PdfViewer;assembly=Syncfusion.Maui.PdfViewer"
+             x:Class="MauiApp5.PdfViewer.PdfViewerPage"
+             Title="PDF Viewer"
+             BackgroundColor="{DynamicResource BackgroundColor}">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="ToolbarButtonStyle" TargetType="Button">
+                <Setter Property="BackgroundColor" Value="Transparent"/>
+                <Setter Property="TextColor" Value="{DynamicResource PrimaryTextColor}"/>
+                <Setter Property="FontSize" Value="16"/>
+                <Setter Property="Padding" Value="12,8"/>
+                <Setter Property="Margin" Value="4,0"/>
+            </Style>
+            <Style x:Key="ToolbarLabelStyle" TargetType="Label">
+                <Setter Property="TextColor" Value="{DynamicResource PrimaryTextColor}"/>
+                <Setter Property="FontSize" Value="14"/>
+                <Setter Property="VerticalOptions" Value="Center"/>
+                <Setter Property="Margin" Value="8,0"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <Grid RowDefinitions="Auto,*,Auto">
+        <!-- Header / Toolbar -->
+        <Border Grid.Row="0" 
+                BackgroundColor="{DynamicResource ToolbarBackgroundColor}" 
+                Padding="8">
+            <ScrollView Orientation="Horizontal">
+                <HorizontalStackLayout Spacing="4" HorizontalOptions="Start">
+                    <Button Text="← Back" 
+                            Style="{StaticResource ToolbarButtonStyle}"
+                            Clicked="OnBackClicked"/>
+                    <BoxView WidthRequest="1" 
+                             BackgroundColor="{DynamicResource DividerColor}" 
+                             Margin="8,4"/>
+                    <Button Text="💾 Save" 
+                            Style="{StaticResource ToolbarButtonStyle}"
+                            Clicked="OnSaveClicked"/>
+                    <Button Text="📄 Flatten &amp; Save" 
+                            Style="{StaticResource ToolbarButtonStyle}"
+                            Clicked="OnFlattenSaveClicked"/>
+                    <BoxView WidthRequest="1" 
+                             BackgroundColor="{DynamicResource DividerColor}" 
+                             Margin="8,4"/>
+                    <Button Text="📥 Import Annotations" 
+                            Style="{StaticResource ToolbarButtonStyle}"
+                            Clicked="OnImportAnnotationsClicked"/>
+                    <Button Text="📤 Export Annotations" 
+                            Style="{StaticResource ToolbarButtonStyle}"
+                            Clicked="OnExportAnnotationsClicked"/>
+                    <BoxView WidthRequest="1" 
+                             BackgroundColor="{DynamicResource DividerColor}" 
+                             Margin="8,4"/>
+                    <Button Text="📥 Import Form Data" 
+                            Style="{StaticResource ToolbarButtonStyle}"
+                            Clicked="OnImportFormDataClicked"/>
+                    <Button Text="📤 Export Form Data" 
+                            Style="{StaticResource ToolbarButtonStyle}"
+                            Clicked="OnExportFormDataClicked"/>
+                </HorizontalStackLayout>
+            </ScrollView>
+        </Border>
+
+        <!-- PDF Viewer -->
+        <pdf:SfPdfViewer x:Name="PdfViewerControl"
+                         Grid.Row="1"
+                         VerticalOptions="FillAndExpand"
+                         HorizontalOptions="FillAndExpand"/>
+
+        <!-- Status Bar -->
+        <Border Grid.Row="2" 
+                BackgroundColor="{DynamicResource StatusBarBackgroundColor}" 
+                Padding="12,6">
+            <HorizontalStackLayout>
+                <Label x:Name="StatusLabel" 
+                       Text="Ready" 
+                       Style="{StaticResource ToolbarLabelStyle}"/>
+                <Label x:Name="PageInfoLabel" 
+                       Text=""
+                       Style="{StaticResource ToolbarLabelStyle}"
+                       HorizontalOptions="End"/>
+            </HorizontalStackLayout>
+        </Border>
+    </Grid>
+</ContentPage>

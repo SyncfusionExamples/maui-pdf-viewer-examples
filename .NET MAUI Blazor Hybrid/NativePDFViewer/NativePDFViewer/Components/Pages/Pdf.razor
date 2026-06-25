@@ -1,0 +1,66 @@
+@page "/pdf"
+@inject NavigationManager Navigation
+
+<h1>PDF Viewer</h1>
+
+<p>
+    Use the native MAUI PDF viewer to open, annotate, and save PDF documents.
+</p>
+
+<div class="mb-3">
+    <button class="btn btn-primary" @onclick="OpenPdfPicker">
+        📄 Select PDF File
+    </button>
+</div>
+
+@if (!string.IsNullOrEmpty(StatusMessage))
+{
+    <div class="alert alert-info">@StatusMessage</div>
+}
+
+@code {
+    private string StatusMessage { get; set; } = string.Empty;
+
+    private async Task OpenPdfPicker()
+    {
+        try
+        {
+            var result = await FilePicker.PickAsync(new PickOptions
+            {
+                PickerTitle = "Select a PDF document",
+                FileTypes = FilePickerFileType.Pdf
+            });
+
+            if (result != null)
+            {
+                StatusMessage = $"Opening: {result.FileName}...";
+                await NavigateToPdfViewer(result.FullPath);
+            }
+        }
+        catch (Exception ex)
+        {
+            StatusMessage = $"Error: {ex.Message}";
+        }
+    }
+
+    private async Task NavigateToPdfViewer(string filePath)
+    {
+        try
+        {
+            if (Application.Current?.MainPage is NavigationPage navPage &&
+                navPage.CurrentPage is MainPage mainPage)
+            {
+                await mainPage.OpenPdfAsync(filePath);
+                StatusMessage = string.Empty;
+            }
+            else
+            {
+                StatusMessage = "Unable to open PDF viewer. Please try again.";
+            }
+        }
+        catch (Exception ex)
+        {
+            StatusMessage = $"Navigation error: {ex.Message}";
+        }
+    }
+}

@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:MauiApp5"
+             xmlns:components="clr-namespace:MauiApp5.Components"
+             xmlns:pdfviewer="clr-namespace:MauiApp5.PdfViewer"
+             x:Class="MauiApp5.MainPage">
+
+    <!--
+        This is a hybrid MAUI + Blazor page.
+        The BlazorWebView hosts the Blazor UI (nav, pages, etc.).
+        Native MAUI pages (like PdfViewerPage) are navigated to via INavigation
+        (Navigation.PushAsync) from Blazor, overlaying this page.
+    -->
+    <BlazorWebView x:Name="blazorWebView" HostPage="wwwroot/index.html">
+        <BlazorWebView.RootComponents>
+            <RootComponent Selector="#app" ComponentType="{x:Type components:Routes}" />
+        </BlazorWebView.RootComponents>
+    </BlazorWebView>
+
+</ContentPage>
