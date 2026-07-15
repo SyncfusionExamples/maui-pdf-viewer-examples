@@ -423,12 +423,10 @@
 
                             <treeview:SfTreeView.ItemTemplate>
                                 <DataTemplate>
-                                    <!--CheckBox-->
-                                    <checkbox:SfCheckBox x:Name="{Binding Content.NodeId}"
-                                                         Text="{Binding Content.NodeText}"
-                                                         VerticalOptions="Center"
-                                                         HorizontalOptions="Start"
-                                                         IsChecked="{Binding IsChecked, Mode=TwoWay}" />
+                                    <Label  x:Name="{Binding Content.NodeId}"
+                                    Text="{Binding Content.NodeText}"
+                                    VerticalOptions="Center"
+                                    HorizontalOptions="Start"/>
                                 </DataTemplate>
                             </treeview:SfTreeView.ItemTemplate>
                         </treeview:SfTreeView>
@@ -621,12 +619,10 @@
 
                     <treeview:SfTreeView.ItemTemplate>
                         <DataTemplate>
-                            <!--CheckBox-->
-                            <checkbox:SfCheckBox  x:Name="{Binding Content.NodeId}"
-                                                  Text="{Binding Content.NodeText}"
-                                                  VerticalOptions="Center"
-                                                  HorizontalOptions="Start"
-                                                  IsChecked="{Binding IsChecked, Mode=TwoWay}" />
+                            <Label  x:Name="{Binding Content.NodeId}"
+                                    Text="{Binding Content.NodeText}"
+                                    VerticalOptions="Center"
+                                    HorizontalOptions="Start"/>
                         </DataTemplate>
                     </treeview:SfTreeView.ItemTemplate>
                 </treeview:SfTreeView>
