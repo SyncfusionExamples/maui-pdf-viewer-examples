@@ -1,10 +1,12 @@
 ﻿using Syncfusion.Maui.Core;
 using Syncfusion.Maui.PdfViewer;
+using Syncfusion.Telemetry;
 
 namespace DocumentViewerDemo
 {
     public partial class MainPage : ContentPage
     {
+        
         // Create three instances of SfPdfViewer for displaying PDF documents
         SfPdfViewer pdfViewer = new SfPdfViewer();
         SfPdfViewer pdfViewer1 = new SfPdfViewer();
@@ -14,6 +16,7 @@ namespace DocumentViewerDemo
         SfPdfViewer pdfViewer5 = new SfPdfViewer();
         public MainPage()
         {
+            Telemetry.IsTelemetryEnabled = false;
             InitializeComponent();
 
             AddSaveOptionToolbarItems(pdfViewer);

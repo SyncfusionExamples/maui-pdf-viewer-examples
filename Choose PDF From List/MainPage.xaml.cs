@@ -1,10 +1,12 @@
 ﻿namespace ChoosePDFFromList;
+using Syncfusion.Telemetry;
 
 public partial class MainPage : ContentPage
 {
 
 	public MainPage()
 	{
+        Telemetry.IsTelemetryEnabled = false;
 		InitializeComponent();
 	}
 

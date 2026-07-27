@@ -1,5 +1,6 @@
 ﻿using Syncfusion.Maui.AIAssistView;
 using Syncfusion.Pdf.Parsing;
+using Syncfusion.Telemetry;
 
 namespace Summarizer;
 
@@ -10,6 +11,7 @@ public partial class MainPage : ContentPage
 
     public MainPage()
     {
+        Telemetry.IsTelemetryEnabled = false;
         InitializeComponent();
         animation = new Animation();
         PdfViewer.DocumentLoaded += PdfViewer_DocumentLoaded;

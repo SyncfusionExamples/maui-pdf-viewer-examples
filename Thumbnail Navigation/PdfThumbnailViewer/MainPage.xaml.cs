@@ -1,4 +1,5 @@
 using PdfThumbnailViewer.ViewModels;
+using Syncfusion.Telemetry;
 
 namespace PdfThumbnailViewer;
 
@@ -8,6 +9,7 @@ public partial class MainPage : ContentPage
 
     public MainPage()
     {
+        Telemetry.IsTelemetryEnabled = false;
         InitializeComponent();
         _viewModel = (PdfThumbnailViewModel)BindingContext;
         _viewModel.Initialize(PdfViewer);

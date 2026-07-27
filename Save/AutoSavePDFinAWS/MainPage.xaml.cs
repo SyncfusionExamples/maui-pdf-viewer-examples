@@ -1,4 +1,5 @@
-﻿namespace AutoSavePDFinAWS
+﻿using Syncfusion.Telemetry;
+namespace AutoSavePDFinAWS
 {
     public partial class MainPage : ContentPage
     {
@@ -10,6 +11,7 @@
 
         public MainPage()
         {
+            Telemetry.IsTelemetryEnabled = false;
             InitializeComponent();
 
             // Initialize ViewModel and set up data binding context

@@ -1,6 +1,7 @@
 ﻿using Syncfusion.Maui.PdfViewer;
 using System.Collections.ObjectModel;
 using System.Reflection;
+using Syncfusion.Telemetry;
 
 namespace PdfViewerAnnotations
 {
@@ -8,6 +9,7 @@ namespace PdfViewerAnnotations
     {
         public MainPage()
         {
+            Telemetry.IsTelemetryEnabled = false;
             InitializeComponent();
             Stream? stream = typeof(MainPage).GetTypeInfo().Assembly.GetManifestResourceStream("PdfViewerAnnotations.Assets.Annotations.pdf");
             if (stream != null)

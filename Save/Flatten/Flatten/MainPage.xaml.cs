@@ -1,5 +1,6 @@
 ﻿using Syncfusion.Maui.PdfViewer;
 using System.Reflection;
+using Syncfusion.Telemetry;
 
 namespace Flatten;
 
@@ -8,6 +9,7 @@ public partial class MainPage : ContentPage
     // Initializes the MainPage by loading the PDF document and sets up the PdfViewer and flattenOptions.
     public MainPage()
     {
+        Telemetry.IsTelemetryEnabled = false;
         InitializeComponent();
         // Loads the PDF document from the embedded resource "Flatten.AnnotationsFormfields.pdf".
         Stream loadedStream = typeof(MainPage).GetTypeInfo().Assembly.GetManifestResourceStream("Flatten.AnnotationsFormfields.pdf");

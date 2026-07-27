@@ -1,6 +1,7 @@
 ﻿using Syncfusion.Maui.PdfViewer;
 using Syncfusion.Pdf.Parsing;
 using System.Net;
+using Syncfusion.Telemetry;
 
 namespace SmartFill;
 
@@ -12,6 +13,7 @@ public partial class MainPage : ContentPage
     Animation animation;
     public MainPage()
     {
+        Telemetry.IsTelemetryEnabled = false;
         InitializeComponent();
         animation = new Animation();
         Clipboard.ClipboardContentChanged += Clipboard_ClipboardContentChanged;

@@ -1,5 +1,6 @@
 ﻿using Syncfusion.Maui.PdfViewer;
 using System.Reflection;
+using Syncfusion.Telemetry;
 
 namespace SignatureDemo
 {
@@ -9,6 +10,7 @@ namespace SignatureDemo
 
         public MainPage()
         {
+            Telemetry.IsTelemetryEnabled = false;
             InitializeComponent();
             // Load the PDF document. Specifies the path within the assembly.
             pdfViewer.DocumentSource = typeof(App).GetTypeInfo().Assembly.GetManifestResourceStream("SignatureDemo.Assets.Rental agreement.pdf");

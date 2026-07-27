@@ -1,3 +1,4 @@
+using Syncfusion.Telemetry;
 namespace PDFAutoSaveEdits
 {
     /// <summary>
@@ -23,6 +24,7 @@ namespace PDFAutoSaveEdits
         /// </summary>
         public MainPage()
         {
+            Telemetry.IsTelemetryEnabled = false;
             InitializeComponent();
             
             // Initialize ViewModel and set up data binding context

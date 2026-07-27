@@ -1,4 +1,6 @@
 ﻿using Microsoft.Maui.Platform;
+using Syncfusion.Telemetry;
+
 namespace PageNavigation;
 
 public partial class MainPage : ContentPage
@@ -8,6 +10,7 @@ public partial class MainPage : ContentPage
 
     public MainPage()
 	{
+        Telemetry.IsTelemetryEnabled = false;
 		InitializeComponent();
     }
 

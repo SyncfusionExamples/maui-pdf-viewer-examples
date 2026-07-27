@@ -1,5 +1,6 @@
 ﻿using Syncfusion.Maui.PdfViewer;
 using System.Reflection;
+using Syncfusion.Telemetry;
 
 namespace TextSearchAndNavigation
 {
@@ -10,6 +11,7 @@ namespace TextSearchAndNavigation
 
         public MainPage()
         {
+            Telemetry.IsTelemetryEnabled = false;
             InitializeComponent();
 
             // Load the PDF document from embedded resources.

@@ -1,9 +1,11 @@
-﻿namespace PdfViewerInStackLayout
+﻿using Syncfusion.Telemetry;
+namespace PdfViewerInStackLayout
 {
     public partial class MainPage : ContentPage
     {
         public MainPage()
         {
+            Telemetry.IsTelemetryEnabled = false;
             InitializeComponent();
         }
 

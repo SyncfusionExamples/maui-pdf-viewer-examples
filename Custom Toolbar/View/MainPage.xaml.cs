@@ -1,5 +1,6 @@
 using Microsoft.Maui.Platform;
 using Syncfusion.Maui.PdfViewer;
+using Syncfusion.Telemetry;
 
 namespace CustomToolbar;
 
@@ -12,6 +13,7 @@ public partial class MainPage : ContentPage
 
     public MainPage()
     {
+        Telemetry.IsTelemetryEnabled = false;
         InitializeComponent();
     }
 

@@ -1,4 +1,6 @@
-﻿namespace OpenPasswordProtectedFile;
+﻿using Syncfusion.Telemetry;
+
+namespace OpenPasswordProtectedFile;
 
 public partial class MainPage : ContentPage
 {
@@ -10,6 +12,7 @@ public partial class MainPage : ContentPage
     /// </summary>
     public MainPage()
 	{
+        Telemetry.IsTelemetryEnabled = false;
 		InitializeComponent();
     }
 
