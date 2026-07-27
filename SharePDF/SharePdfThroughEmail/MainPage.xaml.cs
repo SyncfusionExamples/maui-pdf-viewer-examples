@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using Syncfusion.Telemetry;
 
 namespace SharePDFThroughEmail
 {
@@ -7,6 +8,7 @@ namespace SharePDFThroughEmail
       
         public MainPage()
         {
+            Telemetry.IsTelemetryEnabled = false;
             InitializeComponent();
             // Load the PDF document into the PDF Viewer using the DocumentSource property
             pdfViewer.DocumentSource = typeof(App).GetTypeInfo().Assembly.GetManifestResourceStream("SharePDFThroughEmail.Assets.PDF_Succinctly.pdf");

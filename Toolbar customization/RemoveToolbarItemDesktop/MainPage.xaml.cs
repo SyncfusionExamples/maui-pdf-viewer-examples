@@ -1,5 +1,6 @@
 ﻿using Syncfusion.Maui.PdfViewer;
 using System.Reflection;
+using Syncfusion.Telemetry;
 
 namespace PdfViewerDemo
 {
@@ -7,6 +8,7 @@ namespace PdfViewerDemo
     {
         public MainPage()
         {
+            Telemetry.IsTelemetryEnabled = false;
             InitializeComponent();
 
             // Load the PDF document from the embedded resource.

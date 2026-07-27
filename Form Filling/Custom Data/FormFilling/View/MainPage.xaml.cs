@@ -1,4 +1,5 @@
 ﻿using Syncfusion.Maui.PdfViewer;
+using Syncfusion.Telemetry;
 
 namespace FormFilling
 {
@@ -6,6 +7,7 @@ namespace FormFilling
     {
         public MainPage()
         {
+            Telemetry.IsTelemetryEnabled = false;
             InitializeComponent();
         }
 

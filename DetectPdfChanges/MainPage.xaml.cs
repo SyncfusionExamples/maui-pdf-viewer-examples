@@ -1,4 +1,5 @@
 ﻿using Syncfusion.Maui.PdfViewer;
+using Syncfusion.Telemetry;
 
 namespace DetectPdfChanges
 {
@@ -6,6 +7,7 @@ namespace DetectPdfChanges
     {
         public MainPage()
         {
+            Telemetry.IsTelemetryEnabled = false;
             InitializeComponent();
         }
 

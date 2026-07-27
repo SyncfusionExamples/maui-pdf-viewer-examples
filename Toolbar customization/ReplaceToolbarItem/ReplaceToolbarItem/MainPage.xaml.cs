@@ -1,5 +1,6 @@
 ﻿using Microsoft.Maui.Controls;
 using System.Reflection;
+using Syncfusion.Telemetry;
 
 namespace ReplaceToolbarItem
 {
@@ -7,6 +8,7 @@ namespace ReplaceToolbarItem
     {
         public MainPage()
         {
+            Telemetry.IsTelemetryEnabled = false;
             InitializeComponent();
             // Convert the PDF to a stream.
             Stream? stream = typeof(App).GetTypeInfo().Assembly.GetManifestResourceStream("ReplaceToolbarItem.Assets.PDF_Succinctly.pdf");

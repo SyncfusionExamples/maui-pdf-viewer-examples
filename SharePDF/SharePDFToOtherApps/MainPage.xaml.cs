@@ -1,10 +1,12 @@
-﻿namespace SharePDFToOtherApps
+﻿using Syncfusion.Telemetry;
+namespace SharePDFToOtherApps
 {
     public partial class MainPage : ContentPage
     {      
 
         public MainPage()
         {
+            Telemetry.IsTelemetryEnabled = false;
             InitializeComponent();
             // Load the PDF into the PDF Viewer from embedded resources
             pdfViewer.DocumentSource = this.GetType().Assembly.GetManifestResourceStream("SharePDFToOtherApps.Assets.PDF_Succinctly.pdf");

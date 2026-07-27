@@ -8,6 +8,7 @@ using Syncfusion.Pdf.Redaction;
 using Syncfusion.Maui.PdfViewer;
 using System.Collections.Specialized;
 using System.Collections.ObjectModel;
+using Syncfusion.Telemetry;
 
 namespace SmartRedaction
 {
@@ -19,6 +20,7 @@ namespace SmartRedaction
 
         public MainPage()
         {
+            Telemetry.IsTelemetryEnabled = false;
             InitializeComponent();
             BindingContext = new SmartRedactionViewModel();
             openAIHelper = new AIHelper();

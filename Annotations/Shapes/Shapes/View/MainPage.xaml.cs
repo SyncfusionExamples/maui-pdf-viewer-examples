@@ -2,6 +2,7 @@ using Microsoft.Maui.Platform;
 using Syncfusion.Maui.PdfViewer;
 using Syncfusion.Maui.Sliders;
 using System.Windows.Input;
+using Syncfusion.Telemetry;
 
 namespace Shapes;
 
@@ -11,6 +12,7 @@ public partial class MainPage : ContentPage
     Annotation? SelectedAnnotation;
     public MainPage()
     {
+        Telemetry.IsTelemetryEnabled = false;
         InitializeComponent();
         string[,] colorCodes = new string[1, 5] {
             { "#FF990000", "#FF996100", "#FF009907", "#FF060099", "#FF990098"},

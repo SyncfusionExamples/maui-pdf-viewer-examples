@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using Syncfusion.Telemetry;
 
 namespace PdfViewerDemo
 {
@@ -6,6 +7,7 @@ namespace PdfViewerDemo
     {
         public MainPage()
         {
+            Telemetry.IsTelemetryEnabled = false;
             InitializeComponent();
             PdfViewer.DocumentSource = typeof(App).GetTypeInfo().Assembly.GetManifestResourceStream("PdfViewerDemo.Assets.pdf_succinctly.pdf");
         }

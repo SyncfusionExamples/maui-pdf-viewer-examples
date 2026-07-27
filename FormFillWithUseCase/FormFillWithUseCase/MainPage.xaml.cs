@@ -2,6 +2,7 @@
 using System.Globalization;
 using System.Reflection;
 using System.Text.RegularExpressions;
+using Syncfusion.Telemetry;
 
 namespace FormFillWithUseCase
 {
@@ -9,6 +10,7 @@ namespace FormFillWithUseCase
     {
         public MainPage()
         {
+            Telemetry.IsTelemetryEnabled = false;
             InitializeComponent();
             // Load the PDF document.
             Stream? stream = typeof(MainPage).GetTypeInfo().Assembly.GetManifestResourceStream("FormFillWithUseCase.Assets.workshop_registration.pdf");

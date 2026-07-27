@@ -1,5 +1,6 @@
 ﻿using Syncfusion.Maui.PdfViewer;
 using Syncfusion.Maui.SignaturePad;
+using Syncfusion.Telemetry;
 
 namespace CustomSignatureDialog
 {
@@ -16,6 +17,7 @@ namespace CustomSignatureDialog
         // Constructor: Initializes components and subscribes to event handlers
         public MainPage()
         {
+            Telemetry.IsTelemetryEnabled = false;
             InitializeComponent();
             CreateCustomSignatureDialog(); // Initializes custom signature dialog components
             pdfViewer.SignatureModalViewAppearing += PdfViewer_SignatureModalViewAppearing; // Set up event to suppress default signature dialog

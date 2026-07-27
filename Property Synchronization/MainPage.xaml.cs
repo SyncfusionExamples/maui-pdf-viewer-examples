@@ -1,4 +1,5 @@
 ﻿using Syncfusion.Maui.PdfViewer;
+using Syncfusion.Telemetry;
 
 namespace PdfViewerMirroringDemo;
 
@@ -11,6 +12,7 @@ public partial class MainPage : ContentPage
 
     public MainPage()
     {
+        Telemetry.IsTelemetryEnabled = false;
         InitializeComponent();
         
         //Load the same document in both the viewers.

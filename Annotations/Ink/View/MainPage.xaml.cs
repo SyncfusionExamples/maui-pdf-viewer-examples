@@ -1,5 +1,5 @@
 using Syncfusion.Maui.PdfViewer;
-
+using Syncfusion.Telemetry;
 
 namespace Ink;
 
@@ -11,6 +11,7 @@ public partial class MainPage : ContentPage
 
     public MainPage()
     {
+        Telemetry.IsTelemetryEnabled = false;
         InitializeComponent();
         inkEditor.SelectedThickness = PdfViewer.AnnotationSettings.Ink.BorderWidth;
         inkEditor.SelectedOpacity = PdfViewer.AnnotationSettings.Ink.Color.Alpha;

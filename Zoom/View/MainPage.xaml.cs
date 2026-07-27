@@ -1,4 +1,5 @@
-﻿namespace Magnification;
+﻿using Syncfusion.Telemetry;
+namespace Magnification;
 
 public partial class MainPage : ContentPage
 {
@@ -7,6 +8,7 @@ public partial class MainPage : ContentPage
     /// </summary>
 	public MainPage()
     {
+        Telemetry.IsTelemetryEnabled = false;
         InitializeComponent();
     }
 

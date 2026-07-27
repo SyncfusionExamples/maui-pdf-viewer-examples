@@ -1,4 +1,5 @@
-﻿using Syncfusion.Maui.PdfViewer;
+﻿using Syncfusion.Telemetry;
+using Syncfusion.Maui.PdfViewer;
 
 namespace MultiTabbedPDFViewer
 {
@@ -11,6 +12,7 @@ namespace MultiTabbedPDFViewer
 
         public MainPage()
         {
+            Telemetry.IsTelemetryEnabled = false;
             InitializeComponent();
 
             // Set the zoom mode of three PDF viewers to fit the width of the container
