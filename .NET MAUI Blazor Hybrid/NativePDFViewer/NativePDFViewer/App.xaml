@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<Application xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:MauiApp5"
+             x:Class="MauiApp5.App">
+    <Application.Resources>
+        <ResourceDictionary>
+
+            <!--
+                For information about styling .NET MAUI pages
+                please refer to the documentation:
+                https://go.microsoft.com/fwlink/?linkid=2282329
+            -->
+
+            <!-- PDF Viewer Color Palette -->
+            <Color x:Key="PrimaryTextColor">#1A1A1A</Color>
+            <Color x:Key="SecondaryTextColor">#666666</Color>
+            <Color x:Key="ToolbarBackgroundColor">#F5F5F5</Color>
+            <Color x:Key="StatusBarBackgroundColor">#EEEEEE</Color>
+            <Color x:Key="DividerColor">#DDDDDD</Color>
+            <Color x:Key="BackgroundColor">#FFFFFF</Color>
+            <Color x:Key="AccentColor">#512BD4</Color>
+
+            <!-- iOS-specific dark mode overrides (applied via platform-specific resources) -->
+            <OnPlatform x:Key="PrimaryTextColorPlatform" x:TypeArguments="Color">
+                <On Platform="iOS" Value="#1A1A1A"/>
+                <On Platform="Android" Value="#1A1A1A"/>
+                <On Platform="MacCatalyst" Value="#1A1A1A"/>
+            </OnPlatform>
+
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

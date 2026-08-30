@@ -1,0 +1,72 @@
+﻿@page "/"
+@inject NavigationManager Navigation
+
+<h1>.NET MAUI Blazor Hybrid Application</h1>
+
+
+<div class="mb-4 p-4 border rounded">
+    <h3 class="mb-3">Syncfusion PDF Viewer</h3>
+    <p class="mb-3">Open, annotate, and save PDF documents using the .NET MAUI PDF viewer.</p>
+
+    <div class="d-flex gap-2 flex-wrap">
+        <button class="btn btn-primary" @onclick="OpenPdfPicker">
+            📄 Open PDF
+        </button>
+    </div>
+
+    @if (!string.IsNullOrEmpty(StatusMessage))
+    {
+        <div class="alert alert-info mt-3 mb-0">@StatusMessage</div>
+    }
+</div>
+
+@code {
+    private string StatusMessage { get; set; } = string.Empty;
+
+    private async Task OpenPdfPicker()
+    {
+        try
+        {
+            var result = await FilePicker.PickAsync(new PickOptions
+            {
+                PickerTitle = "Select a PDF document",
+                FileTypes = FilePickerFileType.Pdf
+            });
+
+            if (result != null)
+            {
+                StatusMessage = $"Opening: {result.FileName}...";
+                // Use Navigation to push to native MAUI page
+                // The MainPage hosts the BlazorWebView; we navigate from here to PdfViewerPage
+                await NavigateToPdfViewer(result.FullPath);
+            }
+        }
+        catch (Exception ex)
+        {
+            StatusMessage = $"Error: {ex.Message}";
+        }
+    }
+
+    private async Task NavigateToPdfViewer(string filePath)
+    {
+        try
+        {
+            // Get the current MainPage from the app's window
+            if (Application.Current?.MainPage is NavigationPage navPage &&
+                navPage.CurrentPage is MainPage mainPage)
+            {
+                await mainPage.OpenPdfAsync(filePath);
+                StatusMessage = string.Empty;
+            }
+            else
+            {
+                StatusMessage = "Unable to open PDF viewer. Please try again.";
+            }
+        }
+        catch (Exception ex)
+        {
+            StatusMessage = $"Navigation error: {ex.Message}";
+        }
+    }
+}
+
