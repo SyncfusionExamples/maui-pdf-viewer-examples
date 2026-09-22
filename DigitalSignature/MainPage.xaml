@@ -1,0 +1,184 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:syncfusion="clr-namespace:Syncfusion.Maui.PdfViewer;assembly=Syncfusion.Maui.PdfViewer"
+    xmlns:local="clr-namespace:DigitalSignature"
+    x:Class="DigitalSignature.MainPage">
+
+    <ContentPage.BindingContext>
+        <local:PdfViewerViewModel />
+    </ContentPage.BindingContext>
+    <ContentPage.Resources>
+
+        <Style x:Key="buttonIconStyle" TargetType="Button">
+            <Setter Property="BackgroundColor" Value="Transparent"/>
+
+            <Setter Property="VisualStateManager.VisualStateGroups">
+                <VisualStateGroupList>
+                    <VisualStateGroup x:Name="CommonStates">
+
+                        <VisualState x:Name="Normal"/>
+
+                        <VisualState x:Name="PointerOver">
+                            <VisualState.Setters>
+                                <Setter Property="BackgroundColor"
+                                    Value="#E7E0EC"/>
+                            </VisualState.Setters>
+                        </VisualState>
+
+                        <VisualState x:Name="Pressed">
+                            <VisualState.Setters>
+                                <Setter Property="BackgroundColor"
+                                    Value="#D0C9D6"/>
+                            </VisualState.Setters>
+                        </VisualState>
+
+                        <VisualState x:Name="Disabled">
+                            <VisualState.Setters>
+                                <Setter Property="BackgroundColor"
+                                    Value="Transparent"/>
+                            </VisualState.Setters>
+                        </VisualState>
+
+                    </VisualStateGroup>
+                </VisualStateGroupList>
+            </Setter>
+
+            <Style.Triggers>
+
+                <Trigger TargetType="Button"
+                     Property="IsEnabled"
+                     Value="True">
+                    <Setter Property="BackgroundColor"
+                        Value="Transparent"/>
+                    <Setter Property="Opacity"
+                        Value="1"/>
+                </Trigger>
+
+                <Trigger TargetType="Button"
+                     Property="IsEnabled"
+                     Value="False">
+                    <Setter Property="Opacity"
+                        Value="0.25"/>
+                </Trigger>
+
+                <Trigger TargetType="Button"
+                     Property="IsPressed"
+                     Value="True">
+                    <Setter Property="BackgroundColor"
+                        Value="#261C1B1E"/>
+                </Trigger>
+
+            </Style.Triggers>
+
+        </Style>
+
+    </ContentPage.Resources>
+    
+    <ContentPage.Content>
+ 
+            <Grid RowDefinitions="Auto,*">
+                <Grid Grid.Row="0"
+      BackgroundColor="#F3EDF7"
+     >
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Open -->
+                    <Button Grid.Column="0"
+            x:Name="OpenButton"
+            Style="{StaticResource buttonIconStyle}"
+            Text="&#xE712;"
+            FontFamily="MauiMaterialAssets"
+            FontSize="24"
+            HeightRequest="40"
+            WidthRequest="40"
+            Margin="12,5,0,5"
+            Padding="5"
+            BorderWidth="0"
+            CornerRadius="5"
+            TextColor="#49454F"
+            Clicked="OnOpenClicked" />
+
+                    <!-- Digital ID -->
+                    <Button Grid.Column="1"
+            x:Name="DigitalSignatureButton"
+            Style="{StaticResource buttonIconStyle}"
+            Text="Digital ID"
+            FontSize="16"
+            HeightRequest="40"
+            WidthRequest="110"
+            MinimumWidthRequest="110"
+            Margin="12,5,0,5"
+            Padding="12,5"
+            BorderWidth="0"
+            CornerRadius="5"
+            TextColor="#49454F"
+            Clicked="OnDigitalSignatureClicked" />
+
+                    <!-- Save -->
+                    <Button Grid.Column="3"
+            x:Name="SaveButton"
+            Style="{StaticResource buttonIconStyle}"
+            Text="&#xe75f;"
+            FontFamily="MauiMaterialAssets"
+            FontSize="24"
+            HeightRequest="40"
+            WidthRequest="40"
+            Margin="0,5,12,5"
+            Padding="5"
+            BorderWidth="0"
+            CornerRadius="5"
+            TextColor="#49454F"
+            Clicked="OnSaveClicked" />
+
+                    <!-- Signature Panel -->
+                    <Button Grid.Column="4"
+            x:Name="SignaturePanelButton"
+            Style="{StaticResource buttonIconStyle}"
+            Text="&#xE737;"
+            FontFamily="MauiMaterialAssets"
+            FontSize="24"
+            HeightRequest="40"
+            WidthRequest="40"
+            Margin="0,5,12,5"
+            Padding="5"
+            BorderWidth="0"
+            CornerRadius="5"
+            TextColor="#49454F"
+            Clicked="OnSignaturePanelClicked" />
+
+                    <!-- Bottom Separator -->
+                    <BoxView Grid.ColumnSpan="5"
+             HeightRequest="1"
+             VerticalOptions="End"
+             BackgroundColor="#CAC4D0" />
+
+                </Grid>
+
+                <!-- PDF Viewer -->
+                <Grid Grid.Row="1">
+
+                    <syncfusion:SfPdfViewer x:Name="pdfViewer"
+                             ShowToolbars="False"
+                             DocumentSource="{Binding PdfDocumentStream}" />
+
+                </Grid>
+
+                <!-- Overlay Dialog -->
+                <local:DigitalIDDialog x:Name="SignatureDialogControl"
+                               Grid.Row="1"
+                               IsVisible="True"
+                               SignatureApplied="OnSignatureApplied"/>
+            </Grid>
+
+      
+    </ContentPage.Content>
+
+</ContentPage>
