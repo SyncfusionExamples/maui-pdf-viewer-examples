@@ -6,7 +6,7 @@ namespace DigitalSignature
     {
         public App()
         {
-            //Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("Ix0oFS8QJAw9HSQvXkVhQlBad1RDX3xKf0x/TGpQb19xflBPallYVBYiSV9jS3tTfkdnWHZecXBSRWVVU091Wg==");
+            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("Add license key");
             InitializeComponent();
         }
 

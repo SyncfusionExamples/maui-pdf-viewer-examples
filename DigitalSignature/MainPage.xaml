@@ -85,6 +85,7 @@
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="Auto"/>
@@ -105,25 +106,31 @@
             CornerRadius="5"
             TextColor="#49454F"
             Clicked="OnOpenClicked" />
+                    
+                <BoxView Grid.Column="1"
+                         WidthRequest="2"
+                         HeightRequest="30"
+                         Margin="12,5,0,5"
+                         BackgroundColor="#49454F" />
 
-                    <!-- Digital ID -->
-                    <Button Grid.Column="1"
+                <!-- Digital ID -->
+                    <Button Grid.Column="2"
             x:Name="DigitalSignatureButton"
             Style="{StaticResource buttonIconStyle}"
             Text="Digital ID"
             FontSize="16"
             HeightRequest="40"
-            WidthRequest="110"
-            MinimumWidthRequest="110"
+            WidthRequest="90"
+            MinimumWidthRequest="90"
             Margin="12,5,0,5"
-            Padding="12,5"
+            Padding="5"
             BorderWidth="0"
             CornerRadius="5"
             TextColor="#49454F"
             Clicked="OnDigitalSignatureClicked" />
 
                     <!-- Save -->
-                    <Button Grid.Column="3"
+                    <Button Grid.Column="4"
             x:Name="SaveButton"
             Style="{StaticResource buttonIconStyle}"
             Text="&#xe75f;"
@@ -139,7 +146,7 @@
             Clicked="OnSaveClicked" />
 
                     <!-- Signature Panel -->
-                    <Button Grid.Column="4"
+                    <Button Grid.Column="5"
             x:Name="SignaturePanelButton"
             Style="{StaticResource buttonIconStyle}"
             Text="&#xE737;"

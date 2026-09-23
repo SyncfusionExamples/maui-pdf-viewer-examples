@@ -1,19 +1,23 @@
 # Add digital signatures to PDF files in .NET-MAUI
 
-This repository contains an example that demonstrates how to add digital signatures to PDF files using the Syncfusion&reg; .NET-MAUI PDF Viewer. The sample also shows how to open PDF files from, and save signed PDFs back to, local device storage.
+This repository contains an example that demonstrates how to add digital signatures to PDF files using the Syncfusion .NET-MAUI PDF Viewer. The sample also shows how to open PDF files from, and save signed PDFs back to, local device storage.
+
+## Demo
+
+The following image represents how to sign digital signature on the desktop.
+![Digital Signature Demo](DigitalSignature\Resources\Images\Sample.gif)
 
 ## Prerequisites
 
 1. A .NET MAUI project set up.
 2. The [Syncfusion.Maui.PdfViewer](https://www.nuget.org/packages/Syncfusion.Maui.PdfViewer) package.
-3. The [Syncfusion.Maui.Core](https://www.nuget.org/packages/Syncfusion.Maui.Core) package.
-4. The [CommunityToolkit.Maui](https://www.nuget.org/packages/CommunityToolkit.Maui) package.
+3. The [CommunityToolkit.Maui](https://www.nuget.org/packages/CommunityToolkit.Maui) package.
 
 ## How to digitally sign PDF files using the .NET-MAUI PDF Viewer.
 
 ### 1. Install Required NuGet Package
 
-Create a new [MAUI App](https://dotnet.microsoft.com/en-us/learn/maui/first-app-tutorial/create), install the [Syncfusion.Maui.PdfViewer](https://www.nuget.org/packages/Syncfusion.Maui.PdfViewer), [Syncfusion.Maui.Core](https://www.nuget.org/packages/Syncfusion.Maui.Core) and [CommunityToolkit.Maui](https://www.nuget.org/packages/CommunityToolkit.Maui) packages using either.
+Create a new [MAUI App](https://dotnet.microsoft.com/en-us/learn/maui/first-app-tutorial/create), install the [Syncfusion.Maui.PdfViewer](https://www.nuget.org/packages/Syncfusion.Maui.PdfViewer) and [CommunityToolkit.Maui](https://www.nuget.org/packages/CommunityToolkit.Maui) packages using either.
 
 * NuGet Package Manager
 * NuGet CLI
