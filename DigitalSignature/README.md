@@ -5,7 +5,7 @@ This repository contains an example that demonstrates how to add digital signatu
 ## Demo
 
 The following image represents how to sign digital signature on the desktop.
-![Digital Signature Demo](DigitalSignature\Resources\Images\Sample.gif)
+![Digital Signature Demo](Resources/Images/Sample.gif)
 
 ## Prerequisites
 
