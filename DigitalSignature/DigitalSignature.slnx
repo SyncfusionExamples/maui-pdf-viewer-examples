@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="DigitalSignature.csproj">
+    <Deploy Solution="Debug|*" />
+  </Project>
+</Solution>
