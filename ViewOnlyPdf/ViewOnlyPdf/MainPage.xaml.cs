@@ -41,7 +41,7 @@ namespace ViewOnlyPdf
                 },
                 Command = new Command(OpenAccessSettings)
             });
-            LoadPdf("Annotations");
+            LoadPdf("PDF_Succinctly");
         }
 
         private void PdfViewer_Tapped(object? sender, GestureEventArgs? e)
