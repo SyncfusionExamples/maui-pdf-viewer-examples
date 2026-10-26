@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="ViewOnlyPdf/ViewOnlyPdf.csproj">
+    <Deploy />
+  </Project>
+</Solution>

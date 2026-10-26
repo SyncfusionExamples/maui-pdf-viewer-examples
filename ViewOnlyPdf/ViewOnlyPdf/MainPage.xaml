@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="ViewOnlyPdf.MainPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:syncfusion="clr-namespace:Syncfusion.Maui.PdfViewer;assembly=Syncfusion.Maui.PdfViewer"
+    Title="{Binding AccessTitle}">
+    <Grid>
+        <syncfusion:SfPdfViewer x:Name="PdfViewer" DocumentLoaded="PdfViewer_DocumentLoaded" />
+        <Border
+            x:Name="MoreOptionsMenu"
+            Padding="0,6"
+            BackgroundColor="#F7F2FA"
+            HorizontalOptions="End"
+            IsVisible="False"
+            Margin="0,56,8,0"
+            StrokeShape="RoundRectangle 8"
+            VerticalOptions="Start"
+            WidthRequest="210"
+            ZIndex="10">
+            <Border.Shadow>
+                <Shadow Brush="Black" Opacity="0.25" Radius="8" />
+            </Border.Shadow>
+            <VerticalStackLayout Spacing="0">
+                <Grid
+                    Padding="16,10"
+                    ColumnDefinitions="28,*"
+                    HeightRequest="44">
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OutlineMenu_Tapped" />
+                    </Grid.GestureRecognizers>
+                    <Label
+                        FontFamily="MauiMaterialAssets"
+                        FontSize="20"
+                        HorizontalOptions="Center"
+                        Text="&#xe72c;"
+                        TextColor="#49454F"
+                        VerticalOptions="Center" />
+                    <Label
+                        Grid.Column="1"
+                        Text="Outline"
+                        TextColor="#1C1B1F"
+                        VerticalOptions="Center" />
+                </Grid>
+                <Grid
+                    Padding="16,10"
+                    ColumnDefinitions="28,*"
+                    HeightRequest="44">
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="ThumbnailMenu_Tapped" />
+                    </Grid.GestureRecognizers>
+                    <Label
+                        FontFamily="MauiMaterialAssets"
+                        FontSize="20"
+                        HorizontalOptions="Center"
+                        Text="&#xe798;"
+                        TextColor="#49454F"
+                        VerticalOptions="Center" />
+                    <Label
+                        Grid.Column="1"
+                        Text="Page Thumbnail"
+                        TextColor="#1C1B1F"
+                        VerticalOptions="Center" />
+                </Grid>
+            </VerticalStackLayout>
+        </Border>
+    </Grid>
+</ContentPage>
